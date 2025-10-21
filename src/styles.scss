@@ -4,6 +4,46 @@
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+:host {
+  height: 100%;
+  margin: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 232px 1fr;
+  grid-template-rows: 96px 1fr;
+  grid-template-areas:
+    'sidebar header'
+    'sidebar content';
+  min-height: 100dvh;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: #616161;
+}
+
+.header {
+  grid-area: header;
+  background: #515151;
+}
+
+.content {
+  grid-area: content;
+}
+
+.container {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 16px;
+}
+
 @font-face {
   font-display: swap;
   font-family: 'Inter';
