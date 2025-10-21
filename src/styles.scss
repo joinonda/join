@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 html,
 body,
@@ -44,6 +45,7 @@ body {
 }
 
 .sidebar {
+  display: flex;
   grid-column: 1;
   grid-row: 1 / -1;
   background-color: #2a3647;
@@ -53,10 +55,15 @@ body {
   top: 0;
 }
 
+.sidebar app-footer {
+  flex: 1;
+  display: flex;
+}
+
 .content {
   grid-area: content;
   padding: 16px;
-  background-color: f6f7f8;
+  background-color: #f6f7f8;
 }
 
 @font-face {
