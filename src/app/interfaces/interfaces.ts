@@ -3,4 +3,5 @@ export interface Interfaces {
   firstName: string;
   lastName: string;
   email: string;
+  phone: string;
 }
