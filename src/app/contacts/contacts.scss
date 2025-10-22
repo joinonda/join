@@ -16,7 +16,7 @@
 .contact-list {
   position: relative;
   background-color: white;
-  padding: 100px 24px 24px 24px;
+  padding: 40px 24px 24px 24px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -49,10 +49,10 @@
   justify-content: center;
   align-items: center;
   align-items: center;
-  position: fixed;
-  top: 120px;
-  height: 100px;
-  background: #ffff;
+  position: sticky;
+  top: 0px;
+  height: 400px;
+  background: white;
   z-index: 5;
 
   .add-contact-btn {
@@ -61,15 +61,15 @@
     align-items: center;
     align-self: center;
     cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s  ease;
     width: 352px;
     height: 56px;
     flex-shrink: 0;
-    font-family: 'Inter';
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     font-size: 21px;
     font-weight: 700;
-    color: #ffff;
+    color: white;
     background-color: #2a3647;
     border: none;
     border-radius: 10px;
@@ -85,6 +85,7 @@
 .contacts-scroll {
   flex: 1;
   overflow: visible;
+  padding: 200px 30px 0px;
 }
 
 .contact-group {
@@ -96,7 +97,7 @@
   font-weight: 600;
   color: #2a3647;
   margin-bottom: 8px;
-  padding-left: 0px;
+  padding-left: 25px;
   position: relative;
 
   &::after {
@@ -117,6 +118,7 @@
   border-radius: 8px;
   transition: background-color 0.2s ease;
   cursor: pointer;
+  gap: 25px;
 
   &:hover {
     background-color: #f6f7f8;
@@ -135,6 +137,7 @@
   font-size: 14px;
   margin-right: 12px;
   flex-shrink: 0;
+  margin-left: 10px; 
 }
 
 .contact-info {
