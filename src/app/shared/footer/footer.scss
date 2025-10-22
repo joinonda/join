@@ -29,6 +29,10 @@
   display: block;
   inline-size: 232px;
   block-size: 46px;
+
+  &:hover {
+    background-color: #2a3d59;
+  }
 }
 
 .menu-btn .icon {
