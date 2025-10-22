@@ -26,11 +26,6 @@ export class App implements OnInit, OnDestroy {
     const contactsSubscription = this.dataService.getContacts().subscribe({
       next: (data) => {
         this.contacts = data;
-
-        // Wenn ihr hier loggen wollt, Hier loggen für Firebase DB Data
-        data.forEach((contact) => {
-          console.log('Contact:', contact.firstName);
-        });
       },
       error: (error) => {
         console.error('Fehler beim Laden der Contacts:', error);

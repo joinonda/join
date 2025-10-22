@@ -23,10 +23,8 @@ export class Contacts implements OnInit {
 
   loadContacts() {
     this.dataService.getContacts().subscribe(contacts => {
-      console.log('Geladene Kontakte:', contacts);
       this.contacts = contacts;
       this.groupContactsByFirstLetter();
-      console.log('Gruppierte Kontakte:', this.groupedContacts);
     });
   }
 
