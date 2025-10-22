@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-header',
@@ -9,5 +8,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.scss'
 })
 export class Header {
+  isLoggedIn: boolean = false;
+  shouldHideAvatarOnMobileLegal: boolean = false;
+  isDropdownOpen: boolean = false;
+  userInitials: string = 'UU';
 
+  toggleDropdown(event: Event): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+  navigateToHelp(): void { }
+  navigateToLegalNotice(): void { }
+  navigateToPrivacyPolicy(): void { }
+  logout(): void { }
 }
