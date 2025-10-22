@@ -14,9 +14,11 @@
 }
 
 .contact-list {
+  position: relative;
   background-color: white;
-  padding: 32px 24px 24px 24px;
+  padding: 100px 24px 24px 24px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   width: 456px;
   height: 100%;
@@ -42,17 +44,41 @@
   }
 }
 
-.add-contact-btn {
-  cursor: pointer;
-  margin-bottom: 24px;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  width: 352px;
-  height: 56px;
-  flex-shrink: 0;
+.add-contact-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  position: fixed;
+  top: 120px;
+  height: 100px;
+  background: #ffff;
+  z-index: 5;
 
-  &:hover {
-    transform: scale(1.02);
-    opacity: 0.9;
+  .add-contact-btn {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-self: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    width: 352px;
+    height: 56px;
+    flex-shrink: 0;
+    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: #ffff;
+    background-color: #2a3647;
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+
+    &:hover {
+      background-color: #29abe2;
+      box-shadow: 0 10px 10px -8px rgba(0, 0, 0, 0.5);
+    }
   }
 }
 
