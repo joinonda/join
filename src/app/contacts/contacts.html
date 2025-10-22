@@ -1,1 +1,31 @@
-<section class="contacts-section"></section>
+<section class="contacts-section">
+  <div class="contacts-container">
+    <div class="contact-list">
+      <img src="/imgs/add-new-contact-button.png" alt="Add new contact" class="add-contact-btn">
+      
+      <div class="contacts-scroll">
+        <ng-container *ngFor="let letter of alphabet">
+          <div class="contact-group" *ngIf="groupedContacts[letter]?.length">
+            <div class="letter-header">{{ letter }}</div>
+            <div *ngFor="let contact of groupedContacts[letter]" class="contact-item">
+              <div class="contact-avatar" [style.background-color]="getContactColor(contact)">
+                {{ getInitials(contact.firstName, contact.lastName) }}
+              </div>
+              <div class="contact-info">
+                <div class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</div>
+                <div class="contact-email">{{ contact.email }}</div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+
+    <div class="contacts-header">
+      <h1>Contacts</h1>
+      <div class="header-separator"></div>
+      <p>Better with a team</p>
+    </div>
+  </div>
+</section>
