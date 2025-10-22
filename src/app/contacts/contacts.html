@@ -1,13 +1,12 @@
 <section class="contacts-section">
   <div class="contacts-container">
+    <div class="add-contact-btn-container">
+      <button class="add-contact-btn">
+        <span>Add new Contact</span>
+        <img src="/imgs/add-new-contact-person-plus.png" width="32px" height="32px" alt="" />
+      </button>
+    </div>
     <div class="contact-list">
-      <div class="add-contact-btn-container">
-        <button class="add-contact-btn">
-          <span>Add new Contact</span>
-          <img src="/imgs/add-new-contact-person-plus.png" width="32px" height="32px" alt="" />
-        </button>
-      </div>
-
       <div class="contacts-scroll">
         <ng-container *ngFor="let letter of alphabet">
           <div class="contact-group" *ngIf="groupedContacts[letter]?.length">
@@ -25,12 +24,12 @@
         </ng-container>
       </div>
     </div>
-
-    <div class="contacts-header">
-      <div class="header-content">
+  </div>
+  <div class="contacts-header">
+    <div class="header-content">
       <h2>Contacts</h2>
       <div class="header-separator"></div>
       <p>Better with a team</p>
     </div>
   </div>
-
+</section>

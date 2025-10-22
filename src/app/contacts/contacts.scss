@@ -5,12 +5,14 @@
   margin: 0;
   margin-left: 232px;
   margin-top: 96px;
+  display: flex;
 }
 
 .contacts-container {
   display: flex;
   height: 100%;
   max-width: 100%;
+  flex-direction: column;
 }
 
 .contact-list {
