@@ -1,3 +1,11 @@
+//Header Mo
+@mixin dFlex($jc: center, $ai: center, $fd: row) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $fd;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -132,10 +140,3 @@ app-footer {
   src: url('/fonts/inter-v20-latin-900.woff2') format('woff2');
 }
 
-//Header Mo
-@mixin dFlex($jc: center, $ai: center, $fd: row) {
-  display: flex;
-  justify-content: $jc;
-  align-items: $ai;
-  flex-direction: $fd;
-}
