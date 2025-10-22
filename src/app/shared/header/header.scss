@@ -1,3 +1,10 @@
+// SCSS Variablen definieren
+$blue: #2a3647;
+$light-blue: #29abe2;
+$transparent-blue: rgba(41, 171, 226, 0.1);
+$white: #ffffff;
+
+// dFlex Mixin
 @mixin dFlex($jc: center, $ai: center, $fd: row) {
   display: flex;
   justify-content: $jc;
