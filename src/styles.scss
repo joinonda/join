@@ -131,3 +131,11 @@ app-footer {
   font-weight: 900;
   src: url('/fonts/inter-v20-latin-900.woff2') format('woff2');
 }
+
+//Header Mo
+@mixin dFlex($jc: center, $ai: center, $fd: row) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $fd;
+}
