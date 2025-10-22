@@ -11,7 +11,12 @@
         <ng-container *ngFor="let letter of alphabet">
           <div class="contact-group" *ngIf="groupedContacts[letter]?.length">
             <div class="letter-header">{{ letter }}</div>
-            <div *ngFor="let contact of groupedContacts[letter]" class="contact-item">
+            <div 
+              *ngFor="let contact of groupedContacts[letter]" 
+              class="contact-item"
+              [class.selected]="isSelected(contact)"
+              (click)="selectContact(contact)"
+            >
               <div class="contact-avatar" [style.background-color]="getContactColor(contact)">
                 {{ getInitials(contact.firstName, contact.lastName) }}
               </div>
@@ -30,6 +35,16 @@
       <h2>Contacts</h2>
       <div class="header-separator"></div>
       <p>Better with a team</p>
+    </div>
+    
+    <!-- Contact Detail Component -->
+    <div class="detail-container" *ngIf="selectedContact">
+      <app-contact-detail 
+        [contact]="selectedContact"
+        [contactColor]="getContactColor(selectedContact)"
+        (edit)="onEdit()"
+        (delete)="onDelete()"
+      ></app-contact-detail>
     </div>
   </div>
 </section>

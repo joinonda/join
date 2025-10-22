@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../services/data.service';
 import { Interfaces } from '../interfaces/interfaces';
+import { ContactDetail } from './contact-detail/contact-detail';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ContactDetail],
   templateUrl: './contacts.html',
   styleUrls: ['./contacts.scss'],
 })
@@ -14,6 +15,7 @@ export class Contacts implements OnInit {
   contacts: Interfaces[] = [];
   groupedContacts: { [key: string]: Interfaces[] } = {};
   alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  selectedContact: Interfaces | null = null;
 
   constructor(private dataService: DataService) {}
 
@@ -65,5 +67,23 @@ export class Contacts implements OnInit {
     ];
     const hash = contact.firstName.charCodeAt(0) + contact.lastName.charCodeAt(0);
     return colors[hash % colors.length];
+  }
+
+  selectContact(contact: Interfaces): void {
+    this.selectedContact = contact;
+  }
+
+  isSelected(contact: Interfaces): boolean {
+    return this.selectedContact?.id === contact.id;
+  }
+
+  onEdit(): void {
+    console.log('Edit contact:', this.selectedContact);
+    // TODO: Implement edit functionality
+  }
+
+  onDelete(): void {
+    console.log('Delete contact:', this.selectedContact);
+    // TODO: Implement delete functionality
   }
 }
