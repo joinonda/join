@@ -4,12 +4,13 @@ $light-blue: #29abe2;
 $transparent-blue: rgba(41, 171, 226, 0.1);
 $white: #ffffff;
 
-// dFlex Mixin
-@mixin dFlex($jc: center, $ai: center, $fd: row) {
+// dFlex Mixin mit gap Parameter
+@mixin dFlex($jc: center, $ai: center, $fd: row, $g: normal) {
   display: flex;
   justify-content: $jc;
   align-items: $ai;
   flex-direction: $fd;
+  gap: $g;
 }
 
 header {
