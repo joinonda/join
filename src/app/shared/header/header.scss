@@ -1,3 +1,10 @@
+@mixin dFlex($jc: center, $ai: center, $fd: row) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $fd;
+}
+
 header {
   @include dFlex($jc: space-between);
   z-index: 4;

@@ -1,11 +1,3 @@
-//Header Mo
-@mixin dFlex($jc: center, $ai: center, $fd: row) {
-  display: flex;
-  justify-content: $jc;
-  align-items: $ai;
-  flex-direction: $fd;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
