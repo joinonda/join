@@ -11,6 +11,7 @@ import { ContactDetail } from './contact-detail/contact-detail';
   templateUrl: './contacts.html',
   styleUrls: ['./contacts.scss'],
 })
+
 export class Contacts implements OnInit {
   contacts: Interfaces[] = [];
   groupedContacts: { [key: string]: Interfaces[] } = {};
@@ -69,21 +70,17 @@ export class Contacts implements OnInit {
     return colors[hash % colors.length];
   }
 
-  selectContact(contact: Interfaces): void {
-    this.selectedContact = contact;
-  }
-
   isSelected(contact: Interfaces): boolean {
     return this.selectedContact?.id === contact.id;
   }
 
+  selectContact(contact: Interfaces): void {
+    this.selectedContact = contact;
+  }
+
   onEdit(): void {
-    console.log('Edit contact:', this.selectedContact);
-    // TODO: Implement edit functionality
   }
 
   onDelete(): void {
-    console.log('Delete contact:', this.selectedContact);
-    // TODO: Implement delete functionality
   }
 }

@@ -1,4 +1,5 @@
-<div class="contact-detail" *ngIf="contact">
+@if (contact) {
+<div class="contact-detail">
   <div class="detail-header">
     <div class="detail-avatar-container">
       <div class="detail-avatar" [style.background-color]="contactColor">
@@ -42,3 +43,4 @@
     </div>
   </div>
 </div>
+}
