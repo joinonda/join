@@ -1,6 +1,15 @@
 :host {
   display: flex;
   flex: 1;
+
+  @media (max-width: 1024px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+  }
 }
 
 .footer-section {
@@ -10,10 +19,24 @@
   justify-content: flex-start;
   align-items: center;
   margin: 0;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #2A3647;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    padding: 0 16px;
+  }
 }
 
 .logo {
   margin: 64px 0;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .menu {
@@ -22,6 +45,14 @@
   gap: 15px;
   align-items: center;
   margin: 52px 0;
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin: 0;
+    gap: 10px;
+  }
 }
 
 .menu-btn {
@@ -30,8 +61,23 @@
   inline-size: 232px;
   block-size: 46px;
 
+  @media (max-width: 1024px) {
+    inline-size: 80px;
+    block-size: 76px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
   &:hover {
     background-color: #2a3d59;
+
+    @media (max-width: 1024px) {
+      background-color: #091931;
+      border-radius: 16px;
+    }
   }
 }
 
@@ -69,6 +115,10 @@
   flex-direction: column;
   gap: 18px;
   padding-bottom: 48px;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 
   a {
     font-family: 'Inter';
