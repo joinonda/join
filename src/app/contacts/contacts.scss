@@ -100,7 +100,7 @@
   font-size: 20px;
   font-weight: 600;
   color: #2a3647;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
   padding-left: 25px;
   position: relative;
 
@@ -130,11 +130,11 @@
 
   &.selected {
     background-color: #2a3647;
-    
+
     .contact-name {
       color: #ffffff;
     }
-    
+
     .contact-email {
       color: #ffffff;
     }
