@@ -3,24 +3,40 @@
     <img src="imgs/logo-white.png" alt="Join Logo" width="100" height="121" />
   </div>
   <div class="menu" aria-label="Menu">
-    <a class="menu-btn summary" href="#" aria-label="Summary">
-      <img class="icon default" src="imgs/summary-default.png" alt="" aria-hidden="true" />
-      <!-- <img class="icon hover" src="imgs/summary-hover.png" alt="" aria-hidden="true" /> -->
+    <a class="menu-btn summary" 
+       [class.active]="isActive('summary')" 
+       (click)="setActive('summary')" 
+       aria-label="Summary">
+      <img  class="icon default" [src]="getImageSrc('summary', 'imgs/summary-default.png', 'imgs/summary-hover.png')" 
+           alt="" 
+           aria-hidden="true" />
     </a>
 
-    <a class="menu-btn add-task" href="#" aria-label="Add task">
-      <img class="icon default" src="imgs/add-task-default.png" alt="" aria-hidden="true" />
-      <!-- <img class="icon hover" src="imgs/add-task-hover.png" alt="" aria-hidden="true" /> -->
+    <a class="menu-btn add-task" 
+       [class.active]="isActive('add-task')" 
+       (click)="setActive('add-task')" 
+       aria-label="Add task">
+      <img  class="icon default" [src]="getImageSrc('add-task', 'imgs/add-task-default.png', 'imgs/add-task-hover.png')" 
+           alt="" 
+           aria-hidden="true" />
     </a>
 
-    <a class="menu-btn board" href="#" aria-label="Board">
-      <img class="icon default" src="imgs/board-default.png" alt="" aria-hidden="true" />
-      <!-- <img class="icon hover" src="imgs/board-hover.png" alt="" aria-hidden="true" /> -->
+    <a class="menu-btn board" 
+       [class.active]="isActive('board')" 
+       (click)="setActive('board')" 
+       aria-label="Board">
+      <img  class="icon default" [src]="getImageSrc('board', 'imgs/board-default.png', 'imgs/board-hover.png')" 
+           alt="" 
+           aria-hidden="true" />
     </a>
 
-    <a class="menu-btn contacts" href="#" aria-label="Contacts">
-      <img class="icon default" src="imgs/contacts-default.png" alt="" aria-hidden="true" />
-      <!-- <img class="icon hover" src="imgs/contacts-hover.png" alt="" aria-hidden="true" /> -->
+    <a class="menu-btn contacts" 
+       [class.active]="isActive('contacts')" 
+       (click)="setActive('contacts')" 
+       aria-label="Contacts">
+      <img  class="icon default" [src]="getImageSrc('contacts', 'imgs/contacts-default.png', 'imgs/contacts-hover.png')" 
+           alt="Contacts section" 
+           aria-hidden="true" />
     </a>
   </div>
   <div class="privacy-policy-legal-notice">

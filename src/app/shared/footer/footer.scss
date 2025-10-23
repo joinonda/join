@@ -45,13 +45,16 @@
   gap: 15px;
   align-items: center;
   margin: 52px 0;
-
+  
   @media (max-width: 1024px) {
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
     margin: 0;
     gap: 10px;
+  }
+  a {
+    cursor: pointer;
   }
 }
 
@@ -126,9 +129,11 @@
     font-weight: 700;
     color: #a8a8a8;
     text-decoration: none;
+    
 
     &:hover {
       text-decoration: underline;
+      
     }
   }
 }
