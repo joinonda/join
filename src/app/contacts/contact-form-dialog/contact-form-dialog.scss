@@ -9,17 +9,10 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.2s ease-out;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  
   }
-}
+
+
 
 .dialog-container {
   display: flex;
@@ -30,18 +23,19 @@
   overflow: hidden;
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: slideInFromRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  @keyframes slideUp {
+  @keyframes slideInFromRight {
     from {
-      opacity: 0;
-      transform: translateY(30px);
+      transform: translateX(100%);
     }
     to {
-      opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0);
     }
   }
+    to {
+      opacity: 1;
+    }
 
   @media (max-width: 1280px) {
     width: 95%;

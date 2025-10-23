@@ -117,10 +117,12 @@
   flex: 1;
   overflow: visible;
   padding: 0px 6.56% 0px;
+  width: 90%;
 
   @media (max-width: 1024px) {
     position: static;
     padding: 0;
+    width: 100%;
   }
 }
 
