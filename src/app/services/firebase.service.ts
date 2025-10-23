@@ -32,15 +32,19 @@ export class FirebaseService {
   }
  
   async updateContactInDatabase(id: string, contact: Interfaces) {
-    await updateDoc(doc(this.firestore, 'contact', id), {
-      firstName: contact.firstName,
-      lastName: contact.lastName,
-      email: contact.email,
-      phone: contact.phone
+    return runInInjectionContext(this.injector, async () => {
+      await updateDoc(doc(this.firestore, 'contact', id), {
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
+        phone: contact.phone
+      });
     });
   }
 
   async deleteContactFromDatabase(id: string) {
-    await deleteDoc(doc(this.firestore, 'contact', id));
+    return runInInjectionContext(this.injector, async () => {
+      await deleteDoc(doc(this.firestore, 'contact', id));
+    });
   }
 }

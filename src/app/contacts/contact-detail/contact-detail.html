@@ -1,4 +1,4 @@
-@if (contact) {
+@if (contact && isVisible) {
 <div class="contact-detail">
   <div class="detail-header">
     <div class="detail-avatar-container">
@@ -43,4 +43,11 @@
     </div>
   </div>
 </div>
+}
+
+@if (showDeleteDialog) {
+  <app-contact-delete-dialog 
+    (delete)="confirmDelete()" 
+    (cancel)="cancelDelete()">
+  </app-contact-delete-dialog>
 }

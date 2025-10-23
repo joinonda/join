@@ -49,136 +49,32 @@
       <app-contact-detail
         [contact]="selectedContact"
         [contactColor]="getContactColor(selectedContact)"
+        [contactKey]="selectedContact.id"
         (edit)="onEdit()"
         (delete)="onDelete()"
       ></app-contact-detail>
     </div>
     }
   </div>
-  @if (isEditOpen) {
-  <div class="backdrop">
-    <div class="dialog">
-      <h3>Edit Contact</h3>
 
-      <form action="">
-        <input />
-        <input />
-        <input />
-      </form>
-
-      <div class="dialog-actions">
-        <button (click)="onDelete()">Delete</button>
-        <button (click)="saveEdit()">Save</button>
-      </div>
-    </div>
-  </div>
-  } @if (isAddOpen) {
-  <div class="add-new-contact-overlay">
-    <div class="add-new-contact-container">
-      <div class="a-n-c-left">
-        <img src="imgs/logo-white.png" alt="Join Logo" width="55.6" height="66.48" />
-        <h3>Add contact</h3>
-        <span>Tasks are better with a team!</span>
-        <div class="a-n-c-left-divider"></div>
-      </div>
-
-      <div class="a-n-c-right">
-        <div class="a-n-c-avatar">
-          <img
-            src="imgs/add-contact-profile-placeholder.png"
-            alt="Avatar Placeholder Image"
-            width="120"
-            height="120"
-          />
-        </div>
-        <div class="a-n-c-x-and-inputs-and-btns">
-          <label for="name"></label>
-          <div class="a-n-c-right-inputs" style="position: relative">
-            <input
-              type="text"
-              id="name"
-              name="fullName"
-              placeholder="Full Name"
-              [(ngModel)]="newContact.fullName"
-              aria-label="Name eingeben"
-              style="padding-right: 40px"
-            />
-            <img
-              src="imgs/input-name-person.png"
-              alt=""
-              style="
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 20px;
-                height: 20px;
-                pointer-events: none;
-              "
-            />
-          </div>
-
-          <label for="email"></label>
-          <div style="position: relative">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              [(ngModel)]="newContact.email"
-              aria-label="E-Mail-Adresse eingeben"
-              style="padding-right: 40px"
-            />
-            <img
-              src="imgs/input-mail-letter.png"
-              alt=""
-              style="
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 20px;
-                height: 20px;
-                pointer-events: none;
-              "
-            />
-          </div>
-
-          <label for="phone"></label>
-          <div style="position: relative">
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="Phone"
-              [(ngModel)]="newContact.phone"
-              aria-label="Telefonnummer eingeben"
-              style="padding-right: 40px"
-            />
-            <img
-              src="imgs/input-call-phone.png"
-              alt=""
-              style="
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 20px;
-                height: 20px;
-                pointer-events: none;
-              "
-            />
-          </div>
-          <button type="button" (click)="closeAdd()">Cancel</button>
-          <button type="button" (click)="saveAdd()">Create Contact</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Edit Contact Dialog -->
+  @if (isEditOpen && editingContact) {
+  <app-contact-form-dialog
+    mode="edit"
+    [contact]="editingContact"
+    [contactColor]="getContactColor(editingContact)"
+    (save)="saveEdit($event)"
+    (delete)="onDelete()"
+    (close)="closeEdit()"
+  ></app-contact-form-dialog>
   }
 
-  <div class="dialog-actions">
-    <button (click)="closeAdd()">Cancel X</button>
-    <button (click)="saveAdd()">Create Contact</button>
-  </div>
+  <!-- Add Contact Dialog -->
+  @if (isAddOpen) {
+  <app-contact-form-dialog
+    mode="add"
+    (save)="saveAdd($event)"
+    (close)="closeAdd()"
+  ></app-contact-form-dialog>
+  }
 </section>

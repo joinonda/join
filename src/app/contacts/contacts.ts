@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { Interfaces, NewContact } from '../interfaces/interfaces';
 import { ContactDetail } from './contact-detail/contact-detail';
+import { ContactFormDialog, ContactFormData } from './contact-form-dialog/contact-form-dialog';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ContactDetail, FormsModule],
+  imports: [CommonModule, ContactDetail, FormsModule, ContactFormDialog],
   templateUrl: './contacts.html',
   styleUrls: ['./contacts.scss'],
 })
@@ -70,30 +71,28 @@ export class Contacts implements OnInit {
     this.isEditOpen = true;
   }
 
-  async saveEdit(): Promise<void> {
-    if (!this.editingContact?.id) return;
-    try {
-      await this.dataService.updateContact(this.editingContact.id, this.editingContact);
-      this.closeEdit();
-    } catch (err: any) {
-      console.error('UPDATE failed:', err?.code, err?.message);
-    }
-  }
-
   async onDelete(): Promise<void> {
-    if (!this.editingContact?.id) {
-      console.error('Cannot delete: No ID found for contact');
+    // Try editingContact first (from edit dialog), then selectedContact (from detail view)
+    const contactToDelete = this.editingContact || this.selectedContact;
+    
+    if (!contactToDelete?.id) {
+      console.error('Cannot delete: No contact selected');
       return;
     }
     
     try {
-      await this.dataService.deleteContact(this.editingContact.id);
-      if (this.selectedContact?.id === this.editingContact.id) {
+      console.log('🗑️ Deleting contact:', contactToDelete);
+      await this.dataService.deleteContact(contactToDelete.id);
+      console.log('✅ Contact successfully deleted from database');
+      
+      // Clear selection if deleted contact was selected
+      if (this.selectedContact?.id === contactToDelete.id) {
         this.selectedContact = null;
       }
+      
       this.closeEdit();
     } catch (err: any) {
-      console.error('DELETE failed:', err?.code, err?.message);
+      console.error('❌ DELETE failed:', err?.code, err?.message);
     }
   }
 
@@ -107,14 +106,14 @@ export class Contacts implements OnInit {
     this.isAddOpen = true;
   }
 
-  async saveAdd(): Promise<void> {
+  async saveAdd(formData: ContactFormData): Promise<void> {
     try {
-      const [firstName, ...lastNameParts] = this.newContact.fullName.trim().split(' ');
+      const [firstName, ...lastNameParts] = formData.name.trim().split(' ');
       const contactToSave = {
         firstName: firstName || '',
         lastName: lastNameParts.join(' ') || '',
-        email: this.newContact.email,
-        phone: this.newContact.phone
+        email: formData.email,
+        phone: formData.phone
       };
       await this.dataService.addContact(contactToSave);
       this.closeAdd();
@@ -126,5 +125,24 @@ export class Contacts implements OnInit {
   closeAdd(): void {
     this.isAddOpen = false;
     this.newContact = { fullName: '', email: '', phone: '' };
+  }
+
+  async saveEdit(formData: ContactFormData): Promise<void> {
+    if (!this.editingContact?.id) return;
+    try {
+      const [firstName, ...lastNameParts] = formData.name.trim().split(' ');
+      const updatedContact = {
+        ...this.editingContact,
+        firstName: firstName || '',
+        lastName: lastNameParts.join(' ') || '',
+        email: formData.email,
+        phone: formData.phone
+      };
+      await this.dataService.updateContact(updatedContact.id, updatedContact);
+      console.log('✅ Contact successfully updated in database:', updatedContact);
+      this.closeEdit();
+    } catch (err: any) {
+      console.error('❌ UPDATE failed:', err?.code, err?.message);
+    }
   }
 }
