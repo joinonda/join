@@ -1,5 +1,13 @@
 import { Injectable, inject, runInInjectionContext, Injector } from '@angular/core';
-import { Firestore, collection, onSnapshot,doc, updateDoc, deleteDoc,} from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  addDoc,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Interfaces } from '../interfaces/interfaces';
 
@@ -25,14 +33,14 @@ export class FirebaseService {
     });
   }
 
-  updateDocument(col: string, id: string, data: any): Promise<void> {
+  async updateDocument(col: string, id: string, data: any): Promise<void> {
     return runInInjectionContext(this.injector, () => {
       const ref = doc(this.firestore, `${col}/${id}`);
       return updateDoc(ref, data);
     });
   }
 
-  deleteDocument(col: string, id: string): Promise<void> {
+  async deleteDocument(col: string, id: string): Promise<void> {
     return runInInjectionContext(this.injector, () => {
       const ref = doc(this.firestore, `${col}/${id}`);
       return deleteDoc(ref);
