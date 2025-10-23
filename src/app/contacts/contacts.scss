@@ -252,7 +252,7 @@
   }
 }
 
-.backdrop {
+.add-new-contact-overlay {
   position: fixed;
   inset: 0;
   display: flex;
@@ -262,16 +262,53 @@
   z-index: 1000;
 }
 
-.dialog {
-  width: 55vw;
-  height: 50vh;
+.add-new-contact-container {
+  width: 70vw;
+  height: 60vh;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  padding: 16px;
+
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-direction: row;
+
+  .a-n-c-left {
+    height: 100%;
+    width: 38.5%;
+    background-color: #2a3647;
+    border-radius: 12px 0 0 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 16px;
+    padding: 0 0 0 4%;
+
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 61px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    span {
+      font-family: 'Inter', sans-serif;
+      font-size: 27px;
+      font-weight: 200;
+      color: #ffffff;
+    }
+
+    .a-n-c-left-divider {
+      height: 4px;
+      width: 90px;
+      border-radius: 2px;
+      background-color: #29abe2;
+      margin-bottom: 30px;
+    }
+  }
+
+  .a-n-c-right {
+  }
 }
 
 .dialog-actions {
