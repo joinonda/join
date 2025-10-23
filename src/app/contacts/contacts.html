@@ -72,22 +72,22 @@
       </div>
     </div>
   </div>
-  }
+  } @if (isAddOpen) {
+  <div class="add-new-contact-overlay">
+    <div class="add-new-contact-container">
+      <div class="a-n-c-left">
+        <img src="imgs/logo-white.png" alt="Join Logo" width="55.6" height="66.48" />
+        <h3>Add contact</h3>
+        <span>Tasks are better with a team!</span>
+        <div class="a-n-c-left-divider"></div>
+      </div>
 
-  @if (isAddOpen) {
-  <div class="backdrop">
-    <div class="dialog">
-      <h3>Add new Contact</h3>
-
-      <form action="">
-        <input type="text" placeholder="Name" />
-        <input type="email" placeholder="Email" />
-        <input type="tel" placeholder="Phone" />
-      </form>
-
-      <div class="dialog-actions">
-        <button (click)="closeAdd()">Cancel X</button>
-        <button>Create Contact</button>
+      <div class="a-n-c-right">
+        <div class="a-n-c-avatar"></div>
+        <div class="a-n-c-x-and-inputs-and-btns">
+          <button (click)="closeAdd()">Cancel X</button>
+          <button>Create Contact</button>
+        </div>
       </div>
     </div>
   </div>
