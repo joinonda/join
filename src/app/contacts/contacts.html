@@ -55,4 +55,19 @@
     </div>
     }
   </div>
+  @if (isEditOpen) {
+  <div class="backdrop">
+    <div class="dialog">
+      <h3>Kontakt bearbeiten</h3>
+
+      <p>{{ editingContact?.firstName }} {{ editingContact?.lastName }}</p>
+      <p>{{ editingContact?.email }}</p>
+
+      <div class="dialog-actions">
+        <button (click)="onDelete()">Delete</button>
+        <button (click)="saveEdit()">Save</button>
+      </div>
+    </div>
+  </div>
+  }
 </section>

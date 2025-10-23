@@ -244,10 +244,39 @@
 // Contact Detail Container
 .detail-container {
   margin-top: 60px;
-  max-width: 461px;
+  max-width: 555px;
   overflow: hidden;
 
   @media (max-width: 1024px) {
     max-width: 100%;
   }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.dialog {
+  width: 30vw;
+  height: 30vh;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dialog-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
 }
