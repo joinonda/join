@@ -1,26 +1,19 @@
-
-$blue: #2a3647;
-$light-blue: #29abe2;
-$transparent-blue: rgba(41, 171, 226, 0.1);
-$white: #ffffff;
-
-
-@mixin dFlex($jc: center, $ai: center, $fd: row, $g: normal) {
-  display: flex;
-  justify-content: $jc;
-  align-items: $ai;
-  flex-direction: $fd;
-  gap: $g;
-}
-
 header {
-  @include dFlex($jc: space-between);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: normal;
   z-index: 4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
-  @include dFlex($jc: space-between);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: normal;
   width: 100%;
   padding: 20px 40px;
 
@@ -38,25 +31,33 @@ span {
 
 .avatar-container {
   position: relative;
-  @include dFlex();
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: normal;
 }
 
 .avatar-button {
-  @include dFlex();
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: normal;
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 3px solid $blue;
+  border: 3px solid #2a3647;
   background-color: transparent;
   cursor: pointer;
   transition: all 125ms ease;
 
-  color: $light-blue;
+  color: #29abe2;
   font-size: 24px;
   font-weight: bold;
 
   &:hover {
-    background-color: $transparent-blue;
+    background-color: rgba(41, 171, 226, 0.1);
   }
 }
 
@@ -81,7 +82,7 @@ span {
   border: none;
   text-align: left;
   cursor: pointer;
-  color: $white;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 400;
   transition: background-color 125ms ease;
@@ -100,7 +101,7 @@ span {
   }
 
   &.logout-item {
-    color: $white;
+    color: #ffffff;
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
@@ -120,11 +121,19 @@ span {
 }
 
 .header-actions {
-  @include dFlex($g: 12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
 }
 
 a {
-  @include dFlex();
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: normal;
 
   img {
     width: 24px;
