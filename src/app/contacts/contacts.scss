@@ -333,7 +333,8 @@
   flex-direction: column;
   gap: 12px;
   min-width: 400px;
-  max-width: 500px;
+  width: 55vw;
+  height: 60vh;
 }
 
 .dialog-actions {
@@ -341,4 +342,107 @@
   display: flex;
   gap: 8px;
   justify-content: flex-end;
+}
+
+.add-contact-form {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.add-contact-form .profile-section {
+  background-color: #2a3647;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.add-contact-form .logo-section {
+  color: white;
+  text-align: left;
+  
+  .logo {
+    margin-bottom: 20px;
+    
+    img {
+      height: 40px;
+      width: auto;
+    }
+  }
+  
+  h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+  }
+  
+  p {
+    font-size: 16px;
+    margin: 0 0 20px 0;
+    opacity: 0.8;
+  }
+  
+  .underline {
+    width: 60px;
+    height: 3px;
+    background-color: #29abe2;
+  }
+}
+
+.add-contact-form .form-section {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+  background-color: white;
+}
+
+.add-contact-form .profile-placeholder {
+  flex-shrink: 0;
+  
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+}
+
+.add-contact-form .input-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-contact-form .input-field {
+  display: flex;
+  align-items: center;
+  position: relative;
+  
+  input {
+    flex: 1;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    
+    &:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+  }
+  
+  img {
+    position: absolute;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+  }
 }

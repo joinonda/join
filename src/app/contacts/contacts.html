@@ -79,11 +79,39 @@
     <div class="dialog">
       <h3>Add new Contact</h3>
 
-      <form action="">
-        <input type="text" placeholder="Full Name" name="fullName" [(ngModel)]="newContact.fullName" />
-        <input type="email" placeholder="Email" name="email" [(ngModel)]="newContact.email" />
-        <input type="tel" placeholder="Phone" name="phone" [(ngModel)]="newContact.phone" />
-      </form>
+      <div class="add-contact-form">
+        <div class="profile-section">
+          <div class="logo-section">
+            <div class="logo">
+              <img src="/imgs/logo-white.png" alt="JOIN" />
+            </div>
+            <h2>Add contact</h2>
+            <p>Tasks are better with a team!</p>
+            <div class="underline"></div>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <div class="profile-placeholder">
+            <img src="/imgs/add-contact-profile-placeholder.png" alt="Profile" />
+          </div>
+          
+          <div class="input-fields">
+            <div class="input-field">
+              <input type="text" placeholder="Full Name" name="fullName" [(ngModel)]="newContact.fullName" />
+              <img src="/imgs/input-name-person.png" alt="Name" />
+            </div>
+            <div class="input-field">
+              <input type="email" placeholder="Email" name="email" [(ngModel)]="newContact.email" />
+              <img src="/imgs/input-mail-letter.png" alt="Email" />
+            </div>
+            <div class="input-field">
+              <input type="tel" placeholder="Phone" name="phone" [(ngModel)]="newContact.phone" />
+              <img src="/imgs/input-call-phone.png" alt="Phone" />
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="dialog-actions">
         <button (click)="closeAdd()">Cancel X</button>
