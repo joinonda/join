@@ -6,6 +6,13 @@
   margin-left: 232px;
   margin-top: 96px;
   display: flex;
+
+  @media (max-width: 1024px) {
+    margin-left: 0;
+    margin-top: 0;
+    height: 100vh;
+    flex-direction: column;
+  }
 }
 
 .contacts-container {
@@ -16,6 +23,12 @@
   background-color: white;
   z-index: 1;
   box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: calc(100vh - 80px);
+    box-shadow: none;
+  }
 }
 
 .contact-list {
@@ -30,6 +43,14 @@
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: -115px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 24px;
+    margin-top: 0;
+    height: calc(100vh - 160px);
+  }
+
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -59,6 +80,10 @@
   padding: 30px 0px;
   background-color: white;
   margin: 0 8px 0 0;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 
   .add-contact-btn {
     display: flex;
@@ -92,6 +117,11 @@
   flex: 1;
   overflow: visible;
   padding: 0px 6.56% 0px;
+
+  @media (max-width: 1024px) {
+    position: static;
+    padding: 0;
+  }
 }
 
 .contact-group {
@@ -104,6 +134,11 @@
   margin-bottom: 10px;
   width: 100%;
 
+  @media (max-width: 1024px) {
+    padding: 17px 36px;
+    margin-bottom: 0;
+  }
+
   .letter-header-letter-box {
     display: flex;
     flex-direction: row;
@@ -112,8 +147,8 @@
 
     .letter-header-letter {
       font-size: 20px;
-      font-weight: 600;
-      color: #2a3647;
+      font-weight: 400;
+      color: #000000;
       margin-bottom: 15px;
       position: relative;
       text-align: center;
@@ -122,6 +157,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      line-height: 120%;
+
+      @media (max-width: 1024px) {
+        flex: 0 0 auto;
+        justify-content: flex-start;
+      }
     }
 
     .letter-header-right {
@@ -133,9 +174,13 @@
   .letter-header-divider {
     width: 100%;
     height: 1px;
-    background-color: rgb(219, 215, 215);
-    border-radius: 1px;
+    background-color: #D1D1D1;
+    border-radius: 3px;
     margin: 10px 0 0 0;
+
+    @media (max-width: 1024px) {
+      margin: 8px 0 0 0;
+    }
   }
 }
 
@@ -148,6 +193,13 @@
   transition: background-color 0.2s ease;
   cursor: pointer;
   gap: 25px;
+
+  @media (max-width: 1024px) {
+    padding: 15px 24px;
+    margin: 0;
+    border-radius: 10px;
+    gap: 35px;
+  }
 
   &:hover {
     background-color: #f6f7f8;
@@ -174,40 +226,66 @@
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 12px;
   margin-right: 12px;
   flex-shrink: 0;
   margin-left: 10px;
+  border: 2px solid white;
+  line-height: 120%;
+
+  @media (max-width: 1024px) {
+    width: 42px;
+    height: 42px;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .contact-info {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .contact-name {
   font-size: 16px;
-  font-weight: 600;
-  color: #2a3647;
+  font-weight: 400;
+  color: #000000;
   margin-bottom: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 120%;
+
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
 }
 
 .contact-email {
   font-size: 14px;
-  color: #29abe2;
+  color: #007CEE;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 120%;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
 }
 
 .contacts-header {
   flex: 1;
   padding: 150px 24px 24px 48px;
   position: relative;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .header-content {
@@ -249,6 +327,44 @@
 
   @media (max-width: 1024px) {
     max-width: 100%;
+  }
+}
+
+// Mobile Add Contact FAB
+.mobile-add-contact-fab {
+  display: none;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 96px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    background-color: #2A3647;
+    border: 1px solid #2A3647;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #29ABE2;
+      transform: scale(1.05);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 }
 
