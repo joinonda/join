@@ -17,7 +17,7 @@
             </div>
             <div class="letter-header-divider"></div>
           </div>
-          @for (contact of groupedContacts[letter]; track contact.id) {
+          @for (contact of groupedContacts[letter]; track $index) {
           <div
             class="contact-item"
             [class.selected]="isSelected(contact)"
@@ -80,14 +80,14 @@
       <h3>Add new Contact</h3>
 
       <form action="">
-        <input type="text" placeholder="Name" />
-        <input type="email" placeholder="Email" />
-        <input type="tel" placeholder="Phone" />
+        <input type="text" placeholder="Full Name" name="fullName" [(ngModel)]="newContact.fullName" />
+        <input type="email" placeholder="Email" name="email" [(ngModel)]="newContact.email" />
+        <input type="tel" placeholder="Phone" name="phone" [(ngModel)]="newContact.phone" />
       </form>
 
       <div class="dialog-actions">
         <button (click)="closeAdd()">Cancel X</button>
-        <button>Create Contact</button>
+        <button (click)="saveAdd()">Create Contact</button>
       </div>
     </div>
   </div>

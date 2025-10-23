@@ -1,7 +1,7 @@
 import { Injectable, inject, runInInjectionContext, Injector } from '@angular/core';
-import { Firestore, collection, onSnapshot,doc, updateDoc, deleteDoc, addDoc} from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot, doc, updateDoc, deleteDoc, addDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Interfaces } from '../interfaces/interfaces';
+import { Interfaces, NewContact } from '../interfaces/interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
@@ -25,24 +25,22 @@ export class FirebaseService {
     });
   }
 
-  updateDocument(col: string, id: string, data: any): Promise<void> {
-    return runInInjectionContext(this.injector, () => {
-      const ref = doc(this.firestore, `${col}/${id}`);
-      return updateDoc(ref, data);
+  async addContactToDatabase(contact: Omit<Interfaces, 'id'>) {
+    return runInInjectionContext(this.injector, async () => {
+      return await addDoc(collection(this.firestore, 'contact'), contact);
+    });
+  }
+ 
+  async updateContactInDatabase(id: string, contact: Interfaces) {
+    await updateDoc(doc(this.firestore, 'contact', id), {
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      email: contact.email,
+      phone: contact.phone
     });
   }
 
-  deleteDocument(col: string, id: string): Promise<void> {
-    return runInInjectionContext(this.injector, () => {
-      const ref = doc(this.firestore, `${col}/${id}`);
-      return deleteDoc(ref);
-    });
-  }
-
-  addDocument(col: string, data: any): Promise<any> {
-    return runInInjectionContext(this.injector, () => {
-      const collectionRef = collection(this.firestore, col);
-      return addDoc(collectionRef, data);
-    });
+  async deleteContactFromDatabase(id: string) {
+    await deleteDoc(doc(this.firestore, 'contact', id));
   }
 }

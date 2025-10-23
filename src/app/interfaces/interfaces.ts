@@ -5,3 +5,9 @@ export interface Interfaces {
   email: string;
   phone: string;
 }
+
+export interface NewContact {
+  fullName: string;
+  email: string;
+  phone: string;
+}

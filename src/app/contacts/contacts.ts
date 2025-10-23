@@ -1,30 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { DataService } from '../services/data.service';
-import { Interfaces } from '../interfaces/interfaces';
+import { Interfaces, NewContact } from '../interfaces/interfaces';
 import { ContactDetail } from './contact-detail/contact-detail';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ContactDetail],
+  imports: [CommonModule, ContactDetail, FormsModule],
   templateUrl: './contacts.html',
   styleUrls: ['./contacts.scss'],
 })
+
 export class Contacts implements OnInit {
+  private dataService = inject(DataService);
+  
   contacts: Interfaces[] = [];
   groupedContacts: { [key: string]: Interfaces[] } = {};
   alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   selectedContact: Interfaces | null = null;
-
-  constructor(private dataService: DataService) {}
+  
+  isEditOpen = false;
+  editingContact: Interfaces | null = null;
+  isAddOpen = false;
+  newContact: NewContact = { fullName: '', email: '', phone: '' };
 
   ngOnInit() {
-    this.loadContacts();
-  }
-
-  loadContacts() {
-    this.dataService.getContacts().subscribe((contacts) => {
+    this.dataService.getContacts().subscribe(contacts => {
       this.contacts = contacts;
       this.groupContactsByFirstLetter();
     });
@@ -32,51 +35,25 @@ export class Contacts implements OnInit {
 
   groupContactsByFirstLetter() {
     this.groupedContacts = {};
-    this.contacts.forEach((contact) => {
-      if (contact.lastName && contact.lastName.length > 0) {
-        const firstLetter = contact.lastName.charAt(0).toUpperCase();
-        if (!this.groupedContacts[firstLetter]) {
-          this.groupedContacts[firstLetter] = [];
-        }
-        this.groupedContacts[firstLetter].push(contact);
+    this.contacts.forEach(contact => {
+      if (contact.lastName) {
+        const letter = contact.lastName.charAt(0).toUpperCase();
+        if (!this.groupedContacts[letter]) this.groupedContacts[letter] = [];
+        this.groupedContacts[letter].push(contact);
       }
     });
-
-    Object.keys(this.groupedContacts).forEach((letter) => {
-      this.groupedContacts[letter].sort((a, b) => {
-        if (a.lastName && b.lastName) {
-          return a.lastName.localeCompare(b.lastName);
-        }
-        return 0;
-      });
+    Object.keys(this.groupedContacts).forEach(letter => {
+      this.groupedContacts[letter].sort((a, b) => a.lastName.localeCompare(b.lastName));
     });
   }
 
   getInitials(firstName: string, lastName: string): string {
-    const firstInitial = firstName && firstName.length > 0 ? firstName.charAt(0) : '';
-    const lastInitial = lastName && lastName.length > 0 ? lastName.charAt(0) : '';
-    return (firstInitial + lastInitial).toUpperCase();
+    return (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
   }
 
   getContactColor(contact: Interfaces): string {
-    const colors = [
-      '#FF5EB3',
-      '#6E52FF',
-      '#FF7A00',
-      '#9327FF',
-      '#1FD7C1',
-      '#FF4646',
-      '#C3FF2B',
-      '#00BEE8',
-      '#FFA35E',
-      '#FFBB2B',
-      '#FFC701',
-      '#FFE62B',
-      '#0038FF',
-      '#FC71FF',
-    ];
-    const hash = contact.firstName.charCodeAt(0) + contact.lastName.charCodeAt(0);
-    return colors[hash % colors.length];
+    const colors = ['#FF5EB3', '#6E52FF', '#FF7A00', '#9327FF', '#1FD7C1', '#FF4646', '#C3FF2B', '#00BEE8', '#FFA35E', '#FFBB2B', '#FFC701', '#FFE62B', '#0038FF', '#FC71FF'];
+    return colors[(contact.firstName.charCodeAt(0) + contact.lastName.charCodeAt(0)) % colors.length];
   }
 
   isSelected(contact: Interfaces): boolean {
@@ -87,10 +64,6 @@ export class Contacts implements OnInit {
     this.selectedContact = contact;
   }
 
-  isEditOpen = false;
-  editingContact: Interfaces | null = null;
-  isAddOpen = false;
-
   onEdit(): void {
     if (!this.selectedContact) return;
     this.editingContact = { ...this.selectedContact };
@@ -98,18 +71,9 @@ export class Contacts implements OnInit {
   }
 
   async saveEdit(): Promise<void> {
-    const c = this.editingContact;
-    if (!c || !c.id) {
-      this.closeEdit();
-      return;
-    }
-    const { id, ...data } = c;
+    if (!this.editingContact?.id) return;
     try {
-      await this.dataService.updateContact(id, data);
-      const i = this.contacts.findIndex((x) => x.id === id);
-      if (i > -1) this.contacts[i] = { id, ...data } as Interfaces;
-      this.selectedContact = { id, ...data } as Interfaces;
-      this.groupContactsByFirstLetter();
+      await this.dataService.updateContact(this.editingContact.id, this.editingContact);
       this.closeEdit();
     } catch (err: any) {
       console.error('UPDATE failed:', err?.code, err?.message);
@@ -117,16 +81,16 @@ export class Contacts implements OnInit {
   }
 
   async onDelete(): Promise<void> {
-    const c = this.editingContact;
-    if (!c || !c.id) {
-      this.closeEdit();
+    if (!this.editingContact?.id) {
+      console.error('Cannot delete: No ID found for contact');
       return;
     }
+    
     try {
-      await this.dataService.deleteContact(c.id);
-      this.contacts = this.contacts.filter((x) => x.id !== c.id);
-      if (this.selectedContact?.id === c.id) this.selectedContact = null;
-      this.groupContactsByFirstLetter();
+      await this.dataService.deleteContact(this.editingContact.id);
+      if (this.selectedContact?.id === this.editingContact.id) {
+        this.selectedContact = null;
+      }
       this.closeEdit();
     } catch (err: any) {
       console.error('DELETE failed:', err?.code, err?.message);
@@ -139,10 +103,28 @@ export class Contacts implements OnInit {
   }
 
   onAdd(): void {
+    this.newContact = { fullName: '', email: '', phone: '' };
     this.isAddOpen = true;
+  }
+
+  async saveAdd(): Promise<void> {
+    try {
+      const [firstName, ...lastNameParts] = this.newContact.fullName.trim().split(' ');
+      const contactToSave = {
+        firstName: firstName || '',
+        lastName: lastNameParts.join(' ') || '',
+        email: this.newContact.email,
+        phone: this.newContact.phone
+      };
+      await this.dataService.addContact(contactToSave);
+      this.closeAdd();
+    } catch (err: any) {
+      console.error('ADD failed:', err?.code, err?.message);
+    }
   }
 
   closeAdd(): void {
     this.isAddOpen = false;
+    this.newContact = { fullName: '', email: '', phone: '' };
   }
 }

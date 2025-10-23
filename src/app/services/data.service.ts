@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { FirebaseService } from './firebase.service';
-import { Observable } from 'rxjs';
 import { Interfaces } from '../interfaces/interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
@@ -11,14 +11,15 @@ export class DataService {
     return this.firebaseService.getCollectionSnapshot('contact');
   }
 
-  updateContact(id: string, data: Partial<Interfaces>): Promise<void> {
-    return this.firebaseService.updateDocument('contact', id, data);
-  }
-  deleteContact(id: string): Promise<void> {
-    return this.firebaseService.deleteDocument('contact', id);
+  async addContact(contact: Omit<Interfaces, 'id'>) {
+    await this.firebaseService.addContactToDatabase(contact);
   }
 
-  addContact(contact: Interfaces) {
-    return this.firebaseService.addDocument('contact', contact);
+  async updateContact(id: string, contact: Interfaces) {
+    await this.firebaseService.updateContactInDatabase(id, contact);
+  }
+
+  async deleteContact(id: string) {
+    await this.firebaseService.deleteContactFromDatabase(id);
   }
 }
