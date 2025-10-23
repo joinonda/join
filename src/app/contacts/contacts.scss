@@ -87,9 +87,11 @@
 }
 
 .contacts-scroll {
+  position: absolute;
+  top: 130px;
   flex: 1;
   overflow: visible;
-  padding: 326px 6.56% 0px;
+  padding: 0px 6.56% 0px;
 }
 
 .contact-group {
@@ -106,6 +108,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 5px;
 
     .letter-header-letter {
       font-size: 20px;
@@ -132,14 +135,14 @@
     height: 1px;
     background-color: rgb(219, 215, 215);
     border-radius: 1px;
-    margin: 10px 0 10px 0;
+    margin: 10px 0 0 0;
   }
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  padding: 10px 0px;
+  padding: 15px 0px;
   margin-top: 10px;
   border-radius: 8px;
   transition: background-color 0.2s ease;
