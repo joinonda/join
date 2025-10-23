@@ -2,11 +2,11 @@ import { Injectable, inject, runInInjectionContext, Injector } from '@angular/co
 import {
   Firestore,
   collection,
-  addDoc,
   onSnapshot,
   doc,
   updateDoc,
   deleteDoc,
+  addDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Interfaces } from '../interfaces/interfaces';
@@ -44,6 +44,13 @@ export class FirebaseService {
     return runInInjectionContext(this.injector, () => {
       const ref = doc(this.firestore, `${col}/${id}`);
       return deleteDoc(ref);
+    });
+  }
+
+  addDocument(col: string, data: any): Promise<any> {
+    return runInInjectionContext(this.injector, () => {
+      const collectionRef = collection(this.firestore, col);
+      return addDoc(collectionRef, data);
     });
   }
 }

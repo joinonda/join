@@ -1,7 +1,7 @@
 <section class="contacts-section">
   <div class="contacts-container">
     <div class="add-contact-btn-container">
-      <button class="add-contact-btn">
+      <button class="add-contact-btn" (click)="onAdd()">
         <span>Add new Contact</span>
         <img src="/imgs/add-new-contact-person-plus.png" width="32px" height="32px" alt="" />
       </button>
@@ -58,7 +58,7 @@
   @if (isEditOpen) {
   <div class="backdrop">
     <div class="dialog">
-      <h3>Kontakt bearbeiten</h3>
+      <h3>Edit Contact</h3>
 
       <form action="">
         <input />
@@ -69,6 +69,25 @@
       <div class="dialog-actions">
         <button (click)="onDelete()">Delete</button>
         <button (click)="saveEdit()">Save</button>
+      </div>
+    </div>
+  </div>
+  }
+
+  @if (isAddOpen) {
+  <div class="backdrop">
+    <div class="dialog">
+      <h3>Add new Contact</h3>
+
+      <form action="">
+        <input type="text" placeholder="Name" />
+        <input type="email" placeholder="Email" />
+        <input type="tel" placeholder="Phone" />
+      </form>
+
+      <div class="dialog-actions">
+        <button (click)="closeAdd()">Cancel X</button>
+        <button>Create Contact</button>
       </div>
     </div>
   </div>
