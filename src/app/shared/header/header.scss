@@ -30,18 +30,26 @@ header {
   }
 
   img {
-    width: 32px;
-    height: 32px;
+
     display: none;
 
     @media (max-width: 1024px) {
       display: block;
       padding-top: 0;
       padding-bottom: 0;
+
+      
     }
   }
 }
-
+.logo-img {
+  height: 39px;
+  width: 32px;
+}
+.questionmark-img {
+  width: 32px;
+  height: 32px;
+}
 span {
   font-size: 20px;
   margin: 0 4rem;
@@ -154,8 +162,6 @@ a {
   gap: normal;
 
   img {
-    width: 24px;
-    height: 24px;
     display: block !important;
     transition: scale 125ms ease;
     &:hover {
