@@ -11,10 +11,10 @@ export class DataService {
     return this.firebaseService.getCollectionSnapshot('contact');
   }
 
-  updateContact(contact: Interfaces) {
-    return this.firebaseService.updateDocument('contact', contact.id, contact);
+  updateContact(id: string, data: Partial<Interfaces>): Promise<void> {
+    return this.firebaseService.updateDocument('contact', id, data);
   }
-  deleteContact(id: string) {
+  deleteContact(id: string): Promise<void> {
     return this.firebaseService.deleteDocument('contact', id);
   }
 

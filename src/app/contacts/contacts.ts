@@ -103,15 +103,16 @@ export class Contacts implements OnInit {
       this.closeEdit();
       return;
     }
+    const { id, ...data } = c;
     try {
-      await this.dataService.updateContact(c);
-      const i = this.contacts.findIndex((x) => x.id === c.id);
-      if (i > -1) this.contacts[i] = { ...c };
-      this.selectedContact = { ...c };
+      await this.dataService.updateContact(id, data);
+      const i = this.contacts.findIndex((x) => x.id === id);
+      if (i > -1) this.contacts[i] = { id, ...data } as Interfaces;
+      this.selectedContact = { id, ...data } as Interfaces;
       this.groupContactsByFirstLetter();
       this.closeEdit();
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      console.error('UPDATE failed:', err?.code, err?.message);
     }
   }
 
@@ -127,8 +128,8 @@ export class Contacts implements OnInit {
       if (this.selectedContact?.id === c.id) this.selectedContact = null;
       this.groupContactsByFirstLetter();
       this.closeEdit();
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      console.error('DELETE failed:', err?.code, err?.message);
     }
   }
 
