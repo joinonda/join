@@ -8,28 +8,32 @@
     </div>
     <div class="contact-list">
       <div class="contacts-scroll">
-        @for (letter of alphabet; track letter) {
-          @if (groupedContacts[letter]?.length) {
-            <div class="contact-group">
-              <div class="letter-header">{{ letter }}</div>
-              @for (contact of groupedContacts[letter]; track contact.id) {
-                <div 
-                  class="contact-item"
-                  [class.selected]="isSelected(contact)"
-                  (click)="selectContact(contact)"
-                >
-                  <div class="contact-avatar" [style.background-color]="getContactColor(contact)">
-                    {{ getInitials(contact.firstName, contact.lastName) }}
-                  </div>
-                  <div class="contact-info">
-                    <div class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</div>
-                    <div class="contact-email">{{ contact.email }}</div>
-                  </div>
-                </div>
-              }
+        @for (letter of alphabet; track letter) { @if (groupedContacts[letter]?.length) {
+        <div class="contact-group">
+          <div class="letter-header-container">
+            <div class="letter-header-letter-box">
+              <div class="letter-header-letter">{{ letter }}</div>
+              <div class="letter-header-right"></div>
             </div>
+            <div class="letter-header-divider"></div>
+          </div>
+          @for (contact of groupedContacts[letter]; track contact.id) {
+          <div
+            class="contact-item"
+            [class.selected]="isSelected(contact)"
+            (click)="selectContact(contact)"
+          >
+            <div class="contact-avatar" [style.background-color]="getContactColor(contact)">
+              {{ getInitials(contact.firstName, contact.lastName) }}
+            </div>
+            <div class="contact-info">
+              <div class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</div>
+              <div class="contact-email">{{ contact.email }}</div>
+            </div>
+          </div>
           }
-        }
+        </div>
+        } }
       </div>
     </div>
   </div>
@@ -39,16 +43,16 @@
       <div class="header-separator"></div>
       <p>Better with a team</p>
     </div>
-    
+
     @if (selectedContact) {
-      <div class="detail-container">
-        <app-contact-detail 
-          [contact]="selectedContact"
-          [contactColor]="getContactColor(selectedContact)"
-          (edit)="onEdit()"
-          (delete)="onDelete()"
-        ></app-contact-detail>
-      </div>
+    <div class="detail-container">
+      <app-contact-detail
+        [contact]="selectedContact"
+        [contactColor]="getContactColor(selectedContact)"
+        (edit)="onEdit()"
+        (delete)="onDelete()"
+      ></app-contact-detail>
+    </div>
     }
   </div>
 </section>
