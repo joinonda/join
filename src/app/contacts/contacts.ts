@@ -89,6 +89,7 @@ export class Contacts implements OnInit {
 
   isEditOpen = false;
   editingContact: Interfaces | null = null;
+  isAddOpen = false;
 
   onEdit(): void {
     if (!this.selectedContact) return;
@@ -134,5 +135,13 @@ export class Contacts implements OnInit {
   closeEdit(): void {
     this.isEditOpen = false;
     this.editingContact = null;
+  }
+
+  onAdd(): void {
+    this.isAddOpen = true;
+  }
+
+  closeAdd(): void {
+    this.isAddOpen = false;
   }
 }

@@ -17,4 +17,8 @@ export class DataService {
   deleteContact(id: string) {
     return this.firebaseService.deleteDocument('contact', id);
   }
+
+  addContact(contact: Interfaces) {
+    return this.firebaseService.addDocument('contact', contact);
+  }
 }
