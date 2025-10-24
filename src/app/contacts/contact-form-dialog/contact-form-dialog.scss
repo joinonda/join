@@ -89,13 +89,13 @@
 .dialog-title {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 61px;
+  font-size: clamp(47px, 4.5vw, 61px);
   line-height: 120%;
   color: #FFFFFF;
   margin: 0;
+  white-space: nowrap;
 
   @media (max-width: 768px) {
-    font-size: 48px;
     text-align: center;
   }
 }
@@ -110,10 +110,11 @@
 .dialog-subtitle {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(20px, 2vw, 27px);
   line-height: 120%;
   color: #FFFFFF;
   margin: 8px 0 0 0;
+  white-space: nowrap;
 
   @media (max-width: 768px) {
     text-align: center;
@@ -244,7 +245,7 @@
   flex-direction: column;
   gap: 32px;
   width: 100%;
-  max-width: 422px;
+  max-width: clamp(300px, 40vw, 422px);
   margin-top: 90px;
 
   @media (max-width: 1024px) {
@@ -265,11 +266,11 @@
 
 .form-input {
   width: 100%;
-  height: 50px;
-  padding: 13px 50px 13px 21px;
+  height: clamp(48px, 3.5vw, 50px);
+  padding: 13px clamp(40px, 4vw, 50px) 13px 21px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: clamp(16px, 1.5vw, 20px);
   line-height: 120%;
   color: #000000;
   background: #FFFFFF;
@@ -290,18 +291,13 @@
   &.edit-mode:focus {
     border-color: #29ABE2;
   }
-
-  @media (max-width: 480px) {
-    font-size: 16px;
-    height: 48px;
-  }
 }
 
 .input-icon {
   position: absolute;
-  right: 16px;
-  width: 24px;
-  height: 24px;
+  right: clamp(12px, 1.5vw, 16px);
+  width: clamp(20px, 1.5vw, 24px);
+  height: clamp(20px, 1.5vw, 24px);
   pointer-events: none;
 }
 
@@ -318,7 +314,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 25px;
+  gap: clamp(16px, 2vw, 25px);
   margin-top: 16px;
 
   @media (max-width: 768px) {
@@ -335,16 +331,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: clamp(12px, 1.5vw, 16px);
   gap: 4px;
-  min-width: 214px;
-  height: 57px;
+  min-width: clamp(160px, 20vw, 214px);
+  height: clamp(48px, 4vw, 57px);
   background: #2A3647;
   border: none;
   border-radius: 10px;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 21px;
+  font-size: clamp(16px, 1.8vw, 21px);
   line-height: 120%;
   color: #FFFFFF;
   cursor: pointer;
@@ -369,16 +365,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: clamp(12px, 1.5vw, 16px);
   gap: 4px;
-  min-width: 126px;
-  height: 56px;
+  min-width: clamp(100px, 15vw, 126px);
+  height: clamp(48px, 4vw, 56px);
   background: #FFFFFF;
   border: 1px solid #2A3647;
   border-radius: 10px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: clamp(16px, 1.8vw, 20px);
   line-height: 120%;
   color: #2A3647;
   cursor: pointer;
