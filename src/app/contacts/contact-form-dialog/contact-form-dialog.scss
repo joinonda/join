@@ -53,9 +53,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 66px 46px;
+  padding: 66px 20px;
   gap: 12px;
-  width: 39vw;
+  width: 39%;
   background: #2a3647;
   position: relative;
 
@@ -69,6 +69,10 @@
   width: 55.6px;
   height: 66.48px;
   margin-bottom: 20px;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .dialog-header {
@@ -86,11 +90,11 @@
 .dialog-title {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: clamp(47px, 4.5vw, 61px);
+  font-size: clamp(47px, 8vw, 61px);
   line-height: 120%;
   color: #ffffff;
   margin: 0;
-  white-space: nowrap;
+  white-space: wrap;
 
   @media (max-width: 768px) {
     text-align: center;
@@ -138,11 +142,12 @@
   gap: 40px;
   width: 100%;
   max-width: 700px;
+  padding-left: 35px;
 
   @media (max-width: 1024px) {
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    padding: 0;
   }
 
   @media (max-width: 768px) {
@@ -151,9 +156,7 @@
 }
 
 .close-btn {
-  position: absolute;
-  top: 48px;
-  right: 48px;
+  top: 43px;
   width: 32px;
   height: 32px;
   background: transparent;
@@ -164,6 +167,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  align-self: end;
 
   &:hover {
     background: #f0f0f0;
@@ -247,7 +251,7 @@
 
   @media (max-width: 1024px) {
     gap: 24px;
-    margin-top: 60px;
+    margin-top: 24px;
   }
 
   @media (max-width: 768px) {
@@ -309,18 +313,15 @@
 
 .button-group {
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+
   gap: clamp(16px, 2vw, 25px);
-  margin-top: 16px;
 
   @media (max-width: 768px) {
     gap: 16px;
   }
 
   @media (max-width: 480px) {
-    flex-direction: column;
-    gap: 12px;
+    gap: 2%;
   }
 }
 
@@ -330,7 +331,7 @@
   align-items: center;
   padding: clamp(12px, 1.5vw, 16px);
   gap: 4px;
-  min-width: clamp(160px, 20vw, 214px);
+  min-width: clamp(120px, 8vw, 128px);
   height: clamp(48px, 4vw, 57px);
   background: #2a3647;
   border: none;
@@ -364,7 +365,7 @@
   align-items: center;
   padding: clamp(12px, 1.5vw, 16px);
   gap: 4px;
-  min-width: clamp(100px, 15vw, 126px);
+  min-width: clamp(120px, 8vw, 128px);
   height: clamp(48px, 4vw, 56px);
   background: #ffffff;
   border: 1px solid #2a3647;
