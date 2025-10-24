@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   font-family: 'Inter', sans-serif;
+  overflow-y: hidden;
 }
 html,
 body,
@@ -150,4 +151,3 @@ app-footer {
   font-weight: 900;
   src: url('/fonts/inter-v20-latin-900.woff2') format('woff2');
 }
-
