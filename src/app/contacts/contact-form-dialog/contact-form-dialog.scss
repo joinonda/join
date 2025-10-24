@@ -65,6 +65,7 @@
     width: 100%;
     align-items: center;
     padding: 54px 2px;
+    height: 40%; 
   }
 }
 
@@ -193,9 +194,10 @@
   }
 
   @media (max-width: 768px) {
-    margin-top: -100px;
+    margin-top: 0;
     margin-bottom: 32px;
     z-index: 10;
+    order: -1;
   }
 }
 
