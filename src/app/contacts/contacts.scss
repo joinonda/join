@@ -38,7 +38,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 456px;
+  width: 32vw;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -92,7 +92,7 @@
     align-self: center;
     cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
-    width: 352px;
+    width: 24vw;
     height: 56px;
     font-family: 'Inter';
     font-family: 'Inter', sans-serif;
@@ -102,7 +102,8 @@
     background-color: #2a3647;
     border: none;
     border-radius: 10px;
-    padding: 0 20px;
+    padding: 0 5%;
+    gap: 2%;
 
     &:hover {
       background-color: #29abe2;
@@ -176,7 +177,7 @@
   .letter-header-divider {
     width: 100%;
     height: 1px;
-    background-color: #D1D1D1;
+    background-color: #d1d1d1;
     border-radius: 3px;
     margin: 10px 0 0 0;
 
@@ -194,7 +195,7 @@
   border-radius: 8px;
   transition: background-color 0.2s ease;
   cursor: pointer;
-  gap: 25px;
+  gap: 5%;
 
   @media (max-width: 1024px) {
     padding: 15px 24px;
@@ -269,7 +270,7 @@
 
 .contact-email {
   font-size: 14px;
-  color: #007CEE;
+  color: #007cee;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -343,8 +344,8 @@
     right: 16px;
     width: 56px;
     height: 56px;
-    background-color: #2A3647;
-    border: 1px solid #2A3647;
+    background-color: #2a3647;
+    border: 1px solid #2a3647;
     border-radius: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     cursor: pointer;
@@ -352,7 +353,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-      background-color: #29ABE2;
+      background-color: #29abe2;
       transform: scale(1.05);
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
     }
