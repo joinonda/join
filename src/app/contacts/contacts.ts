@@ -5,11 +5,12 @@ import { DataService } from '../services/data.service';
 import { Interfaces, NewContact } from '../interfaces/interfaces';
 import { ContactDetail } from './contact-detail/contact-detail';
 import { ContactFormDialog, ContactFormData } from './contact-form-dialog/contact-form-dialog';
+import { ContactDetailDialog } from './contact-detail-dialog/contact-detail-dialog';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ContactDetail, FormsModule, ContactFormDialog],
+  imports: [CommonModule, ContactDetail, FormsModule, ContactFormDialog, ContactDetailDialog],
   templateUrl: './contacts.html',
   styleUrls: ['./contacts.scss'],
 })
@@ -26,6 +27,8 @@ export class Contacts implements OnInit {
   editingContact: Interfaces | null = null;
   isAddOpen = false;
   newContact: NewContact = { fullName: '', email: '', phone: '' };
+  isDetailDialogOpen = false;
+  detailDialogContact: Interfaces | null = null;
 
   ngOnInit() {
     this.dataService.getContacts().subscribe(contacts => {
@@ -63,6 +66,36 @@ export class Contacts implements OnInit {
 
   selectContact(contact: Interfaces): void {
     this.selectedContact = contact;
+    
+    if (window.innerWidth <= 1024) {
+      this.openDetailDialog(contact);
+    }
+  }
+
+  openDetailDialog(contact: Interfaces): void {
+    this.detailDialogContact = contact;
+    this.isDetailDialogOpen = true;
+  }
+
+  closeDetailDialog(): void {
+    this.isDetailDialogOpen = false;
+    this.detailDialogContact = null;
+  }
+
+  onDetailEdit(): void {
+    if (this.detailDialogContact) {
+      this.editingContact = { ...this.detailDialogContact };
+      this.isEditOpen = true;
+      this.closeDetailDialog();
+    }
+  }
+
+  onDetailDelete(): void {
+    if (this.detailDialogContact) {
+      this.editingContact = { ...this.detailDialogContact };
+      this.closeDetailDialog();
+      this.onDelete();
+    }
   }
 
   onEdit(): void {
@@ -72,7 +105,6 @@ export class Contacts implements OnInit {
   }
 
   async onDelete(): Promise<void> {
-    // Try editingContact first (from edit dialog), then selectedContact (from detail view)
     const contactToDelete = this.editingContact || this.selectedContact;
     
     if (!contactToDelete?.id) {
@@ -85,7 +117,6 @@ export class Contacts implements OnInit {
       await this.dataService.deleteContact(contactToDelete.id);
       console.log('✅ Contact successfully deleted from database');
       
-      // Clear selection if deleted contact was selected
       if (this.selectedContact?.id === contactToDelete.id) {
         this.selectedContact = null;
       }

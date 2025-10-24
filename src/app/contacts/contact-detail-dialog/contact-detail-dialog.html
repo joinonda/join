@@ -1,0 +1,82 @@
+<div class="overlay" (click)="onBackdropClick($event)">
+  <div class="dialog-container">
+
+    <div class="dialog-content">
+      <div class="page-header">
+        <div class="header-content">
+          <h2>Contacts</h2>
+          <p>Better with a team</p>
+          <div class="header-separator"></div>
+        </div>
+        <button class="back-btn" (click)="onClose()">
+          <img src="/imgs/arrow-to-left.png" alt="Back" width="32" height="32" />
+        </button>
+      </div>
+
+      @if (contact) {
+      <div class="contact-detail">
+        <div class="detail-header">
+          <div class="detail-avatar-container">
+            <div class="detail-avatar" [style.background-color]="contactColor">
+              {{ getInitials(contact.firstName, contact.lastName) }}
+            </div>
+          </div>
+          <div class="detail-name-section">
+            <h1 class="detail-name">{{ contact.firstName }} {{ contact.lastName }}</h1>
+          </div>
+        </div>
+
+        <div class="detail-info-section">
+          <h3 class="info-title">Contact Information</h3>
+          
+          <div class="info-content">
+            <div class="info-group">
+              <label class="info-label">Email</label>
+              <a [href]="'mailto:' + contact.email" class="info-value email-link">
+                {{ contact.email }}
+              </a>
+            </div>
+            
+            <div class="info-group">
+              <label class="info-label">Phone</label>
+              <span class="info-value">{{ contact.phone }}</span>
+            </div>
+          </div>
+        </div>
+        </div>
+      }
+
+      <button class="fab-button" (click)="toggleMenu()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="5" r="2" fill="white"/>
+          <circle cx="12" cy="12" r="2" fill="white"/>
+          <circle cx="12" cy="19" r="2" fill="white"/>
+        </svg>
+      </button>
+
+      @if (showMenu) {
+      <div class="dropdown-menu">
+        <button class="dropdown-item" (click)="onEdit()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#2A3647"/>
+          </svg>
+          <span>Edit</span>
+        </button>
+        <button class="dropdown-item" (click)="onDelete()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="#2A3647"/>
+          </svg>
+          <span>Delete</span>
+        </button>
+      </div>
+      }
+    </div>
+  </div>
+
+  @if (showDeleteDialog) {
+  <app-contact-delete-dialog 
+    (delete)="confirmDelete()" 
+    (cancel)="cancelDelete()">
+  </app-contact-delete-dialog>
+  }
+</div>
