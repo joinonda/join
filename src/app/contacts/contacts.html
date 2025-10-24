@@ -81,4 +81,14 @@
     (close)="closeAdd()"
   ></app-contact-form-dialog>
   }
+
+  @if (isDetailDialogOpen && detailDialogContact) {
+  <app-contact-detail-dialog
+    [contact]="detailDialogContact"
+    [contactColor]="getContactColor(detailDialogContact)"
+    (edit)="onDetailEdit()"
+    (delete)="onDetailDelete()"
+    (close)="closeDetailDialog()"
+  ></app-contact-detail-dialog>
+  }
 </section>
