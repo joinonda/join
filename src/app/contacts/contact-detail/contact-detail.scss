@@ -60,7 +60,7 @@
 .detail-name {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
-  font-size: 47px;
+  font-size: clamp(24px, 2.6vw, 47px);
   line-height: 120%;
   color: #000000;
   margin: 0;

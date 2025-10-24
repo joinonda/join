@@ -15,7 +15,6 @@
   display: flex;
   width: 1212px;
   height: 594px;
-  background: #ffffff;
   border-radius: 30px;
   overflow: hidden;
   position: relative;
@@ -131,6 +130,7 @@
   align-items: center;
   padding: 48px 46px 66px;
   position: relative;
+  background-color: #ffffff;
 
   @media (max-width: 768px) {
     padding: 60px 24px 40px;
@@ -345,6 +345,7 @@
   color: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 
   &:hover {
     background: #29abe2;
