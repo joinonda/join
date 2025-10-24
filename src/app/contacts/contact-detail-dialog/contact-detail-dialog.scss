@@ -193,7 +193,11 @@
 
       &.email-link {
         color: #29abe2;
-        text-decoration: underline;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
