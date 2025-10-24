@@ -93,7 +93,7 @@
     align-self: center;
     cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
-    width: 24vw;
+    width: 25vw;
     height: 56px;
     font-family: 'Inter';
     font-family: 'Inter', sans-serif;
@@ -139,7 +139,7 @@
   width: 100%;
 
   @media (max-width: 1024px) {
-    padding: 17px 36px;
+    padding: 17px 0px;
     margin-bottom: 0;
   }
 
@@ -148,6 +148,13 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 5px;
+    
+
+    @media (max-width: 1024px) {
+      padding: 17px 0px;
+      margin-bottom: 0;
+      padding-left: 39px;
+    }
 
     .letter-header-letter {
       font-size: 20px;
