@@ -66,7 +66,7 @@
     width: 100%;
     align-items: center;
     padding: 54px 2px;
-    height: 40%; 
+    height: 40%;
   }
 }
 
@@ -262,6 +262,8 @@
   position: relative;
   display: flex;
   align-items: center;
+  flex-direction: column;
+  margin-bottom: 0;
 }
 
 .form-input {
@@ -291,11 +293,28 @@
   &.edit-mode:focus {
     border-color: #29abe2;
   }
+
+  &.invalid {
+    border-color: #ff3d3d;
+  }
+}
+
+.error-message {
+  color: #ff3d3d;
+  font-size: 14px;
+  position: absolute;
+  bottom: -20px;
+  left: 21px;
+  font-family: 'Inter', sans-serif;
+  width: calc(100% - 21px);
+  text-align: left;
 }
 
 .input-icon {
   position: absolute;
   right: clamp(12px, 1.5vw, 16px);
+  top: 50%;
+  transform: translateY(-50%);
   width: clamp(20px, 1.5vw, 24px);
   height: clamp(20px, 1.5vw, 24px);
   pointer-events: none;

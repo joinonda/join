@@ -14,7 +14,7 @@ export interface ContactFormData {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './contact-form-dialog.html',
-  styleUrl: './contact-form-dialog.scss'
+  styleUrl: './contact-form-dialog.scss',
 })
 export class ContactFormDialog implements OnInit {
   @Input() mode: 'add' | 'edit' = 'add';
@@ -27,17 +27,85 @@ export class ContactFormDialog implements OnInit {
   formData: ContactFormData = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
   };
+
+  nameError: string | null = null;
+  emailError: string | null = null;
+  phoneError: string | null = null;
 
   ngOnInit(): void {
     if (this.mode === 'edit' && this.contact) {
       this.formData = {
         name: `${this.contact.firstName} ${this.contact.lastName}`,
         email: this.contact.email,
-        phone: this.contact.phone
+        phone: this.contact.phone,
       };
     }
+  }
+
+  validateName(): void {
+    const name = this.formData.name?.trim();
+    if (!name) {
+      this.nameError = 'A real name is required';
+      return;
+    }
+
+    const words = name.split(' ').filter((word) => word.length > 0);
+    if (words.length < 2) {
+      this.nameError = 'A real name is required';
+      return;
+    }
+
+    const isCapitalized = words.every((word) => word[0] === word[0].toUpperCase());
+    if (!isCapitalized) {
+      this.nameError = 'A real name is required';
+      return;
+    }
+
+    this.nameError = null;
+  }
+
+  validateEmail(): void {
+    const email = this.formData.email?.trim();
+    if (!email) {
+      this.emailError = 'A real email address is required';
+      return;
+    }
+
+    if (email.length < 3) {
+      this.emailError = 'A real email address is required';
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      this.emailError = 'A real email address is required';
+      return;
+    }
+
+    this.emailError = null;
+  }
+
+  validatePhone(): void {
+    const phone = this.formData.phone?.trim();
+    if (!phone) {
+      this.phoneError = 'A real phone number is required';
+      return;
+    }
+
+    if (!phone.startsWith('+') && !phone.startsWith('0')) {
+      this.phoneError = 'A real phone number is required';
+      return;
+    }
+
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 12) {
+      this.phoneError = 'A real phone number is required';
+      return;
+    }
+
+    this.phoneError = null;
   }
 
   get title(): string {
@@ -60,6 +128,14 @@ export class ContactFormDialog implements OnInit {
   }
 
   onSave(): void {
+    this.validateName();
+    this.validateEmail();
+    this.validatePhone();
+
+    if (this.nameError || this.emailError || this.phoneError) {
+      return;
+    }
+
     this.save.emit(this.formData);
   }
 
