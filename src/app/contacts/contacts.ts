@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../services/data.service';
@@ -6,17 +6,20 @@ import { Interfaces, NewContact } from '../interfaces/interfaces';
 import { ContactDetail } from './contact-detail/contact-detail';
 import { ContactFormDialog, ContactFormData } from './contact-form-dialog/contact-form-dialog';
 import { ContactDetailDialog } from './contact-detail-dialog/contact-detail-dialog';
+import { ToastComponent } from '../shared/toast/toast';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ContactDetail, FormsModule, ContactFormDialog, ContactDetailDialog],
+  imports: [CommonModule, ContactDetail, FormsModule, ContactFormDialog, ContactDetailDialog, ToastComponent],
   templateUrl: './contacts.html',
   styleUrls: ['./contacts.scss'],
 })
 
 export class Contacts implements OnInit {
   private dataService = inject(DataService);
+  
+  @ViewChild(ToastComponent) toast!: ToastComponent;
   
   contacts: Interfaces[] = [];
   groupedContacts: { [key: string]: Interfaces[] } = {};
@@ -148,6 +151,7 @@ export class Contacts implements OnInit {
       };
       await this.dataService.addContact(contactToSave);
       this.closeAdd();
+      this.toast.show('Contact successfully created');
     } catch (err: any) {
       console.error('ADD failed:', err?.code, err?.message);
     }
