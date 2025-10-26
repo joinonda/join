@@ -78,9 +78,9 @@
                 stroke-linejoin="round"
               />
             </svg>
-            <span class="error-message" *ngIf="nameError && (nameInput.dirty || nameInput.touched)">
-              {{ nameError }}
-            </span>
+            @if (nameError && (nameInput.dirty || nameInput.touched)) {
+            <span class="error-message">{{ nameError }}</span>
+            }
           </div>
 
           <div class="input-wrapper">
@@ -111,12 +111,9 @@
                 stroke-linejoin="round"
               />
             </svg>
-            <span
-              class="error-message"
-              *ngIf="emailError && (emailInput.dirty || emailInput.touched)"
-            >
-              {{ emailError }}
-            </span>
+            @if (emailError && (emailInput.dirty || emailInput.touched)) {
+            <span class="error-message">{{ emailError }}</span>
+            }
           </div>
 
           <div class="input-wrapper">
@@ -140,12 +137,9 @@
                 stroke-linejoin="round"
               />
             </svg>
-            <span
-              class="error-message"
-              *ngIf="phoneError && (phoneInput.dirty || phoneInput.touched)"
-            >
-              {{ phoneError }}
-            </span>
+            @if (phoneError && (phoneInput.dirty || phoneInput.touched)) {
+            <span class="error-message">{{ phoneError }}</span>
+            }
           </div>
 
           <div class="button-group">
