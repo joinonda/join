@@ -7,36 +7,44 @@
        [class.active]="isActive('summary')" 
        (click)="setActive('summary')" 
        aria-label="Summary">
-      <img  class="icon default" [src]="getImageSrc('summary', 'imgs/summary-default.png', 'imgs/summary-hover.png')" 
+      <img class="icon desktop" [src]="getImageSrc('summary', 'imgs/summary-default.png', 'imgs/summary-hover.png')" 
            alt="" 
            aria-hidden="true" />
+      <img class="icon mobile" src="imgs/icons/summary.png" alt="" aria-hidden="true" />
+      <span class="mobile-label">Summary</span>
     </a>
 
     <a class="menu-btn add-task" 
        [class.active]="isActive('add-task')" 
        (click)="setActive('add-task')" 
        aria-label="Add task">
-      <img  class="icon default" [src]="getImageSrc('add-task', 'imgs/add-task-default.png', 'imgs/add-task-hover.png')" 
+      <img class="icon desktop" [src]="getImageSrc('add-task', 'imgs/add-task-default.png', 'imgs/add-task-hover.png')" 
            alt="" 
            aria-hidden="true" />
+      <img class="icon mobile" src="imgs/icons/add-task.png" alt="" aria-hidden="true" />
+      <span class="mobile-label">Add Task</span>
     </a>
 
     <a class="menu-btn board" 
        [class.active]="isActive('board')" 
        (click)="setActive('board')" 
        aria-label="Board">
-      <img  class="icon default" [src]="getImageSrc('board', 'imgs/board-default.png', 'imgs/board-hover.png')" 
+      <img class="icon desktop" [src]="getImageSrc('board', 'imgs/board-default.png', 'imgs/board-hover.png')" 
            alt="" 
            aria-hidden="true" />
+      <img class="icon mobile" src="imgs/icons/board.png" alt="" aria-hidden="true" />
+      <span class="mobile-label">Board</span>
     </a>
 
     <a class="menu-btn contacts" 
        [class.active]="isActive('contacts')" 
        (click)="setActive('contacts')" 
        aria-label="Contacts">
-      <img  class="icon default" [src]="getImageSrc('contacts', 'imgs/contacts-default.png', 'imgs/contacts-hover.png')" 
+      <img class="icon desktop" [src]="getImageSrc('contacts', 'imgs/contacts-default.png', 'imgs/contacts-hover.png')" 
            alt="Contacts section" 
            aria-hidden="true" />
+      <img class="icon mobile" src="imgs/icons/contacts.png" alt="" aria-hidden="true" />
+      <span class="mobile-label">Contacts</span>
     </a>
   </div>
   <div class="privacy-policy-legal-notice">

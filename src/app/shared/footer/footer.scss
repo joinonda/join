@@ -93,6 +93,37 @@
   object-fit: contain;
   transition: opacity 0.15s ease-in-out;
   pointer-events: none;
+
+  &.mobile {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    position: static;
+    width: 24px;
+    height: 24px;
+    
+    &.desktop {
+      display: none;
+    }
+    
+    &.mobile {
+      display: block;
+    }
+  }
+}
+
+.mobile-label {
+  display: none;
+  
+  @media (max-width: 1024px) {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-align: center;
+  }
 }
 
 .menu-btn .icon.default {
