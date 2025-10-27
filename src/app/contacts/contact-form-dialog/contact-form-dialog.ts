@@ -44,25 +44,51 @@ export class ContactFormDialog implements OnInit {
     }
   }
 
+  private isNameValid(): boolean {
+    const name = this.formData.name?.trim();
+    if (!name) return false;
+    const words = name.split(' ').filter((w) => w.length > 0);
+    if (words.length < 2) return false;
+    const isCapitalized = words.every((w) => w[0] === w[0]?.toUpperCase());
+    return isCapitalized;
+  }
+
+  private isEmailValid(): boolean {
+    const email = this.formData.email?.trim();
+    if (!email || email.length < 3) return false;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  private isPhoneValid(): boolean {
+    const raw = this.formData.phone?.trim();
+    if (!raw) return false;
+    if (!/^(0|\+)/.test(raw)) return false;
+    if (!/^[+0][0-9\s\-()]*$/.test(raw)) return false;
+    const digits = raw.replace(/\D/g, '');
+    return digits.length >= 6;
+  }
+
+  get canSubmit(): boolean {
+    return this.isNameValid() && this.isEmailValid() && this.isPhoneValid();
+  }
+
   validateName(): void {
     const name = this.formData.name?.trim();
     if (!name) {
       this.nameError = 'Name is required';
       return;
     }
-
     const words = name.split(' ').filter((w) => w.length > 0);
     if (words.length < 2) {
       this.nameError = 'First and last name required';
       return;
     }
-
     const isCapitalized = words.every((w) => w[0] === w[0]?.toUpperCase());
     if (!isCapitalized) {
       this.nameError = 'Each name must start with a capital letter';
       return;
     }
-
     this.nameError = null;
   }
 
@@ -72,18 +98,15 @@ export class ContactFormDialog implements OnInit {
       this.emailError = 'Email is required';
       return;
     }
-
     if (email.length < 3) {
       this.emailError = 'Email is too short';
       return;
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       this.emailError = 'Invalid email format';
       return;
     }
-
     this.emailError = null;
   }
 
@@ -93,23 +116,19 @@ export class ContactFormDialog implements OnInit {
       this.phoneError = 'Phone number is required';
       return;
     }
-
     if (!/^(0|\+)/.test(raw)) {
       this.phoneError = 'Must start with 0 or +';
       return;
     }
-
     if (!/^[+0][0-9\s\-()]*$/.test(raw)) {
       this.phoneError = 'Invalid characters';
       return;
     }
-
     const digits = raw.replace(/\D/g, '');
     if (digits.length < 6) {
       this.phoneError = 'At least 6 digits';
       return;
     }
-
     this.phoneError = null;
   }
 
@@ -137,10 +156,7 @@ export class ContactFormDialog implements OnInit {
     this.validateEmail();
     this.validatePhone();
 
-    if (this.nameError || this.emailError || this.phoneError) {
-      return;
-    }
-
+    if (!this.canSubmit) return;
     this.save.emit(this.formData);
   }
 
