@@ -1,0 +1,119 @@
+$breakpoint-mobile: 1024px;
+$primary-color: #2a3647;
+$hover-color: #29abe2;
+$bg-color: #f6f7f8;
+$text-color: #000000;
+$white: #ffffff;
+$gray-divider: #d1d1d1;
+
+@media (max-width: $breakpoint-mobile) {
+  .contacts-section {
+    margin: 0;
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  .contacts-container {
+    width: 100%;
+    height: calc(100vh - 80px);
+    box-shadow: none;
+  }
+
+  .contact-list {
+    width: 100%;
+    padding: 10px 24px 80px;
+    margin-top: 0;
+    height: calc(100vh - 80px);
+    justify-content: unset;
+  }
+
+  .add-contact-btn-container {
+    display: none;
+  }
+
+  .contacts-scroll {
+    position: static;
+    padding: 0;
+    width: 100%;
+  }
+
+  .letter-header-container {
+    padding: 17px 0;
+    margin-bottom: 0;
+  }
+
+  .letter-header-letter-box {
+    padding: 17px 0 0 39px;
+    margin-bottom: 0;
+  }
+
+  .letter-header-letter {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+  }
+
+  .letter-header-divider {
+    margin: 8px 0 0;
+  }
+
+  .contact-item {
+    padding: 15px 24px;
+    margin: 0;
+    border-radius: 10px;
+    gap: 35px;
+  }
+
+  .contact-avatar {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+  }
+
+  .contact-name {
+    font-size: 20px;
+  }
+
+  .contact-email {
+    font-size: 16px;
+  }
+
+  .contacts-header {
+    display: none;
+  }
+
+  .detail-container {
+    max-width: 100%;
+  }
+
+  .mobile-add-contact-fab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 96px;
+    right: 26px;
+    width: 56px;
+    height: 56px;
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $hover-color;
+      transform: rotate(90deg);
+      box-shadow: 0 0 7px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

@@ -20,7 +20,7 @@ import { ToastComponent } from '../shared/toast/toast';
     ToastComponent,
   ],
   templateUrl: './contacts.html',
-  styleUrls: ['./contacts.scss'],
+  styleUrls: ['./contacts.scss', './contacts-mobile.scss'],
 })
 export class Contacts implements OnInit {
   private dataService = inject(DataService);
