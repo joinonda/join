@@ -91,7 +91,7 @@ $gray-divider: #d1d1d1;
     align-items: center;
     position: fixed;
     bottom: 96px;
-    right: 26px;
+    right: 17px;
     width: 56px;
     height: 56px;
     background-color: $primary-color;
@@ -102,8 +102,9 @@ $gray-divider: #d1d1d1;
     transition: all 0.3s ease;
 
     &:hover {
+      background: #29abe2;
       transform: scale(1.05);
-      box-shadow: 0 0 7px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.2);
     }
 
     &:active {
