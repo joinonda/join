@@ -34,7 +34,7 @@
       transform: translateX(0);
     }
   }
-  
+
   @keyframes slideInFromBottom {
     from {
       transform: translateY(100%);
@@ -45,7 +45,7 @@
       opacity: 1;
     }
   }
-  
+
   @media (max-width: 1024px) {
     width: 95%;
     height: calc(100vh - 160px);
@@ -156,8 +156,6 @@
     padding: 0px 3% 20px 3%;
   }
 }
-
-
 
 .right-content {
   display: flex;
@@ -337,7 +335,7 @@
 .form-input {
   width: 100%;
   height: clamp(48px, 3.5vw, 50px);
-  padding: 13px clamp(40px, 4vw, 50px) 13px 21px;
+  padding: 13px clamp(40px, 4vw, 50px) 13px 10px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: clamp(16px, 1.5vw, 20px);
@@ -371,8 +369,8 @@
   color: #ff3d3d;
   font-size: 16px;
   position: absolute;
-  bottom: -20px;
-  left: 21px;
+  bottom: -19px;
+  left: 11px;
   font-family: 'Inter', sans-serif;
   width: calc(100% - 21px);
   text-align: left;

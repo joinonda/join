@@ -44,7 +44,7 @@ export class ContactFormDialog implements OnInit {
     }
   }
 
-  private isNameValid(): boolean {
+  isNameValid(): boolean {
     const name = this.formData.name?.trim();
     if (!name) return false;
     const words = name.split(' ').filter((w) => w.length > 0);
@@ -53,14 +53,14 @@ export class ContactFormDialog implements OnInit {
     return isCapitalized;
   }
 
-  private isEmailValid(): boolean {
+  isEmailValid(): boolean {
     const email = this.formData.email?.trim();
     if (!email || email.length < 3) return false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  private isPhoneValid(): boolean {
+  isPhoneValid(): boolean {
     const raw = this.formData.phone?.trim();
     if (!raw) return false;
     if (!/^(0|\+)/.test(raw)) return false;
@@ -98,13 +98,9 @@ export class ContactFormDialog implements OnInit {
       this.emailError = 'Email is required';
       return;
     }
-    if (email.length < 3) {
-      this.emailError = 'Email is too short';
-      return;
-    }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      this.emailError = 'Invalid email format';
+      this.emailError = 'Must contain @ and domain';
       return;
     }
     this.emailError = null;
@@ -126,7 +122,7 @@ export class ContactFormDialog implements OnInit {
     }
     const digits = raw.replace(/\D/g, '');
     if (digits.length < 6) {
-      this.phoneError = 'At least 6 digits';
+      this.phoneError = 'Enter at least 6 digits';
       return;
     }
     this.phoneError = null;
