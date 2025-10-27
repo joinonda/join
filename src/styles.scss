@@ -16,6 +16,8 @@ body,
 body {
   background: #f5f5f5;
   font-family: 'Inter', sans-serif;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .wrapper {
