@@ -47,19 +47,19 @@ export class ContactFormDialog implements OnInit {
   validateName(): void {
     const name = this.formData.name?.trim();
     if (!name) {
-      this.nameError = 'A real name is required';
+      this.nameError = 'Please enter your full name (at least two words).';
       return;
     }
 
     const words = name.split(' ').filter((word) => word.length > 0);
     if (words.length < 2) {
-      this.nameError = 'A real name is required';
+      this.nameError = 'Please enter your full name (at least two words).';
       return;
     }
 
     const isCapitalized = words.every((word) => word[0] === word[0].toUpperCase());
     if (!isCapitalized) {
-      this.nameError = 'A real name is required';
+      this.nameError = 'Please enter your full name (at least two words).';
       return;
     }
 
@@ -69,18 +69,18 @@ export class ContactFormDialog implements OnInit {
   validateEmail(): void {
     const email = this.formData.email?.trim();
     if (!email) {
-      this.emailError = 'A real email address is required';
+      this.emailError = 'The email must contain ‘@’ and a valid domain';
       return;
     }
 
     if (email.length < 3) {
-      this.emailError = 'A real email address is required';
+      this.emailError = 'The email must contain ‘@’ and a valid domain';
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      this.emailError = 'A real email address is required';
+      this.emailError = 'The email must contain ‘@’ and a valid domain';
       return;
     }
 
