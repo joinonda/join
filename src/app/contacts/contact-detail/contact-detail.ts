@@ -8,7 +8,7 @@ import { ContactDeleteDialogComponent } from '../contact-delete-dialog/contact-d
   standalone: true,
   imports: [CommonModule, ContactDeleteDialogComponent],
   templateUrl: './contact-detail.html',
-  styleUrl: './contact-detail.scss'
+  styleUrl: './contact-detail.scss',
 })
 export class ContactDetail implements OnChanges {
   @Input() contact: Interfaces | null = null;
@@ -22,15 +22,18 @@ export class ContactDetail implements OnChanges {
   showDeleteDialog = false;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['contactKey'] && this.contactKey && this.currentContactId && this.contactKey !== this.currentContactId) {
-      // Neuer Kontakt wurde ausgewählt - Fade out dann fade in
+    if (
+      changes['contactKey'] &&
+      this.contactKey &&
+      this.currentContactId &&
+      this.contactKey !== this.currentContactId
+    ) {
       this.isVisible = false;
       setTimeout(() => {
         this.currentContactId = this.contactKey;
         this.isVisible = true;
-      }, 200); // Kurze Pause für Fade-Out
+      }, 200);
     } else if (changes['contactKey'] && this.contactKey) {
-      // Erster Kontakt
       this.currentContactId = this.contactKey;
       this.isVisible = true;
     }
