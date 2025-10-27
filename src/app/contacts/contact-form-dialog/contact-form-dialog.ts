@@ -47,19 +47,19 @@ export class ContactFormDialog implements OnInit {
   validateName(): void {
     const name = this.formData.name?.trim();
     if (!name) {
-      this.nameError = 'A real name is required';
+      this.nameError = 'Name is required';
       return;
     }
 
-    const words = name.split(' ').filter((word) => word.length > 0);
+    const words = name.split(' ').filter((w) => w.length > 0);
     if (words.length < 2) {
-      this.nameError = 'A real name is required';
+      this.nameError = 'First and last name required';
       return;
     }
 
-    const isCapitalized = words.every((word) => word[0] === word[0].toUpperCase());
+    const isCapitalized = words.every((w) => w[0] === w[0]?.toUpperCase());
     if (!isCapitalized) {
-      this.nameError = 'A real name is required';
+      this.nameError = 'Each name must start with a capital letter';
       return;
     }
 
