@@ -255,6 +255,8 @@
 
   @media (max-width: 768px) {
     margin-top: 0;
+    justify-content: center; 
+    align-items: center;
   }
 }
 
@@ -414,6 +416,6 @@
 }
 @media (max-width: 768px) {
   .btn-secondary {
-    display: none !important;
-  }
+    display: none;
+}
 }
