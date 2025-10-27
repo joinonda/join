@@ -1,5 +1,9 @@
 <div class="overlay" (click)="onBackdropClick($event)">
   <div class="dialog-container">
+    <button class="close-btn" (click)="onClose()" type="button" aria-label="Close">
+      <img class="close-btn-dark" src="imgs/close-dark.png" alt="" />
+      <img class="close-btn-white" src="imgs/close-white.png" alt="" />
+    </button>
     <div class="dialog-left">
       <img src="imgs/logo-white.png" alt="Join Logo" class="logo" width="55.6" height="66.48" />
       <div class="dialog-header">
@@ -12,18 +16,6 @@
     </div>
 
     <div class="dialog-right">
-      <button class="close-btn" (click)="onClose()" type="button">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M18 6L6 18M6 6l12 12"
-            stroke="#2A3647"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-
       <div class="right-content">
         <div class="avatar-container">
           @if (mode === 'edit' && contact) {
