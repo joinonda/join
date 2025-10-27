@@ -86,6 +86,7 @@ $gray-divider: #d1d1d1;
   }
 
   .mobile-add-contact-fab {
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
