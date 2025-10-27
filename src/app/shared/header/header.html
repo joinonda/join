@@ -1,11 +1,15 @@
 <div class="header-container">
   <img class="logo-img" src="imgs/logo.png" alt="join-logo-header" />
 
-  <span>Kanban Project Management Tool</span>
+  <h1>Kanban Project Management Tool</h1>
 
   <div class="header-actions">
     <a href="" target="_blank" title="Help" class="help-link-desktop">
-    <img class="questionmark-img" src="imgs/questionmark-small.png" alt="Help Questionmark Icon" />
+      <img
+        class="questionmark-img"
+        src="imgs/questionmark-small.png"
+        alt="Help Questionmark Icon"
+      />
     </a>
     @if(!isLoggedIn){
     <div class="avatar-container" [class.hidden-mobile-legal]="shouldHideAvatarOnMobileLegal">
