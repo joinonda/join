@@ -11,21 +11,27 @@ import { ToastComponent } from '../shared/toast/toast';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ContactDetail, FormsModule, ContactFormDialog, ContactDetailDialog, ToastComponent],
+  imports: [
+    CommonModule,
+    ContactDetail,
+    FormsModule,
+    ContactFormDialog,
+    ContactDetailDialog,
+    ToastComponent,
+  ],
   templateUrl: './contacts.html',
   styleUrls: ['./contacts.scss'],
 })
-
 export class Contacts implements OnInit {
   private dataService = inject(DataService);
-  
+
   @ViewChild(ToastComponent) toast!: ToastComponent;
-  
+
   contacts: Interfaces[] = [];
   groupedContacts: { [key: string]: Interfaces[] } = {};
   alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   selectedContact: Interfaces | null = null;
-  
+
   isEditOpen = false;
   editingContact: Interfaces | null = null;
   isAddOpen = false;
@@ -34,7 +40,7 @@ export class Contacts implements OnInit {
   detailDialogContact: Interfaces | null = null;
 
   ngOnInit() {
-    this.dataService.getContacts().subscribe(contacts => {
+    this.dataService.getContacts().subscribe((contacts) => {
       this.contacts = contacts;
       this.groupContactsByFirstLetter();
     });
@@ -42,14 +48,14 @@ export class Contacts implements OnInit {
 
   groupContactsByFirstLetter() {
     this.groupedContacts = {};
-    this.contacts.forEach(contact => {
+    this.contacts.forEach((contact) => {
       if (contact.lastName) {
         const letter = contact.lastName.charAt(0).toUpperCase();
         if (!this.groupedContacts[letter]) this.groupedContacts[letter] = [];
         this.groupedContacts[letter].push(contact);
       }
     });
-    Object.keys(this.groupedContacts).forEach(letter => {
+    Object.keys(this.groupedContacts).forEach((letter) => {
       this.groupedContacts[letter].sort((a, b) => a.lastName.localeCompare(b.lastName));
     });
   }
@@ -59,8 +65,25 @@ export class Contacts implements OnInit {
   }
 
   getContactColor(contact: Interfaces): string {
-    const colors = ['#FF5EB3', '#6E52FF', '#FF7A00', '#9327FF', '#1FD7C1', '#FF4646', '#C3FF2B', '#00BEE8', '#FFA35E', '#FFBB2B', '#FFC701', '#FFE62B', '#0038FF', '#FC71FF'];
-    return colors[(contact.firstName.charCodeAt(0) + contact.lastName.charCodeAt(0)) % colors.length];
+    const colors = [
+      '#FF5EB3',
+      '#6E52FF',
+      '#FF7A00',
+      '#9327FF',
+      '#1FD7C1',
+      '#FF4646',
+      '#C3FF2B',
+      '#00BEE8',
+      '#FFA35E',
+      '#FFBB2B',
+      '#FFC701',
+      '#FFE62B',
+      '#0038FF',
+      '#FC71FF',
+    ];
+    return colors[
+      (contact.firstName.charCodeAt(0) + contact.lastName.charCodeAt(0)) % colors.length
+    ];
   }
 
   isSelected(contact: Interfaces): boolean {
@@ -69,7 +92,7 @@ export class Contacts implements OnInit {
 
   selectContact(contact: Interfaces): void {
     this.selectedContact = contact;
-    
+
     if (window.innerWidth <= 1024) {
       this.openDetailDialog(contact);
     }
@@ -109,21 +132,21 @@ export class Contacts implements OnInit {
 
   async onDelete(): Promise<void> {
     const contactToDelete = this.editingContact || this.selectedContact;
-    
+
     if (!contactToDelete?.id) {
       console.error('Cannot delete: No contact selected');
       return;
     }
-    
+
     try {
       console.log('🗑️ Deleting contact:', contactToDelete);
       await this.dataService.deleteContact(contactToDelete.id);
       console.log('✅ Contact successfully deleted from database');
-      
+
       if (this.selectedContact?.id === contactToDelete.id) {
         this.selectedContact = null;
       }
-      
+
       this.closeEdit();
     } catch (err: any) {
       console.error('❌ DELETE failed:', err?.code, err?.message);
@@ -147,7 +170,7 @@ export class Contacts implements OnInit {
         firstName: firstName || '',
         lastName: lastNameParts.join(' ') || '',
         email: formData.email,
-        phone: formData.phone
+        phone: formData.phone,
       };
       await this.dataService.addContact(contactToSave);
       this.closeAdd();
@@ -171,10 +194,9 @@ export class Contacts implements OnInit {
         firstName: firstName || '',
         lastName: lastNameParts.join(' ') || '',
         email: formData.email,
-        phone: formData.phone
+        phone: formData.phone,
       };
       await this.dataService.updateContact(updatedContact.id, updatedContact);
-      console.log('✅ Contact successfully updated in database:', updatedContact);
       this.closeEdit();
     } catch (err: any) {
       console.error('❌ UPDATE failed:', err?.code, err?.message);
