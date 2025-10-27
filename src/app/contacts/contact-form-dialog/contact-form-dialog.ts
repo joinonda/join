@@ -88,20 +88,25 @@ export class ContactFormDialog implements OnInit {
   }
 
   validatePhone(): void {
-    const phone = this.formData.phone?.trim();
-    if (!phone) {
-      this.phoneError = 'A real phone number is required';
+    const raw = this.formData.phone?.trim();
+    if (!raw) {
+      this.phoneError = 'Phone number is required';
       return;
     }
 
-    if (!phone.startsWith('+') && !phone.startsWith('0')) {
-      this.phoneError = 'A real phone number is required';
+    if (!/^(0|\+)/.test(raw)) {
+      this.phoneError = 'Must start with 0 or +';
       return;
     }
 
-    const digits = phone.replace(/\D/g, '');
-    if (digits.length < 12) {
-      this.phoneError = 'A real phone number is required';
+    if (!/^[+0][0-9\s\-()]*$/.test(raw)) {
+      this.phoneError = 'Invalid characters';
+      return;
+    }
+
+    const digits = raw.replace(/\D/g, '');
+    if (digits.length < 6) {
+      this.phoneError = 'At least 6 digits';
       return;
     }
 
