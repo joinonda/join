@@ -180,8 +180,8 @@
 
 .close-btn {
   position: absolute;
-  top: 40px;
-  right: 4%;
+  top: 30px;
+  right: 3.5%;
   width: 32px;
   height: 32px;
   background: transparent;
@@ -214,8 +214,8 @@
   }
 
   @media (max-width: 768px) {
-    top: 40px;
-    right: 5%;
+    top: 20px;
+    right: 3.5%;
 
     .close-btn-dark {
       display: none;
@@ -330,6 +330,11 @@
   align-items: center;
   flex-direction: column;
   margin-bottom: 0;
+
+  img {
+    height: 25px;
+    width: auto;
+  }
 }
 
 .form-input {
