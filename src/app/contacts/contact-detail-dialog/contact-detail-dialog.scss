@@ -19,18 +19,6 @@
   overflow: hidden;
   position: relative;
   box-shadow: none;
-  animation: slideInFromBottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  @keyframes slideInFromBottom {
-    from {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
 }
 
 .dialog-content {
@@ -206,7 +194,7 @@
 .fab-button {
   position: fixed;
   bottom: 96px;
-  right: 16px;
+  right: 17px;
   width: 56px;
   height: 56px;
   background: #2a3647;
@@ -236,18 +224,6 @@
   padding: 8px 0;
   min-width: 160px;
   z-index: 1002;
-  animation: slideInFromBottom 0.2s ease-out;
-
-  @keyframes slideInFromBottom {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 }
 
 .dropdown-item {
