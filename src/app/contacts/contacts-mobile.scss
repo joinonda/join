@@ -102,8 +102,7 @@ $gray-divider: #d1d1d1;
     transition: all 0.3s ease;
 
     &:hover {
-      background-color: $hover-color;
-      transform: rotate(90deg);
+      transform: scale(1.05);
       box-shadow: 0 0 7px 4px rgba(0, 0, 0, 0.3);
     }
 
@@ -111,7 +110,7 @@ $gray-divider: #d1d1d1;
       transform: scale(0.95);
     }
 
-    svg {
+    img {
       width: 32px;
       height: 32px;
     }

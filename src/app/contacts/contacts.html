@@ -3,7 +3,7 @@
     <div class="add-contact-btn-container">
       <button class="add-contact-btn" (click)="onAdd()">
         <span>Add new Contact</span>
-        <img src="/imgs/add-new-contact-person-plus.png" width="32px" height="32px" alt="" />
+        <img src="imgs/add-new-contact-person-plus.png" width="32px" height="32px" alt="" />
       </button>
     </div>
     <div class="contact-list">
@@ -38,9 +38,7 @@
     </div>
 
     <button class="mobile-add-contact-fab" (click)="onAdd()">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16 2C14.9 2 14 2.9 14 4V14H4C2.9 14 2 14.9 2 16C2 17.1 2.9 18 4 18H14V28C14 29.1 14.9 30 16 30C17.1 30 18 29.1 18 28V18H28C29.1 18 30 17.1 30 16C30 14.9 29.1 14 28 14H18V4C18 2.9 17.1 2 16 2Z" fill="white"/>
-      </svg>
+      <img src="imgs/add-new-contact-person-plus.png" alt="" />
     </button>
   </div>
   <div class="contacts-header">
@@ -72,17 +70,13 @@
     (delete)="onDelete()"
     (close)="closeEdit()"
   ></app-contact-form-dialog>
-  }
-
-  @if (isAddOpen) {
+  } @if (isAddOpen) {
   <app-contact-form-dialog
     mode="add"
     (save)="saveAdd($event)"
     (close)="closeAdd()"
   ></app-contact-form-dialog>
-  }
-
-  @if (isDetailDialogOpen && detailDialogContact) {
+  } @if (isDetailDialogOpen && detailDialogContact) {
   <app-contact-detail-dialog
     [contact]="detailDialogContact"
     [contactColor]="getContactColor(detailDialogContact)"
