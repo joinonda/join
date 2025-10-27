@@ -6,6 +6,7 @@
   margin-left: 232px;
   margin-top: 96px;
   display: flex;
+  position: relative;
 
   @media (max-width: 1024px) {
     margin-left: 0;
@@ -363,7 +364,6 @@
 
     &:hover {
       background-color: #29abe2;
-      transform: scale(1.05);
       transform: rotate(90deg);
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
     }
