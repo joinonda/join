@@ -138,12 +138,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 46px 66px;
+  padding: 0px 35px 66px 5%;
   background-color: #ffffff;
   justify-content: center;
 
   @media (max-width: 768px) {
-    padding: 0px 24px 40px;
+    padding: 0px 35px 66px 3%;
   }
 }
 
@@ -170,8 +170,8 @@
 
 .close-btn {
   position: absolute;
-  top: 30px;
-  right: 42px;
+  top: 40px;
+  right: 4%;
   width: 32px;
   height: 32px;
   background: transparent;
@@ -204,8 +204,8 @@
   }
 
   @media (max-width: 768px) {
-    top: 30px;
-    right: 42px;
+    top: 40px;
+    right: 5%;
 
     .close-btn-dark {
       display: none;
