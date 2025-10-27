@@ -139,18 +139,13 @@ export class Contacts implements OnInit {
     }
 
     try {
-      console.log('🗑️ Deleting contact:', contactToDelete);
       await this.dataService.deleteContact(contactToDelete.id);
-      console.log('✅ Contact successfully deleted from database');
-
       if (this.selectedContact?.id === contactToDelete.id) {
         this.selectedContact = null;
       }
 
       this.closeEdit();
-    } catch (err: any) {
-      console.error('❌ DELETE failed:', err?.code, err?.message);
-    }
+    } catch (err: any) {}
   }
 
   closeEdit(): void {
@@ -175,9 +170,7 @@ export class Contacts implements OnInit {
       await this.dataService.addContact(contactToSave);
       this.closeAdd();
       this.toast.show('Contact successfully created');
-    } catch (err: any) {
-      console.error('ADD failed:', err?.code, err?.message);
-    }
+    } catch (err: any) {}
   }
 
   closeAdd(): void {
@@ -198,8 +191,6 @@ export class Contacts implements OnInit {
       };
       await this.dataService.updateContact(updatedContact.id, updatedContact);
       this.closeEdit();
-    } catch (err: any) {
-      console.error('❌ UPDATE failed:', err?.code, err?.message);
-    }
+    } catch (err: any) {}
   }
 }
