@@ -60,6 +60,10 @@ h1 {
   font-size: 20px;
   margin: 0 4rem;
   font-weight: 400;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .header-actions {
@@ -208,8 +212,3 @@ a {
   }
 }
 
-@media (max-width: 850px) {
-  span {
-    display: none;
-  }
-}
