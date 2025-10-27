@@ -82,6 +82,13 @@
       border-radius: 16px;
     }
   }
+
+  &.active {
+    @media (max-width: 1024px) {
+      background-color: #091931;
+      border-radius: 16px;
+    }
+  }
 }
 
 .menu-btn .icon {
