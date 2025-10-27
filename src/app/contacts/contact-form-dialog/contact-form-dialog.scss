@@ -365,6 +365,11 @@
   transition: all 0.2s ease;
   white-space: nowrap;
 
+  img {
+    width: clamp(20px, 1.5vw, 24px);
+    height: clamp(20px, 1.5vw, 24px);
+  }
+
   &:hover {
     background: #29abe2;
     transform: translateY(-1px);
@@ -399,6 +404,11 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
+  img {
+    width: clamp(20px, 1.5vw, 24px);
+    height: clamp(20px, 1.5vw, 24px);
+  }
+
   &:hover {
     background: #f6f7f8;
     border-color: #29abe2;
@@ -415,7 +425,7 @@
 
 }
 @media (max-width: 768px) {
-  .btn-secondary {
-    display: none;
-}
+  .btn-secondary#cancel-btn {
+    display: none
+  }
 }
