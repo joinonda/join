@@ -69,18 +69,18 @@ export class ContactFormDialog implements OnInit {
   validateEmail(): void {
     const email = this.formData.email?.trim();
     if (!email) {
-      this.emailError = 'A real email address is required';
+      this.emailError = 'Email is required';
       return;
     }
 
     if (email.length < 3) {
-      this.emailError = 'A real email address is required';
+      this.emailError = 'Email is too short';
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      this.emailError = 'A real email address is required';
+      this.emailError = 'Invalid email format';
       return;
     }
 
