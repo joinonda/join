@@ -410,4 +410,10 @@
   @media (max-width: 480px) {
     width: 100%;
   }
+
+}
+@media (max-width: 768px) {
+  .btn-secondary {
+    display: none !important;
+  }
 }
