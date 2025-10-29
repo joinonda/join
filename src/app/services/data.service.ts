@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { FirebaseService } from './firebase.service';
-import { Interfaces } from '../interfaces/interfaces';
+import { Interfaces, Task } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -21,5 +21,13 @@ export class DataService {
 
   async deleteContact(id: string) {
     await this.firebaseService.deleteContactFromDatabase(id);
+  }
+
+  getTasks(): Observable<Task[]> {
+    return this.firebaseService.getTasksSnapshot();
+  }
+
+  async addTask(task: Omit<Task, 'id' | 'createdAt'>) {
+    await this.firebaseService.addTaskToDatabase(task);
   }
 }

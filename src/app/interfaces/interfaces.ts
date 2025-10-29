@@ -16,17 +16,17 @@ export interface Task {
   id?: string;
   title: string;
   description: string;
-  dueDate: Timestamp;
-  priority: 'urgent' | 'madium' | 'low';
+  dueDate: Date;
+  priority: 'urgent' | 'medium' | 'low';
   category: string;
   status: 'todo' | 'inprogress' | 'awaitfeedback' | 'done';
   assignedTo: string[];
   subtasks: Subtask[];
-  createdAt: Timestamp;
+  createdAt: Date | null;
 }
 
 export interface Subtask {
-  is: string;
+  id: string;
   title: string;
   completed: boolean;
 }

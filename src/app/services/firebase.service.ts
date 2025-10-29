@@ -1,7 +1,18 @@
 import { Injectable, inject, runInInjectionContext, Injector } from '@angular/core';
-import { Firestore, collection, onSnapshot, doc, updateDoc, deleteDoc, addDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { Interfaces, NewContact } from '../interfaces/interfaces';
+import {
+  Firestore,
+  collection,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc,
+  docData,
+  addDoc,
+} from '@angular/fire/firestore';
+import { getDoc } from 'firebase/firestore';
+import { Observable, firstValueFrom } from 'rxjs';
+import { Interfaces, NewContact, Task, Subtask } from '../interfaces/interfaces';
+import { Timestamp, serverTimestamp } from 'firebase/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
@@ -30,14 +41,14 @@ export class FirebaseService {
       return await addDoc(collection(this.firestore, 'contact'), contact);
     });
   }
- 
+
   async updateContactInDatabase(id: string, contact: Interfaces) {
     return runInInjectionContext(this.injector, async () => {
       await updateDoc(doc(this.firestore, 'contact', id), {
         firstName: contact.firstName,
         lastName: contact.lastName,
         email: contact.email,
-        phone: contact.phone
+        phone: contact.phone,
       });
     });
   }
@@ -46,5 +57,48 @@ export class FirebaseService {
     return runInInjectionContext(this.injector, async () => {
       await deleteDoc(doc(this.firestore, 'contact', id));
     });
+  }
+
+  getTasksSnapshot(): Observable<Task[]> {
+    return new Observable((observer) =>
+      runInInjectionContext(this.injector, () => {
+        const ref = collection(this.firestore, 'tasks');
+        const unsub = onSnapshot(
+          ref,
+          (snap) => {
+            observer.next(
+              snap.docs.map((d) => {
+                const x: any = d.data();
+                return {
+                  id: d.id,
+                  ...x,
+                  dueDate: x.dueDate?.toDate?.(),
+                  createdAt: x.createdAt?.toDate?.(),
+                } as Task;
+              })
+            );
+          },
+          (err) => observer.error(err)
+        );
+        return () => unsub();
+      })
+    );
+  }
+
+  async addTaskToDatabase(task: Omit<Task, 'id' | 'createdAt'>) {
+    return runInInjectionContext(this.injector, async () => {
+      await addDoc(collection(this.firestore, 'tasks'), {
+        ...task,
+        dueDate: Timestamp.fromDate(task.dueDate),
+        createdAt: serverTimestamp(),
+      });
+    });
+  }
+
+  async addSubtask(taskId: string, subtask: Subtask) {
+    const ref = doc(this.firestore, 'tasks', taskId);
+    const data = await firstValueFrom(docData(ref));
+    const current = (data?.['subtasks'] ?? []) as Subtask[];
+    await updateDoc(ref, { subtasks: [...current, subtask] });
   }
 }
