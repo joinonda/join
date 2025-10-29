@@ -11,7 +11,8 @@ import {
 } from '@angular/fire/firestore';
 import { getDoc } from 'firebase/firestore';
 import { Observable, firstValueFrom } from 'rxjs';
-import { Interfaces, NewContact, Task, Subtask } from '../interfaces/contacts-interfaces';
+import { Contact, NewContact } from '../interfaces/contacts-interfaces';
+import { Task, Subtask } from '../interfaces/task-interface';
 import { Timestamp, serverTimestamp } from 'firebase/firestore';
 
 @Injectable({ providedIn: 'root' })
@@ -19,14 +20,14 @@ export class FirebaseService {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
 
-  getCollectionSnapshot(collectionName: string): Observable<Interfaces[]> {
+  getCollectionSnapshot(collectionName: string): Observable<Contact[]> {
     return new Observable((observer) => {
       return runInInjectionContext(this.injector, () => {
         const collectionRef = collection(this.firestore, collectionName);
         const unsubscribe = onSnapshot(
           collectionRef,
           (snapshot) => {
-            const data = snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Interfaces));
+            const data = snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Contact));
             observer.next(data);
           },
           (error) => observer.error(error)
@@ -36,13 +37,13 @@ export class FirebaseService {
     });
   }
 
-  async addContactToDatabase(contact: Omit<Interfaces, 'id'>) {
+  async addContactToDatabase(contact: Omit<Contact, 'id'>) {
     return runInInjectionContext(this.injector, async () => {
       return await addDoc(collection(this.firestore, 'contact'), contact);
     });
   }
 
-  async updateContactInDatabase(id: string, contact: Interfaces) {
+  async updateContactInDatabase(id: string, contact: Contact) {
     return runInInjectionContext(this.injector, async () => {
       await updateDoc(doc(this.firestore, 'contact', id), {
         firstName: contact.firstName,

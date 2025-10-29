@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Interfaces } from '../../interfaces/contacts-interfaces';
+import { Contact } from '../../interfaces/contacts-interfaces';
 
 export interface ContactFormData {
   name: string;
@@ -18,7 +18,7 @@ export interface ContactFormData {
 })
 export class ContactFormDialog implements OnInit {
   @Input() mode: 'add' | 'edit' = 'add';
-  @Input() contact?: Interfaces;
+  @Input() contact?: Contact;
   @Input() contactColor: string = '#FF7A00';
   @Output() save = new EventEmitter<ContactFormData>();
   @Output() delete = new EventEmitter<void>();
