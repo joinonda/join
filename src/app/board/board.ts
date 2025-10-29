@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Boardheader } from '../board/boardheader/boardheader';
-import { BoardTasks } from '../board/boardtasks/boardtasks';
+import { BoardHeader } from './board-header/board-header';
+import { BoardTasks } from './board-tasks/board-tasks';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [Boardheader, BoardTasks],
+  imports: [BoardHeader, BoardTasks],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })

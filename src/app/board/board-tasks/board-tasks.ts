@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-boardtasks',
+  selector: 'app-board-tasks',
   standalone: true,
   imports: [],
-  templateUrl: './boardtasks.html',
-  styleUrl: './boardtasks.scss',
+  templateUrl: './board-tasks.html',
+  styleUrl: './board-tasks.scss',
 })
 export class BoardTasks {}

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Boardheader } from './boardheader';
+import { Boardheader } from './board-header';
 
 describe('Boardheader', () => {
   let component: Boardheader;
@@ -8,9 +8,8 @@ describe('Boardheader', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Boardheader]
-    })
-    .compileComponents();
+      imports: [Boardheader],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Boardheader);
     component = fixture.componentInstance;
