@@ -4,10 +4,8 @@
   </div>
   <div class="menu" aria-label="Menu">
     <a class="menu-btn summary" 
-       [class.active]="isActive('summary')" 
-       (click)="setActive('summary')" 
        aria-label="Summary">
-      <img class="icon desktop" [src]="getImageSrc('summary', 'imgs/summary-default.png', 'imgs/summary-hover.png')" 
+      <img class="icon desktop" src="imgs/summary-default.png" 
            alt="" 
            aria-hidden="true" />
       <img class="icon mobile" src="imgs/icons/summary.png" alt="" aria-hidden="true" />
@@ -15,10 +13,8 @@
     </a>
 
     <a class="menu-btn add-task" 
-       [class.active]="isActive('add-task')" 
-       (click)="setActive('add-task')" 
        aria-label="Add task">
-      <img class="icon desktop" [src]="getImageSrc('add-task', 'imgs/add-task-default.png', 'imgs/add-task-hover.png')" 
+      <img class="icon desktop" src="imgs/add-task-default.png" 
            alt="" 
            aria-hidden="true" />
       <img class="icon mobile" src="imgs/icons/add-task.png" alt="" aria-hidden="true" />
@@ -26,8 +22,8 @@
     </a>
 
     <a class="menu-btn board" 
-       [class.active]="isActive('board')" 
-       (click)="setActive('board')" 
+       routerLink="/board"
+       routerLinkActive="active"
        aria-label="Board">
       <img class="icon desktop" [src]="getImageSrc('board', 'imgs/board-default.png', 'imgs/board-hover.png')" 
            alt="" 
@@ -37,8 +33,8 @@
     </a>
 
     <a class="menu-btn contacts" 
-       [class.active]="isActive('contacts')" 
-       (click)="setActive('contacts')" 
+       routerLink="/contact"
+       routerLinkActive="active"
        aria-label="Contacts">
       <img class="icon desktop" [src]="getImageSrc('contacts', 'imgs/contacts-default.png', 'imgs/contacts-hover.png')" 
            alt="Contacts section" 

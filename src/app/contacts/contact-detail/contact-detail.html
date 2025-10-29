@@ -9,17 +9,13 @@
     <div class="detail-name-section">
       <h1 class="detail-name">{{ contact.firstName }} {{ contact.lastName }}</h1>
       <div class="detail-actions">
-        <button class="action-btn" (click)="onEdit()">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#2A3647"/>
-          </svg>
-          <span>Edit</span>
+        <button class="edit-btn" (click)="onEdit()">
+          <img src="imgs/edit-dark.png" alt="" />
+          <img src="imgs/edit-hover.png" alt="" />
         </button>
-        <button class="action-btn" (click)="onDelete()">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="#2A3647"/>
-          </svg>
-          <span>Delete</span>
+        <button class="delete-btn" (click)="onDelete()">
+          <img src="imgs/delete-dark.png" alt="" />
+          <img src="imgs/delete-hover.png" alt="" />
         </button>
       </div>
     </div>
@@ -27,7 +23,7 @@
 
   <div class="detail-info-section">
     <h3 class="info-title">Contact Information</h3>
-    
+
     <div class="info-content">
       <div class="info-group">
         <label class="info-label">Email</label>
@@ -35,7 +31,7 @@
           {{ contact.email }}
         </a>
       </div>
-      
+
       <div class="info-group">
         <label class="info-label">Phone</label>
         <span class="info-value">{{ contact.phone }}</span>
@@ -43,11 +39,7 @@
     </div>
   </div>
 </div>
-}
-
-@if (showDeleteDialog) {
-  <app-contact-delete-dialog 
-    (delete)="confirmDelete()" 
-    (cancel)="cancelDelete()">
-  </app-contact-delete-dialog>
+} @if (showDeleteDialog) {
+<app-contact-delete-dialog (delete)="confirmDelete()" (cancel)="cancelDelete()">
+</app-contact-delete-dialog>
 }

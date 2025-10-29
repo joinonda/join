@@ -86,7 +86,8 @@
   }
 }
 
-.action-btn {
+.edit-btn {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -94,24 +95,42 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 120%;
-  color: #2a3647;
-  transition: all 0.2s ease;
 
-  &:hover {
-    color: #29abe2;
-
-    svg path {
-      fill: #29abe2;
-    }
+  img:last-child {
+    display: none;
   }
 
-  svg {
-    width: 24px;
-    height: 24px;
+  &:hover {
+    img:last-child {
+      display: block;
+    }
+
+    img:first-child {
+      display: none;
+    }
+  }
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  img:last-child {
+    display: none;
+  }
+
+  &:hover {
+    img:last-child {
+      display: block;
+    }
+
+    img:first-child {
+      display: none;
+    }
   }
 }
 
