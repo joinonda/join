@@ -14,6 +14,7 @@ export class Footer {
   getImageSrc(menuName: string, defaultImg: string, activeImg: string): string {
     const isBoardActive = menuName === 'board' && this.router.url === '/board';
     const isContactsActive = menuName === 'contacts' && this.router.url === '/contact';
-    return (isBoardActive || isContactsActive) ? activeImg : defaultImg;
+    const isAddTaskActive = menuName === 'add-task' && this.router.url === '/add-task';
+    return (isBoardActive || isContactsActive || isAddTaskActive) ? activeImg : defaultImg;
   }
 }
