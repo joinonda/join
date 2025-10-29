@@ -13,8 +13,10 @@
     </a>
 
     <a class="menu-btn add-task" 
+       routerLink="/add-task"
+       routerLinkActive="active"
        aria-label="Add task">
-      <img class="icon desktop" src="imgs/add-task-default.png" 
+      <img class="icon desktop" [src]="getImageSrc('add-task', 'imgs/add-task-default.png', 'imgs/add-task-hover.png')" 
            alt="" 
            aria-hidden="true" />
       <img class="icon mobile" src="imgs/icons/add-task.png" alt="" aria-hidden="true" />
