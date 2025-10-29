@@ -15,6 +15,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
   justify-content: space-between;
   align-items: center;
   padding: 0 40px 0 40px;
+  background-color: #f6f7f8;
 
   .container {
     position: relative;
@@ -22,10 +23,12 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 13px 0 13px;
+    margin: 0 1.5%;
 
     .top {
       width: 252px;
+      //   width: clamp(200px, 13vw, 300px);
+      max-width: 300px;
       height: 24px;
       display: flex;
       flex-direction: row;
@@ -44,8 +47,10 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
       justify-content: center;
       align-items: center;
       background: none;
-      border: 0;
+      border: none;
       cursor: pointer;
+      transition: 0.3s ease;
+      border-radius: 50%;
 
       .hover-img {
         display: none;
@@ -63,29 +68,45 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
       }
       &:hover .hover-img {
         display: block;
+        transform: scale(1.03);
       }
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 680px;
+      width: 100%;
+    }
+
+    .to-do-container {
+    }
+
+    .in-progress-container {
+    }
+
+    .await-feedback-container {
+    }
+
+    .done-container {
     }
   }
 
-  .column {
+  .tasks-placeholder {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #29abe2;
-    height: 680px;
     width: 100%;
-  }
-
-  .to-do-container {
-  }
-
-  .in-progress-container {
-  }
-
-  .await-feedback-container {
-  }
-
-  .done-container {
+    height: 48px;
+    background-color: #e7e7e7;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #a8a8a8;
+    border-radius: 10px;
+    border: 2px dotted #a8a8a8;
   }
 }
