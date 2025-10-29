@@ -1,0 +1,21 @@
+$primary-color: #2a3647;
+$hover-color: #29abe2;
+$bg-color: #f6f7f8;
+$text-color: #000000;
+$white: #ffffff;
+$gray-divider: #d1d1d1;
+$gray-border: #d1d5db;
+$light-gray: #a8a8a8;
+$input-border: #d1d5db;
+$overlay-bg: rgba(0, 0, 0, 0.4);
+
+.board-wrapper {
+  height: calc(100vh - 96px);
+  background-color: $bg-color;
+  padding: 0;
+  margin: 0 0 0 232px;
+  margin-top: 96px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
