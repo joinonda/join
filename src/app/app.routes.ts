@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Contacts } from './contacts/contacts';
+import { Board } from './board/board';
 // import { Login } from './auth/login/login';
 // import { Signup } from './auth/signup/signup';
 
@@ -8,4 +9,5 @@ export const routes: Routes = [
   //   { path: 'login', component: Login },
   //   { path: 'signup', component: Signup },
   { path: 'contact', component: Contacts },
+  { path: 'board', component: Board },
 ];
