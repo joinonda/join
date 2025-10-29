@@ -9,6 +9,7 @@ $light-gray: #a8a8a8;
 $input-border: #d1d5db;
 $overlay-bg: rgba(0, 0, 0, 0.4);
 $red: #ff3d3d;
+$medium-orange: #ff8a00;
 
 
 .addtask-section {
@@ -106,4 +107,60 @@ $red: #ff3d3d;
 
   .form-field span.required{
     color: $red;
+  }
+
+  .form-field .priority-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+    white-space: nowrap;
+
+
+  }
+
+  .form-field .urgent{
+    background-color: $white;
+    font-size: 20px;
+    padding: 16px 10px 16px 10px;
+    gap: 8px;
+    border: 1px solid $input-border;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 134px;
+ 
+
+  }
+
+  .form-field .medium{
+    background-color: $medium-orange;
+    color: $white;
+    font-size: 20px;
+    padding: 16px 10px 16px 10px;
+    gap: 8px;
+    border: 1px solid $input-border;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 134px;
+  }
+
+  .form-field .low{
+    background-color: $white;
+    font-size: 20px;
+    padding: 16px 10px 16px 10px;
+    gap: 8px;
+    border: 1px solid $input-border;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 134px;
+  }
+
+  @media (max-width: 1024px) {
+    .addtask-content {
+        flex-direction: column;
+    }
   }
