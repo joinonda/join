@@ -2,7 +2,7 @@ import { Component, OnInit, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../services/data.service';
-import { Interfaces, NewContact } from '../interfaces/contacts-interfaces';
+import { Contact, NewContact } from '../interfaces/contacts-interfaces';
 import { ContactDetail } from './contact-detail/contact-detail';
 import { ContactFormDialog, ContactFormData } from './contact-form-dialog/contact-form-dialog';
 import { ContactDetailDialog } from './contact-detail-dialog/contact-detail-dialog';
@@ -27,17 +27,17 @@ export class Contacts implements OnInit {
 
   @ViewChild(ToastComponent) toast!: ToastComponent;
 
-  contacts: Interfaces[] = [];
-  groupedContacts: { [key: string]: Interfaces[] } = {};
+  contacts: Contact[] = [];
+  groupedContacts: { [key: string]: Contact[] } = {};
   alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  selectedContact: Interfaces | null = null;
+  selectedContact: Contact | null = null;
 
   isEditOpen = false;
-  editingContact: Interfaces | null = null;
+  editingContact: Contact | null = null;
   isAddOpen = false;
   newContact: NewContact = { fullName: '', email: '', phone: '' };
   isDetailDialogOpen = false;
-  detailDialogContact: Interfaces | null = null;
+  detailDialogContact: Contact | null = null;
 
   ngOnInit() {
     this.dataService.getContacts().subscribe((contacts) => {
@@ -64,7 +64,7 @@ export class Contacts implements OnInit {
     return (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
   }
 
-  getContactColor(contact: Interfaces): string {
+  getContactColor(contact: Contact): string {
     const colors = [
       '#FF5EB3',
       '#6E52FF',
@@ -100,11 +100,11 @@ export class Contacts implements OnInit {
     ];
   }
 
-  isSelected(contact: Interfaces): boolean {
+  isSelected(contact: Contact): boolean {
     return this.selectedContact?.id === contact.id;
   }
 
-  selectContact(contact: Interfaces): void {
+  selectContact(contact: Contact): void {
     this.selectedContact = contact;
 
     if (window.innerWidth <= 1024) {
@@ -112,7 +112,7 @@ export class Contacts implements OnInit {
     }
   }
 
-  openDetailDialog(contact: Interfaces): void {
+  openDetailDialog(contact: Contact): void {
     this.detailDialogContact = contact;
     this.isDetailDialogOpen = true;
   }

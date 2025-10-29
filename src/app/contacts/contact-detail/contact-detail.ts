@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Interfaces } from '../../interfaces/contacts-interfaces';
+import { Contact } from '../../interfaces/contacts-interfaces';
 import { ContactDeleteDialogComponent } from '../contact-delete-dialog/contact-delete-dialog';
 
 @Component({
@@ -11,7 +11,7 @@ import { ContactDeleteDialogComponent } from '../contact-delete-dialog/contact-d
   styleUrl: './contact-detail.scss',
 })
 export class ContactDetail implements OnChanges {
-  @Input() contact: Interfaces | null = null;
+  @Input() contact: Contact | null = null;
   @Input() contactColor: string = '';
   @Input() contactKey: string = '';
   @Output() edit = new EventEmitter<void>();
