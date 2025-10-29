@@ -80,6 +80,20 @@ export class Contacts implements OnInit {
       '#FFE62B',
       '#0038FF',
       '#FC71FF',
+      '#FF3D8A',
+      '#7A3CFF',
+      '#FF5A3D',
+      '#0FB39E',
+      '#E83E3E',
+      '#A8F01A',
+      '#00A4FF',
+      '#FF8AD6',
+      '#6AF7FF',
+      '#FFCE5A',
+      '#2D77FF',
+      '#F04AFF',
+      '#00E26D',
+      '#845EFF',
     ];
     return colors[
       (contact.firstName.charCodeAt(0) + contact.lastName.charCodeAt(0)) % colors.length
@@ -140,10 +154,10 @@ export class Contacts implements OnInit {
 
     try {
       await this.dataService.deleteContact(contactToDelete.id);
-      
-      this.contacts = this.contacts.filter(c => c.id !== contactToDelete.id);
+
+      this.contacts = this.contacts.filter((c) => c.id !== contactToDelete.id);
       this.groupContactsByFirstLetter();
-      
+
       if (this.selectedContact?.id === contactToDelete.id) {
         this.selectedContact = null;
       }
@@ -173,7 +187,7 @@ export class Contacts implements OnInit {
       };
 
       await this.dataService.addContact(contactToSave);
-      
+
       this.closeAdd();
       this.toast.show('Contact successfully created');
     } catch (err: any) {}
@@ -197,17 +211,17 @@ export class Contacts implements OnInit {
       };
 
       await this.dataService.updateContact(updatedContact.id, updatedContact);
-      
-      const contactIndex = this.contacts.findIndex(c => c.id === updatedContact.id);
+
+      const contactIndex = this.contacts.findIndex((c) => c.id === updatedContact.id);
       if (contactIndex !== -1) {
         this.contacts[contactIndex] = updatedContact;
         this.groupContactsByFirstLetter();
       }
-      
+
       if (this.selectedContact?.id === updatedContact.id) {
         this.selectedContact = updatedContact;
       }
-      
+
       this.closeEdit();
     } catch (err: any) {}
   }
