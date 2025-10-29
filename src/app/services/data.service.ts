@@ -1,21 +1,22 @@
 import { Injectable, inject } from '@angular/core';
 import { FirebaseService } from './firebase.service';
-import { Interfaces, Task } from '../interfaces/interfaces';
+import { Contact } from '../interfaces/contacts-interfaces';
+import { Task, Subtask } from '../interfaces/task-interface';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
   private firebaseService = inject(FirebaseService);
 
-  getContacts(): Observable<Interfaces[]> {
+  getContacts(): Observable<Contact[]> {
     return this.firebaseService.getCollectionSnapshot('contact');
   }
 
-  async addContact(contact: Omit<Interfaces, 'id'>) {
+  async addContact(contact: Omit<Contact, 'id'>) {
     await this.firebaseService.addContactToDatabase(contact);
   }
 
-  async updateContact(id: string, contact: Interfaces) {
+  async updateContact(id: string, contact: Contact) {
     await this.firebaseService.updateContactInDatabase(id, contact);
   }
 

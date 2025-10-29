@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Interfaces } from '../../interfaces/interfaces';
+import { Interfaces } from '../../interfaces/contacts-interfaces';
 import { ContactDeleteDialogComponent } from '../contact-delete-dialog/contact-delete-dialog';
 
 @Component({
@@ -8,7 +8,7 @@ import { ContactDeleteDialogComponent } from '../contact-delete-dialog/contact-d
   standalone: true,
   imports: [CommonModule, ContactDeleteDialogComponent],
   templateUrl: './contact-detail-dialog.html',
-  styleUrl: './contact-detail-dialog.scss'
+  styleUrl: './contact-detail-dialog.scss',
 })
 export class ContactDetailDialog implements OnDestroy {
   @Input() contact: Interfaces | null = null;
@@ -66,6 +66,5 @@ export class ContactDetailDialog implements OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
 }

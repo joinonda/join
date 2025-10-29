@@ -11,7 +11,7 @@ import {
 } from '@angular/fire/firestore';
 import { getDoc } from 'firebase/firestore';
 import { Observable, firstValueFrom } from 'rxjs';
-import { Interfaces, NewContact, Task, Subtask } from '../interfaces/interfaces';
+import { Interfaces, NewContact, Task, Subtask } from '../interfaces/contacts-interfaces';
 import { Timestamp, serverTimestamp } from 'firebase/firestore';
 
 @Injectable({ providedIn: 'root' })

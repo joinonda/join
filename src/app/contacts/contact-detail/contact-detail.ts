@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Interfaces } from '../../interfaces/interfaces';
+import { Interfaces } from '../../interfaces/contacts-interfaces';
 import { ContactDeleteDialogComponent } from '../contact-delete-dialog/contact-delete-dialog';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Interfaces } from '../../interfaces/interfaces';
+import { Interfaces } from '../../interfaces/contacts-interfaces';
 
 export interface ContactFormData {
   name: string;

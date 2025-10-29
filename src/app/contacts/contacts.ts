@@ -2,7 +2,7 @@ import { Component, OnInit, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../services/data.service';
-import { Interfaces, NewContact } from '../interfaces/interfaces';
+import { Interfaces, NewContact } from '../interfaces/contacts-interfaces';
 import { ContactDetail } from './contact-detail/contact-detail';
 import { ContactFormDialog, ContactFormData } from './contact-form-dialog/contact-form-dialog';
 import { ContactDetailDialog } from './contact-detail-dialog/contact-detail-dialog';
