@@ -1,0 +1,85 @@
+$primary-color: #2a3647;
+$hover-color: #29abe2;
+$bg-color: #f6f7f8;
+$text-color: #000000;
+$white: #ffffff;
+$gray-divider: #d1d1d1;
+$gray-border: #d1d5db;
+$light-gray: #a8a8a8;
+$input-border: #d1d5db;
+$overlay-bg: rgba(0, 0, 0, 0.4);
+
+
+.addtask-section {
+    height: calc(100vh - 96px);
+    background-color: $bg-color;
+    padding: 0;
+    margin: 0 0 0 232px;
+    margin-top: 96px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+  }
+
+  .addtask-header {
+    margin-top: 100px;
+    white-space: nowrap;
+    height: 73px;
+    padding-left: 80px;
+    margin-bottom: 60px;
+
+    h2 {
+      font-size: 61px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 120%;
+      letter-spacing: 0%;
+    }
+  }
+
+  .addtask-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    padding-left: 80px;
+  }
+
+  .form-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .form-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1px;
+    height: 424px;
+    background-color: $gray-divider;
+   
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 20px;
+  }
+  
+  .form-field label {
+    color: $primary-color;
+  }

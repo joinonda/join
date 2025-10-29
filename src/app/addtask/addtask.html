@@ -1,1 +1,58 @@
-<p>addtask works!</p>
+<section class="addtask-section">
+<div class="addtask-header">
+    <h2>Add Task</h2>
+</div>
+
+<div class="addtask-content">
+    <div class="form-left">
+        <form class="title-form form-field">
+        <label>Title<span class="required">*</span></label>
+        <input type="text" placeholder="Enter a title" />
+  </form>
+
+    <form class="description-form form-field">
+    <label>Description</label>
+    <textarea placeholder="Enter a Description" ></textarea>
+</form>
+
+<form class="due-date-form form-field">
+    <label>Due date<span class="required">*</span></label>
+    <input type="text" placeholder="dd/mm/yyyy" class="date-input" />
+</form>
+</div>
+
+<div class="divider">
+    <div class="divider-line"></div>
+</div>
+
+<div class="form-right">
+<form class="priority-form form-field">
+    <label>Priority</label>
+         <div class="priority-buttons">
+            <button type="button" class="priority-button urgent">Urgent</button>
+            <button type="button" class="priority-button medium">Medium</button>
+            <button type="button" class="priority-button low">Low</button>
+         </div>
+</form>
+
+<form class="assigned-to-form form-field">
+    <label>Assigned to</label>
+    <select>
+        <option value="">Select a contact</option>
+    </select>
+</form>
+
+<form class="category-form form-field">
+    <label>Category <span class="required">*</span></label>
+    <select>
+        <option value="">Select task category</option>
+    </select>
+</form>
+
+<form class="subtasks-form form-field">
+    <label>Subtasks</label>
+    <input type="text" placeholder="Add new subtask"/>
+</form>
+    </div>
+</div>
+</section>
