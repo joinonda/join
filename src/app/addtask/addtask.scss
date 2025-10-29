@@ -8,6 +8,7 @@ $gray-border: #d1d5db;
 $light-gray: #a8a8a8;
 $input-border: #d1d5db;
 $overlay-bg: rgba(0, 0, 0, 0.4);
+$red: #ff3d3d;
 
 
 .addtask-section {
@@ -41,7 +42,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 10px;
+    gap: 60px;
     padding-left: 80px;
   }
 
@@ -51,6 +52,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     justify-content: flex-start;
     align-items: flex-start;
     gap: 10px;
+    width: 440px;
   }
   
   .form-right {
@@ -58,7 +60,8 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 10px;
+    gap: 10px;  
+    width: 440px;
   }
 
   .divider {
@@ -78,8 +81,29 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     align-items: flex-start;
     gap: 10px;
     font-size: 20px;
+    width: 100%;
   }
   
   .form-field label {
     color: $primary-color;
+  }
+
+  .form-field input, select, textarea{
+    max-width: 100%; 
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 1px solid $input-border;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .form-field textarea{
+    max-height: 200px;
+    min-height: 136px;
+    min-width: 100%;
+  }
+
+  .form-field span.required{
+    color: $red;
   }
