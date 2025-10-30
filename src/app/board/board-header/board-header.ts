@@ -1,12 +1,11 @@
 import { Component, HostListener } from '@angular/core';
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-header',
   standalone: true,
-  imports: [NgIf, FormsModule],
+  imports: [FormsModule],
   templateUrl: './board-header.html',
   styleUrl: './board-header.scss',
 })
