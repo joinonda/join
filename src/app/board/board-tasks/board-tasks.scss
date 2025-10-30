@@ -108,6 +108,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     font-weight: 400;
     color: #a8a8a8;
     border-radius: 10px;
-    border: 2px dotted #a8a8a8;
+    border: 2px dashed #a8a8a8;
+    box-shadow: 0 0 10px 2px #a8a8a835;
   }
 }
