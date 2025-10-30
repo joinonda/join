@@ -7,11 +7,7 @@
           class="add-task-button-icon mobile-only"
           (click)="openAddTaskComponent()"
         >
-          <img
-            src="/imgs/icons/add-task-board-header.png"
-            alt="Add task"
-            class="add-task-icon"
-          />
+          <span class="plus-icon-mobile">+</span>
         </button>
       </div>
 
@@ -28,7 +24,7 @@
           />
           <div class="search-separator">|</div>
           <img
-            src="/imgs/icons/search.png"
+            src="/imgs/search.png"
             alt="Search"
             class="search-icon"
             (click)="performSearch()"
@@ -40,10 +36,7 @@
           (click)="openAddTaskOverlay('todo')"
         >
           <span>Add task</span>
-          <img
-            src="/imgs/icons/add-task-board-header.png"
-            alt="Add"
-          />
+          <span class="plus-icon">+</span>
         </button>
       </div>
     </div>
