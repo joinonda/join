@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { Contacts } from './contacts/contacts';
 import { Board } from './board/board';
-import { Addtask } from './addtask/addtask';
+import { Addtask } from './add-task/add-task';
 // import { Login } from './auth/login/login';
 // import { Signup } from './auth/signup/signup';
 
