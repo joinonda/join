@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BoardHeader } from './board-header';
 
-describe('BoardHeader', () => {
-  let component: BoardHeader;
-  let fixture: ComponentFixture<BoardHeader>;
+import { TaskBoardCard } from './board-task-card';
+
+describe('TaskBoardCard', () => {
+  let component: TaskBoardCard;
+  let fixture: ComponentFixture<TaskBoardCard>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BoardHeader],
+      imports: [TaskBoardCard],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BoardHeader);
+    fixture = TestBed.createComponent(TaskBoardCard);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
