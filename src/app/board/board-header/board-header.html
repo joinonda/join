@@ -1,21 +1,57 @@
-<div class="board-container">
-  <div class="board-header">
-    <div class="header-top-row">
-      <h1 class="mobile-title">Board</h1>
+<div class="board-wrapper">
+  <div class="board-container">
+    <div class="board-header">
+      <div class="header-top-row">
+        <h1>Board</h1>
+        <button
+          class="add-task-button-icon mobile-only"
+          (click)="openAddTaskComponent()"
+        >
+          <img
+            src="/imgs/icons/add-task-board-header.png"
+            alt="Add task"
+            class="add-task-icon"
+          />
+        </button>
+      </div>
 
-      <button class="">
-        <img src="" alt="" class="" />
-      </button>
-    </div>
+      <h1 class="desktop-title">Board</h1>
 
-    <h1 class="desktop-title">Board</h1>
+      <div class="board-actions">
+        <div class="search-container">
+          <input
+            type="text"
+            placeholder="Find Task"
+            class="search-input"
+            [(ngModel)]="searchTerm"
+            (input)="performSearch()"
+          />
+          <div class="search-separator">|</div>
+          <img
+            src="/imgs/icons/search.png"
+            alt="Search"
+            class="search-icon"
+            (click)="performSearch()"
+          />
+        </div>
 
-    <div class="board-actions">
-      <div class="search-container">
-        <input type="text" placeholder="Find Task" class="search-input" />
-        <div class="search-separator">|</div>
-        <img src="" alt="Search" class="search-icon" />
+        <button
+          class="add-task-button desktop-only"
+          (click)="openAddTaskOverlay('todo')"
+        >
+          <span>Add task</span>
+          <img
+            src="/imgs/icons/add-task-board-header.png"
+            alt="Add"
+          />
+        </button>
       </div>
     </div>
+
+    @if (searchTerm && !hasSearchResults) {
+      <div class="no-results-message">
+        <p>No results found for "{{ searchTerm }}"</p>
+      </div>
+    }
   </div>
 </div>
