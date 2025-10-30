@@ -1,17 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BoardHeader } from './board-header';
 
-import { Boardheader } from './board-header';
-
-describe('Boardheader', () => {
-  let component: Boardheader;
-  let fixture: ComponentFixture<Boardheader>;
+describe('BoardHeader', () => {
+  let component: BoardHeader;
+  let fixture: ComponentFixture<BoardHeader>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Boardheader],
+      imports: [BoardHeader],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Boardheader);
+    fixture = TestBed.createComponent(BoardHeader);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
