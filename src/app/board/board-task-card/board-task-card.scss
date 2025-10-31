@@ -1,5 +1,111 @@
+.app-board-task-card {
+  width: 100%;
+}
 .board-task-card-section {
   width: 100%;
   background-color: #ffff;
   border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #005dff;
+}
+
+.category span {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.title {
+  color: #2a3647;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.description {
+  color: #6b778c;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-container progress {
+  flex: 1;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.progress-container progress::-webkit-progress-bar {
+  background-color: #eef2f6;
+  border-radius: 8px;
+}
+
+.progress-container progress::-webkit-progress-value {
+  background-color: #3b82f6;
+  border-radius: 8px;
+}
+
+.progress-container span {
+  color: #2a3647;
+  font-size: 12px;
+}
+
+.card-footer {
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.assigned {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  margin-left: -6px;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatar-more {
+  background: #2a3647 !important;
+  color: white !important;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.priority-icon {
+  width: 22px;
+  height: 22px;
 }
