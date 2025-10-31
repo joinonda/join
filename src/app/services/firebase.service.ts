@@ -13,7 +13,7 @@ import { getDoc } from 'firebase/firestore';
 import { Observable, firstValueFrom } from 'rxjs';
 import { Contact, NewContact } from '../interfaces/contacts-interfaces';
 import { Task, Subtask } from '../interfaces/task-interface';
-import { Timestamp, serverTimestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
@@ -74,7 +74,6 @@ export class FirebaseService {
                   id: d.id,
                   ...x,
                   dueDate: x.dueDate?.toDate?.(),
-                  createdAt: x.createdAt?.toDate?.(),
                 } as Task;
               })
             );
@@ -86,12 +85,11 @@ export class FirebaseService {
     );
   }
 
-  async addTaskToDatabase(task: Omit<Task, 'id' | 'createdAt'>) {
+  async addTaskToDatabase(task: Omit<Task, 'id'>) {
     return runInInjectionContext(this.injector, async () => {
       await addDoc(collection(this.firestore, 'tasks'), {
         ...task,
-        dueDate: Timestamp.fromDate(task.dueDate),
-        createdAt: serverTimestamp(),
+        dueDate: task.dueDate,
       });
     });
   }
@@ -101,5 +99,21 @@ export class FirebaseService {
     const data = await firstValueFrom(docData(ref));
     const current = (data?.['subtasks'] ?? []) as Subtask[];
     await updateDoc(ref, { subtasks: [...current, subtask] });
+  }
+
+  async deleteTaskFromDatabase(id: string) {
+    return runInInjectionContext(this.injector, async () => {
+      await deleteDoc(doc(this.firestore, 'tasks', id));
+    });
+  }
+
+  async updateTaskInDatabase(id: string, partial: Partial<Task>) {
+    return runInInjectionContext(this.injector, async () => {
+      const payload: any = { ...partial };
+      if (payload.dueDate instanceof Date) {
+        payload.dueDate = payload.dueDate;
+      }
+      await updateDoc(doc(this.firestore, 'tasks', id), payload);
+    });
   }
 }
