@@ -9,8 +9,12 @@
       </button>
     </div>
     <div class="to-do-ccontainer-column column">
-      <div class="no-tasks-to-do-container tasks-placeholder"><p>No tasks to do</p></div>
-      <app-board-task-card></app-board-task-card>
+      @if (!tasksByStatus('todo').length) {
+        <div class="no-tasks-to-do-container tasks-placeholder"><p>No tasks to do</p></div>
+      }
+      @for (task of tasksByStatus('todo'); track task.id) {
+        <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+      }
     </div>
   </div>
   <!-- in progress -->
@@ -23,10 +27,14 @@
       </button>
     </div>
     <div class="in-progress-container-column column">
-      <div class="no-tasks-in-progress-container tasks-placeholder">
-        <p>No tasks in progress</p>
-      </div>
-      <app-board-task-card></app-board-task-card>
+      @if (!tasksByStatus('inprogress').length) {
+        <div class="no-tasks-in-progress-container tasks-placeholder">
+          <p>No tasks in progress</p>
+        </div>
+      }
+      @for (task of tasksByStatus('inprogress'); track task.id) {
+        <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+      }
     </div>
   </div>
   <!-- await feedback -->
@@ -39,10 +47,14 @@
       </button>
     </div>
     <div class="await-for-container-column column">
-      <div class="no-pending-feedbacks-container tasks-placeholder">
-        <p>No pending feedbacks</p>
-      </div>
-      <app-board-task-card></app-board-task-card>
+      @if (!tasksByStatus('awaitfeedback').length) {
+        <div class="no-pending-feedbacks-container tasks-placeholder">
+          <p>No pending feedbacks</p>
+        </div>
+      }
+      @for (task of tasksByStatus('awaitfeedback'); track task.id) {
+        <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+      }
     </div>
   </div>
   <!-- done -->
@@ -55,10 +67,19 @@
       </button>
     </div>
     <div class="done-container-column column">
-      <div class="no-finished-tasks-container tasks-placeholder">
-        <p>No finished tasks</p>
-      </div>
-      <app-board-task-card></app-board-task-card>
+      @if (!tasksByStatus('done').length) {
+        <div class="no-finished-tasks-container tasks-placeholder">
+          <p>No finished tasks</p>
+        </div>
+      }
+      @for (task of tasksByStatus('done'); track task.id) {
+        <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+      }
     </div>
   </div>
+
+  @if (selectedTask) {
+    <app-board-task-dialog [task]="selectedTask!" (closed)="closeDialog()" (deleted)="deleteTask($event)"></app-board-task-dialog>
+  }
+
 </section>
