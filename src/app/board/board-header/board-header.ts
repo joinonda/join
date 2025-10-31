@@ -33,10 +33,10 @@ export class BoardHeader {
   }
 
   openAddTaskComponent(): void {
-    this.router.navigateByUrl('/addTask');
+    this.router.navigateByUrl('/add-task');
   }
 
   openAddTaskOverlay(status: string): void {
-    this.router.navigate(['/addTask'], { queryParams: { status } });
+    this.router.navigate(['/add-task'], { queryParams: { status } });
   }
 }
