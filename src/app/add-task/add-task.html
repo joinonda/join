@@ -4,21 +4,21 @@
 </div>
 
 <div class="addtask-content">
-    <div class="form-left">
-        <form class="title-form form-field">
-        <label>Title<span class="required">*</span></label>
-        <input type="text" placeholder="Enter a title" />
-  </form>
+    <div class="form-left" [formGroup]="form">
+        <div class="title-form form-field">
+            <label>Title<span class="required">*</span></label>
+            <input type="text" placeholder="Enter a title" formControlName="title" />
+        </div>
 
-    <form class="description-form form-field">
-    <label>Description</label>
-    <textarea placeholder="Enter a description" ></textarea>
-</form>
+        <div class="description-form form-field">
+            <label>Description</label>
+            <textarea placeholder="Enter a description" formControlName="description"></textarea>
+        </div>
 
-<form class="due-date-form form-field">
-    <label>Due date<span class="required">*</span></label>
-    <input type="text" placeholder="dd/mm/yyyy" class="date-input" />
-</form>
+        <div class="due-date-form form-field">
+            <label>Due date<span class="required">*</span></label>
+            <input type="date" placeholder="dd/mm/yyyy" class="date-input" formControlName="dueDate" />
+        </div>
     <div class="addtask-bottom-left">
     <label><span class="required">*</span>This field is required</label>
     </div>
@@ -28,47 +28,99 @@
     <div class="divider-line"></div>
 </div>
 
-<div class="form-right">
-<form class="priority-form form-field">
-    <label>Priority</label>
-         <div class="priority-buttons">
-            <button type="button" class="priority-button urgent">Urgent
+<div class="form-right" [formGroup]="form">
+    <div class="priority-form form-field">
+        <label>Priority</label>
+        <div class="priority-buttons">
+            <button type="button" class="priority-button urgent"
+              [class.active-urgent]="form.value.priority==='urgent'"
+              (click)="prioritySelect('urgent')">Urgent
                 <img src="imgs/addtask/urgent-red.png" alt="Urgent" />
             </button>
-            <button type="button" class="priority-button medium">Medium
+            <button type="button" class="priority-button medium"
+              [class.active-medium]="form.value.priority==='medium'"
+              (click)="prioritySelect('medium')">Medium
                 <img src="imgs/addtask/medium-equals.png" alt="Urgent" />
             </button>
-            <button type="button" class="priority-button low">Low
+            <button type="button" class="priority-button low"
+              [class.active-low]="form.value.priority==='low'"
+              (click)="prioritySelect('low')">Low
                 <img src="imgs/addtask/low-green.png" alt="Urgent" />
             </button>
-         </div>
-</form>
+        </div>
+    </div>
 
-<form class="assigned-to-form form-field">
+    <div class="assigned-to-form form-field">
     <label>Assigned to</label>
-    <select>
-        <option value="">Select a contact</option>
-    </select>
-</form>
+    <div class="dropdown-container">
+        <div class="dropdown-input" (click)="toggleDropdown()" [attr.data-open]="isDropdownOpen()">
+            <input 
+                type="text" 
+                placeholder="Select contacts to assign"
+                [ngModel]="searchTerm()"
+                (ngModelChange)="searchTerm.set($event)"
+                [ngModelOptions]="{standalone: true}"
+                (click)="$event.stopPropagation()"
+                (focus)="isDropdownOpen.set(true)"
+                class="dropdown-search"
+            />
+            <span class="dropdown-arrow"></span>
+        </div>
+        @if (isDropdownOpen()) {
+            <div class="dropdown-list">
+                @for (contact of filteredContacts(); track contact.id) {
+                    <div class="dropdown-item" (click)="toggleContact(contact.id)">
+                        <div class="dropdown-item-avatar" [style.background-color]="getContactColor(contact)">
+                            {{ getInitials(contact) }}
+                        </div>
+                        <span class="dropdown-item-name">
+                            {{ contact.firstName }} {{ contact.lastName }}
+                            @if (isCurrentUser(contact.id)) {
+                                <span class="you-label">(You)</span>
+                            }
+                        </span>
+                        <img 
+                            [src]="isContactSelected(contact.id) ? 'imgs/checkbox-checked.png' : 'imgs/checkbox-empty.png'" 
+                            alt="checkbox"
+                            class="dropdown-checkbox"
+                        />
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    @if (selectedContacts().length) {
+        <div class="assigned-contacts">
+            @for (contact of selectedContacts(); track contact.id) {
+                <div class="contact-avatar" [style.background-color]="getContactColor(contact)" (click)="removeContact(contact.id)">
+                    {{ getInitials(contact) }}
+                </div>
+            }
+        </div>
+    }
+    </div>
 
-<form class="category-form form-field">
-    <label>Category<span class="required">*</span></label>
-    <select>
-        <option value="">Select task category</option>
-        <option value="">Technical Task</option>
-        <option value="">User Story</option>
-    </select>
-</form>
+    <div class="category-form form-field">
+        <label>Category<span class="required">*</span></label>
+        <div class="select-wrapper">
+            <select formControlName="category">
+                <option value="">Select task category</option>
+                <option value="Technical Task">Technical Task</option>
+                <option value="User Story">User Story</option>
+            </select>
+            <span class="select-arrow"></span>
+        </div>
+    </div>
 
-<form class="subtasks-form form-field">
-    <label>Subtasks</label>
-    <input type="text" placeholder="Add new subtask"/>
-</form>
+    <div class="subtasks-form form-field">
+        <label>Subtasks</label>
+        <input type="text" placeholder="Add new subtask"/>
+    </div>
     <div class="addtask-bottom-right">
-    <button type="button" class="btn-secondary" id="cancel-btn">Clear
+    <button type="button" class="btn-secondary" id="cancel-btn" (click)="form.reset({ priority: 'medium' })">Clear
         <img src="imgs/cancel-x-btn.png" alt="Cancel" />
     </button>
-    <button type="button" class="btn-primary" id="submit-btn">Create Task
+    <button type="button" class="btn-primary" id="submit-btn" (click)="createTask()">Create Task
         <img src="imgs/check-save-btn.png" alt="Save" />
     </button>
     </div>
