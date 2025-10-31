@@ -5,11 +5,13 @@ import { BoardTaskDialog } from '../board-task-dialog/board-task-dialog';
 import { DataService } from '../../services/data.service';
 import { Task } from '../../interfaces/task-interface';
 import { Subscription } from 'rxjs';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board-tasks',
   standalone: true,
-  imports: [CommonModule, TaskBoardCard, BoardTaskDialog],
+  imports: [CommonModule, TaskBoardCard, BoardTaskDialog, DragDropModule],
   templateUrl: './board-tasks.html',
   styleUrl: './board-tasks.scss',
 })
@@ -17,11 +19,17 @@ export class BoardTasks implements OnDestroy {
   private dataService = inject(DataService);
   private sub?: Subscription;
 
-  todo: Task[] = []; inProgress: Task[] = []; awaitFeedback: Task[] = []; done: Task[] = [];
+  todo: Task[] = [];
+  inProgress: Task[] = [];
+  awaitFeedback: Task[] = [];
+  done: Task[] = [];
   constructor() {
-    this.sub = this.dataService.getTasks().subscribe(ts => {
-      this.todo = []; this.inProgress = []; this.awaitFeedback = []; this.done = [];
-      ts.forEach(t => {
+    this.sub = this.dataService.getTasks().subscribe((ts) => {
+      this.todo = [];
+      this.inProgress = [];
+      this.awaitFeedback = [];
+      this.done = [];
+      ts.forEach((t) => {
         if (t.status === 'todo') this.todo.push(t);
         else if (t.status === 'inprogress') this.inProgress.push(t);
         else if (t.status === 'awaitfeedback') this.awaitFeedback.push(t);
@@ -39,21 +47,47 @@ export class BoardTasks implements OnDestroy {
 
   selectedTask: Task | null = null;
 
-  openTask(task: Task) { 
-    this.selectedTask = task; 
+  openTask(task: Task) {
+    this.selectedTask = task;
   }
 
-  closeDialog() { 
-    this.selectedTask = null; 
+  closeDialog() {
+    this.selectedTask = null;
   }
-  
+
   async deleteTask(task: Task) {
-    if (!task.id) { this.selectedTask = null; return; }
+    if (!task.id) {
+      this.selectedTask = null;
+      return;
+    }
     await this.dataService.deleteTask(task.id);
     this.selectedTask = null;
   }
 
-  ngOnDestroy() { 
-    this.sub?.unsubscribe(); 
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
+  }
+
+  async drop(event: CdkDragDrop<Task[]>, targetStatus: Task['status']) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      return;
+    }
+
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+
+    const movedTask = event.container.data[event.currentIndex];
+    if (!movedTask) return;
+
+    movedTask.status = targetStatus;
+
+    if (movedTask.id) {
+      await this.dataService.saveTask(movedTask.id, { status: targetStatus });
+    }
   }
 }

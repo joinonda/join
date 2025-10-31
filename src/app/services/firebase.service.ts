@@ -116,4 +116,9 @@ export class FirebaseService {
       await updateDoc(doc(this.firestore, 'tasks', id), payload);
     });
   }
+
+  async updateTask(id: string, partial: Partial<Task>) {
+    const ref = doc(this.firestore, 'tasks', id);
+    return updateDoc(ref, partial);
+  }
 }
