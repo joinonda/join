@@ -8,6 +8,21 @@ import { Observable } from 'rxjs';
 export class DataService {
   private firebaseService = inject(FirebaseService);
 
+  todo: Task[] = [];
+  inProgress: Task[] = [];
+  awaitFeedback: Task[] = [];
+  done: Task[] = [];
+
+  constructor() {
+    this.getTasks().subscribe((tasks) => {
+      this.todo = [];
+      this.inProgress = [];
+      this.awaitFeedback = [];
+      this.done = [];
+      tasks.forEach((t) => this.categorizeTask(t));
+    });
+  }
+
   getContacts(): Observable<Contact[]> {
     return this.firebaseService.getCollectionSnapshot('contact');
   }
@@ -28,7 +43,31 @@ export class DataService {
     return this.firebaseService.getTasksSnapshot();
   }
 
-  async addTask(task: Omit<Task, 'id' | 'createdAt'>) {
-    await this.firebaseService.addTaskToDatabase(task);
+  addTask(task: Omit<Task, 'id'>) {
+    return this.firebaseService.addTaskToDatabase(task);
+  }
+
+  deleteTask(id: string) {
+    return this.firebaseService.deleteTaskFromDatabase(id);
+  }
+
+  saveTask(id: string, partial: Partial<Task>) {
+    return this.firebaseService.updateTaskInDatabase(id, partial);
+  }
+
+  editTask(id: string, partial: Partial<Task>) {
+    return this.saveTask(id, partial);
+  }
+
+  private categorizeTask(task: Task) {
+    if (task.status === 'todo') {
+      this.todo.push(task);
+    } else if (task.status === 'inprogress') {
+      this.inProgress.push(task);
+    } else if (task.status === 'awaitfeedback') {
+      this.awaitFeedback.push(task);
+    } else if (task.status === 'done') {
+      this.done.push(task);
+    }
   }
 }

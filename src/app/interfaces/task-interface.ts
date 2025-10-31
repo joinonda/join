@@ -8,7 +8,6 @@ export interface Task {
   status: 'todo' | 'inprogress' | 'awaitfeedback' | 'done';
   assignedTo: string[];
   subtasks: Subtask[];
-  createdAt: Date | null;
 }
 
 export interface Subtask {

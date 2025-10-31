@@ -1,1 +1,63 @@
-<p>board-task-dialog works!</p>
+<div class="dialog-backdrop" (click)="closed.emit()"></div>
+<div class="dialog">
+  <div class="dialog-header">
+    <span class="badge">{{ task().category }}</span>
+    <button class="close" (click)="closed.emit()">✕</button>
+  </div>
+
+  @if (!editMode) {
+    <h2 class="title">{{ task().title }}</h2>
+    <p class="description">{{ task().description }}</p>
+  } @else {
+    <input class="input title-input" [(ngModel)]="model.title" />
+    <textarea class="input desc-input" [(ngModel)]="model.description"></textarea>
+  }
+
+  <div class="meta">
+    @if (!editMode) {
+      <div><span class="label">Due date:</span> {{ task().dueDate | date:'dd/MM/yyyy' }}</div>
+    } @else {
+      <div class="date-edit"><span class="label">Due date:</span> <input type="date" [(ngModel)]="model.dueDate" /></div>
+    }
+    <div class="priority-row">
+      <span class="label">Priority:</span>
+      <img [src]="priorityIcon()" class="priority-icon" alt="priority" />
+    </div>
+  </div>
+
+  <div class="assigned">
+    <span class="label">Assigned To:</span>
+    <div class="people">
+      @for (contact of assignedContacts(); track contact.name) {
+        <div class="contact-item">
+          <div class="contact-avatar" [style.background-color]="contact.color">
+            {{ contact.initials }}
+          </div>
+          <span class="contact-name">{{ contact.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (task().subtasks.length) {
+    <span class="label">Subtasks</span>
+    <div class="list">
+      @for (s of task().subtasks; track s.id) {
+        <label class="sub">
+          <input type="checkbox" [checked]="s.completed" disabled />
+          <span>{{ s.title }}</span>
+        </label>
+      }
+    </div>
+  }
+
+  <div class="dialog-footer">
+    <button (click)="deleted.emit(task())">Delete</button>
+    @if (!editMode) {
+      <button (click)="editTask()">Edit</button>
+    } @else {
+      <button (click)="saveTask()">Save</button>
+      <button (click)="editMode = false">Cancel</button>
+    }
+  </div>
+</div>
