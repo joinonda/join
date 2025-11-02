@@ -1,6 +1,7 @@
 .app-board-task-card {
   width: 100%;
 }
+
 .board-task-card-section {
   width: 100%;
   background-color: #ffff;
@@ -10,6 +11,12 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin: 8px 0;
+  cursor: pointer;
+
+  &:active {
+    transform: rotate(20deg);
+  }
 }
 
 .category {
