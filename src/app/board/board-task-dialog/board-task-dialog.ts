@@ -70,4 +70,15 @@ export class BoardTaskDialog {
     });
     this.editMode = false;
   }
+
+  async toggleSubtask(subtaskId: string) {
+    const t = this.task();
+    if (!t?.id) return;
+    
+    const updatedSubtasks = t.subtasks.map(s => 
+      s.id === subtaskId ? { ...s, completed: !s.completed } : s
+    );
+    
+    await this.dataService.saveTask(t.id, { subtasks: updatedSubtasks });
+  }
 }

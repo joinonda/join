@@ -114,7 +114,46 @@
 
     <div class="subtasks-form form-field">
         <label>Subtasks</label>
-        <input type="text" placeholder="Add new subtask"/>
+        <div class="subtask-input-wrapper">
+            <input 
+                type="text" 
+                placeholder="Add new subtask"
+                [(ngModel)]="newSubtaskInput"
+                (keyup.enter)="addSubtask()"
+                [ngModelOptions]="{standalone: true}"
+                class="subtask-input"
+            />
+            <div class="subtask-actions">
+                <img 
+                    src="imgs/cancel-x-btn.png" 
+                    alt="Cancel" 
+                    class="subtask-icon"
+                    (click)="clearSubtaskInput()"
+                />
+                <div class="subtask-divider"></div>
+                <img 
+                    src="imgs/checksubtasks.png" 
+                    alt="Save" 
+                    class="subtask-icon"
+                    (click)="addSubtask()"
+                />
+            </div>
+        </div>
+        @if (subtasks().length) {
+            <ul class="subtasks-list">
+                @for (subtask of subtasks(); track subtask.id) {
+                    <li>
+                        <span>{{ subtask.title }}</span>
+                        <img 
+                            src="imgs/cancel-x-btn.png" 
+                            alt="Remove" 
+                            class="subtask-remove-icon"
+                            (click)="removeSubtask(subtask.id)"
+                        />
+                    </li>
+                }
+            </ul>
+        }
     </div>
     <div class="addtask-bottom-right">
     <button type="button" class="btn-secondary" id="cancel-btn" (click)="form.reset({ priority: 'medium' })">Clear

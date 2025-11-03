@@ -49,17 +49,24 @@
     <div class="list">
       @for (s of task().subtasks; track s.id) {
       <label class="sub">
-        <input type="checkbox" [checked]="s.completed" disabled />
-        <span>{{ s.title }}</span>
+        <input type="checkbox" [checked]="s.completed" (change)="toggleSubtask(s.id)" />
+        <span [class.completed]="s.completed">{{ s.title }}</span>
       </label>
       }
     </div>
     }
 
     <div class="dialog-footer">
-      <button (click)="deleted.emit(task())">Delete</button>
+      <button class="delete-btn" (click)="deleted.emit(task())">
+        <img src="imgs/delete-dark.png" alt="" />
+        <img src="imgs/delete-hover.png" alt="" />
+      </button>
+      <div class="footer-divider"></div>
       @if (!editMode) {
-      <button (click)="editTask()">Edit</button>
+      <button class="edit-btn" (click)="editTask()">
+        <img src="imgs/edit-dark.png" alt="" />
+        <img src="imgs/edit-hover.png" alt="" />
+      </button>
       } @else {
       <button (click)="saveTask()">Save</button>
       <button (click)="editMode = false">Cancel</button>

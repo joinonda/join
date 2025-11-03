@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DataService } from '../services/data.service';
-import { Task } from '../interfaces/task-interface';
+import { Task, Subtask } from '../interfaces/task-interface';
 import { Contact } from '../interfaces/contacts-interfaces';
 import { getContactColor, getInitials } from '../utilities/contact.helpfunctions';
 
@@ -23,6 +23,9 @@ export class Addtask {
   isDropdownOpen = signal(false);
   searchTerm = signal('');
   currentUserId = signal('');
+  subtasks = signal<Subtask[]>([]);
+  newSubtaskInput = '';
+  private subtaskIdCounter = 0;
 
   form = this.fb.group({
     title: ['', Validators.required],
@@ -86,6 +89,25 @@ export class Addtask {
     }
   }
 
+  addSubtask() {
+    const title = this.newSubtaskInput.trim();
+    if (!title) return;
+    this.subtasks.update(list => [...list, {
+      id: `subtask-${++this.subtaskIdCounter}`,
+      title,
+      completed: false
+    }]);
+    this.newSubtaskInput = '';
+  }
+
+  clearSubtaskInput() {
+    this.newSubtaskInput = '';
+  }
+
+  removeSubtask(id: string) {
+    this.subtasks.update(list => list.filter(s => s.id !== id));
+  }
+
   async createTask() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -100,10 +122,13 @@ export class Addtask {
       category: this.form.value.category!,
       status: 'inprogress',
       assignedTo: this.selectedContacts().map(c => `${c.firstName} ${c.lastName}`),
-      subtasks: [],
+      subtasks: this.subtasks(),
     });
 
     this.form.reset({ priority: 'medium' });
     this.selectedContacts.set([]);
+    this.subtasks.set([]);
+    this.newSubtaskInput = '';
+    this.subtaskIdCounter = 0;
   }
 }
