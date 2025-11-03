@@ -17,16 +17,22 @@
 
     <div class="meta">
       @if (!editMode) {
-      <div><span class="label">Due date:</span> {{ task().dueDate | date : 'dd/MM/yyyy' }}</div>
+      <div class="date-row">
+        <span class="label">Due date:</span>
+        <span class="date-value">{{ task().dueDate | date : 'dd/MM/yyyy' }}</span>
+      </div>
       } @else {
-      <div class="date-edit">
+      <div class="date-row date-edit">
         <span class="label">Due date:</span>
         <input type="date" [(ngModel)]="model.dueDate" />
       </div>
       }
       <div class="priority-row">
         <span class="label">Priority:</span>
-        <img [src]="priorityIcon()" class="priority-icon" alt="priority" />
+        <div class="priority-content">
+          <span class="priority-text">{{ priorityText() }}</span>
+          <img [src]="priorityIcon()" class="priority-icon" alt="priority" />
+        </div>
       </div>
     </div>
 

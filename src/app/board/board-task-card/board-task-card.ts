@@ -40,10 +40,10 @@ export class TaskBoardCard {
   remainingContactsCount = computed(() => Math.max(0, this.assignedContacts().length - 4));
 
   priorityIconSrc = computed(() => {
-    const base = '/imgs/addtask/taskcard';
+    const base = '/imgs/addtask';
     const priority = this.task().priority;
-    if (priority === 'urgent') return `${base}/urgent.png`;
-    if (priority === 'low') return `${base}/low.png`;
-    return `${base}/medium.png`;
+    if (priority === 'urgent') return `${base}/urgent-normal.png`;
+    if (priority === 'low') return `${base}/low-normal.png`;
+    return `${base}/medium-normal.png`;
   });
 }

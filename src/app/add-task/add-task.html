@@ -35,17 +35,20 @@
             <button type="button" class="priority-button urgent"
               [class.active-urgent]="form.value.priority==='urgent'"
               (click)="prioritySelect('urgent')">Urgent
-                <img src="imgs/addtask/urgent-red.png" alt="Urgent" />
+                <img src="imgs/addtask/urgent-normal.png" alt="Urgent" class="priority-icon-normal" />
+                <img src="imgs/addtask/urgent-hover.png" alt="Urgent" class="priority-icon-hover" />
             </button>
             <button type="button" class="priority-button medium"
               [class.active-medium]="form.value.priority==='medium'"
               (click)="prioritySelect('medium')">Medium
-                <img src="imgs/addtask/medium-equals.png" alt="Urgent" />
+                <img src="imgs/addtask/medium-normal.png" alt="Medium" class="priority-icon-normal" />
+                <img src="imgs/addtask/medium-hover.png" alt="Medium" class="priority-icon-hover" />
             </button>
             <button type="button" class="priority-button low"
               [class.active-low]="form.value.priority==='low'"
               (click)="prioritySelect('low')">Low
-                <img src="imgs/addtask/low-green.png" alt="Urgent" />
+                <img src="imgs/addtask/low-normal.png" alt="Low" class="priority-icon-normal" />
+                <img src="imgs/addtask/low-hover.png" alt="Low" class="priority-icon-hover" />
             </button>
         </div>
     </div>

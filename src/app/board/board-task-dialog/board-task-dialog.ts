@@ -51,11 +51,16 @@ export class BoardTaskDialog {
   });
 
   priorityIcon = computed(() => {
-    const base = '/imgs/addtask/taskcard';
+    const base = '/imgs/addtask';
     const priority = this.task().priority;
-    if (priority === 'urgent') return `${base}/urgent.png`;
-    if (priority === 'low') return `${base}/low.png`;
-    return `${base}/medium.png`;
+    if (priority === 'urgent') return `${base}/urgent-normal.png`;
+    if (priority === 'low') return `${base}/low-normal.png`;
+    return `${base}/medium-normal.png`;
+  });
+
+  priorityText = computed(() => {
+    const priority = this.task().priority;
+    return priority.charAt(0).toUpperCase() + priority.slice(1);
   });
 
   editTask() { this.editMode = true; }

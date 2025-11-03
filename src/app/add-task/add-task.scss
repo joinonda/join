@@ -185,6 +185,11 @@ $medium-orange: #ff8a00;
     justify-content: center;
     align-items: center;
     width: 134px;
+    position: relative;
+
+    .priority-icon-hover {
+      display: none;
+    }
 
     &:hover {
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -195,18 +200,42 @@ $medium-orange: #ff8a00;
     background-color: #ff3d00;
     color: $white;
     border-color: transparent;
+
+    .priority-icon-normal {
+      display: none;
+    }
+
+    .priority-icon-hover {
+      display: block;
+    }
   }
 
   .form-field .priority-button.active-medium {
     background-color: #ffb000;
     color: $white;
     border-color: transparent;
+
+    .priority-icon-normal {
+      display: none;
+    }
+
+    .priority-icon-hover {
+      display: block;
+    }
   }
 
   .form-field .priority-button.active-low {
     background-color: #69e031;
     color: $white;
     border-color: transparent;
+
+    .priority-icon-normal {
+      display: none;
+    }
+
+    .priority-icon-hover {
+      display: block;
+    }
   }
 
   @media (max-width: 1024px) {
