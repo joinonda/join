@@ -3,10 +3,7 @@
     <div class="board-header">
       <div class="header-top-row">
         <h1>Board</h1>
-        <button
-          class="add-task-button-icon mobile-only"
-          (click)="openAddTaskComponent()"
-        >
+        <button class="add-task-button-icon mobile-only"(click)="openAddTaskComponent()">
           <span class="plus-icon-mobile">+</span>
         </button>
       </div>
@@ -14,7 +11,7 @@
       <h1 class="desktop-title">Board</h1>
 
       <div class="board-actions">
-        <div class="search-container">
+        <div class="search-container"> 
           <input
             type="text"
             placeholder="Find Task"
@@ -31,12 +28,9 @@
           />
         </div>
 
-        <button
-          class="add-task-button desktop-only"
-          (click)="openAddTaskOverlay('todo')"
-        >
+        <button class="add-task-button desktop-only"(click)="openAddTaskOverlay('todo')">
           <span>Add task</span>
-          <span class="plus-icon">+</span>
+          <img src="/imgs/boardheader/plus.png" alt="Plus" class="plus-icon" />
         </button>
       </div>
     </div>

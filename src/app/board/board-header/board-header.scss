@@ -7,9 +7,8 @@
 
 .board-container {
   width: 100%;
-  max-width: 1440px;
   height: 208px;
-  padding: 0 48px;
+  padding: 0 76px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -56,12 +55,13 @@
 .search-container {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   background: #ffffff;
   border: 1px solid #a8a8a8;
   border-radius: 10px;
   padding: 13px 21px;
-  min-height: 51px;
+  max-height: 48px;
+  max-width: 312px;
   box-sizing: border-box;
 }
 
@@ -94,16 +94,16 @@
 }
 
 .add-task-button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 4px;
   background: #2a3647;
   color: #ffffff;
   border: none;
   border-radius: 10px;
   padding: 18px 10px;
-  min-width: 137px;
-  height: 51px;
+  min-width: 160px;
+  max-height: 48px;
   font-size: 21px;
   font-weight: 700;
   cursor: pointer;
@@ -123,9 +123,9 @@
 }
 
 .plus-icon {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .add-task-button-icon {
