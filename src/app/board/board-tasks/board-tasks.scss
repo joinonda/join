@@ -18,6 +18,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
   background-color: #f6f7f8;
   height: calc(100vh - 96px - 208px);
   overflow-y: hidden;
+  overflow-x: hidden;
 
   .container {
     position: relative;

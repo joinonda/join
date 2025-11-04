@@ -104,6 +104,16 @@
         .addtask-bottom-left {
           align-self: flex-start;
           margin-top: 195px;
+
+          label {
+            display: flex;
+            align-items: baseline;
+            line-height: 1.2;
+          }
+
+          span.required {
+            vertical-align: baseline;
+          }
         }
 
         .addtask-bottom-right {

@@ -159,10 +159,17 @@ $medium-orange: #ff8a00;
   .addtask-bottom-left{
     align-self: flex-start;
     margin-top: 195px;
+
+    label {
+      display: flex;
+      align-items: baseline;
+      line-height: 1.2;
+    }
   }
 
   .addtask-bottom-left span.required{
     color: $red;
+    vertical-align: baseline;
   }
 
   .form-field .priority-buttons, button{
