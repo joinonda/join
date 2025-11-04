@@ -19,7 +19,17 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
-    overflow-y: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &.edit-mode {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
 
     .dialog-header {
       display: flex;
@@ -33,13 +43,18 @@
       }
     }
 
+    &.edit-mode .dialog-header {
+      justify-content: flex-end;
+    }
+
     .badge {
       background: #005dff;
       color: #fff;
-      padding: 6px 18px;
+      padding: clamp(4px, 1.5vw, 6px) clamp(12px, 4.5vw, 18px);
       border-radius: 8px;
       font-weight: 400;
-      font-size: 23px;
+      font-size: clamp(14px, 5.75vw, 23px);
+      white-space: nowrap;
     }
   }
 
@@ -282,4 +297,5 @@
       padding: 0;
     }
   }
+
 }

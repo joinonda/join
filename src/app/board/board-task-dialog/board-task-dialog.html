@@ -1,82 +1,75 @@
 <div class="dialog-backdrop" (click)="closed.emit()">
-  <div class="dialog" (click)="$event.stopPropagation()">
+  <div class="dialog" [class.edit-mode]="editMode" (click)="$event.stopPropagation()">
     <div class="dialog-header">
-      <span class="badge">{{ task().category }}</span>
+      @if (!editMode) {
+        <span class="badge">{{ task().category }}</span>
+      }
       <button class="close" (click)="closed.emit()">
         <img src="imgs/close-black.png" alt="" />
       </button>
     </div>
 
     @if (!editMode) {
-    <h2 class="title">{{ task().title }}</h2>
-    <p class="description">{{ task().description }}</p>
-    } @else {
-    <input class="input title-input" [(ngModel)]="model.title" />
-    <textarea class="input desc-input" [(ngModel)]="model.description"></textarea>
-    }
+      <h2 class="title">{{ task().title }}</h2>
+      <p class="description">{{ task().description }}</p>
 
-    <div class="meta">
-      @if (!editMode) {
-      <div class="date-row">
-        <span class="label">Due date:</span>
-        <span class="date-value">{{ task().dueDate | date : 'dd/MM/yyyy' }}</span>
-      </div>
-      } @else {
-      <div class="date-row date-edit">
-        <span class="label">Due date:</span>
-        <input type="date" [(ngModel)]="model.dueDate" />
-      </div>
-      }
-      <div class="priority-row">
-        <span class="label">Priority:</span>
-        <div class="priority-content">
-          <span class="priority-text">{{ priorityText() }}</span>
-          <img [src]="priorityIcon()" class="priority-icon" alt="priority" />
+      <div class="meta">
+        <div class="date-row">
+          <span class="label">Due date:</span>
+          <span class="date-value">{{ task().dueDate | date : 'dd/MM/yyyy' }}</span>
         </div>
-      </div>
-    </div>
-
-    <div class="assigned">
-      <span class="label">Assigned To:</span>
-      <div class="people">
-        @for (contact of assignedContacts(); track contact.name) {
-        <div class="contact-item">
-          <div class="contact-avatar" [style.background-color]="contact.color">
-            {{ contact.initials }}
+        <div class="priority-row">
+          <span class="label">Priority:</span>
+          <div class="priority-content">
+            <span class="priority-text">{{ priorityText() }}</span>
+            <img [src]="priorityIcon()" class="priority-icon" alt="priority" />
           </div>
-          <span class="contact-name">{{ contact.name }}</span>
         </div>
+      </div>
+
+      <div class="assigned">
+        <span class="label">Assigned To:</span>
+        <div class="people">
+          @for (contact of assignedContacts(); track contact.name) {
+          <div class="contact-item">
+            <div class="contact-avatar" [style.background-color]="contact.color">
+              {{ contact.initials }}
+            </div>
+            <span class="contact-name">{{ contact.name }}</span>
+          </div>
+          }
+        </div>
+      </div>
+
+      @if (task().subtasks.length) {
+      <span class="label">Subtasks</span>
+      <div class="list">
+        @for (s of task().subtasks; track s.id) {
+        <label class="sub">
+          <input type="checkbox" [checked]="s.completed" (change)="toggleSubtask(s.id)" />
+          <span [class.completed]="s.completed">{{ s.title }}</span>
+        </label>
         }
       </div>
-    </div>
-
-    @if (task().subtasks.length) {
-    <span class="label">Subtasks</span>
-    <div class="list">
-      @for (s of task().subtasks; track s.id) {
-      <label class="sub">
-        <input type="checkbox" [checked]="s.completed" (change)="toggleSubtask(s.id)" />
-        <span [class.completed]="s.completed">{{ s.title }}</span>
-      </label>
       }
-    </div>
+
+      <div class="dialog-footer">
+        <button class="delete-btn" (click)="deleted.emit(task())">
+          <img src="imgs/delete-dark.png" alt="" />
+          <img src="imgs/delete-hover.png" alt="" />
+        </button>
+        <div class="footer-divider"></div>
+        <button class="edit-btn" (click)="editTask()">
+          <img src="imgs/edit-dark.png" alt="" />
+          <img src="imgs/edit-hover.png" alt="" />
+        </button>
+      </div>
+    } @else {
+      <app-board-task-dialog-edit
+        [task]="task()"
+        (saved)="onEditSaved($event)"
+        (cancelled)="onEditCancelled()"
+      />
     }
-
-    <div class="dialog-footer">
-      <button class="delete-btn" (click)="deleted.emit(task())">
-        <img src="imgs/delete-dark.png" alt="" />
-        <img src="imgs/delete-hover.png" alt="" />
-      </button>
-      <div class="footer-divider"></div>
-      @if (!editMode) {
-      <button class="edit-btn" (click)="editTask()">
-        <img src="imgs/edit-dark.png" alt="" />
-        <img src="imgs/edit-hover.png" alt="" />
-      </button>
-      } @else {
-      <button (click)="saveTask()">Save</button>
-      <button (click)="editMode = false">Cancel</button>
-      }
-    </div>
   </div>
 </div>

@@ -55,6 +55,24 @@ export class BoardTasks implements OnDestroy {
     this.selectedTask = null;
   }
 
+  updateSelectedTask(updatedTask: Task) {
+    if (this.selectedTask?.id === updatedTask.id) {
+      this.selectedTask = updatedTask;
+    }
+    
+    const updateInArray = (arr: Task[]) => {
+      const index = arr.findIndex(t => t.id === updatedTask.id);
+      if (index !== -1) {
+        arr[index] = updatedTask;
+      }
+    };
+    
+    updateInArray(this.todo);
+    updateInArray(this.inProgress);
+    updateInArray(this.awaitFeedback);
+    updateInArray(this.done);
+  }
+
   async deleteTask(task: Task) {
     if (!task.id) {
       this.selectedTask = null;

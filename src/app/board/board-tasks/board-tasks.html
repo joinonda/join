@@ -1,5 +1,5 @@
 <section class="boardtask-section">
-  <!-- to do -->
+
   <div class="to-do-container container">
     <div class="to-do-container-top top">
       <span>To do</span>
@@ -25,7 +25,7 @@
       }
     </div>
   </div>
-  <!-- in progress -->
+ 
   <div class="in-progress-container container">
     <div class="in-progress-container-top top">
       <span>In progress</span>
@@ -53,7 +53,7 @@
       }
     </div>
   </div>
-  <!-- await feedback -->
+
   <div class="await-feedback-container container">
     <div class="await-feedback-container-top top">
       <span>Await feedback</span>
@@ -81,7 +81,7 @@
       }
     </div>
   </div>
-  <!-- done -->
+
   <div class="done-container container">
     <div class="done-container-top top">
       <span>Done</span>
@@ -111,6 +111,7 @@
     [task]="selectedTask!"
     (closed)="closeDialog()"
     (deleted)="deleteTask($event)"
+    (updated)="updateSelectedTask($event)"
   ></app-board-task-dialog>
   }
 </section>

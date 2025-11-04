@@ -1,15 +1,17 @@
-import { Component, output, inject, computed, effect, input } from '@angular/core';
+import { Component, output, inject, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Task } from '../../interfaces/task-interface';
+import { Contact } from '../../interfaces/contacts-interfaces';
 import { DataService } from '../../services/data.service';
 import { getContactColor, getInitialsFromName, findContactByName } from '../../utilities/contact.helpfunctions';
+import { BoardTaskDialogEdit } from './board-task-dialog-edit/board-task-dialog-edit';
 
 @Component({
   selector: 'app-board-task-dialog',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, DatePipe, BoardTaskDialogEdit],
   templateUrl: './board-task-dialog.html',
   styleUrl: './board-task-dialog.scss'
 })
@@ -17,23 +19,11 @@ export class BoardTaskDialog {
   task = input.required<Task>();
   closed = output<void>();
   deleted = output<Task>();
+  updated = output<Task>();
   
   editMode = false;
-  model = { title: '', description: '', dueDate: '' };
   private dataService = inject(DataService);
   contacts = toSignal(this.dataService.getContacts(), { initialValue: [] });
-
-  constructor() {
-    effect(() => {
-      const t = this.task();
-      if (t) {
-        this.model.title = t.title;
-        this.model.description = t.description;
-        const d = t.dueDate instanceof Date ? t.dueDate : new Date(t.dueDate);
-        this.model.dueDate = new Date(d).toISOString().slice(0, 10);
-      }
-    });
-  }
 
   assignedContacts = computed(() => {
     const contacts = this.contacts() ?? [];
@@ -63,16 +53,16 @@ export class BoardTaskDialog {
     return priority.charAt(0).toUpperCase() + priority.slice(1);
   });
 
-  editTask() { this.editMode = true; }
+  editTask() {
+    this.editMode = true;
+  }
 
-  async saveTask() {
-    const t = this.task();
-    if (!t?.id) return;
-    await this.dataService.saveTask(t.id, {
-      title: this.model.title,
-      description: this.model.description,
-      dueDate: new Date(this.model.dueDate),
-    });
+  onEditSaved(updatedTask: Task) {
+    this.updated.emit(updatedTask);
+    this.editMode = false;
+  }
+
+  onEditCancelled() {
     this.editMode = false;
   }
 
@@ -85,5 +75,11 @@ export class BoardTaskDialog {
     );
     
     await this.dataService.saveTask(t.id, { subtasks: updatedSubtasks });
+    
+    const updatedTask: Task = {
+      ...t,
+      subtasks: updatedSubtasks,
+    };
+    this.updated.emit(updatedTask);
   }
 }

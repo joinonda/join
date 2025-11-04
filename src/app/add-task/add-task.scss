@@ -439,6 +439,7 @@ $medium-orange: #ff8a00;
     max-height: 300px;
     overflow-y: auto;
     z-index: 1000;
+    padding: 4px;
   }
 
   .dropdown-item {
@@ -446,11 +447,42 @@ $medium-orange: #ff8a00;
     align-items: center;
     gap: 12px;
     padding: 12px 16px;
+    margin-bottom: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    border-radius: 8px;
 
-    &:hover {
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover:not(.selected) {
       background-color: $bg-color;
+    }
+
+    &.selected {
+      background-color: #2F3642;
+      color: #ffffff;
+
+      .dropdown-item-name {
+        color: #ffffff;
+      }
+
+      .you-label {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .dropdown-checkbox {
+        filter: brightness(0) invert(1);
+      }
+
+      &:hover {
+        background-color: #212833;
+      }
+    }
+
+    .dropdown-item-name {
+      transition: color 0.2s ease;
     }
   }
 

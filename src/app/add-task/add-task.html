@@ -72,7 +72,10 @@
         @if (isDropdownOpen()) {
             <div class="dropdown-list">
                 @for (contact of filteredContacts(); track contact.id) {
-                    <div class="dropdown-item" (click)="toggleContact(contact.id)">
+                    <div 
+                        class="dropdown-item" 
+                        [class.selected]="isContactSelected(contact.id)"
+                        (click)="toggleContact(contact.id)">
                         <div class="dropdown-item-avatar" [style.background-color]="getContactColor(contact)">
                             {{ getInitials(contact) }}
                         </div>
