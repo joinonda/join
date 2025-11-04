@@ -16,6 +16,8 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
   align-items: center;
   padding: 0 1.5%;
   background-color: #f6f7f8;
+  height: calc(100vh - 96px - 208px);
+  overflow-y: hidden;
 
   .container {
     position: relative;
@@ -23,9 +25,10 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     width: clamp(200px, 13vw, 300px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin: 0 1.5%;
+    height: 100%;
 
     .top {
       width: 100%;
@@ -39,6 +42,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
       font-family: 'Inter', sans-serif;
       font-size: 20px;
       font-weight: 700;
+      flex-shrink: 0;
     }
 
     .plus-btn {
@@ -77,8 +81,14 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      height: 680px;
+      height: calc(100% - 36px);
       width: clamp(200px, 13vw, 300px);
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
     }
 
     // .to-do-container {

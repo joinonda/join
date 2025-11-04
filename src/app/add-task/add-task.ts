@@ -1,22 +1,28 @@
-import { Component, inject, HostListener, computed, signal } from '@angular/core';
+import { Component, inject, HostListener, computed, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { Task, Subtask } from '../interfaces/task-interface';
 import { Contact } from '../interfaces/contacts-interfaces';
 import { getContactColor, getInitials } from '../utilities/contact.helpfunctions';
+import { ToastComponent } from '../shared/toast/toast';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ToastComponent],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
 })
 export class Addtask {
   private fb = inject(FormBuilder);
   private dataService = inject(DataService);
+  private router = inject(Router);
+
+  @ViewChild(ToastComponent) toast!: ToastComponent;
 
   contacts = toSignal(this.dataService.getContacts(), { initialValue: [] });
   selectedContacts = signal<Contact[]>([]);
@@ -171,6 +177,12 @@ export class Addtask {
       status: 'inprogress',
       assignedTo: this.selectedContacts().map(c => `${c.firstName} ${c.lastName}`),
       subtasks: this.subtasks(),
+    });
+
+    this.toast.show('Task added to board', 2000);
+    
+    this.toast.closed$.pipe(take(1)).subscribe(() => {
+      this.router.navigate(['/board']);
     });
 
     this.form.reset({ priority: 'medium' });

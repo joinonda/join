@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-toast',
@@ -11,6 +12,9 @@ import { CommonModule } from '@angular/common';
 export class ToastComponent {
   isVisible = false;
   message = '';
+  closed = output<void>();
+  private closedSubject = new Subject<void>();
+  closed$ = this.closedSubject.asObservable();
 
   show(message: string, duration: number = 2000): void {
     this.message = message;
@@ -22,6 +26,8 @@ export class ToastComponent {
 
     setTimeout(() => {
       this.hide();
+      this.closed.emit();
+      this.closedSubject.next();
     }, duration);
   }
 
