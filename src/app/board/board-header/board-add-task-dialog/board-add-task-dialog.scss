@@ -1,0 +1,120 @@
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .dialog {
+    background: #fff;
+    border-radius: 30px;
+    width: 1116px;
+    height: 90vh;
+    position: relative;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: slideInFromRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    @keyframes slideInFromRight {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      padding: 50px;
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .dialog-content {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      ::ng-deep .addtask-section {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+
+        .addtask-header {
+          margin-top: 0;
+          margin-bottom: 60px;
+          padding-left: 0;
+          height: 73px;
+          white-space: nowrap;
+
+          h2 {
+            font-size: 61px;
+            font-weight: 700;
+            margin: 0;
+            line-height: 120%;
+            letter-spacing: 0%;
+          }
+        }
+
+        .addtask-content {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 60px;
+          padding-left: 0;
+        }
+
+        .form-left {
+          width: 440px;
+        }
+
+        .form-right {
+          width: 440px;
+          min-height: 100%;
+        }
+
+        .addtask-bottom-left {
+          align-self: flex-start;
+          margin-top: 195px;
+        }
+
+        .addtask-bottom-right {
+          display: flex;
+          flex-direction: row;
+          gap: 20px;
+          align-self: flex-end;
+          margin-top: auto;
+        }
+      }
+    }
+  }
+}
+

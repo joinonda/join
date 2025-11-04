@@ -1,11 +1,11 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { BoardAddTaskDialog } from './board-add-task-dialog/board-add-task-dialog';
 
 @Component({
   selector: 'app-board-header',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, BoardAddTaskDialog],
   templateUrl: './board-header.html',
   styleUrl: './board-header.scss',
 })
@@ -13,8 +13,9 @@ export class BoardHeader {
   isMobile: boolean = false;
   searchTerm: string = '';
   hasSearchResults: boolean = true;
+  isAddTaskDialogOpen = signal(false);
 
-  constructor(private router: Router) {
+  constructor() {
     this.updateIsMobile();
   }
 
@@ -33,10 +34,14 @@ export class BoardHeader {
   }
 
   openAddTaskComponent(): void {
-    this.router.navigateByUrl('/add-task');
+    this.isAddTaskDialogOpen.set(true);
   }
 
-  openAddTaskOverlay(status: string): void {
-    this.router.navigate(['/add-task'], { queryParams: { status } });
+  openAddTaskOverlay(): void {
+    this.isAddTaskDialogOpen.set(true);
+  }
+
+  onDialogClosed(): void {
+    this.isAddTaskDialogOpen.set(false);
   }
 }

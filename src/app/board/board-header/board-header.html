@@ -28,7 +28,7 @@
           />
         </div>
 
-        <button class="add-task-button desktop-only"(click)="openAddTaskOverlay('todo')">
+        <button class="add-task-button desktop-only"(click)="openAddTaskOverlay()">
           <span>Add task</span>
           <img src="/imgs/boardheader/plus.png" alt="Plus" class="plus-icon" />
         </button>
@@ -42,3 +42,7 @@
     }
   </div>
 </div>
+
+@if (isAddTaskDialogOpen()) {
+  <app-board-add-task-dialog (closed)="onDialogClosed()"></app-board-add-task-dialog>
+}
