@@ -65,6 +65,7 @@ $medium-orange: #ff8a00;
     gap: 10px;  
     width: 440px;
     cursor: pointer;
+    min-height: 100%;
   }
 
   .divider {
@@ -148,7 +149,7 @@ $medium-orange: #ff8a00;
     flex-direction: row;
     gap: 20px;
     align-self: flex-end;
-    margin-top: 140px;
+    margin-top: auto;
   }
 
   .form-field span.required{
