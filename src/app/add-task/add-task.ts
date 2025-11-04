@@ -26,6 +26,9 @@ export class Addtask {
   subtasks = signal<Subtask[]>([]);
   newSubtaskInput = '';
   private subtaskIdCounter = 0;
+  hoveredSubtaskId = signal<string | null>(null);
+  editingSubtaskId = signal<string | null>(null);
+  editingSubtaskTitle = signal<string>('');
 
   form = this.fb.group({
     title: ['', Validators.required],
@@ -108,6 +111,51 @@ export class Addtask {
     this.subtasks.update(list => list.filter(s => s.id !== id));
   }
 
+  setHoveredSubtask(id: string | null) {
+    this.hoveredSubtaskId.set(id);
+  }
+
+  startEditingSubtask(subtask: Subtask) {
+    this.editingSubtaskId.set(subtask.id);
+    this.editingSubtaskTitle.set(subtask.title);
+  }
+
+  updateEditingSubtaskTitle(title: string) {
+    this.editingSubtaskTitle.set(title);
+  }
+
+  cancelEditingSubtask() {
+    this.editingSubtaskId.set(null);
+    this.editingSubtaskTitle.set('');
+  }
+
+  saveSubtaskEdit(subtaskId: string) {
+    const title = this.editingSubtaskTitle().trim();
+    if (!title) {
+      this.removeSubtask(subtaskId);
+      this.editingSubtaskId.set(null);
+      return;
+    }
+
+    this.subtasks.update(list => 
+      list.map(s => s.id === subtaskId ? { ...s, title } : s)
+    );
+    
+    this.editingSubtaskId.set(null);
+    this.editingSubtaskTitle.set('');
+  }
+
+  clearForm() {
+    this.form.reset({ priority: 'medium' });
+    this.selectedContacts.set([]);
+    this.subtasks.set([]);
+    this.newSubtaskInput = '';
+    this.subtaskIdCounter = 0;
+    this.hoveredSubtaskId.set(null);
+    this.editingSubtaskId.set(null);
+    this.editingSubtaskTitle.set('');
+  }
+
   async createTask() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -130,5 +178,8 @@ export class Addtask {
     this.subtasks.set([]);
     this.newSubtaskInput = '';
     this.subtaskIdCounter = 0;
+    this.hoveredSubtaskId.set(null);
+    this.editingSubtaskId.set(null);
+    this.editingSubtaskTitle.set('');
   }
 }

@@ -43,7 +43,7 @@ export class BoardTaskDialogEdit {
   });
 
   constructor() {
-    effect(() => {
+    effect(() => { 
       const t = this.task();
       if (t) {
         this.form.patchValue({
