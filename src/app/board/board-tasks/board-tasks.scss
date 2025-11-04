@@ -20,16 +20,14 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
   overflow-y: hidden;
   overflow-x: hidden;
 
-  .container {
+  .wrapper {
+    flex: 1;
     position: relative;
-
-    width: clamp(200px, 13vw, 300px);
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
     margin: 0 1.5%;
     height: 100%;
+    top: 155px;
 
     .top {
       width: 100%;

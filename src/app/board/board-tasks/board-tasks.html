@@ -1,108 +1,115 @@
 <section class="boardtask-section">
-
-  <div class="to-do-container container">
-    <div class="to-do-container-top top">
-      <span>To do</span>
-      <button class="plus-btn">
-        <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
-        <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
-      </button>
-    </div>
-    <div
-      class="to-do-ccontainer-column column"
-      cdkDropList
-      id="todoList"
-      [cdkDropListData]="todo"
-      [cdkDropListConnectedTo]="['inprogressList', 'awaitfeedbackList', 'doneList']"
-      (cdkDropListDropped)="drop($event, 'todo')"
-    >
-      @if (!tasksByStatus('todo').length) {
-      <div class="no-tasks-to-do-container tasks-placeholder"><p>No tasks to do</p></div>
-      } @for (task of tasksByStatus('todo'); track task.id) {
-      <div cdkDrag>
-        <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+  <div class="wrapper">
+    <div class="to-do-container container">
+      <div class="to-do-container-top top">
+        <span>To do</span>
+        <button class="plus-btn">
+          <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
+          <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
+        </button>
       </div>
-      }
-    </div>
-  </div>
- 
-  <div class="in-progress-container container">
-    <div class="in-progress-container-top top">
-      <span>In progress</span>
-      <button class="plus-btn">
-        <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
-        <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
-      </button>
-    </div>
-    <div
-      class="in-progress-container-column column"
-      cdkDropList
-      id="inprogressList"
-      [cdkDropListData]="inProgress"
-      [cdkDropListConnectedTo]="['todoList', 'awaitfeedbackList', 'doneList']"
-      (cdkDropListDropped)="drop($event, 'inprogress')"
-    >
-      @if (!tasksByStatus('inprogress').length) {
-      <div class="no-tasks-in-progress-container tasks-placeholder">
-        <p>No tasks in progress</p>
+      <div
+        class="to-do-ccontainer-column column"
+        cdkDropList
+        id="todoList"
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="['inprogressList', 'awaitfeedbackList', 'doneList']"
+        (cdkDropListDropped)="drop($event, 'todo')"
+      >
+        @if (!tasksByStatus('todo').length) {
+        <div class="no-tasks-to-do-container tasks-placeholder"><p>No tasks to do</p></div>
+        } @for (task of tasksByStatus('todo'); track task.id) {
+        <div cdkDrag>
+          <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+        </div>
+        }
       </div>
-      } @for (task of tasksByStatus('inprogress'); track task.id) {
-      <div cdkDrag>
-        <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
-      </div>
-      }
     </div>
   </div>
 
-  <div class="await-feedback-container container">
-    <div class="await-feedback-container-top top">
-      <span>Await feedback</span>
-      <button class="plus-btn">
-        <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
-        <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
-      </button>
-    </div>
-    <div
-      class="await-for-container-column column"
-      cdkDropList
-      id="awaitfeedbackList"
-      [cdkDropListData]="awaitFeedback"
-      [cdkDropListConnectedTo]="['todoList', 'inprogressList', 'doneList']"
-      (cdkDropListDropped)="drop($event, 'awaitfeedback')"
-    >
-      @if (!tasksByStatus('awaitfeedback').length) {
-      <div class="no-pending-feedbacks-container tasks-placeholder">
-        <p>No pending feedbacks</p>
+  <div class="wrapper">
+    <div class="in-progress-container container">
+      <div class="in-progress-container-top top">
+        <span>In progress</span>
+        <button class="plus-btn">
+          <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
+          <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
+        </button>
       </div>
-      } @for (task of tasksByStatus('awaitfeedback'); track task.id) {
-      <div cdkDrag>
-        <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+      <div
+        class="in-progress-container-column column"
+        cdkDropList
+        id="inprogressList"
+        [cdkDropListData]="inProgress"
+        [cdkDropListConnectedTo]="['todoList', 'awaitfeedbackList', 'doneList']"
+        (cdkDropListDropped)="drop($event, 'inprogress')"
+      >
+        @if (!tasksByStatus('inprogress').length) {
+        <div class="no-tasks-in-progress-container tasks-placeholder">
+          <p>No tasks in progress</p>
+        </div>
+        } @for (task of tasksByStatus('inprogress'); track task.id) {
+        <div cdkDrag>
+          <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+        </div>
+        }
       </div>
-      }
     </div>
   </div>
 
-  <div class="done-container container">
-    <div class="done-container-top top">
-      <span>Done</span>
+  <div class="wrapper">
+    <div class="await-feedback-container container">
+      <div class="await-feedback-container-top top">
+        <span>Await feedback</span>
+        <button class="plus-btn">
+          <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
+          <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
+        </button>
+      </div>
+      <div
+        class="await-for-container-column column"
+        cdkDropList
+        id="awaitfeedbackList"
+        [cdkDropListData]="awaitFeedback"
+        [cdkDropListConnectedTo]="['todoList', 'inprogressList', 'doneList']"
+        (cdkDropListDropped)="drop($event, 'awaitfeedback')"
+      >
+        @if (!tasksByStatus('awaitfeedback').length) {
+        <div class="no-pending-feedbacks-container tasks-placeholder">
+          <p>No pending feedbacks</p>
+        </div>
+        } @for (task of tasksByStatus('awaitfeedback'); track task.id) {
+        <div cdkDrag>
+          <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+        </div>
+        }
+      </div>
     </div>
-    <div
-      class="done-container-column column"
-      cdkDropList
-      id="doneList"
-      [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="['todoList', 'inprogressList', 'awaitfeedbackList']"
-      (cdkDropListDropped)="drop($event, 'done')"
-    >
-      @if (!tasksByStatus('done').length) {
-      <div class="no-finished-tasks-container tasks-placeholder">
-        <p>No finished tasks</p>
+  </div>
+
+  <div class="wrapper">
+    <div class="done-container container">
+      <div class="done-container-top top">
+        <span>Done</span>
       </div>
-      } @for (task of tasksByStatus('done'); track task.id) {
-      <div cdkDrag>
-        <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+      <div
+        class="done-container-column column"
+        cdkDropList
+        id="doneList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="['todoList', 'inprogressList', 'awaitfeedbackList']"
+        (cdkDropListDropped)="drop($event, 'done')"
+      >
+        @if (!tasksByStatus('done').length) {
+        <div class="no-finished-tasks-container tasks-placeholder">
+          <p>No finished tasks</p>
+        </div>
+        } @for (task of tasksByStatus('done'); track task.id) {
+        <div cdkDrag>
+          <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
+        </div>
+        }
       </div>
-      }
     </div>
   </div>
 
