@@ -71,11 +71,6 @@ body {
   min-height: calc(100vh - 96px);
   overflow-y: auto;
 
-  @media (max-width: 1024px) {
-    min-height: calc(100vh - 160px);
-    margin-top: 80px;
-    margin-bottom: 80px;
-  }
 }
 
 app-footer {

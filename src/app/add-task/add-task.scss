@@ -21,6 +21,12 @@ $medium-orange: #ff8a00;
     display: flex;
     position: relative;
     flex-direction: column;
+
+    @media (max-width: 1024px) {
+      margin-left: 0;
+      margin-top: 80px;
+      height: calc(100vh - 160px);
+    }
   }
 
   .addtask-header {
