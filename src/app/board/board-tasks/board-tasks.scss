@@ -19,12 +19,12 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
   height: calc(100vh - 96px - 208px);
   overflow-y: hidden;
   overflow-x: hidden;
-  
+
   .wrapper {
     flex: 1;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0 1.5%;
     height: 100%;
     top: 155px;
