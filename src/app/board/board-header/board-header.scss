@@ -76,7 +76,7 @@
   background: transparent;
   font-size: 16px;
   color: #000000;
-  width: 251px;
+  width: clamp(185px, 15.6vw, 312px);
   font-family: 'Inter', sans-serif;
 }
 
