@@ -13,6 +13,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-right: 57px;
+
+  @media (max-width: 1024px) {
+    margin-right: 0;
+  }
 }
 
 .board-header {
@@ -130,8 +135,8 @@
 
 .add-task-button-icon {
   display: none;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   background: #2a3647;
   border: none;
   border-radius: 10px;
