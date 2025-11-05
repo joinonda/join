@@ -4,7 +4,7 @@
       <img src="imgs/close-black.png" alt="Close" />
     </button>
     <div class="dialog-content">
-      <app-add-task></app-add-task>
+      <app-add-task [initialStatus]="initialStatus()" (taskCreated)="closed.emit()"></app-add-task>
     </div>
   </div>
 </div>

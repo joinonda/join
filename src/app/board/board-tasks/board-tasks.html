@@ -3,7 +3,7 @@
     <div class="to-do-container container">
       <div class="to-do-container-top top">
         <span>To do</span>
-        <button class="plus-btn">
+        <button class="plus-btn" (click)="openAddTaskDialog('todo')">
           <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
           <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
         </button>
@@ -31,7 +31,7 @@
     <div class="in-progress-container container">
       <div class="in-progress-container-top top">
         <span>In progress</span>
-        <button class="plus-btn">
+        <button class="plus-btn" (click)="openAddTaskDialog('inprogress')">
           <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
           <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
         </button>
@@ -61,7 +61,7 @@
     <div class="await-feedback-container container">
       <div class="await-feedback-container-top top">
         <span>Await feedback</span>
-        <button class="plus-btn">
+        <button class="plus-btn" (click)="openAddTaskDialog('awaitfeedback')">
           <img class="default-img" src="imgs/add-task-plus-default.png" alt="" />
           <img class="hover-img" src="imgs/add-task-plus-hover.png" alt="" />
         </button>
@@ -120,5 +120,9 @@
     (deleted)="deleteTask($event)"
     (updated)="updateSelectedTask($event)"
   ></app-board-task-dialog>
+  }
+
+  @if (isAddTaskDialogOpen()) {
+    <app-board-add-task-dialog [initialStatus]="initialStatus()" (closed)="onDialogClosed()"></app-board-add-task-dialog>
   }
 </section>

@@ -1,4 +1,4 @@
-import { Component, inject, HostListener, computed, signal, ViewChild } from '@angular/core';
+import { Component, inject, HostListener, computed, signal, ViewChild, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,6 +23,9 @@ export class Addtask {
   private router = inject(Router);
 
   @ViewChild(ToastComponent) toast!: ToastComponent;
+
+  initialStatus = input<Task['status']>('inprogress');
+  taskCreated = output<void>();
 
   contacts = toSignal(this.dataService.getContacts(), { initialValue: [] });
   selectedContacts = signal<Contact[]>([]);
@@ -174,7 +177,7 @@ export class Addtask {
       dueDate: new Date(this.form.value.dueDate as string),
       priority: (this.form.value.priority ?? 'medium') as Task['priority'],
       category: this.form.value.category!,
-      status: 'inprogress',
+      status: this.initialStatus(),
       assignedTo: this.selectedContacts().map(c => `${c.firstName} ${c.lastName}`),
       subtasks: this.subtasks(),
     });
@@ -182,7 +185,10 @@ export class Addtask {
     this.toast.show('Task added to board', 2000);
     
     this.toast.closed$.pipe(take(1)).subscribe(() => {
-      this.router.navigate(['/board']);
+      this.taskCreated.emit();
+      if (this.router.url !== '/board') {
+        this.router.navigate(['/board']);
+      }
     });
 
     this.form.reset({ priority: 'medium' });

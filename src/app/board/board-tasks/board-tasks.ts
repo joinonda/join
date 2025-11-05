@@ -1,7 +1,8 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskBoardCard } from '../board-task-card/board-task-card';
 import { BoardTaskDialog } from '../board-task-dialog/board-task-dialog';
+import { BoardAddTaskDialog } from '../board-header/board-add-task-dialog/board-add-task-dialog';
 import { DataService } from '../../services/data.service';
 import { Task } from '../../interfaces/task-interface';
 import { Subscription } from 'rxjs';
@@ -11,7 +12,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 @Component({
   selector: 'app-board-tasks',
   standalone: true,
-  imports: [CommonModule, TaskBoardCard, BoardTaskDialog, DragDropModule],
+  imports: [CommonModule, TaskBoardCard, BoardTaskDialog, BoardAddTaskDialog, DragDropModule],
   templateUrl: './board-tasks.html',
   styleUrl: './board-tasks.scss',
 })
@@ -23,6 +24,9 @@ export class BoardTasks implements OnDestroy {
   inProgress: Task[] = [];
   awaitFeedback: Task[] = [];
   done: Task[] = [];
+  isAddTaskDialogOpen = signal(false);
+  initialStatus = signal<Task['status']>('inprogress');
+  
   constructor() {
     this.sub = this.dataService.getTasks().subscribe((ts) => {
       this.todo = [];
@@ -107,5 +111,14 @@ export class BoardTasks implements OnDestroy {
     if (movedTask.id) {
       await this.dataService.saveTask(movedTask.id, { status: targetStatus });
     }
+  }
+
+  openAddTaskDialog(status: Task['status']) {
+    this.initialStatus.set(status);
+    this.isAddTaskDialogOpen.set(true);
+  }
+
+  onDialogClosed() {
+    this.isAddTaskDialogOpen.set(false);
   }
 }

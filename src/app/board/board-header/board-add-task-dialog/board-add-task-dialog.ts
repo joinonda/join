@@ -1,6 +1,7 @@
-import { Component, output } from '@angular/core';
+import { Component, output, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Addtask } from '../../../add-task/add-task';
+import { Task } from '../../../interfaces/task-interface';
 
 @Component({
   selector: 'app-board-add-task-dialog',
@@ -11,5 +12,6 @@ import { Addtask } from '../../../add-task/add-task';
 })
 export class BoardAddTaskDialog {
   closed = output<void>();
+  initialStatus = input<Task['status']>('inprogress');
 }
 
