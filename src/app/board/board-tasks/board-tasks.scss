@@ -81,7 +81,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
       flex-direction: column;
       justify-content: flex-start;
       height: 680px;
-      width: clamp(200px, 13vw, 300px);
+      width: clamp(120px, 17vw, 300px);
       overflow-y: auto;
       overflow-x: hidden;
 
@@ -105,7 +105,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: clamp(200px, 13vw, 300px);
+    width: clamp(120px, 17vw, 300px);
     height: 48px;
     background-color: #e7e7e7ad;
     font-family: 'Inter', sans-serif;
