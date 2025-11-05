@@ -19,7 +19,6 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
   display: flex;
   position: relative;
   flex-direction: column;
-  overflow-y: hidden;
 
   @media (max-width: 1024px) {
     margin-left: 0;
