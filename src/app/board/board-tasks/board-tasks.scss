@@ -31,7 +31,6 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
 
     .top {
       width: 100%;
-      max-width: 300px;
       height: 24px;
       display: flex;
       flex-direction: row;
@@ -81,7 +80,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
       flex-direction: column;
       justify-content: flex-start;
       height: 680px;
-      width: clamp(120px, 17vw, 300px);
+      width: clamp(134px, 16vw, 409px);
       overflow-y: auto;
       overflow-x: hidden;
 
@@ -105,7 +104,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: clamp(120px, 17vw, 300px);
+    width: clamp(134px, 16vw, 409px);
     height: 48px;
     background-color: #e7e7e7ad;
     font-family: 'Inter', sans-serif;
