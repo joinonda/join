@@ -51,6 +51,7 @@ $medium-orange: #ff8a00;
   align-items: stretch;
   gap: clamp(15px, 3vw, 60px);
   padding: 0 6%;
+  max-width: 1100px; 
 }
 
 .form-left-and-form-right {

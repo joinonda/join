@@ -134,19 +134,18 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 1024px) {
-  .boardtask-section {
-    flex-direction: column;
-    width: 100%;
-    height: 300px;
-    overflow-y: clip;
-  }
 
-  .container {
-    display: flex;
-    flex-direction: row;
-  }
+.boardtask-section ,wrapper {
+ display: flex;
+  flex-direction: row;
 
-  .wrapper .column {
-    height: calc(100vh - 160px - 155px - 36px);
-  }
 }
+}
+
+@media (max-width: 1024px) {
+ .boardtask-section .wrapper .column {
+  flex-direction: row;
+ }
+
+
+} 
