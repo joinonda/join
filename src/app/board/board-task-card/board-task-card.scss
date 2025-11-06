@@ -1,5 +1,10 @@
 .app-board-task-card {
   width: 100%;
+  
+  @media (max-width: 1024px) {
+    width: clamp(200px, 40vw, 300px);
+    flex-shrink: 0;
+  }
 }
 
 .board-task-card-section {
@@ -16,6 +21,10 @@
 
   &:active {
     transform: rotate(20deg);
+  }
+
+  @media (max-width: 1024px) {
+    margin: 0;
   }
 }
 

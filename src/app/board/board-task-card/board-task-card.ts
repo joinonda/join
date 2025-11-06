@@ -46,4 +46,12 @@ export class TaskBoardCard {
     if (priority === 'low') return `${base}/low-normal.png`;
     return `${base}/medium-normal.png`;
   });
+
+  truncatedDescription = computed(() => {
+    const description = this.task()?.description ?? '';
+    if (description.length <= 43) {
+      return description;
+    }
+    return description.substring(0, 43) + '...';
+  });
 }

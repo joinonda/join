@@ -3,7 +3,7 @@
     <span>{{ task().category }}</span>
   </div>
   <span class="title">{{ task().title }}</span>
-  <span class="description">{{ task().description }}</span>
+  <span class="description">{{ truncatedDescription() }}</span>
 
   @if (task().subtasks.length) {
     <div class="progress-container">

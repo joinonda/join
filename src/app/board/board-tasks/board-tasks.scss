@@ -18,7 +18,6 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
   background-color: #f6f7f8;
   height: auto;
   min-height: auto;
-  overflow-y: hidden;
   overflow-x: hidden;
 
   .wrapper {
@@ -134,18 +133,79 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 1024px) {
+  .boardtask-section {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 2.5%;
+    gap: 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
 
-.boardtask-section ,wrapper {
- display: flex;
-  flex-direction: row;
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
 
-}
-}
+    &::-webkit-scrollbar-thumb {
+      background: #70829c3f;
+      border-radius: 2px;
 
-@media (max-width: 1024px) {
- .boardtask-section .wrapper .column {
-  flex-direction: row;
- }
+      &:hover {
+        background: #a8a8a8;
+      }
+    }
+  }
 
+  .boardtask-section .wrapper {
+    width: 100%;
+    flex: none;
+  }
 
+  .boardtask-section .wrapper .container {
+    width: 100%;
+  }
+
+  .boardtask-section .wrapper .column {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    padding-right: 0;
+    gap: 12px;
+    
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #70829c3f;
+      border-radius: 2px;
+
+      &:hover {
+        background: #a8a8a8;
+      }
+    }
+  }
+
+  .boardtask-section .wrapper .column > div {
+    width: 100%;
+  }
+
+  .boardtask-section .tasks-placeholder {
+    width: 100%;
+    min-width: 200px;
+    flex-shrink: 0;
+    margin: 0;
+  }
 } 
