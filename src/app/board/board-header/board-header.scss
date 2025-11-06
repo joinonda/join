@@ -27,7 +27,7 @@
   gap: 32px;
 }
 
-.desktop-title {
+.board-title {
   font-size: 61px;
   font-weight: 700;
   line-height: 1.2;
@@ -37,18 +37,9 @@
 }
 
 .header-top-row {
-  display: none;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.header-top-row h2 {
-  font-size: 61px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #000000;
-  margin: 0;
-  font-family: 'Inter', sans-serif;
+  gap: 16px;
 }
 
 .board-actions {
@@ -201,12 +192,12 @@
   }
 
   .header-top-row {
-    display: flex;
     width: 100%;
+    justify-content: space-between;
   }
 
-  .desktop-title {
-    display: none;
+  .board-title {
+    font-size: 47px;
   }
 
   .add-task-button-icon {
