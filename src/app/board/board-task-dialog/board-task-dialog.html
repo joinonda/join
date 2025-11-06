@@ -11,6 +11,9 @@
 
     @if (!editMode) {
       <h2 class="title">{{ task().title }}</h2>
+
+
+      <div class="description-dialog-scrollbar-wrapper">
       <p class="description">{{ task().description }}</p>
 
       <div class="meta">
@@ -53,17 +56,21 @@
       </div>
       }
 
-      <div class="dialog-footer">
-        <button class="delete-btn" (click)="deleted.emit(task())">
-          <img src="imgs/delete-dark.png" alt="" />
-          <img src="imgs/delete-hover.png" alt="" />
-        </button>
-        <div class="footer-divider"></div>
-        <button class="edit-btn" (click)="editTask()">
-          <img src="imgs/edit-dark.png" alt="" />
-          <img src="imgs/edit-hover.png" alt="" />
-        </button>
-      </div>
+     
+    </div>
+    <div class="dialog-footer">
+      <button class="delete-btn" (click)="deleted.emit(task())">
+        <img src="imgs/delete-dark.png" alt="" />
+        <img src="imgs/delete-hover.png" alt="" />
+      </button>
+      <div class="footer-divider"></div>
+      <button class="edit-btn" (click)="editTask()">
+        <img src="imgs/edit-dark.png" alt="" />
+        <img src="imgs/edit-hover.png" alt="" />
+      </button>
+    </div>
+
+
     } @else {
       <app-board-task-dialog-edit
         [task]="task()"

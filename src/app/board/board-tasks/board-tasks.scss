@@ -84,9 +84,23 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
       overflow-y: auto;
       overflow-x: hidden;
       padding-bottom: 8px;
+      padding-right: 8px;
 
       &::-webkit-scrollbar {
-        width: 0px;
+        width: 4px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #70829c3f;
+        border-radius: 2px;
+
+        &:hover {
+          background: #a8a8a8;
+        }
       }
     }
 

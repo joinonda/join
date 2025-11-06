@@ -30,9 +30,9 @@
       }
     }
 
-    &::-webkit-scrollbar {
-      width: 0px;
-    }
+    padding-right: 8px;
+
+
 
     .close-btn {
       position: absolute;
@@ -56,9 +56,8 @@
       overflow-y: auto;
       overflow-x: hidden;
 
-      &::-webkit-scrollbar {
-        width: 0px;
-      }
+      padding-right: 8px;
+
 
       ::ng-deep .addtask-section {
         height: 100%;

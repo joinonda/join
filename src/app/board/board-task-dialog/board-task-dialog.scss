@@ -31,6 +31,7 @@
       width: 0px;
     }
 
+
     .dialog-header {
       display: flex;
       justify-content: space-between;
@@ -298,4 +299,26 @@
     }
   }
 
+}
+
+
+.description-dialog-scrollbar-wrapper {
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #70829c3f;
+    border-radius: 2px;
+
+    &:hover {
+      background: #a8a8a8;
+    }
+  }
 }

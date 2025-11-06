@@ -454,7 +454,24 @@ $medium-orange: #ff8a00;
     max-height: 300px;
     overflow-y: auto;
     z-index: 1000;
-    padding: 4px;
+    padding: 4px 8px 4px 4px;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #70829c3f;
+      border-radius: 2px;
+
+      &:hover {
+        background: #a8a8a8;
+      }
+    }
   }
 
   .dropdown-item {
