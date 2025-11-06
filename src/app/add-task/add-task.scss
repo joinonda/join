@@ -15,11 +15,11 @@ $medium-orange: #ff8a00;
   height: calc(100vh - 96px);
   background-color: $bg-color;
   padding: 0;
-  margin: 0 0 0 232px;
-  margin-top: 96px;
+  margin: 96px 0 0 232px;
   display: flex;
   position: relative;
   flex-direction: column;
+  max-width: none;
 
   @media (max-width: 1024px) {
     margin-left: 0;
@@ -46,37 +46,31 @@ $medium-orange: #ff8a00;
 
 .addtask-content {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
   gap: clamp(15px, 3vw, 60px);
   padding: 0 6%;
 }
 
-.form-left,
-input,
-textarea {
+.form-left-and-form-right {
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  gap: 10px;
-  width: 440px;
-  min-width: 280px;
-  cursor: pointer;
+  align-items: stretch;
+  gap: clamp(15px, 3vw, 60px);
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 }
 
-.form-right,
-select,
-input {
+.form-left,
+.form-right {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   gap: 10px;
   width: 440px;
   min-width: 280px;
-  cursor: pointer;
-  min-height: 100%;
 }
 
 .title-and-validation {
@@ -95,30 +89,30 @@ input {
 
 .divider {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: stretch;
+}
+
+.divider-line {
   width: 1px;
-  height: 424px;
   background-color: $gray-divider;
+  min-height: 100%;
 }
 
 .form-field {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   gap: 4px;
   font-size: 20px;
   width: 100%;
-}
 
-.form-field label {
-  color: $primary-color;
+  label {
+    color: $primary-color;
+  }
 }
 
 .form-field input,
-select,
-textarea {
+.form-field select,
+.form-field textarea {
   max-width: 100%;
   width: 100%;
   padding: 12px 40px 12px 16px;
@@ -138,7 +132,7 @@ textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: none;
-  background-color: white;
+  background-color: $white;
   cursor: pointer;
 }
 
@@ -168,53 +162,27 @@ textarea {
 .form-field textarea {
   max-height: 200px;
   min-height: 136px;
-  min-width: 100%;
 }
 
-.addtask-bottom-right {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-self: flex-end;
-  margin-top: auto;
-}
-
-.form-field span.required {
+.form-field .required,
+.addtask-bottom-left .required {
   color: $red;
 }
 
-.addtask-bottom-left {
-  align-self: flex-start;
-  margin-top: 195px;
-
-  label {
-    display: flex;
-    align-items: baseline;
-    line-height: 1.2;
-  }
-}
-
-.addtask-bottom-left span.required {
-  color: $red;
-  vertical-align: baseline;
-}
-
-.form-field .priority-buttons,
-button {
+.priority-form .priority-buttons {
   display: flex;
   flex-direction: row;
   gap: 2%;
   width: 100%;
   justify-content: space-between;
   white-space: nowrap;
-  cursor: pointer;
 }
 
-.form-field .priority-button {
+.priority-form .priority-button {
   background-color: $white;
   color: $text-color;
   font-size: clamp(16px, 1.7vw, 20px);
-  padding: 16px 10px 16px 10px;
+  padding: 16px 10px;
   gap: 8px;
   border: 1px solid $input-border;
   border-radius: 10px;
@@ -222,17 +190,19 @@ button {
   align-items: center;
   width: 134px;
   position: relative;
+  display: flex;
+  cursor: pointer;
 
   .priority-icon-hover {
     display: none;
   }
 
   &:hover {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
 }
 
-.form-field .priority-button.active-urgent {
+.priority-form .priority-button.active-urgent {
   background-color: #ff3d00;
   color: $white;
   border-color: transparent;
@@ -240,13 +210,12 @@ button {
   .priority-icon-normal {
     display: none;
   }
-
   .priority-icon-hover {
     display: block;
   }
 }
 
-.form-field .priority-button.active-medium {
+.priority-form .priority-button.active-medium {
   background-color: #ffb000;
   color: $white;
   border-color: transparent;
@@ -254,13 +223,12 @@ button {
   .priority-icon-normal {
     display: none;
   }
-
   .priority-icon-hover {
     display: block;
   }
 }
 
-.form-field .priority-button.active-low {
+.priority-form .priority-button.active-low {
   background-color: #69e031;
   color: $white;
   border-color: transparent;
@@ -268,35 +236,14 @@ button {
   .priority-icon-normal {
     display: none;
   }
-
   .priority-icon-hover {
     display: block;
-  }
-}
-
-@media (max-width: 1024px) {
-  .addtask-content {
-    flex-direction: column;
   }
 }
 
 [aria-invalid='true'] {
   outline: 2px solid #d32f2f;
   outline-offset: 1px;
-}
-
-.addtask-bottom {
-  display: flex;
-
-  gap: clamp(16px, 2vw, 25px);
-
-  @media (max-width: 768px) {
-    gap: 16px;
-  }
-
-  @media (max-width: 480px) {
-    gap: 2%;
-  }
 }
 
 .btn-primary {
@@ -327,7 +274,7 @@ button {
   &:hover {
     background: #29abe2;
     transform: translateY(-1px);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   &:active {
@@ -368,7 +315,7 @@ button {
     border-color: #29abe2;
     color: #29abe2;
     transform: translateY(-1px);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   &:active {
@@ -379,6 +326,7 @@ button {
     width: 100%;
   }
 }
+
 @media (max-width: 768px) {
   .btn-secondary#cancel-btn {
     display: none;
@@ -411,7 +359,6 @@ button {
   &:first-child {
     margin-left: 0;
   }
-
   &:hover {
     transform: scale(1.1);
     z-index: 1;
@@ -430,7 +377,7 @@ button {
   cursor: pointer;
   border: 1px solid $input-border;
   border-radius: 8px;
-  background: white;
+  background: $white;
 
   &:focus-within {
     border-color: $hover-color;
@@ -473,7 +420,7 @@ button {
   left: 0;
   right: 0;
   margin-top: 4px;
-  background: white;
+  background: $white;
   border: 1px solid $input-border;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -485,18 +432,15 @@ button {
   &::-webkit-scrollbar {
     width: 4px;
   }
-
   &::-webkit-scrollbar-track {
     background: transparent;
   }
-
   &::-webkit-scrollbar-thumb {
     background: #70829c3f;
     border-radius: 2px;
-
-    &:hover {
-      background: #a8a8a8;
-    }
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 }
 
@@ -525,11 +469,9 @@ button {
     .dropdown-item-name {
       color: #ffffff;
     }
-
     .you-label {
       color: rgba(255, 255, 255, 0.7);
     }
-
     .dropdown-checkbox {
       filter: brightness(0) invert(1);
     }
@@ -604,7 +546,6 @@ button {
   height: 20px;
   cursor: pointer;
   transition: opacity 0.2s ease;
-
   &:hover {
     opacity: 0.7;
   }
@@ -622,7 +563,7 @@ button {
     color: $text-color;
     margin-bottom: 4px;
     line-height: 1.5;
-    padding: 8px 12px;
+    padding: 8px 12px 8px 28px;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -631,7 +572,6 @@ button {
     cursor: pointer;
     transition: background-color 0.2s ease;
     list-style: none;
-    padding-left: 28px;
 
     &::before {
       content: '•';
@@ -647,7 +587,6 @@ button {
 
     &.editing {
       background-color: transparent;
-      padding: 8px 12px;
       padding-left: 12px;
 
       &::before {
@@ -657,7 +596,6 @@ button {
 
     .subtask-text {
       flex: 1;
-      padding-left: 0;
     }
 
     .subtask-edit-input {
@@ -672,10 +610,6 @@ button {
       outline: none;
       color: $text-color;
       margin-right: 8px;
-
-      &:focus {
-        border-bottom-color: #29abe2;
-      }
     }
 
     .subtask-actions {
@@ -688,7 +622,6 @@ button {
         height: 18px;
         cursor: pointer;
         transition: opacity 0.2s ease;
-
         &:hover {
           opacity: 0.7;
         }
@@ -709,8 +642,48 @@ button {
   cursor: pointer;
   opacity: 0.6;
   transition: opacity 0.2s ease;
-
   &:hover {
     opacity: 1;
+  }
+}
+
+.addtask-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: clamp(16px, 2vw, 25px);
+
+  .addtask-bottom-left {
+    label {
+      display: flex;
+      align-items: baseline;
+      line-height: 1.2;
+    }
+  }
+
+  .addtask-bottom-right {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-self: flex-end;
+
+    @media (max-width: 480px) {
+      width: 100%;
+      gap: 12px;
+      .btn-primary,
+      .btn-secondary {
+        flex: 1;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 2%;
   }
 }

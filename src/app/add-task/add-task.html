@@ -4,276 +4,284 @@
   </div>
 
   <div class="addtask-content">
-    <div class="form-left" [formGroup]="form">
-      <div class="title-form form-field">
-        <div class="title-and-validation">
-          <label for="title">Title<span class="required">*</span></label>
-          @if (title?.touched && title?.invalid) {
-          <p class="error-text" id="title-error" role="alert" aria-live="polite">
-            @if (title?.hasError('required')) { Title is required. } @else if
-            (title?.hasError('minlength')) { Use at least 3 characters. }
-          </p>
-          }
-        </div>
-
-        <input
-          id="title"
-          type="text"
-          placeholder="Enter a title"
-          formControlName="title"
-          [attr.aria-invalid]="title?.touched && title?.invalid"
-          aria-describedby="title-error"
-        />
-      </div>
-
-      <div class="description-form form-field">
-        <label>Description</label>
-        <textarea placeholder="Enter a description" formControlName="description"></textarea>
-      </div>
-
-      <div class="due-date-form form-field">
-        <div class="title-and-validation">
-          <label for="dueDate">Due date<span class="required">*</span></label
-          >@if (dueDate?.touched && dueDate?.invalid) {
-          <p class="error-text" id="dueDate-error" role="alert" aria-live="polite">
-            @if (dueDate?.hasError('required')) { Due date is required. } @else if
-            (dueDate?.hasError('pastDate')) { Choose a future date. }
-          </p>
-          }
-        </div>
-
-        <input
-          id="dueDate"
-          type="date"
-          class="date-input"
-          formControlName="dueDate"
-          [attr.min]="todayStr"
-          [attr.aria-invalid]="dueDate?.touched && dueDate?.invalid"
-          aria-describedby="dueDate-error"
-        />
-      </div>
-      <div class="addtask-bottom-left">
-        <label><span class="required">*</span>This field is required</label>
-      </div>
-    </div>
-
-    <div class="divider">
-      <div class="divider-line"></div>
-    </div>
-
-    <div class="form-right" [formGroup]="form">
-      <div class="priority-form form-field">
-        <label>Priority</label>
-        <div class="priority-buttons">
-          <button
-            type="button"
-            class="priority-button urgent"
-            [class.active-urgent]="form.value.priority === 'urgent'"
-            (click)="prioritySelect('urgent')"
-          >
-            Urgent
-            <img src="imgs/addtask/urgent-normal.png" alt="Urgent" class="priority-icon-normal" />
-            <img src="imgs/addtask/urgent-hover.png" alt="Urgent" class="priority-icon-hover" />
-          </button>
-          <button
-            type="button"
-            class="priority-button medium"
-            [class.active-medium]="form.value.priority === 'medium'"
-            (click)="prioritySelect('medium')"
-          >
-            Medium
-            <img src="imgs/addtask/medium-normal.png" alt="Medium" class="priority-icon-normal" />
-            <img src="imgs/addtask/medium-hover.png" alt="Medium" class="priority-icon-hover" />
-          </button>
-          <button
-            type="button"
-            class="priority-button low"
-            [class.active-low]="form.value.priority === 'low'"
-            (click)="prioritySelect('low')"
-          >
-            Low
-            <img src="imgs/addtask/low-normal.png" alt="Low" class="priority-icon-normal" />
-            <img src="imgs/addtask/low-hover.png" alt="Low" class="priority-icon-hover" />
-          </button>
-        </div>
-      </div>
-
-      <div class="assigned-to-form form-field">
-        <label>Assigned to</label>
-        <div class="dropdown-container">
-          <div
-            class="dropdown-input"
-            (click)="toggleDropdown()"
-            [attr.data-open]="isDropdownOpen()"
-          >
-            <input
-              type="text"
-              placeholder="Select contacts to assign"
-              [ngModel]="searchTerm()"
-              (ngModelChange)="searchTerm.set($event)"
-              [ngModelOptions]="{ standalone: true }"
-              (click)="$event.stopPropagation()"
-              (focus)="isDropdownOpen.set(true)"
-              class="dropdown-search"
-            />
-            <span class="dropdown-arrow"></span>
+    <div class="form-left-and-form-right">
+      <div class="form-left" [formGroup]="form">
+        <div class="title-form form-field">
+          <div class="title-and-validation">
+            <label for="title">Title<span class="required">*</span></label>
+            @if (title?.touched && title?.invalid) {
+            <p class="error-text" id="title-error" role="alert" aria-live="polite">
+              @if (title?.hasError('required')) { Title is required. } @else if
+              (title?.hasError('minlength')) { Use at least 3 characters. }
+            </p>
+            }
           </div>
-          @if (isDropdownOpen()) {
-          <div class="dropdown-list">
-            @for (contact of filteredContacts(); track contact.id) {
-            <div
-              class="dropdown-item"
-              [class.selected]="isContactSelected(contact.id)"
-              (click)="toggleContact(contact.id)"
+
+          <input
+            id="title"
+            type="text"
+            placeholder="Enter a title"
+            formControlName="title"
+            [attr.aria-invalid]="title?.touched && title?.invalid"
+            aria-describedby="title-error"
+          />
+        </div>
+
+        <div class="description-form form-field">
+          <label>Description</label>
+          <textarea placeholder="Enter a description" formControlName="description"></textarea>
+        </div>
+
+        <div class="due-date-form form-field">
+          <div class="title-and-validation">
+            <label for="dueDate">Due date<span class="required">*</span></label
+            >@if (dueDate?.touched && dueDate?.invalid) {
+            <p class="error-text" id="dueDate-error" role="alert" aria-live="polite">
+              @if (dueDate?.hasError('required')) { Due date is required. } @else if
+              (dueDate?.hasError('pastDate')) { Choose a future date. }
+            </p>
+            }
+          </div>
+
+          <input
+            id="dueDate"
+            type="date"
+            class="date-input"
+            formControlName="dueDate"
+            [attr.min]="todayStr"
+            [attr.aria-invalid]="dueDate?.touched && dueDate?.invalid"
+            aria-describedby="dueDate-error"
+          />
+        </div>
+      </div>
+      <div class="divider">
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="form-right" [formGroup]="form">
+        <div class="priority-form form-field">
+          <label>Priority</label>
+          <div class="priority-buttons">
+            <button
+              type="button"
+              class="priority-button urgent"
+              [class.active-urgent]="form.value.priority === 'urgent'"
+              (click)="prioritySelect('urgent')"
             >
-              <div class="dropdown-item-avatar" [style.background-color]="getContactColor(contact)">
-                {{ getInitials(contact) }}
-              </div>
-              <span class="dropdown-item-name">
-                {{ contact.firstName }} {{ contact.lastName }}
-                @if (isCurrentUser(contact.id)) {
-                <span class="you-label">(You)</span>
-                }
-              </span>
-              <img
-                [src]="
-                  isContactSelected(contact.id)
-                    ? 'imgs/checkbox-checked.png'
-                    : 'imgs/checkbox-empty.png'
-                "
-                alt="checkbox"
-                class="dropdown-checkbox"
+              Urgent
+              <img src="imgs/addtask/urgent-normal.png" alt="Urgent" class="priority-icon-normal" />
+              <img src="imgs/addtask/urgent-hover.png" alt="Urgent" class="priority-icon-hover" />
+            </button>
+            <button
+              type="button"
+              class="priority-button medium"
+              [class.active-medium]="form.value.priority === 'medium'"
+              (click)="prioritySelect('medium')"
+            >
+              Medium
+              <img src="imgs/addtask/medium-normal.png" alt="Medium" class="priority-icon-normal" />
+              <img src="imgs/addtask/medium-hover.png" alt="Medium" class="priority-icon-hover" />
+            </button>
+            <button
+              type="button"
+              class="priority-button low"
+              [class.active-low]="form.value.priority === 'low'"
+              (click)="prioritySelect('low')"
+            >
+              Low
+              <img src="imgs/addtask/low-normal.png" alt="Low" class="priority-icon-normal" />
+              <img src="imgs/addtask/low-hover.png" alt="Low" class="priority-icon-hover" />
+            </button>
+          </div>
+        </div>
+
+        <div class="assigned-to-form form-field">
+          <label>Assigned to</label>
+          <div class="dropdown-container">
+            <div
+              class="dropdown-input"
+              (click)="toggleDropdown()"
+              [attr.data-open]="isDropdownOpen()"
+            >
+              <input
+                type="text"
+                placeholder="Select contacts to assign"
+                [ngModel]="searchTerm()"
+                (ngModelChange)="searchTerm.set($event)"
+                [ngModelOptions]="{ standalone: true }"
+                (click)="$event.stopPropagation()"
+                (focus)="isDropdownOpen.set(true)"
+                class="dropdown-search"
               />
+              <span class="dropdown-arrow"></span>
+            </div>
+            @if (isDropdownOpen()) {
+            <div class="dropdown-list">
+              @for (contact of filteredContacts(); track contact.id) {
+              <div
+                class="dropdown-item"
+                [class.selected]="isContactSelected(contact.id)"
+                (click)="toggleContact(contact.id)"
+              >
+                <div
+                  class="dropdown-item-avatar"
+                  [style.background-color]="getContactColor(contact)"
+                >
+                  {{ getInitials(contact) }}
+                </div>
+                <span class="dropdown-item-name">
+                  {{ contact.firstName }} {{ contact.lastName }}
+                  @if (isCurrentUser(contact.id)) {
+                  <span class="you-label">(You)</span>
+                  }
+                </span>
+                <img
+                  [src]="
+                    isContactSelected(contact.id)
+                      ? 'imgs/checkbox-checked.png'
+                      : 'imgs/checkbox-empty.png'
+                  "
+                  alt="checkbox"
+                  class="dropdown-checkbox"
+                />
+              </div>
+              }
+            </div>
+            }
+          </div>
+          @if (selectedContacts().length) {
+          <div class="assigned-contacts">
+            @for (contact of selectedContacts(); track contact.id) {
+            <div
+              class="contact-avatar"
+              [style.background-color]="getContactColor(contact)"
+              (click)="removeContact(contact.id)"
+            >
+              {{ getInitials(contact) }}
             </div>
             }
           </div>
           }
         </div>
-        @if (selectedContacts().length) {
-        <div class="assigned-contacts">
-          @for (contact of selectedContacts(); track contact.id) {
-          <div
-            class="contact-avatar"
-            [style.background-color]="getContactColor(contact)"
-            (click)="removeContact(contact.id)"
-          >
-            {{ getInitials(contact) }}
+
+        <div class="category-form form-field">
+          <div class="title-and-validation">
+            <label for="category">Category<span class="required">*</span></label
+            >@if (category?.touched && category?.invalid) {
+            <p class="error-text" id="category-error" role="alert" aria-live="polite">
+              Category is required.
+            </p>
+            }
           </div>
-          }
-        </div>
-        }
-      </div>
 
-      <div class="category-form form-field">
-        <div class="title-and-validation">
-          <label for="category">Category<span class="required">*</span></label
-          >@if (category?.touched && category?.invalid) {
-          <p class="error-text" id="category-error" role="alert" aria-live="polite">
-            Category is required.
-          </p>
-          }
-        </div>
-
-        <div class="select-wrapper">
-          <select
-            id="category"
-            formControlName="category"
-            [attr.aria-invalid]="category?.touched && category?.invalid"
-            aria-describedby="category-error"
-          >
-            <option value="">Select task category</option>
-            <option value="Technical Task">Technical Task</option>
-            <option value="User Story">User Story</option>
-          </select>
-          <span class="select-arrow"></span>
-        </div>
-      </div>
-
-      <div class="subtasks-form form-field">
-        <label>Subtasks</label>
-        <div class="subtask-input-wrapper">
-          <input
-            type="text"
-            placeholder="Add new subtask"
-            [(ngModel)]="newSubtaskInput"
-            (keyup.enter)="addSubtask()"
-            [ngModelOptions]="{ standalone: true }"
-            class="subtask-input"
-          />
-          <div class="subtask-actions">
-            <img
-              src="imgs/cancel-x-btn.png"
-              alt="Cancel"
-              class="subtask-icon"
-              (click)="clearSubtaskInput()"
-            />
-            <div class="subtask-divider"></div>
-            <img
-              src="imgs/checksubtasks.png"
-              alt="Save"
-              class="subtask-icon"
-              (click)="addSubtask()"
-            />
+          <div class="select-wrapper">
+            <select
+              id="category"
+              formControlName="category"
+              [attr.aria-invalid]="category?.touched && category?.invalid"
+              aria-describedby="category-error"
+            >
+              <option value="">Select task category</option>
+              <option value="Technical Task">Technical Task</option>
+              <option value="User Story">User Story</option>
+            </select>
+            <span class="select-arrow"></span>
           </div>
         </div>
-        @if (subtasks().length) {
-        <ul class="subtasks-list">
-          @for (subtask of subtasks(); track subtask.id) {
-          <li
-            (mouseenter)="setHoveredSubtask(subtask.id)"
-            (mouseleave)="setHoveredSubtask(null)"
-            [class.hovered]="hoveredSubtaskId() === subtask.id"
-            [class.editing]="editingSubtaskId() === subtask.id"
-          >
-            @if (editingSubtaskId() === subtask.id) {
+
+        <div class="subtasks-form form-field">
+          <label>Subtasks</label>
+          <div class="subtask-input-wrapper">
             <input
               type="text"
-              [value]="editingSubtaskTitle()"
-              (input)="updateEditingSubtaskTitle($any($event.target).value)"
-              (keydown.enter)="saveSubtaskEdit(subtask.id)"
-              (blur)="saveSubtaskEdit(subtask.id)"
-              class="subtask-edit-input"
-              autofocus
+              placeholder="Add new subtask"
+              [(ngModel)]="newSubtaskInput"
+              (keyup.enter)="addSubtask()"
+              [ngModelOptions]="{ standalone: true }"
+              class="subtask-input"
             />
             <div class="subtask-actions">
               <img
-                src="imgs/dialog/deleve-normal.png"
-                alt="Delete"
-                class="subtask-action-icon"
-                (click)="removeSubtask(subtask.id)"
+                src="imgs/cancel-x-btn.png"
+                alt="Cancel"
+                class="subtask-icon"
+                (click)="clearSubtaskInput()"
               />
               <div class="subtask-divider"></div>
               <img
-                src="imgs/dialog/check-normal.png"
+                src="imgs/checksubtasks.png"
                 alt="Save"
-                class="subtask-action-icon"
-                (click)="saveSubtaskEdit(subtask.id)"
+                class="subtask-icon"
+                (click)="addSubtask()"
               />
             </div>
-            } @else {
-            <span class="subtask-text">{{ subtask.title }}</span>
-            @if (hoveredSubtaskId() === subtask.id) {
-            <div class="subtask-actions">
-              <img
-                src="imgs/dialog/edit-normal.png"
-                alt="Edit"
-                class="subtask-action-icon"
-                (click)="startEditingSubtask(subtask)"
+          </div>
+          @if (subtasks().length) {
+          <ul class="subtasks-list">
+            @for (subtask of subtasks(); track subtask.id) {
+            <li
+              (mouseenter)="setHoveredSubtask(subtask.id)"
+              (mouseleave)="setHoveredSubtask(null)"
+              [class.hovered]="hoveredSubtaskId() === subtask.id"
+              [class.editing]="editingSubtaskId() === subtask.id"
+            >
+              @if (editingSubtaskId() === subtask.id) {
+              <input
+                type="text"
+                [value]="editingSubtaskTitle()"
+                (input)="updateEditingSubtaskTitle($any($event.target).value)"
+                (keydown.enter)="saveSubtaskEdit(subtask.id)"
+                (blur)="saveSubtaskEdit(subtask.id)"
+                class="subtask-edit-input"
+                autofocus
               />
-              <div class="subtask-divider"></div>
-              <img
-                src="imgs/dialog/deleve-normal.png"
-                alt="Delete"
-                class="subtask-action-icon"
-                (click)="removeSubtask(subtask.id)"
-              />
-            </div>
-            } }
-          </li>
+              <div class="subtask-actions">
+                <img
+                  src="imgs/dialog/deleve-normal.png"
+                  alt="Delete"
+                  class="subtask-action-icon"
+                  (click)="removeSubtask(subtask.id)"
+                />
+                <div class="subtask-divider"></div>
+                <img
+                  src="imgs/dialog/check-normal.png"
+                  alt="Save"
+                  class="subtask-action-icon"
+                  (click)="saveSubtaskEdit(subtask.id)"
+                />
+              </div>
+              } @else {
+              <span class="subtask-text">{{ subtask.title }}</span>
+              @if (hoveredSubtaskId() === subtask.id) {
+              <div class="subtask-actions">
+                <img
+                  src="imgs/dialog/edit-normal.png"
+                  alt="Edit"
+                  class="subtask-action-icon"
+                  (click)="startEditingSubtask(subtask)"
+                />
+                <div class="subtask-divider"></div>
+                <img
+                  src="imgs/dialog/deleve-normal.png"
+                  alt="Delete"
+                  class="subtask-action-icon"
+                  (click)="removeSubtask(subtask.id)"
+                />
+              </div>
+              } }
+            </li>
+            }
+          </ul>
           }
-        </ul>
-        }
+        </div>
       </div>
+    </div>
+
+    <div class="addtask-bottom">
+      <div class="addtask-bottom-left">
+        <label><span class="required">*</span>This field is required</label>
+      </div>
+
       <div class="addtask-bottom-right">
         <button type="button" class="btn-secondary" id="cancel-btn" (click)="clearForm()">
           Clear
