@@ -6,7 +6,16 @@
   <div class="addtask-content">
     <div class="form-left" [formGroup]="form">
       <div class="title-form form-field">
-        <label for="title">Title<span class="required">*</span></label>
+        <div class="title-and-validation">
+          <label for="title">Title<span class="required">*</span></label>
+          @if (title?.touched && title?.invalid) {
+          <p class="error-text" id="title-error" role="alert" aria-live="polite">
+            @if (title?.hasError('required')) { Title is required. } @else if
+            (title?.hasError('minlength')) { Use at least 3 characters. }
+          </p>
+          }
+        </div>
+
         <input
           id="title"
           type="text"
@@ -15,12 +24,6 @@
           [attr.aria-invalid]="title?.touched && title?.invalid"
           aria-describedby="title-error"
         />
-        @if (title?.touched && title?.invalid) {
-        <p class="error-text" id="title-error" role="alert" aria-live="polite">
-          @if (title?.hasError('required')) { Title is required. } @else if
-          (title?.hasError('minlength')) { Use at least 3 characters. }
-        </p>
-        }
       </div>
 
       <div class="description-form form-field">
@@ -29,7 +32,16 @@
       </div>
 
       <div class="due-date-form form-field">
-        <label for="dueDate">Due date<span class="required">*</span></label>
+        <div class="title-and-validation">
+          <label for="dueDate">Due date<span class="required">*</span></label
+          >@if (dueDate?.touched && dueDate?.invalid) {
+          <p class="error-text" id="dueDate-error" role="alert" aria-live="polite">
+            @if (dueDate?.hasError('required')) { Due date is required. } @else if
+            (dueDate?.hasError('pastDate')) { Choose a future date. }
+          </p>
+          }
+        </div>
+
         <input
           id="dueDate"
           type="date"
@@ -39,12 +51,6 @@
           [attr.aria-invalid]="dueDate?.touched && dueDate?.invalid"
           aria-describedby="dueDate-error"
         />
-        @if (dueDate?.touched && dueDate?.invalid) {
-        <p class="error-text" id="dueDate-error" role="alert" aria-live="polite">
-          @if (dueDate?.hasError('required')) { Due date is required. } @else if
-          (dueDate?.hasError('pastDate')) { Choose a future date. }
-        </p>
-        }
       </div>
       <div class="addtask-bottom-left">
         <label><span class="required">*</span>This field is required</label>
@@ -159,7 +165,15 @@
       </div>
 
       <div class="category-form form-field">
-        <label for="category">Category<span class="required">*</span></label>
+        <div class="title-and-validation">
+          <label for="category">Category<span class="required">*</span></label
+          >@if (category?.touched && category?.invalid) {
+          <p class="error-text" id="category-error" role="alert" aria-live="polite">
+            Category is required.
+          </p>
+          }
+        </div>
+
         <div class="select-wrapper">
           <select
             id="category"
@@ -173,11 +187,6 @@
           </select>
           <span class="select-arrow"></span>
         </div>
-        @if (category?.touched && category?.invalid) {
-        <p class="error-text" id="category-error" role="alert" aria-live="polite">
-          Category is required.
-        </p>
-        }
       </div>
 
       <div class="subtasks-form form-field">
