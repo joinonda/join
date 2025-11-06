@@ -55,7 +55,6 @@ export class Addtask {
   editingSubtaskId = signal<string | null>(null);
   editingSubtaskTitle = signal<string>('');
 
-  // Single source of truth
   form = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
     description: [''],
@@ -64,7 +63,14 @@ export class Addtask {
     category: ['', Validators.required],
   });
 
-  // ---- validation helpers ----
+  todayStr = this.toLocalDateInputString(new Date());
+  private toLocalDateInputString(d: Date): string {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
   futureDateValidator(ctrl: AbstractControl): ValidationErrors | null {
     const v = ctrl.value;
     if (!v) return null;
@@ -85,7 +91,6 @@ export class Addtask {
     return this.form.get('category');
   }
 
-  // ---- contacts / dropdown ----
   filteredContacts = computed(() => {
     const contacts = this.contacts() ?? [];
     const term = this.searchTerm().toLowerCase().trim();
@@ -135,7 +140,6 @@ export class Addtask {
     if (!(event.target as HTMLElement).closest('.dropdown-container')) this.closeDropdown();
   }
 
-  // ---- subtasks ----
   addSubtask() {
     const title = this.newSubtaskInput.trim();
     if (!title) return;

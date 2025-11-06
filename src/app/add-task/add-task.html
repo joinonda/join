@@ -35,6 +35,7 @@
           type="date"
           class="date-input"
           formControlName="dueDate"
+          [attr.min]="todayStr"
           [attr.aria-invalid]="dueDate?.touched && dueDate?.invalid"
           aria-describedby="dueDate-error"
         />
