@@ -14,6 +14,8 @@ $red: #ff3d3d;
   flex-direction: column;
   gap: 20px;
   margin-top: 20px;
+  flex: 1;
+  min-height: 0;
 }
 
 .form-field {
@@ -24,6 +26,8 @@ $red: #ff3d3d;
   gap: 10px;
   font-size: 20px;
   width: 100%;
+  padding-right: 8px;
+  padding-bottom: 10px; 
 
   label {
     color: $primary-color;
@@ -64,7 +68,7 @@ $red: #ff3d3d;
 
   textarea {
     max-height: 200px;
-    min-height: 136px;
+    min-height: 170px;
     min-width: 100%;
   }
 
@@ -513,8 +517,9 @@ $red: #ff3d3d;
   flex-direction: row;
   gap: 20px;
   justify-content: flex-end;
-  margin-top: 20px;
+  margin-top: auto;
   padding-top: 20px;
+  flex-shrink: 0;
 
   .btn-primary {
     display: flex;
@@ -590,3 +595,26 @@ $red: #ff3d3d;
   }
 }
 
+
+.edit-dialog-scrollbar-wrapper {
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #70829c3f;
+    border-radius: 2px;
+
+    &:hover {
+      background: #a8a8a8;
+    }
+  }
+}

@@ -13,23 +13,18 @@
     padding: 16px;
     width: clamp(300px, 80vw, 525px);
     height: 90vh;
-    overflow-y: auto;
     position: relative;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
     padding: 40px;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
+  
+   
 
-    &.edit-mode {
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
 
-    &::-webkit-scrollbar {
-      width: 0px;
-    }
+
 
 
     .dialog-header {
@@ -44,8 +39,17 @@
       }
     }
 
-    &.edit-mode .dialog-header {
-      justify-content: flex-end;
+    &.edit-mode {
+      .dialog-header {
+        justify-content: flex-end;
+      }
+
+      app-board-task-dialog-edit {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+      }
     }
 
     .badge {
@@ -186,8 +190,6 @@
         height: 20px;
         min-width: 20px;
         cursor: pointer;
-        appearance: none;
-        -webkit-appearance: none;
         border: 2px solid #2a3647;
         border-radius: 4px;
         position: relative;
@@ -298,9 +300,7 @@
       padding: 0;
     }
   }
-
 }
-
 
 .description-dialog-scrollbar-wrapper {
   overflow-y: auto;
@@ -322,3 +322,4 @@
     }
   }
 }
+

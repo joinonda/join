@@ -1,4 +1,7 @@
+
+
 <div class="edit-dialog-content" [formGroup]="form">
+  <div class="edit-dialog-scrollbar-wrapper">
   <div class="title-form form-field">
     <label>Title</label>
     <input type="text" placeholder="Enter a title" formControlName="title" />
@@ -109,6 +112,7 @@
   </div>
 
   <div class="subtasks-form form-field">
+
     <label>Subtasks</label>
 
     <div class="subtask-input-wrapper">
@@ -194,6 +198,9 @@
       </ul>
     }
   </div>
+  </div>  
+
+
 
   <div class="edit-dialog-footer">
     <button type="button" class="btn-secondary" id="cancel-btn" (click)="cancelEdit()">Cancel
