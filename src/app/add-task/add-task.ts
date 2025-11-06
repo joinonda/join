@@ -1,6 +1,22 @@
-import { Component, inject, HostListener, computed, signal, ViewChild, input, output } from '@angular/core';
+import {
+  Component,
+  inject,
+  HostListener,
+  computed,
+  signal,
+  ViewChild,
+  input,
+  output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule, FormBuilder, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormsModule,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { take } from 'rxjs';
@@ -39,21 +55,43 @@ export class Addtask {
   editingSubtaskId = signal<string | null>(null);
   editingSubtaskTitle = signal<string>('');
 
+  // Single source of truth
   form = this.fb.group({
-    title: ['', Validators.required],
+    title: ['', [Validators.required, Validators.minLength(3)]],
     description: [''],
-    dueDate: ['', Validators.required],
+    dueDate: ['', [Validators.required, this.futureDateValidator]],
     priority: ['medium' as Task['priority']],
     category: ['', Validators.required],
   });
 
+  // ---- validation helpers ----
+  futureDateValidator(ctrl: AbstractControl): ValidationErrors | null {
+    const v = ctrl.value;
+    if (!v) return null;
+    const d = new Date(v);
+    d.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return d < today ? { pastDate: true } : null;
+  }
+
+  get title() {
+    return this.form.get('title');
+  }
+  get dueDate() {
+    return this.form.get('dueDate');
+  }
+  get category() {
+    return this.form.get('category');
+  }
+
+  // ---- contacts / dropdown ----
   filteredContacts = computed(() => {
     const contacts = this.contacts() ?? [];
     const term = this.searchTerm().toLowerCase().trim();
     if (!term) return contacts;
-    return contacts.filter(c => 
-      c.firstName.toLowerCase().includes(term) || 
-      c.lastName.toLowerCase().includes(term)
+    return contacts.filter(
+      (c) => c.firstName.toLowerCase().includes(term) || c.lastName.toLowerCase().includes(term)
     );
   });
 
@@ -62,22 +100,21 @@ export class Addtask {
   }
 
   toggleContact(contactId: string) {
-    const contact = this.contacts()?.find(c => c.id === contactId);
+    const contact = this.contacts()?.find((c) => c.id === contactId);
     if (!contact) return;
     const current = this.selectedContacts();
-    const index = current.findIndex(c => c.id === contactId);
-    this.selectedContacts.set(index > -1 
-      ? current.filter(c => c.id !== contactId)
-      : [...current, contact]
+    const index = current.findIndex((c) => c.id === contactId);
+    this.selectedContacts.set(
+      index > -1 ? current.filter((c) => c.id !== contactId) : [...current, contact]
     );
   }
 
   removeContact(contactId: string) {
-    this.selectedContacts.set(this.selectedContacts().filter(c => c.id !== contactId));
+    this.selectedContacts.set(this.selectedContacts().filter((c) => c.id !== contactId));
   }
 
   toggleDropdown() {
-    this.isDropdownOpen.update(v => !v);
+    this.isDropdownOpen.update((v) => !v);
     if (!this.isDropdownOpen()) this.searchTerm.set('');
   }
 
@@ -86,9 +123,8 @@ export class Addtask {
     this.searchTerm.set('');
   }
 
-  isContactSelected = (contactId: string) => 
-    this.selectedContacts().some(c => c.id === contactId);
-
+  isContactSelected = (contactId: string) =>
+    this.selectedContacts().some((c) => c.id === contactId);
   isCurrentUser = (contactId: string) => contactId === this.currentUserId();
 
   getContactColor = getContactColor;
@@ -96,48 +132,39 @@ export class Addtask {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    if (!(event.target as HTMLElement).closest('.dropdown-container')) {
-      this.closeDropdown();
-    }
+    if (!(event.target as HTMLElement).closest('.dropdown-container')) this.closeDropdown();
   }
 
+  // ---- subtasks ----
   addSubtask() {
     const title = this.newSubtaskInput.trim();
     if (!title) return;
-    this.subtasks.update(list => [...list, {
-      id: `subtask-${++this.subtaskIdCounter}`,
-      title,
-      completed: false
-    }]);
+    this.subtasks.update((list) => [
+      ...list,
+      { id: `subtask-${++this.subtaskIdCounter}`, title, completed: false },
+    ]);
     this.newSubtaskInput = '';
   }
-
   clearSubtaskInput() {
     this.newSubtaskInput = '';
   }
-
   removeSubtask(id: string) {
-    this.subtasks.update(list => list.filter(s => s.id !== id));
+    this.subtasks.update((list) => list.filter((s) => s.id !== id));
   }
-
   setHoveredSubtask(id: string | null) {
     this.hoveredSubtaskId.set(id);
   }
-
   startEditingSubtask(subtask: Subtask) {
     this.editingSubtaskId.set(subtask.id);
     this.editingSubtaskTitle.set(subtask.title);
   }
-
   updateEditingSubtaskTitle(title: string) {
     this.editingSubtaskTitle.set(title);
   }
-
   cancelEditingSubtask() {
     this.editingSubtaskId.set(null);
     this.editingSubtaskTitle.set('');
   }
-
   saveSubtaskEdit(subtaskId: string) {
     const title = this.editingSubtaskTitle().trim();
     if (!title) {
@@ -145,11 +172,7 @@ export class Addtask {
       this.editingSubtaskId.set(null);
       return;
     }
-
-    this.subtasks.update(list => 
-      list.map(s => s.id === subtaskId ? { ...s, title } : s)
-    );
-    
+    this.subtasks.update((list) => list.map((s) => (s.id === subtaskId ? { ...s, title } : s)));
     this.editingSubtaskId.set(null);
     this.editingSubtaskTitle.set('');
   }
@@ -178,26 +201,16 @@ export class Addtask {
       priority: (this.form.value.priority ?? 'medium') as Task['priority'],
       category: this.form.value.category!,
       status: this.initialStatus(),
-      assignedTo: this.selectedContacts().map(c => `${c.firstName} ${c.lastName}`),
+      assignedTo: this.selectedContacts().map((c) => `${c.firstName} ${c.lastName}`),
       subtasks: this.subtasks(),
     });
 
     this.toast.show('Task added to board', 2000);
-    
     this.toast.closed$.pipe(take(1)).subscribe(() => {
       this.taskCreated.emit();
-      if (this.router.url !== '/board') {
-        this.router.navigate(['/board']);
-      }
+      if (this.router.url !== '/board') this.router.navigate(['/board']);
     });
 
-    this.form.reset({ priority: 'medium' });
-    this.selectedContacts.set([]);
-    this.subtasks.set([]);
-    this.newSubtaskInput = '';
-    this.subtaskIdCounter = 0;
-    this.hoveredSubtaskId.set(null);
-    this.editingSubtaskId.set(null);
-    this.editingSubtaskTitle.set('');
+    this.clearForm();
   }
 }
