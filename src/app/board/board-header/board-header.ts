@@ -1,4 +1,4 @@
-import { Component, HostListener, signal, inject } from '@angular/core';
+import { Component, HostListener, signal, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BoardAddTaskDialog } from './board-add-task-dialog/board-add-task-dialog';
@@ -13,7 +13,8 @@ import { BoardAddTaskDialog } from './board-add-task-dialog/board-add-task-dialo
 export class BoardHeader {
   private router = inject(Router);
   isMobile = signal(window.innerWidth <= 1024);
-  searchTerm: string = '';
+  searchTerm = input<string>('');
+  searchTermChange = output<string>();
   hasSearchResults: boolean = true;
   isAddTaskDialogOpen = signal(false);
 
@@ -34,8 +35,14 @@ export class BoardHeader {
   }
 
   performSearch(): void {
-    const term = this.searchTerm.trim();
+    const term = this.searchTerm().trim();
+    this.searchTermChange.emit(term);
     this.hasSearchResults = true;
+  }
+
+  onSearchInput(event: Event): void {
+    const term = (event.target as HTMLInputElement).value;
+    this.searchTermChange.emit(term);
   }
 
   openAddTaskComponent(): void {

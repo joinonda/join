@@ -1,4 +1,4 @@
 <section class="board-wrapper">
-  <app-board-header></app-board-header>
-  <app-board-tasks></app-board-tasks>
+  <app-board-header [searchTerm]="searchTerm()" (searchTermChange)="onSearchTermChange($event)"></app-board-header>
+  <app-board-tasks [searchTerm]="searchTerm()"></app-board-tasks>
 </section>

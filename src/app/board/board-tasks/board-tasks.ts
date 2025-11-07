@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject, signal, HostListener } from '@angular/core';
+import { Component, OnDestroy, inject, signal, HostListener, input, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TaskBoardCard } from '../board-task-card/board-task-card';
@@ -22,6 +22,9 @@ export class BoardTasks implements OnDestroy {
   private router = inject(Router);
   private sub?: Subscription;
 
+  searchTerm = input<string>('');
+
+  allTasks: Task[] = [];
   todo: Task[] = [];
   inProgress: Task[] = [];
   awaitFeedback: Task[] = [];
@@ -31,18 +34,47 @@ export class BoardTasks implements OnDestroy {
   isMobile = signal(window.innerWidth <= 1024);
   
   constructor() {
-    this.sub = this.dataService.getTasks().subscribe((ts) => {
-      this.todo = [];
-      this.inProgress = [];
-      this.awaitFeedback = [];
-      this.done = [];
-      ts.forEach((t) => {
-        if (t.status === 'todo') this.todo.push(t);
-        else if (t.status === 'inprogress') this.inProgress.push(t);
-        else if (t.status === 'awaitfeedback') this.awaitFeedback.push(t);
-        else this.done.push(t);
-      });
+    effect(() => {
+      this.searchTerm();
+      if (this.allTasks.length > 0) {
+        this.updateTasks();
+      }
     });
+
+    this.sub = this.dataService.getTasks().subscribe((ts) => {
+      this.allTasks = ts;
+      this.updateTasks();
+    });
+  }
+
+  private updateTasks() {
+    this.todo = [];
+    this.inProgress = [];
+    this.awaitFeedback = [];
+    this.done = [];
+    
+    const searchTerm = this.searchTerm().toLowerCase().trim();
+    const filteredTasks = searchTerm 
+      ? this.allTasks.filter(task => this.taskMatchesSearch(task, searchTerm))
+      : this.allTasks;
+    
+    filteredTasks.forEach((t) => {
+      if (t.status === 'todo') this.todo.push(t);
+      else if (t.status === 'inprogress') this.inProgress.push(t);
+      else if (t.status === 'awaitfeedback') this.awaitFeedback.push(t);
+      else this.done.push(t);
+    });
+  }
+
+  private taskMatchesSearch(task: Task, searchTerm: string): boolean {
+    const titleMatch = task.title?.toLowerCase().includes(searchTerm) ?? false;
+    const descriptionMatch = task.description?.toLowerCase().includes(searchTerm) ?? false;
+    const categoryMatch = task.category?.toLowerCase().includes(searchTerm) ?? false;
+    const subtaskMatch = task.subtasks?.some(subtask => 
+      subtask.title?.toLowerCase().includes(searchTerm)
+    ) ?? false;
+    
+    return titleMatch || descriptionMatch || categoryMatch || subtaskMatch;
   }
 
   @HostListener('window:resize')

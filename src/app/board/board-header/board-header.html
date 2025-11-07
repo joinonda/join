@@ -14,8 +14,8 @@
             type="text"
             placeholder="Find Task"
             class="search-input"
-            [(ngModel)]="searchTerm"
-            (input)="performSearch()"
+            [value]="searchTerm()"
+            (input)="onSearchInput($event)"
           />
           <div class="search-separator">|</div>
           <img
@@ -33,9 +33,9 @@
       </div>
     </div>
 
-    @if (searchTerm && !hasSearchResults) {
+    @if (searchTerm() && !hasSearchResults) {
       <div class="no-results-message">
-        <p>No results found for "{{ searchTerm }}"</p>
+        <p>No results found for "{{ searchTerm() }}"</p>
       </div>
     }
   </div>
