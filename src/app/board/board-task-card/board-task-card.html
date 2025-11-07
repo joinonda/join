@@ -1,6 +1,6 @@
 <section class="board-task-card-section" (click)="onCardClick($event)">
   <div class="card-header">
-    <div class="category">
+    <div class="category" [style.background-color]="categoryColor()">
       <span>{{ task().category }}</span>
     </div>
     @if (isMobile()) {

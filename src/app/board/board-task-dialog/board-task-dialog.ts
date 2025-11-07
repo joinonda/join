@@ -53,6 +53,17 @@ export class BoardTaskDialog {
     return priority.charAt(0).toUpperCase() + priority.slice(1);
   });
 
+  categoryColor = computed(() => {
+    const category = this.task()?.category;
+    if (category === 'Technical Task') {
+      return '#1FD7C1';
+    }
+    if (category === 'User Story') {
+      return '#0038FF';
+    }
+    return '#005dff';
+  });
+
   editTask() {
     this.editMode = true;
   }

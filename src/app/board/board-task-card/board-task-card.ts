@@ -111,6 +111,17 @@ export class TaskBoardCard implements OnInit {
     return description.substring(0, 43) + '...';
   });
 
+  categoryColor = computed(() => {
+    const category = this.task()?.category;
+    if (category === 'Technical Task') {
+      return '#1FD7C1';
+    }
+    if (category === 'User Story') {
+      return '#0038FF';
+    }
+    return '#005dff';
+  });
+
   private lastToggleTime = 0;
 
   onMoveButtonClick(event: Event | MouseEvent) {

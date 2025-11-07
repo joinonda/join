@@ -2,7 +2,7 @@
   <div class="dialog" [class.edit-mode]="editMode" (click)="$event.stopPropagation()">
     <div class="dialog-header">
       @if (!editMode) {
-        <span class="badge">{{ task().category }}</span>
+        <span class="badge" [style.background-color]="categoryColor()">{{ task().category }}</span>
       }
       <button class="close" (click)="closed.emit()">
         <img src="imgs/close-black.png" alt="" />
