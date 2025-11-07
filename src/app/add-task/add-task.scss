@@ -64,7 +64,6 @@ $medium-orange: #ff8a00;
   gap: clamp(15px, 3vw, 60px);
   padding: 0 4%;
   max-width: 1100px;
-  flex: 1;
   min-height: 0;
 
   @media (max-width: 1024px) {
@@ -142,6 +141,7 @@ $medium-orange: #ff8a00;
 .divider {
   display: flex;
   align-items: stretch;
+  max-height: 500px;
 }
 
 .divider-line {
