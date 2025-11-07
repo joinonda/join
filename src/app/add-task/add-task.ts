@@ -1,23 +1,7 @@
-import {
-  Component,
-  inject,
-  HostListener,
-  computed,
-  signal,
-  ViewChild,
-  input,
-  output,
-} from '@angular/core';
+import {Component,inject, HostListener,computed,signal,ViewChild,input,output,} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  ReactiveFormsModule,
-  FormsModule,
-  FormBuilder,
-  Validators,
-  AbstractControl,
-  ValidationErrors,
-} from '@angular/forms';
-import { Router } from '@angular/router';
+import {ReactiveFormsModule,FormsModule,FormBuilder,Validators,AbstractControl,ValidationErrors} from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { take } from 'rxjs';
 import { DataService } from '../services/data.service';
@@ -37,11 +21,20 @@ export class Addtask {
   private fb = inject(FormBuilder);
   private dataService = inject(DataService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   @ViewChild(ToastComponent) toast!: ToastComponent;
 
   initialStatus = input<Task['status']>('inprogress');
   taskCreated = output<void>();
+
+  effectiveInitialStatus = computed<Task['status']>(() => {
+    const queryStatus = this.route.snapshot.queryParams['status'];
+    if (queryStatus && ['todo', 'inprogress', 'awaitfeedback', 'done'].includes(queryStatus)) {
+      return queryStatus as Task['status'];
+    }
+    return this.initialStatus();
+  });
 
   contacts = toSignal(this.dataService.getContacts(), { initialValue: [] });
   selectedContacts = signal<Contact[]>([]);
@@ -204,7 +197,7 @@ export class Addtask {
       dueDate: new Date(this.form.value.dueDate as string),
       priority: (this.form.value.priority ?? 'medium') as Task['priority'],
       category: this.form.value.category!,
-      status: this.initialStatus(),
+      status: this.effectiveInitialStatus(),
       assignedTo: this.selectedContacts().map((c) => `${c.firstName} ${c.lastName}`),
       subtasks: this.subtasks(),
     });

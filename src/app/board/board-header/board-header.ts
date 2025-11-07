@@ -1,5 +1,6 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BoardAddTaskDialog } from './board-add-task-dialog/board-add-task-dialog';
 
 @Component({
@@ -10,7 +11,8 @@ import { BoardAddTaskDialog } from './board-add-task-dialog/board-add-task-dialo
   styleUrl: './board-header.scss',
 })
 export class BoardHeader {
-  isMobile: boolean = false;
+  private router = inject(Router);
+  isMobile = signal(window.innerWidth <= 1024);
   searchTerm: string = '';
   hasSearchResults: boolean = true;
   isAddTaskDialogOpen = signal(false);
@@ -22,10 +24,13 @@ export class BoardHeader {
   @HostListener('window:resize')
   onResize() {
     this.updateIsMobile();
+    if (this.isMobile() && this.isAddTaskDialogOpen()) {
+      this.isAddTaskDialogOpen.set(false);
+    }
   }
 
   private updateIsMobile() {
-    this.isMobile = window.innerWidth < 1024;
+    this.isMobile.set(window.innerWidth <= 1024);
   }
 
   performSearch(): void {
@@ -34,11 +39,19 @@ export class BoardHeader {
   }
 
   openAddTaskComponent(): void {
-    this.isAddTaskDialogOpen.set(true);
+    if (this.isMobile()) {
+      this.router.navigate(['/add-task']);
+    } else {
+      this.isAddTaskDialogOpen.set(true);
+    }
   }
 
   openAddTaskOverlay(): void {
-    this.isAddTaskDialogOpen.set(true);
+    if (this.isMobile()) {
+      this.router.navigate(['/add-task']);
+    } else {
+      this.isAddTaskDialogOpen.set(true);
+    }
   }
 
   onDialogClosed(): void {

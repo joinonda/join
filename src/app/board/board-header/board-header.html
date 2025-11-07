@@ -41,6 +41,6 @@
   </div>
 </div>
 
-@if (isAddTaskDialogOpen()) {
+@if (isAddTaskDialogOpen() && !isMobile()) {
   <app-board-add-task-dialog (closed)="onDialogClosed()"></app-board-add-task-dialog>
 }

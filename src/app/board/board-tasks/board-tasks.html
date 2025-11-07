@@ -146,7 +146,7 @@
   ></app-board-task-dialog>
   }
 
-  @if (isAddTaskDialogOpen()) {
+  @if (isAddTaskDialogOpen() && !isMobile()) {
     <app-board-add-task-dialog [initialStatus]="initialStatus()" (closed)="onDialogClosed()"></app-board-add-task-dialog>
   }
 </section>

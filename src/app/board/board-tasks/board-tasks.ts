@@ -1,5 +1,6 @@
 import { Component, OnDestroy, inject, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { TaskBoardCard } from '../board-task-card/board-task-card';
 import { BoardTaskDialog } from '../board-task-dialog/board-task-dialog';
 import { BoardAddTaskDialog } from '../board-header/board-add-task-dialog/board-add-task-dialog';
@@ -18,6 +19,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class BoardTasks implements OnDestroy {
   private dataService = inject(DataService);
+  private router = inject(Router);
   private sub?: Subscription;
 
   todo: Task[] = [];
@@ -46,6 +48,9 @@ export class BoardTasks implements OnDestroy {
   @HostListener('window:resize')
   onResize() {
     this.isMobile.set(window.innerWidth <= 1024);
+    if (this.isMobile() && this.isAddTaskDialogOpen()) {
+      this.isAddTaskDialogOpen.set(false);
+    }
   }
 
   tasksByStatus(status: Task['status']): Task[] {
@@ -120,8 +125,12 @@ export class BoardTasks implements OnDestroy {
   }
 
   openAddTaskDialog(status: Task['status']) {
-    this.initialStatus.set(status);
-    this.isAddTaskDialogOpen.set(true);
+    if (this.isMobile()) {
+      this.router.navigate(['/add-task'], { queryParams: { status } });
+    } else {
+      this.initialStatus.set(status);
+      this.isAddTaskDialogOpen.set(true);
+    }
   }
 
   onDialogClosed() {
