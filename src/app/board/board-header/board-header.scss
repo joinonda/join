@@ -46,6 +46,10 @@
   display: flex;
   align-items: center;
   gap: 54px;
+
+  @media (max-width: 1024px) {
+    gap: 30px;
+  }
 }
 
 .search-container {
@@ -177,7 +181,7 @@
   font-size: 15px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 750px) {
   .board-container {
     padding: 0 4%;
     height: auto;
@@ -233,5 +237,3 @@
     font-size: 31px;
   }
 }
-
-
