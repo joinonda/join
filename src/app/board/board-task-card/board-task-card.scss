@@ -1,6 +1,6 @@
 .app-board-task-card {
   width: 100%;
-  
+
   @media (max-width: 1024px) {
     width: clamp(200px, 40vw, 300px);
     flex-shrink: 0;
@@ -25,6 +25,8 @@
 
   @media (max-width: 1024px) {
     margin: 0;
+    max-width: 270px;
+    min-width: 230px;
   }
 }
 
@@ -47,14 +49,12 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 120%;
- 
 }
 
 .description {
   color: #6b778c;
   font-size: 16px;
   line-height: 120%;
- 
 }
 
 .progress-container {
@@ -122,4 +122,3 @@
   font-size: 11px;
   font-weight: 600;
 }
-
