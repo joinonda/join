@@ -82,7 +82,7 @@ $medium-orange: #ff8a00;
 
 .form-left-and-form-right {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: stretch;
   gap: clamp(15px, 3vw, 60px);
   flex: 1;
