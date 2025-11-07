@@ -35,6 +35,10 @@ $medium-orange: #ff8a00;
   padding-left: 4%;
   margin-bottom: 60px;
 
+  @media (max-width: 750px) {
+    height: 43px;
+  }
+
   h2 {
     font-size: 61px;
     font-weight: 700;
@@ -624,7 +628,6 @@ $medium-orange: #ff8a00;
   padding-right: 70px;
 }
 
-
 .subtasks-list {
   list-style: disc;
   padding-left: 20px;
@@ -663,6 +666,7 @@ $medium-orange: #ff8a00;
     cursor: pointer;
     transition: background-color 0.2s ease;
     list-style: none;
+    padding-right: 40px;
 
     &::before {
       content: '•';
