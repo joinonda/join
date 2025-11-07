@@ -69,7 +69,7 @@ $medium-orange: #ff8a00;
   }
 
   @media (max-width: 750px) {
-    padding: 0 3% 0 5%;
+    padding: 0 5% 0 5%;
   }
 }
 
@@ -85,7 +85,7 @@ $medium-orange: #ff8a00;
     flex-direction: column;
     overflow-y: auto;
     overflow-x: clip;
-    padding-right: 4px;
+    margin-right: -7px;
 
     &::-webkit-scrollbar {
       width: 8px;
@@ -214,6 +214,23 @@ $medium-orange: #ff8a00;
   color: $red;
 }
 
+.required-mobile {
+  display: none;
+}
+
+@media (max-width: 750px) {
+  .addtask-bottom-left {
+    display: none;
+  }
+  .required-mobile {
+    display: block;
+
+    span {
+      color: $red;
+    }
+  }
+}
+
 .priority-form .priority-buttons {
   display: flex;
   flex-direction: row;
@@ -303,7 +320,7 @@ $medium-orange: #ff8a00;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: clamp(12px, 1.5vw, 16px);
+  padding: clamp(0px, 1.5vw, 16px);
   gap: 4px;
   min-width: 183px;
   height: clamp(48px, 4vw, 57px);
@@ -377,12 +394,6 @@ $medium-orange: #ff8a00;
 
   @media (max-width: 480px) {
     width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .btn-secondary#cancel-btn {
-    display: none;
   }
 }
 
@@ -714,6 +725,7 @@ $medium-orange: #ff8a00;
       display: flex;
       align-items: baseline;
       line-height: 1.2;
+      margin-top: 31px;
     }
   }
 
@@ -724,21 +736,19 @@ $medium-orange: #ff8a00;
     align-self: flex-end;
 
     @media (max-width: 480px) {
-      width: 100%;
+      width: 70%;
       gap: 12px;
-      .btn-primary,
-      .btn-secondary {
-        flex: 1;
-      }
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     gap: 16px;
-    margin-bottom: 30px;
+    margin: 0 0 44px 0;
   }
 
-  @media (max-width: 480px) {
-    gap: 2%;
+  @media (max-width: 750px) {
+    gap: 16px;
+    margin: 0 0 44px 0;
+    justify-content: flex-end;
   }
 }
