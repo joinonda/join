@@ -1,6 +1,31 @@
-<section class="board-task-card-section" (click)="cardClick.emit(task())">
-  <div class="category">
-    <span>{{ task().category }}</span>
+<section class="board-task-card-section" (click)="onCardClick($event)">
+  <div class="card-header">
+    <div class="category">
+      <span>{{ task().category }}</span>
+    </div>
+    @if (isMobile()) {
+      <div class="move-to-btn-wrapper">
+        <button 
+          class="move-to-btn" 
+          (click)="onMoveButtonClick($event)" 
+          [class.active]="showMoveMenu()" 
+          type="button"
+          title="Move to">
+          <img src="imgs/mobile/moveto.png" alt="Move to" />
+        </button>
+        @if (showMoveMenu()) {
+          <div class="move-menu">
+            <div class="move-menu-title">Move to</div>
+            @for (statusOption of availableStatuses(); track statusOption.value) {
+              <button class="move-menu-item" (click)="moveToStatus(statusOption.value, $event)">
+                <span class="move-menu-icon">{{ statusOption.icon }}</span>
+                <span class="move-menu-text">{{ statusOption.label }}</span>
+              </button>
+            }
+          </div>
+        }
+      </div>
+    }
   </div>
   <span class="title">{{ task().title }}</span>
   <span class="description">{{ truncatedDescription() }}</span>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { Component, OnDestroy, inject, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskBoardCard } from '../board-task-card/board-task-card';
 import { BoardTaskDialog } from '../board-task-dialog/board-task-dialog';
@@ -26,6 +26,7 @@ export class BoardTasks implements OnDestroy {
   done: Task[] = [];
   isAddTaskDialogOpen = signal(false);
   initialStatus = signal<Task['status']>('inprogress');
+  isMobile = signal(window.innerWidth <= 1024);
   
   constructor() {
     this.sub = this.dataService.getTasks().subscribe((ts) => {
@@ -40,6 +41,11 @@ export class BoardTasks implements OnDestroy {
         else this.done.push(t);
       });
     });
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.isMobile.set(window.innerWidth <= 1024);
   }
 
   tasksByStatus(status: Task['status']): Task[] {
@@ -120,5 +126,31 @@ export class BoardTasks implements OnDestroy {
 
   onDialogClosed() {
     this.isAddTaskDialogOpen.set(false);
+  }
+
+  async moveTaskToStatus(event: { task: Task; newStatus: Task['status'] }) {
+    const { task, newStatus } = event;
+    
+    const removeFromArray = (arr: Task[]) => {
+      const index = arr.findIndex(t => t.id === task.id);
+      if (index !== -1) {
+        arr.splice(index, 1);
+      }
+    };
+    
+    removeFromArray(this.todo);
+    removeFromArray(this.inProgress);
+    removeFromArray(this.awaitFeedback);
+    removeFromArray(this.done);
+
+    task.status = newStatus;
+    if (newStatus === 'todo') this.todo.push(task);
+    else if (newStatus === 'inprogress') this.inProgress.push(task);
+    else if (newStatus === 'awaitfeedback') this.awaitFeedback.push(task);
+    else this.done.push(task);
+
+    if (task.id) {
+      await this.dataService.saveTask(task.id, { status: newStatus });
+    }
   }
 }

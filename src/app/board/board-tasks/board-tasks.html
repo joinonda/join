@@ -19,9 +19,15 @@
         @if (!tasksByStatus('todo').length) {
         <div class="no-tasks-to-do-container tasks-placeholder"><p>No tasks to do</p></div>
         } @for (task of tasksByStatus('todo'); track task.id) {
-        <div cdkDrag>
-          <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
-        </div>
+        @if (isMobile()) {
+          <div>
+            <app-board-task-card [task]="task" (cardClick)="openTask(task)" (moveTask)="moveTaskToStatus($event)"></app-board-task-card>
+          </div>
+        } @else {
+          <div cdkDrag>
+            <app-board-task-card [task]="task" (cardClick)="openTask(task)" (moveTask)="moveTaskToStatus($event)"></app-board-task-card>
+          </div>
+        }
         }
       </div>
     </div>
@@ -49,9 +55,15 @@
           <p>No tasks in progress</p>
         </div>
         } @for (task of tasksByStatus('inprogress'); track task.id) {
-        <div cdkDrag>
-          <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
-        </div>
+        @if (isMobile()) {
+          <div>
+            <app-board-task-card [task]="task" (cardClick)="openTask(task)" (moveTask)="moveTaskToStatus($event)"></app-board-task-card>
+          </div>
+        } @else {
+          <div cdkDrag>
+            <app-board-task-card [task]="task" (cardClick)="openTask(task)" (moveTask)="moveTaskToStatus($event)"></app-board-task-card>
+          </div>
+        }
         }
       </div>
     </div>
@@ -79,9 +91,15 @@
           <p>No pending feedbacks</p>
         </div>
         } @for (task of tasksByStatus('awaitfeedback'); track task.id) {
-        <div cdkDrag>
-          <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
-        </div>
+        @if (isMobile()) {
+          <div>
+            <app-board-task-card [task]="task" (cardClick)="openTask(task)" (moveTask)="moveTaskToStatus($event)"></app-board-task-card>
+          </div>
+        } @else {
+          <div cdkDrag>
+            <app-board-task-card [task]="task" (cardClick)="openTask(task)" (moveTask)="moveTaskToStatus($event)"></app-board-task-card>
+          </div>
+        }
         }
       </div>
     </div>
@@ -105,9 +123,15 @@
           <p>No finished tasks</p>
         </div>
         } @for (task of tasksByStatus('done'); track task.id) {
-        <div cdkDrag>
-          <app-board-task-card [task]="task" (cardClick)="openTask(task)"></app-board-task-card>
-        </div>
+        @if (isMobile()) {
+          <div>
+            <app-board-task-card [task]="task" (cardClick)="openTask(task)" (moveTask)="moveTaskToStatus($event)"></app-board-task-card>
+          </div>
+        } @else {
+          <div cdkDrag>
+            <app-board-task-card [task]="task" (cardClick)="openTask(task)" (moveTask)="moveTaskToStatus($event)"></app-board-task-card>
+          </div>
+        }
         }
       </div>
     </div>
