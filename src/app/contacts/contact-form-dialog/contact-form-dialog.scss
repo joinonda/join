@@ -58,8 +58,6 @@
     overflow-y: auto;
     position: relative;
     animation: slideInFromBottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    padding-right: 8px;
-
   }
 }
 
@@ -291,7 +289,6 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 2px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -302,7 +299,6 @@
   color: #ffffff;
   text-align: center;
   transition: all 0.3s ease;
-  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.17);
 
   @media (max-width: 1024px) {
     width: 110px;
