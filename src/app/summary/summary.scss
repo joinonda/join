@@ -1,11 +1,49 @@
-<section>
-  <div class="head">
-    <h2>Join 360</h2>
-    <div class="spacer-blue"></div>
-    <span class="tagline">Key Metrics at a Glance</span>
-  </div>
+section {
+  height: calc(100vh - 96px);
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 64px;
+  overflow: auto;
+  padding: 96px;
+  background-color: #f6f7f8;
+  margin: 0 0 0 232px;
+  margin-top: 96px;
 
-  <div class="body">
+  @media (max-width: 1024px) {
+    margin-left: 0;
+    margin-top: 80px;
+    height: calc(100vh - 160px);
+  }
+}
 
-  </div>
-</section>
+.head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+
+  .spacer-blue {
+    width: 4px;
+    height: 64px;
+    background-color: #29abe2;
+    border-radius: 2px;
+  }
+
+  span {
+    font-size: 20px;
+  }
+}
+
+.body {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 40px;
+}
