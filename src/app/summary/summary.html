@@ -7,56 +7,59 @@
 
   <div class="body">
     @if (columns$ | async; as columns) {
-      <div class="card-container">
-        <div class="card-row">
-          <div class="card-to-do" routerLink="/board">
-            <div class="icon"></div>
-            <div class="text">
-              <p class="count">{{ columns[0].tasks.length }}</p>
-              <p>To-do</p>
-            </div>
-          </div>
-          <div class="card-done" routerLink="/board">
-            <div class="icon"></div>
-            <div class="text">
-              <p class="count">{{ columns[3].tasks.length }}</p>
-              <p>Done</p>
-            </div>
+    <div class="card-container">
+      <div class="card-row">
+        <div class="card-to-do" routerLink="/board">
+          <div class="icon"></div>
+          <div class="text">
+            <p class="count">{{ columns[0].tasks.length }}</p>
+            <p>To-do</p>
           </div>
         </div>
-
-        <div class="card-row">
-          <div class="card-deadline" routerLink="/board">
-            <div class="highest-priority-badge">
-              <div class="icon"></div>
-              <div class="text">
-                <p class="count">{{ countUrgentOpenTasks(columns) }}</p>
-                <p>Urgent</p>
-              </div>
-            </div>
-            <div class="spacer"></div>
-            <div class="deadline">
-              <p class="date">{{ getNextDeadline(columns) }}</p>
-              <p>Upcoming Deadline</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-row">
-          <div class="card-all-tasks" routerLink="/board">
-            <p class="count">{{ countOpenTaskWithStatus(columns, "incomplete") }}</p>
-            <p>Tasks&nbsp;in<br />Board</p>
-          </div>
-          <div class="card-in-progress" routerLink="/board">
-            <p class="count">{{ countOpenTaskWithStatus(columns, "inprogress") }}</p>
-            <p>Tasks in Progress</p>
-          </div>
-          <div class="card-awaiting-feedback" routerLink="/board">
-            <p class="count">{{ countOpenTaskWithStatus(columns, "awaitfeedback") }}</p>
-            <p>Awaiting Feedback</p>
+        <div class="card-done" routerLink="/board">
+          <div class="icon"></div>
+          <div class="text">
+            <p class="count">{{ columns[3].tasks.length }}</p>
+            <p>Done</p>
           </div>
         </div>
       </div>
+      <div class="card-row">
+        <div class="card-deadline" routerLink="/board">
+          <div class="highest-priority-badge">
+            <div class="icon"></div>
+            <div class="text">
+              <p class="count">{{ countUrgentOpenTasks(columns) }}</p>
+              <p>Urgent</p>
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="deadline">
+            <p class="date">{{ getNextDeadline(columns) }}</p>
+            <p>Upcoming Deadline</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card-all-tasks" routerLink="/board">
+          <p class="count">{{ countOpenTaskWithStatus(columns, "incomplete") }}</p>
+          <p>Tasks&nbsp;in<br />Board</p>
+        </div>
+        <div class="card-in-progress" routerLink="/board">
+          <p class="count">{{ countOpenTaskWithStatus(columns, "inprogress") }}</p>
+          <p>Tasks in Progress</p>
+        </div>
+        <div class="card-awaiting-feedback" routerLink="/board">
+          <p class="count">{{ countOpenTaskWithStatus(columns, "awaitfeedback") }}</p>
+          <p>Awaiting Feedback</p>
+        </div>
+      </div>
+    </div>
+    } @if (!(breakpointService.isMobileMedium$ | async)) {
+    <div class="greeting">
+      <p>{{ getGreetingMessage() }}</p>
+      <p class="name">{{ truncateName(getUserName()) }}</p>
+    </div>
     }
   </div>
 </section>
