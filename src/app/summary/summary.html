@@ -41,6 +41,21 @@
             </div>
           </div>
         </div>
+
+        <div class="card-row">
+          <div class="card-all-tasks" routerLink="/board">
+            <p class="count">{{ countOpenTaskWithStatus(columns, "incomplete") }}</p>
+            <p>Tasks&nbsp;in<br />Board</p>
+          </div>
+          <div class="card-in-progress" routerLink="/board">
+            <p class="count">{{ countOpenTaskWithStatus(columns, "inprogress") }}</p>
+            <p>Tasks in Progress</p>
+          </div>
+          <div class="card-awaiting-feedback" routerLink="/board">
+            <p class="count">{{ countOpenTaskWithStatus(columns, "awaitfeedback") }}</p>
+            <p>Awaiting Feedback</p>
+          </div>
+        </div>
       </div>
     }
   </div>
