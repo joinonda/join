@@ -5,5 +5,26 @@
     <span class="tagline">Key Metrics at a Glance</span>
   </div>
 
-  <div class="body"></div>
+  <div class="body">
+    @if (columns$ | async; as columns) {
+      <div class="card-container">
+        <div class="card-row">
+          <div class="card-to-do" routerLink="/board">
+            <div class="icon"></div>
+            <div class="text">
+              <p class="count">{{ columns[0].tasks.length }}</p>
+              <p>To-do</p>
+            </div>
+          </div>
+          <div class="card-done" routerLink="/board">
+            <div class="icon"></div>
+            <div class="text">
+              <p class="count">{{ columns[3].tasks.length }}</p>
+              <p>Done</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
 </section>
