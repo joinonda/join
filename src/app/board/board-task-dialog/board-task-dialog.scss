@@ -15,17 +15,11 @@
     height: 90vh;
     position: relative;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-    padding: 40px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
     overflow-x: hidden;
-  
-   
-
-
-
-
 
     .dialog-header {
       display: flex;
@@ -69,6 +63,7 @@
     line-height: 110%;
     color: #000000;
     margin: 24px 0 16px 0;
+    word-wrap: break-word;
   }
 
   p {
@@ -184,7 +179,7 @@
       gap: 12px;
       cursor: pointer;
 
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         width: 20px;
         height: 20px;
         min-width: 20px;
@@ -303,7 +298,7 @@
 
 .description-dialog-scrollbar-wrapper {
   overflow-y: auto;
-  
+
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -321,4 +316,3 @@
     }
   }
 }
-
