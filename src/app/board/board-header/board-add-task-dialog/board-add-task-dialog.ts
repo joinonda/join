@@ -12,6 +12,6 @@ import { Task } from '../../../interfaces/task-interface';
 })
 export class BoardAddTaskDialog {
   closed = output<void>();
-  initialStatus = input<Task['status']>('inprogress');
+  initialStatus = input<Task['status']>('todo');
 }
 

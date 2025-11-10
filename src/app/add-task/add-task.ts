@@ -25,7 +25,7 @@ export class Addtask {
 
   @ViewChild(ToastComponent) toast!: ToastComponent;
 
-  initialStatus = input<Task['status']>('inprogress');
+  initialStatus = input<Task['status']>('todo');
   taskCreated = output<void>();
 
   effectiveInitialStatus = computed<Task['status']>(() => {

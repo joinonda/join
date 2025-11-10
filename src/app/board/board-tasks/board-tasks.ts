@@ -30,7 +30,7 @@ export class BoardTasks implements OnDestroy {
   awaitFeedback: Task[] = [];
   done: Task[] = [];
   isAddTaskDialogOpen = signal(false);
-  initialStatus = signal<Task['status']>('inprogress');
+  initialStatus = signal<Task['status']>('todo');
   isMobile = signal(window.innerWidth <= 1024);
   
   constructor() {
