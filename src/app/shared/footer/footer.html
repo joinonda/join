@@ -4,8 +4,10 @@
   </div>
   <div class="menu" aria-label="Menu">
     <a class="menu-btn summary" 
+       routerLink="/summary"
+       routerLinkActive="active"
        aria-label="Summary">
-      <img class="icon desktop" src="imgs/summary-default.png" 
+      <img class="icon desktop" [src]="getImageSrc('summary', 'imgs/summary-default.png', 'imgs/summary-hover.png')" 
            alt="" 
            aria-hidden="true" />
       <img class="icon mobile" src="imgs/icons/summary.png" alt="" aria-hidden="true" />

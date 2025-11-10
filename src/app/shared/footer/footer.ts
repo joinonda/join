@@ -12,9 +12,10 @@ export class Footer {
   router = inject(Router);
   
   getImageSrc(menuName: string, defaultImg: string, activeImg: string): string {
+    const isSummaryActive = menuName === 'summary' && this.router.url === '/summary';
     const isBoardActive = menuName === 'board' && this.router.url === '/board';
     const isContactsActive = menuName === 'contacts' && this.router.url === '/contact';
     const isAddTaskActive = menuName === 'add-task' && this.router.url === '/add-task';
-    return (isBoardActive || isContactsActive || isAddTaskActive) ? activeImg : defaultImg;
+    return (isSummaryActive || isBoardActive || isContactsActive || isAddTaskActive) ? activeImg : defaultImg;
   }
 }
