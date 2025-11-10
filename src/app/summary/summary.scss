@@ -60,3 +60,159 @@ section {
   max-width: 1100px;
   min-height: 0;
 }
+
+.card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-row {
+  width: 544px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.card-to-do {
+  width: 100%;
+  padding: 38px 0;
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 125ms ease, scale 125ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+
+  .icon {
+    width: 70px;
+    height: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url('/imgs/summary/pen-default.png');
+
+    @media (max-width: 580px) {
+      width: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
+      height: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
+    }
+  }
+
+  .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+
+    .count {
+      font-size: 64px;
+      font-weight: 600;
+
+      @media (max-width: 580px) {
+        font-size: clamp(2.5em, 9.231vw + 0.654em, 4em);
+      }
+    }
+
+    p {
+      font-size: 20px;
+      color: #2a3647;
+      white-space: nowrap;
+
+      @media (max-width: 580px) {
+        font-size: clamp(1em, 1.538vw + 0.692em, 1.25em);
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    scale: 1.04;
+    background-color: #2a3647;
+  }
+
+  &:hover .text p {
+    color: #ffffff;
+  }
+
+  &:hover .icon {
+    background-image: url('/imgs/summary/pen-hover.png');
+  }
+}
+
+.card-done {
+  width: 100%;
+  padding: 38px 0;
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 125ms ease, scale 125ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+
+  .icon {
+    width: 70px;
+    height: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url('/imgs/summary/checkmark-default.png');
+
+    @media (max-width: 580px) {
+      width: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
+      height: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
+    }
+  }
+
+  .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+
+    .count {
+      font-size: 64px;
+      font-weight: 600;
+
+      @media (max-width: 580px) {
+        font-size: clamp(2.5em, 9.231vw + 0.654em, 4em);
+      }
+    }
+
+    p {
+      font-size: 20px;
+      color: #2a3647;
+      white-space: nowrap;
+
+      @media (max-width: 580px) {
+        font-size: clamp(1em, 1.538vw + 0.692em, 1.25em);
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    scale: 1.04;
+    background-color: #2a3647;
+  }
+
+  &:hover .text p {
+    color: #ffffff;
+  }
+
+  &:hover .icon {
+    background-image: url('/imgs/summary/checkmark-hover.png');
+  }
+}
