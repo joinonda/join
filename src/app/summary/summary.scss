@@ -304,7 +304,11 @@ section {
     color: #ffffff;
   }
 
-  &:hover .text p {
+  &:hover .highest-priority-badge .text p {
+    color: #ffffff;
+  }
+
+  &:hover .highest-priority-badge .text .count {
     color: #ffffff;
   }
 
@@ -359,7 +363,6 @@ section {
   }
 
   .name {
-    display: none;
     color: #29abe2;
     font-size: clamp(2.25em, 11.667vw - 6.5em, 4em);
     font-weight: bold;
