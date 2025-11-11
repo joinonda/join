@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.html',
-  styleUrl: './login.scss'
+  styleUrl: './login.scss',
 })
 export class Login {
   email: string = '';
@@ -18,13 +19,15 @@ export class Login {
   constructor(private router: Router) {}
 
   onLogin() {
-    console.log('Login attempt:', { email: this.email, password: this.password, rememberMe: this.rememberMe });
-    // TODO: Implement login logic
+    console.log('Login attempt:', {
+      email: this.email,
+      password: this.password,
+      rememberMe: this.rememberMe,
+    });
   }
 
   onGuestLogin() {
     console.log('Guest login');
-    // TODO: Implement guest login logic
   }
 
   onSignUp() {
