@@ -33,14 +33,13 @@ export class SignupComponent {
 
 function mapSignupError(code?: string) {
   switch (code) {
+    case 'auth/email-already-in-use':
+      return 'Email already registered.';
     case 'auth/invalid-email':
       return 'Invalid email.';
-    case 'auth/user-not-found':
-    case 'auth/wrong-password':
-      return 'Incorrect email address or password.';
-    case 'auth/too-many-requests':
-      return 'Too many attempts. Please wait a moment.';
+    case 'auth/weak-password':
+      return 'Password too weak (at least 6 characters).';
     default:
-      return 'Login failed.';
+      return 'Registration failed.';
   }
 }
