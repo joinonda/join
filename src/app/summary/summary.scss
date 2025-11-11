@@ -143,6 +143,10 @@ section {
     color: #ffffff;
   }
 
+  &:hover .text .count {
+    color: #ffffff;
+  }
+
   &:hover .icon {
     background-image: url('/imgs/summary/pen-hover.png');
   }
@@ -209,6 +213,10 @@ section {
   }
 
   &:hover .text p {
+    color: #ffffff;
+  }
+
+  &:hover .text .count {
     color: #ffffff;
   }
 
@@ -350,6 +358,10 @@ section {
   }
 
   &:hover p {
+    color: #ffffff;
+  }
+
+  &:hover .count {
     color: #ffffff;
   }
 }
