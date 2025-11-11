@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.html',
-  styleUrl: './login.scss'
+  styleUrl: './login.scss',
 })
 export class LoginComponent {
   email: string = '';
@@ -23,7 +23,7 @@ export class LoginComponent {
 
   async onLogin() {
     if (!this.email || !this.password) {
-      this.errorMessage = 'Bitte füllen Sie alle Felder aus';
+      this.errorMessage = 'Please fill in all fields.';
       return;
     }
 
@@ -52,14 +52,14 @@ export class LoginComponent {
   private mapAuthError(code?: string): string {
     switch (code) {
       case 'auth/invalid-email':
-        return 'Ungültige E-Mail-Adresse';
+        return 'Invalid email address';
       case 'auth/user-not-found':
       case 'auth/wrong-password':
-        return 'Falsche E-Mail-Adresse oder Passwort';
+        return 'Incorrect email address or password';
       case 'auth/too-many-requests':
-        return 'Zu viele Versuche. Bitte warten Sie einen Moment';
+        return 'Too many attempts. Please wait a moment.';
       default:
-        return 'Login fehlgeschlagen';
+        return 'Login failed';
     }
   }
 }

@@ -10,7 +10,7 @@ import { updateProfile } from '@angular/fire/auth';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './signup.html',
-  styleUrl: './signup.scss'
+  styleUrl: './signup.scss',
 })
 export class SignupComponent {
   name: string = '';
@@ -27,23 +27,23 @@ export class SignupComponent {
 
   async onSignUp() {
     if (!this.name || !this.email || !this.password || !this.confirmPassword) {
-      this.errorMessage = 'Bitte füllen Sie alle Felder aus';
+      this.errorMessage = 'Please fill in all fields.';
       return;
     }
 
     if (!this.acceptPrivacy) {
-      this.errorMessage = 'Bitte akzeptieren Sie die Datenschutzerklärung';
+      this.errorMessage = 'Please accept the privacy policy.';
       return;
     }
 
     if (this.password !== this.confirmPassword) {
       this.passwordMismatch = true;
-      this.errorMessage = 'Die Passwörter stimmen nicht überein';
+      this.errorMessage = 'The passwords do not match.';
       return;
     }
 
     if (this.password.length < 6) {
-      this.errorMessage = 'Das Passwort muss mindestens 6 Zeichen lang sein';
+      this.errorMessage = 'The password must be at least 6 characters long.';
       return;
     }
 
@@ -78,13 +78,13 @@ export class SignupComponent {
   private mapSignupError(code?: string): string {
     switch (code) {
       case 'auth/email-already-in-use':
-        return 'Diese E-Mail-Adresse wird bereits verwendet';
+        return 'This email address is already in use.';
       case 'auth/invalid-email':
-        return 'Ungültige E-Mail-Adresse';
+        return 'Invalid email address';
       case 'auth/weak-password':
-        return 'Das Passwort ist zu schwach (mindestens 6 Zeichen)';
+        return 'The password must be at least 6 characters long.';
       default:
-        return 'Registrierung fehlgeschlagen';
+        return 'Registration failed';
     }
   }
 }
