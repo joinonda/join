@@ -143,6 +143,10 @@ section {
     color: #ffffff;
   }
 
+  &:hover .text .count {
+    color: #ffffff;
+  }
+
   &:hover .icon {
     background-image: url('/imgs/summary/pen-hover.png');
   }
@@ -209,6 +213,10 @@ section {
   }
 
   &:hover .text p {
+    color: #ffffff;
+  }
+
+  &:hover .text .count {
     color: #ffffff;
   }
 
@@ -304,7 +312,11 @@ section {
     color: #ffffff;
   }
 
-  &:hover .text p {
+  &:hover .highest-priority-badge .text p {
+    color: #ffffff;
+  }
+
+  &:hover .highest-priority-badge .text .count {
     color: #ffffff;
   }
 
@@ -348,6 +360,10 @@ section {
   &:hover p {
     color: #ffffff;
   }
+
+  &:hover .count {
+    color: #ffffff;
+  }
 }
 
 .greeting {
@@ -359,7 +375,6 @@ section {
   }
 
   .name {
-    display: none;
     color: #29abe2;
     font-size: clamp(2.25em, 11.667vw - 6.5em, 4em);
     font-weight: bold;
