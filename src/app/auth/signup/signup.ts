@@ -1,45 +1,90 @@
-import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { sendEmailVerification, updateProfile } from '@angular/fire/auth';
+import { updateProfile } from '@angular/fire/auth';
 
-@Component({ selector: 'app-signup', standalone: true, templateUrl: './signup.html' })
+@Component({
+  selector: 'app-signup',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: './signup.html',
+  styleUrl: './signup.scss'
+})
 export class SignupComponent {
-  private auth = inject(AuthService);
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  acceptPrivacy: boolean = false;
+  passwordMismatch: boolean = false;
+  errorMessage: string = '';
+  isLoading: boolean = false;
+
   private router = inject(Router);
+  private authService = inject(AuthService);
 
-  loading = signal(false);
-  error = signal<string | null>(null);
-
-  async onSubmit(name: string, email: string, password: string, repeat: string) {
-    if (password !== repeat) {
-      this.error.set('Passwörter stimmen nicht.');
+  async onSignUp() {
+    if (!this.name || !this.email || !this.password || !this.confirmPassword) {
+      this.errorMessage = 'Bitte füllen Sie alle Felder aus';
       return;
     }
-    this.error.set(null);
-    this.loading.set(true);
+
+    if (!this.acceptPrivacy) {
+      this.errorMessage = 'Bitte akzeptieren Sie die Datenschutzerklärung';
+      return;
+    }
+
+    if (this.password !== this.confirmPassword) {
+      this.passwordMismatch = true;
+      this.errorMessage = 'Die Passwörter stimmen nicht überein';
+      return;
+    }
+
+    if (this.password.length < 6) {
+      this.errorMessage = 'Das Passwort muss mindestens 6 Zeichen lang sein';
+      return;
+    }
+
+    this.passwordMismatch = false;
+    this.errorMessage = '';
+    this.isLoading = true;
+
     try {
-      const cred = await this.auth.signUp(email, password);
-      await updateProfile(cred.user, { displayName: name });
-      await sendEmailVerification(cred.user);
-      this.router.navigate(['/verify-email']);
-    } catch (e: any) {
-      this.error.set(mapSignupError(e.code));
+      const cred = await this.authService.signUp(this.email, this.password);
+      if (this.name && cred.user) {
+        await updateProfile(cred.user, { displayName: this.name });
+      }
+      this.router.navigate(['/summary']);
+    } catch (error: any) {
+      this.errorMessage = this.mapSignupError(error.code);
     } finally {
-      this.loading.set(false);
+      this.isLoading = false;
     }
   }
-}
 
-function mapSignupError(code?: string) {
-  switch (code) {
-    case 'auth/email-already-in-use':
-      return 'Email already registered.';
-    case 'auth/invalid-email':
-      return 'Invalid email.';
-    case 'auth/weak-password':
-      return 'Password too weak (at least 6 characters).';
-    default:
-      return 'Registration failed.';
+  onPasswordChange() {
+    if (this.passwordMismatch && this.password === this.confirmPassword) {
+      this.passwordMismatch = false;
+      this.errorMessage = '';
+    }
+  }
+
+  goBack() {
+    this.router.navigate(['/login']);
+  }
+
+  private mapSignupError(code?: string): string {
+    switch (code) {
+      case 'auth/email-already-in-use':
+        return 'Diese E-Mail-Adresse wird bereits verwendet';
+      case 'auth/invalid-email':
+        return 'Ungültige E-Mail-Adresse';
+      case 'auth/weak-password':
+        return 'Das Passwort ist zu schwach (mindestens 6 Zeichen)';
+      default:
+        return 'Registrierung fehlgeschlagen';
+    }
   }
 }

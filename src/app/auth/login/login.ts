@@ -1,39 +1,65 @@
-import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
-@Component({ selector: 'app-login', standalone: true, templateUrl: './login.html' })
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: './login.html',
+  styleUrl: './login.scss'
+})
 export class LoginComponent {
-  private auth = inject(AuthService);
+  email: string = '';
+  password: string = '';
+  rememberMe: boolean = false;
+  errorMessage: string = '';
+  isLoading: boolean = false;
+
   private router = inject(Router);
+  private authService = inject(AuthService);
 
-  loading = signal(false);
-  error = signal<string | null>(null);
+  async onLogin() {
+    if (!this.email || !this.password) {
+      this.errorMessage = 'Bitte füllen Sie alle Felder aus';
+      return;
+    }
 
-  async onSubmit(email: string, password: string) {
-    this.error.set(null);
-    this.loading.set(true);
+    this.errorMessage = '';
+    this.isLoading = true;
+
     try {
-      await this.auth.signIn(email, password);
-      this.router.navigate(['/app']);
-    } catch (e: any) {
-      this.error.set(mapAuthError(e.code));
+      await this.authService.signIn(this.email, this.password);
+      this.router.navigate(['/summary']);
+    } catch (error: any) {
+      this.errorMessage = this.mapAuthError(error.code);
     } finally {
-      this.loading.set(false);
+      this.isLoading = false;
     }
   }
-}
 
-function mapAuthError(code?: string) {
-  switch (code) {
-    case 'auth/invalid-email':
-      return 'Invalid email.';
-    case 'auth/user-not-found':
-    case 'auth/wrong-password':
-      return 'Incorrect email address or password.';
-    case 'auth/too-many-requests':
-      return 'Too many attempts. Please wait a moment.';
-    default:
-      return 'Login failed.';
+  onGuestLogin() {
+    this.authService.loginAsGuest();
+    this.router.navigate(['/summary']);
+  }
+
+  onSignUp() {
+    this.router.navigate(['/signup']);
+  }
+
+  private mapAuthError(code?: string): string {
+    switch (code) {
+      case 'auth/invalid-email':
+        return 'Ungültige E-Mail-Adresse';
+      case 'auth/user-not-found':
+      case 'auth/wrong-password':
+        return 'Falsche E-Mail-Adresse oder Passwort';
+      case 'auth/too-many-requests':
+        return 'Zu viele Versuche. Bitte warten Sie einen Moment';
+      default:
+        return 'Login fehlgeschlagen';
+    }
   }
 }
