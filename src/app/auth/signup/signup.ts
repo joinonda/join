@@ -1,47 +1,46 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { sendEmailVerification, updateProfile } from '@angular/fire/auth';
 
-@Component({
-  selector: 'app-signup',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './signup.html',
-  styleUrl: './signup.scss',
-})
-export class Signup {
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
-  acceptPrivacy: boolean = false;
-  passwordMismatch: boolean = false;
+@Component({ selector: 'app-signup', standalone: true, templateUrl: './signup.html' })
+export class SignupComponent {
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(private router: Router) {}
+  loading = signal(false);
+  error = signal<string | null>(null);
 
-  onSignUp() {
-    if (this.password !== this.confirmPassword) {
-      this.passwordMismatch = true;
+  async onSubmit(name: string, email: string, password: string, repeat: string) {
+    if (password !== repeat) {
+      this.error.set('Passwörter stimmen nicht.');
       return;
     }
-
-    this.passwordMismatch = false;
-    console.log('Sign up attempt:', {
-      name: this.name,
-      email: this.email,
-      acceptPrivacy: this.acceptPrivacy,
-    });
-  }
-
-  onPasswordChange() {
-    if (this.passwordMismatch && this.password === this.confirmPassword) {
-      this.passwordMismatch = false;
+    this.error.set(null);
+    this.loading.set(true);
+    try {
+      const cred = await this.auth.signUp(email, password);
+      await updateProfile(cred.user, { displayName: name });
+      await sendEmailVerification(cred.user);
+      this.router.navigate(['/verify-email']);
+    } catch (e: any) {
+      this.error.set(mapSignupError(e.code));
+    } finally {
+      this.loading.set(false);
     }
   }
+}
 
-  goBack() {
-    this.router.navigate(['/login']);
+function mapSignupError(code?: string) {
+  switch (code) {
+    case 'auth/invalid-email':
+      return 'Invalid email.';
+    case 'auth/user-not-found':
+    case 'auth/wrong-password':
+      return 'Incorrect email address or password.';
+    case 'auth/too-many-requests':
+      return 'Too many attempts. Please wait a moment.';
+    default:
+      return 'Login failed.';
   }
 }

@@ -1,36 +1,39 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
-@Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
-})
-export class Login {
-  email: string = '';
-  password: string = '';
-  rememberMe: boolean = false;
+@Component({ selector: 'app-login', standalone: true, templateUrl: './login.html' })
+export class LoginComponent {
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(private router: Router) {}
+  loading = signal(false);
+  error = signal<string | null>(null);
 
-  onLogin() {
-    console.log('Login attempt:', {
-      email: this.email,
-      password: this.password,
-      rememberMe: this.rememberMe,
-    });
+  async onSubmit(email: string, password: string) {
+    this.error.set(null);
+    this.loading.set(true);
+    try {
+      await this.auth.signIn(email, password);
+      this.router.navigate(['/app']);
+    } catch (e: any) {
+      this.error.set(mapAuthError(e.code));
+    } finally {
+      this.loading.set(false);
+    }
   }
+}
 
-  onGuestLogin() {
-    console.log('Guest login');
-  }
-
-  onSignUp() {
-    this.router.navigate(['/signup']);
+function mapAuthError(code?: string) {
+  switch (code) {
+    case 'auth/invalid-email':
+      return 'Invalid email.';
+    case 'auth/user-not-found':
+    case 'auth/wrong-password':
+      return 'Incorrect email address or password.';
+    case 'auth/too-many-requests':
+      return 'Too many attempts. Please wait a moment.';
+    default:
+      return 'Login failed.';
   }
 }
