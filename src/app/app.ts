@@ -20,9 +20,10 @@ export class App {
       filter((event) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => 
         event.urlAfterRedirects.includes('/login') || 
-        event.urlAfterRedirects.includes('/signup')
+        event.urlAfterRedirects.includes('/signup') ||
+        event.urlAfterRedirects === '/'
       ),
-      startWith(this.router.url.includes('/login') || this.router.url.includes('/signup'))
+      startWith(this.router.url.includes('/login') || this.router.url.includes('/signup') || this.router.url === '/')
     )
   );
 }
