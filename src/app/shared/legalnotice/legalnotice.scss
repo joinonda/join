@@ -1,3 +1,52 @@
+$primary-color: #2a3647;
+$hover-color: #29abe2;
+$bg-color: #f6f7f8;
+$text-color: #000000;
+$white: #ffffff;
+$gray-divider: #d1d1d1;
+$gray-border: #d1d5db;
+$light-gray: #a8a8a8;
+$input-border: #d1d5db;
+$overlay-bg: rgba(0, 0, 0, 0.4);
+
 .privacy-section {
+  height: calc(100vh - 96px);
+  background-color: $bg-color;
+  padding: 0;
   margin: 96px 0 0 232px;
+  display: flex;
+  position: relative;
+  max-width: 1920px;
+  overflow: auto;
+
+  @media (max-width: 1024px) {
+    margin: 96px 0 0 0;
+  }
+
+  .privacy-content {
+    margin: 94px 4% 0 4%;
+  }
+
+  h2 {
+    font-size: clamp(32px, 5vw, 61px);
+    font-weight: 700;
+    margin: 0 0 35px 0;
+  }
+
+  h3 {
+    font-size: clamp(20px, 2vw, 27px);
+    font-weight: 700;
+    margin: 0 0 24px 0;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 24px 0 0 0;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+  }
 }
