@@ -11,7 +11,7 @@
       <strong>Developer Akademie GmbH</strong> and is used solely for educational purposes.
     </p>
 
-    <h3>2. Data controller</h3>
+    <h3 id="controller">2. Data controller</h3>
     <p>
       The responsible persons (“we”) are the listed students in the
       <a href="#imprint">Legal Notice</a>. For any privacy-related questions, please contact:
@@ -21,53 +21,84 @@
 
     <h3>3. Purpose of data processing</h3>
     <p>
-      “Join” is a demonstration project. We do not operate a commercial service and do not collect
-      personal data for business or marketing purposes. Any data processed (such as names or email
-      addresses entered voluntarily within the app) is used only to demonstrate the app’s
-      functionality locally or temporarily on a demo server.
+      We process personal data to provide account registration and login, to store user-created
+      content, and to ensure security and proper operation of the Service. We do not use your data
+      for advertising or analytics.
     </p>
 
     <h3>4. Categories of data processed</h3>
     <ul>
-      <li>Voluntary input data such as name, email, or task information</li>
       <li>
-        Technical data such as browser type, time of access, or IP address (transmitted
-        automatically and possibly stored temporarily in server logs)
+        <strong>Account data:</strong> name, email address, password (stored as a secure hash via
+        Firebase Authentication)
+      </li>
+      <li>
+        <strong>App data:</strong> information you create or submit in the app (e.g., tasks,
+        comments)
+      </li>
+      <li>
+        <strong>Technical data:</strong> IP address, browser type, access times, and error logs for
+        security purposes
       </li>
     </ul>
 
-    <h3>5. Legal basis</h3>
+    <h3>5. Legal bases</h3>
     <p>
-      Processing of data is based on <strong>Art. 6 (1) f GDPR</strong> (legitimate interest) for
-      ensuring technical functionality and user interaction within the educational context. Any
-      voluntarily entered personal data is processed based on
-      <strong>Art. 6 (1) a GDPR</strong> (consent).
+      Processing is based on:
+      <br />
+      <strong>Art. 6(1)(b) GDPR</strong> (performance of a contract) – to provide login and core app
+      functionality;
+      <br />
+      <strong>Art. 6(1)(f) GDPR</strong> (legitimate interest) – to maintain security, prevent
+      abuse, and ensure stability.
     </p>
 
-    <h3>6. Data storage and deletion</h3>
+    <h3>6. Firebase (Google) services</h3>
     <p>
-      Any personal data entered in Join is stored only temporarily during your active use of the
-      application and is deleted automatically when the project or browser session ends. We do not
-      maintain a permanent database or user accounts.
+      We use Firebase, a platform provided by Google LLC (1600 Amphitheatre Parkway, Mountain View,
+      CA 94043, USA) and operated for EEA customers by Google Ireland Limited, Gordon House, Barrow
+      Street, Dublin 4, Ireland. Firebase acts as our data processor.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Firebase Authentication</strong>: manages user registration, login, and password
+        reset.
+      </li>
+      <li>
+        <strong>Firebase Realtime Database</strong>: stores user data such as tasks or entries
+        created within the app.
+      </li>
+    </ul>
+
+    <p>
+      Data is generally stored in Firebase servers located in the EU region (<em>europe-west</em>).
+      Google may process data in third countries; in such cases, appropriate safeguards such as EU
+      Standard Contractual Clauses are applied.
     </p>
 
     <h3>7. Data sharing</h3>
     <p>
-      We do not share personal data with third parties. The project may be hosted on educational or
-      personal web servers (e.g., GitHub Pages, Firebase, or Developer Akademie servers). In such
-      cases, hosting providers may process technical log data under data processing agreements in
-      compliance with Art. 28 GDPR.
+      Apart from Firebase (Google) as our data processor, we do not share personal data with third
+      parties. We do not sell or rent your personal data.
     </p>
 
-    <h3>8. Cookies and analytics</h3>
+    <h3>8. Data retention and deletion</h3>
     <p>
-      Join does not use cookies, analytics tools, or tracking technologies for advertising or
-      profiling. Your browser may store technical session information necessary for functionality.
+      Your account data and stored app data remain in our Firebase project for as long as your
+      account exists. If you delete your account or request deletion, the associated data will be
+      erased or anonymised. Technical logs are retained only for a short time for security reasons.
     </p>
 
-    <h3>9. Your rights under the GDPR</h3>
+    <h3>9. Cookies and tracking</h3>
+    <p>
+      Join does not use cookies, analytics, or tracking technologies. Firebase Authentication may
+      use temporary cookies or tokens to maintain login sessions; these are technically necessary.
+    </p>
+
+    <h3>10. Your rights under the GDPR</h3>
     <ul>
-      <li>Right to access your personal data (Art. 15 GDPR)</li>
+      <li>Right of access (Art. 15 GDPR)</li>
       <li>Right to rectification (Art. 16 GDPR)</li>
       <li>Right to erasure (Art. 17 GDPR)</li>
       <li>Right to restriction of processing (Art. 18 GDPR)</li>
@@ -75,23 +106,22 @@
       <li>Right to object (Art. 21 GDPR)</li>
       <li>Right to lodge a complaint with a supervisory authority (Art. 77 GDPR)</li>
     </ul>
-
     <p>
       To exercise your rights or for any data protection concerns, please contact us via the email
       provided above.
     </p>
 
-    <h3>10. Security</h3>
+    <h3>11. Security</h3>
     <p>
-      We take appropriate technical and organisational measures to secure your data against
-      unauthorised access or loss. However, since Join is a non-commercial educational project, no
-      continuous server-side protection or encryption of user data can be guaranteed.
+      We implement appropriate technical and organisational measures to protect your data. All
+      passwords are securely stored using Firebase Authentication’s built-in encryption. However, no
+      system is completely secure.
     </p>
 
-    <h3>11. Changes to this policy</h3>
+    <h3>12. Changes to this policy</h3>
     <p>
-      We may update this Privacy Policy when necessary to reflect technical changes or legal
-      requirements. The current version will always be available within the Join project.
+      We may update this Privacy Policy when necessary to reflect technical or legal developments.
+      The latest version is always available within the Join project.
     </p>
   </div>
 </section>
