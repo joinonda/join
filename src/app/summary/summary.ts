@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { Task } from '../interfaces/task-interface';
 
 @Component({
   selector: 'app-summary',
@@ -36,5 +37,13 @@ export class Summary {
       this.dataService.awaitFeedback.length +
       this.dataService.done.length
     );
+  }
+
+  private get openTasks(): Task[] {
+    return [
+      ...this.dataService.todo,
+      ...this.dataService.inProgress,
+      ...this.dataService.awaitFeedback,
+    ];
   }
 }
