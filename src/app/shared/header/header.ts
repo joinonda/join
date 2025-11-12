@@ -32,8 +32,12 @@ export class Header {
   }
 
   navigateToHelp(): void { }
-  navigateToLegalNotice(): void { }
-  navigateToPrivacyPolicy(): void { }
+  navigateToLegalNotice(): void {
+    this.router.navigate(['/legal-notice']);
+  }
+  navigateToPrivacyPolicy(): void {
+    this.router.navigate(['/privacy-policy']);
+  }
 
   logout(): void {
     this.authService.signOut();

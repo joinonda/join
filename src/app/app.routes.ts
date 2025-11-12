@@ -5,6 +5,8 @@ import { Addtask } from './add-task/add-task';
 import { Summary } from './summary/summary';
 import { LoginComponent } from './auth/login/login';
 import { SignupComponent } from './auth/signup/signup';
+import { Legalnotice } from './shared/legalnotice/legalnotice';
+import { Privacy } from './shared/privacy/privacy';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/contact', pathMatch: 'full' },
@@ -14,4 +16,6 @@ export const routes: Routes = [
   { path: 'contact', component: Contacts },
   { path: 'board', component: Board },
   { path: 'add-task', component: Addtask },
+  { path: 'legal-notice', component: Legalnotice },
+  { path: 'privacy-policy', component: Privacy },
 ];

@@ -1,4 +1,3 @@
-// Login Page Styles
 .login-page {
   min-height: 100vh;
   background: #F6F7F8;
@@ -8,7 +7,6 @@
   font-family: 'Inter', sans-serif;
 }
 
-// Logo Container
 .logo-container {
   position: absolute;
   top: 80px;
@@ -45,7 +43,6 @@
   position: relative;
 }
 
-// Main Login Form Card
 .login-form {
   background: #FFFFFF;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
@@ -65,7 +62,6 @@
   }
 }
 
-// Header Section
 .login-header {
   display: flex;
   flex-direction: column;
@@ -108,7 +104,6 @@
   }
 }
 
-// Form Fields
 .login-fields {
   display: flex;
   flex-direction: column;
@@ -170,7 +165,6 @@
   height: 24px;
 }
 
-// Remember Me Checkbox
 .remember-me {
   display: flex;
   justify-content: flex-start;
@@ -235,7 +229,6 @@
   }
 }
 
-// Button Group
 .button-group {
   display: flex;
   justify-content: center;
@@ -248,7 +241,6 @@
   }
 }
 
-// Primary Button (Log in)
 .btn-primary {
   display: flex;
   justify-content: center;
@@ -281,7 +273,6 @@
   }
 }
 
-// Secondary Button (Guest Log in)
 .btn-secondary {
   display: flex;
   justify-content: center;
@@ -314,7 +305,6 @@
   }
 }
 
-// Mobile Sign Up (outside white box, only visible on mobile)
 .mobile-signup {
   display: none;
   flex-direction: column;
@@ -333,7 +323,6 @@
   }
 }
 
-// Desktop Sign Up Prompt (hidden on mobile)
 .desktop-signup-prompt {
   position: absolute;
   top: 67px;
@@ -391,7 +380,6 @@
   }
 }
 
-// Footer Links
 .footer-links {
   display: flex;
   justify-content: center;
