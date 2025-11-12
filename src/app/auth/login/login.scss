@@ -37,11 +37,12 @@
 }
 
 .login-container {
+  top: 64px;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 20px;
   position: relative;
 }
 
@@ -56,6 +57,7 @@
   gap: 32px;
   width: 100%;
   max-width: 652px;
+  max-height: 449px;
 
   @media (max-width: 768px) {
     padding: 32px 24px;
@@ -76,7 +78,7 @@
 .login-title {
   font-family: 'Inter', sans-serif;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 61px;
   line-height: 120%;
   text-align: center;
@@ -236,6 +238,7 @@
   justify-content: center;
   gap: 35px;
   width: 100%;
+  margin-top: 14px;
 
   @media (max-width: 480px) {
     flex-direction: column;
@@ -327,7 +330,7 @@
 
 .desktop-signup-prompt {
   position: absolute;
-  top: 67px;
+  top: 0px;
   right: 122px;
   display: flex;
   align-items: center;
