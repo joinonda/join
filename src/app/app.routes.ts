@@ -8,9 +8,10 @@ import { SignupComponent } from './auth/signup/signup';
 import { Legalnotice } from './shared/legalnotice/legalnotice';
 import { Privacy } from './shared/privacy/privacy';
 import { Help } from './shared/header/help/help';
+import { StartAnimation } from './start-animation/start-animation';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/contact', pathMatch: 'full' },
+  { path: '', component: StartAnimation },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'summary', component: Summary },

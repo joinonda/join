@@ -1,0 +1,119 @@
+.start-animation-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.login-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  animation: fadeInLoginBackground 1.8s ease-in-out forwards;
+  
+  ::ng-deep .logo-container {
+    opacity: 0;
+    pointer-events: none;
+    animation: fadeInLoginLogo 0.3s ease-in-out 1.8s forwards;
+  }
+}
+
+@keyframes fadeInLoginLogo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+
+@keyframes fadeInLoginBackground {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animation-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f7f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  animation: fadeOutBackground 1.8s ease-in-out forwards;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.animation-container .logo {
+  pointer-events: auto;
+}
+
+.logo {
+  width: 274px;
+  height: 334.07px;
+  opacity: 1;
+  animation: slideToCorner 1.8s ease-in-out forwards, fadeOutAnimatedLogo 0.3s ease-in-out 1.8s forwards;
+  display: block;
+  position: relative;
+  z-index: 100000;
+  object-fit: contain;
+  transform-origin: center center;
+}
+
+@keyframes fadeOutAnimatedLogo {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slideToCorner {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    width: 274px;
+    height: 334.07px;
+  }
+  20% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    width: 274px;
+    height: 334.07px;
+  }
+  100% {
+    transform: translate(calc(-50vw + 77px + 50px), calc(-50vh + 80px + 60.985px));
+    opacity: 1;
+    width: 100px;
+    height: 121.97px;
+  }
+}
+
+@keyframes fadeOutBackground {
+  0% {
+    background-color: #f6f7f8;
+  }
+  30% {
+    background-color: #f6f7f8;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
