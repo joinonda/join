@@ -17,6 +17,14 @@ export class Summary {
     return this.dataService.todo.length;
   }
 
+  get inProgressCount(): number {
+    return this.dataService.inProgress.length;
+  }
+
+  get awaitingFeedbackCount(): number {
+    return this.dataService.awaitFeedback.length;
+  }
+
   get doneCount(): number {
     return this.dataService.done.length;
   }
