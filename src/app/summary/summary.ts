@@ -50,4 +50,16 @@ export class Summary {
   get urgentCount(): number {
     return this.openTasks.filter((t) => t.priority === 'urgent').length;
   }
+
+  get nextDeadline(): Date | null {
+    const now = new Date();
+
+    const upcoming = this.openTasks
+      .filter((t) => !!t.dueDate)
+      .map((t) => new Date(t.dueDate))
+      .filter((d) => !isNaN(d.getTime()) && d >= now)
+      .sort((a, b) => a.getTime() - b.getTime());
+
+    return upcoming[0] ?? null;
+  }
 }

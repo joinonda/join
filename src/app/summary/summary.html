@@ -11,12 +11,12 @@
         <div class="card-to-do" routerLink="/board">
           <div class="icon"></div>
           <div class="text">
-             <p class="count">{{ todoCount }}</p>
+            <p class="count">{{ todoCount }}</p>
             <p>To-do</p>
           </div>
         </div>
 
-         <div class="card-done" routerLink="/board">
+        <div class="card-done" routerLink="/board">
           <div class="icon"></div>
           <div class="text">
             <p class="count">{{ doneCount }}</p>
@@ -37,29 +37,30 @@
 
           <div class="spacer"></div>
           <div class="deadline">
-            <p class="date">15. November 2025</p>
+            <p class="date">{{ nextDeadline | date : 'MMMM d, y' }}</p>
             <p>Upcoming Deadline</p>
           </div>
         </div>
       </div>
 
-      <div class="card-row">
-        <div class="card-all-tasks">
-          <p class="count">8</p>
+     <div class="card-row">
+        <div class="card-all-tasks" routerLink="/board">
+          <p class="count">{{ allTasksCount }}</p>
           <p>Tasks&nbsp;in<br />Board</p>
         </div>
 
-        <div class="card-in-progress">
-          <p class="count">4</p>
+         <div class="card-in-progress" routerLink="/board">
+          <p class="count">{{ inProgressCount }}</p>
           <p>Tasks in Progress</p>
         </div>
 
-        <div class="card-awaiting-feedback">
-          <p class="count">2</p>
+          <div class="card-awaiting-feedback" routerLink="/board">
+          <p class="count">{{ awaitingFeedbackCount }}</p>
           <p>Awaiting Feedback</p>
         </div>
       </div>
     </div>
+
 
     <div class="greeting">
       <p>Good morning,</p>
