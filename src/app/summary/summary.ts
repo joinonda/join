@@ -46,4 +46,8 @@ export class Summary {
       ...this.dataService.awaitFeedback,
     ];
   }
+
+  get urgentCount(): number {
+    return this.openTasks.filter((t) => t.priority === 'urgent').length;
+  }
 }
