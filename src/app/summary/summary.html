@@ -62,9 +62,14 @@
     </div>
 
 
-    <div class="greeting">
-      <p>Good morning,</p>
-      <p class="name">Guest User</p>
+     <div class="greeting">
+      @if (userName) {
+        <p>{{ greetingText }}</p>
+        <p class="name">{{ userName }}</p>
+      } @else {
+        <p>Good morning,</p>
+        <p class="name">Guest User</p>
+      }
     </div>
   </div>
 </section>
