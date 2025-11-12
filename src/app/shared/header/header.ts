@@ -31,7 +31,9 @@ export class Header {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  navigateToHelp(): void { }
+  navigateToHelp(): void {
+    this.router.navigate(['/help']);
+  }
   navigateToLegalNotice(): void {
     this.router.navigate(['/legal-notice']);
   }

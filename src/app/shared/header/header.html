@@ -4,13 +4,10 @@
   <h1>Kanban Project Management Tool</h1>
 
   <div class="header-actions">
-    <a href="" target="_blank" title="Help" class="help-link-desktop">
-      <img
-        class="questionmark-img"
-        src="imgs/questionmark-small.png"
-        alt="Help Questionmark Icon"
-      />
-    </a>
+    <button (click)="navigateToHelp()" title="Help" class="help-link-desktop">
+      <img class="questionmark-img" src="imgs/questionmark-small.png" alt="Help Questionmark Icon" />
+    </button>
+
     @if(isLoggedIn()){
     <div class="avatar-container" [class.hidden-mobile-legal]="shouldHideAvatarOnMobileLegal">
       <button class="avatar-button" (click)="toggleDropdown($event)" title="User menu">

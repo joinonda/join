@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login/login';
 import { SignupComponent } from './auth/signup/signup';
 import { Legalnotice } from './shared/legalnotice/legalnotice';
 import { Privacy } from './shared/privacy/privacy';
+import { Help } from './shared/header/help/help';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/contact', pathMatch: 'full' },
@@ -18,4 +19,5 @@ export const routes: Routes = [
   { path: 'add-task', component: Addtask },
   { path: 'legal-notice', component: Legalnotice },
   { path: 'privacy-policy', component: Privacy },
+  { path: 'help', component: Help },
 ];
