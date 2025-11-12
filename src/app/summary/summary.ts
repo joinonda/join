@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { AuthService } from '../services/auth.service';
 import { Task } from '../interfaces/task-interface';
 
 @Component({
@@ -13,6 +14,7 @@ import { Task } from '../interfaces/task-interface';
 })
 export class Summary {
   private dataService = inject(DataService);
+  private authService = inject(AuthService);
 
   get todoCount(): number {
     return this.dataService.todo.length;
@@ -71,6 +73,19 @@ export class Summary {
   }
 
   get userName(): string {
+    if (this.authService.isGuest()) {
+      return 'Guest User';
+    }
+
+    const user = this.authService.getCurrentUser();
+    if (user?.displayName) {
+      return user.displayName;
+    }
+
+    if (user?.email) {
+      return user.email.split('@')[0];
+    }
+
     return 'Guest User';
   }
 }
