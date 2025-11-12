@@ -11,15 +11,15 @@
         <div class="card-to-do" routerLink="/board">
           <div class="icon"></div>
           <div class="text">
-            <p class="count">5</p>
+             <p class="count">{{ todoCount }}</p>
             <p>To-do</p>
           </div>
         </div>
 
-        <div class="card-done">
+         <div class="card-done" routerLink="/board">
           <div class="icon"></div>
           <div class="text">
-            <p class="count">12</p>
+            <p class="count">{{ doneCount }}</p>
             <p>Done</p>
           </div>
         </div>
