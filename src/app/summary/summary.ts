@@ -28,4 +28,13 @@ export class Summary {
   get doneCount(): number {
     return this.dataService.done.length;
   }
+
+  get allTasksCount(): number {
+    return (
+      this.dataService.todo.length +
+      this.dataService.inProgress.length +
+      this.dataService.awaitFeedback.length +
+      this.dataService.done.length
+    );
+  }
 }
