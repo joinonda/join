@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,6 +11,13 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 })
 export class Footer {
   router = inject(Router);
+  authService = inject(AuthService);
+  
+  isLoggedIn = computed(() => this.authService.isLoggedIn());
+  
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
   
   getImageSrc(menuName: string, defaultImg: string, activeImg: string): string {
     const isSummaryActive = menuName === 'summary' && this.router.url === '/summary';

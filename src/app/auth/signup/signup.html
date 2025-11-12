@@ -1,28 +1,22 @@
 <div class="signup-page">
-  <!-- Logo -->
   <div class="logo-container">
     <img src="imgs/logo.png" alt="Join Logo" class="logo">
   </div>
 
   <div class="signup-container">
-    <!-- Sign up Form -->
     <div class="signup-form">
-      <!-- Back Arrow -->
       <button class="back-arrow" (click)="goBack()" type="button">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
           <path d="M20 24L12 16L20 8" stroke="#29ABE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
 
-      <!-- Header -->
       <div class="signup-header">
         <h1 class="signup-title">Sign up</h1>
         <div class="title-underline"></div>
       </div>
 
-      <!-- Form Fields -->
       <form class="signup-fields" (ngSubmit)="onSignUp()">
-        <!-- Name Field -->
         <div class="input-group">
           <div class="input-field">
             <input 
@@ -40,7 +34,6 @@
           </div>
         </div>
 
-        <!-- Email Field -->
         <div class="input-group">
           <div class="input-field">
             <input 
@@ -58,7 +51,6 @@
           </div>
         </div>
 
-        <!-- Password Field -->
         <div class="input-group">
           <div class="input-field">
             <input 
@@ -78,7 +70,6 @@
           </div>
         </div>
 
-        <!-- Confirm Password Field -->
         <div class="input-group">
           <div class="input-field" [class.error]="passwordMismatch">
             <input 
@@ -99,18 +90,16 @@
           <span class="error-message" *ngIf="passwordMismatch">Ups! your password don't match</span>
         </div>
 
-        <!-- Privacy Policy Checkbox -->
         <div class="privacy-policy">
           <label class="checkbox-container">
             <input type="checkbox" [(ngModel)]="acceptPrivacy" name="acceptPrivacy" required>
             <span class="checkmark"></span>
             <span class="checkbox-label">
-              I accept the <a href="#" class="privacy-link">Privacy policy</a>
+              I accept the <a routerLink="/privacy-policy" class="privacy-link">Privacy policy</a>
             </span>
           </label>
         </div>
 
-        <!-- Sign up Button -->
         <button type="submit" class="btn-primary" [disabled]="!acceptPrivacy">
           Sign up
         </button>
@@ -118,9 +107,8 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <div class="footer-links">
-    <a href="#" class="footer-link">Privacy Policy</a>
-    <a href="#" class="footer-link">Legal notice</a>
+    <a routerLink="/privacy-policy" class="footer-link">Privacy Policy</a>
+    <a routerLink="/legal-notice" class="footer-link">Legal notice</a>
   </div>
 </div>

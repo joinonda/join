@@ -3,6 +3,7 @@
     <img src="imgs/logo-white.png" alt="Join Logo" width="100" height="121" />
   </div>
   <div class="menu" aria-label="Menu">
+    @if(isLoggedIn()) {
     <a class="menu-btn summary" 
        routerLink="/summary"
        routerLinkActive="active"
@@ -46,6 +47,14 @@
       <img class="icon mobile" src="imgs/icons/contacts.png" alt="" aria-hidden="true" />
       <span class="mobile-label">Contacts</span>
     </a>
+    } @else {
+    <button class="menu-btn login-btn" 
+            (click)="navigateToLogin()"
+            aria-label="Log In">
+      <img src="imgs/login.png" alt="" aria-hidden="true" />
+      <span>Log In</span>
+    </button>
+    }
   </div>
   <div class="privacy-policy-legal-notice">
     <a routerLink="/privacy-policy">Privacy Policy</a>

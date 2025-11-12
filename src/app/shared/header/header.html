@@ -8,8 +8,8 @@
       <img class="questionmark-img" src="imgs/questionmark-small.png" alt="Help Questionmark Icon" />
     </button>
 
-    @if(isLoggedIn()){
     <div class="avatar-container" [class.hidden-mobile-legal]="shouldHideAvatarOnMobileLegal">
+      @if(isLoggedIn()){
       <button class="avatar-button" (click)="toggleDropdown($event)" title="User menu">
         {{ userInitials() }}
       </button>
@@ -22,7 +22,9 @@
         <button class="dropdown-item logout-item" (click)="logout()">Log out</button>
       </div>
       }
+      } @else {
+      <div class="avatar-button avatar-placeholder"></div>
+      }
     </div>
-    }
   </div>
 </div>

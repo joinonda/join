@@ -1,21 +1,17 @@
 <div class="login-page">
-  <!-- Logo -->
   <div class="logo-container">
     <img src="imgs/logo.png" alt="Join Logo" class="logo">
   </div>
 
   <div class="login-container">
-    <!-- Login Form -->
     <div class="login-form">
-      <!-- Header -->
       <div class="login-header">
         <h1 class="login-title">Log in</h1>
         <div class="title-underline"></div>
       </div>
 
-      <!-- Form Fields -->
+
       <form class="login-fields" (ngSubmit)="onLogin()">
-        <!-- Email Field -->
         <div class="input-group">
           <div class="input-field">
             <input 
@@ -33,7 +29,6 @@
           </div>
         </div>
 
-        <!-- Password Field -->
         <div class="input-group">
           <div class="input-field">
             <input 
@@ -52,7 +47,6 @@
           </div>
         </div>
 
-        <!-- Remember Me -->
         <div class="remember-me">
           <label class="checkbox-container">
             <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
@@ -61,7 +55,6 @@
           </label>
         </div>
 
-        <!-- Buttons -->
         <div class="button-group">
           <button type="submit" class="btn-primary">
             Log in
@@ -73,22 +66,19 @@
       </form>
     </div>
 
-    <!-- Desktop Sign Up Prompt (hidden on mobile) -->
     <div class="desktop-signup-prompt">
       <span class="signup-text">Not a Join user?</span>
       <button class="btn-signup" (click)="onSignUp()">Sign up</button>
     </div>
   </div>
 
-  <!-- Mobile Sign Up (only visible on mobile, outside white box) -->
   <div class="mobile-signup">
     <span class="signup-text">Not a Join user?</span>
     <button class="btn-signup" (click)="onSignUp()">Sign up</button>
   </div>
 
-  <!-- Footer -->
   <div class="footer-links">
-    <a href="#" class="footer-link">Privacy Policy</a>
-    <a href="#" class="footer-link">Legal notice</a>
+    <a routerLink="/privacy-policy" class="footer-link">Privacy Policy</a>
+    <a routerLink="/legal-notice" class="footer-link">Legal notice</a>
   </div>
 </div>

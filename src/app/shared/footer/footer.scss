@@ -63,16 +63,11 @@
   display: block;
   inline-size: 232px;
   block-size: 46px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 
-  @media (max-width: 1024px) {
-    inline-size: 80px;
-    block-size: 76px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-  }
 
   &:hover {
     background-color: #2a3d59;
@@ -87,6 +82,40 @@
     @media (max-width: 1024px) {
       background-color: #091931;
       border-radius: 16px;
+    }
+  }
+
+  &.login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+
+    @media (max-width: 1024px) {
+      inline-size: auto;
+      flex-direction: column;
+    }
+
+    &:hover {
+      @media (max-width: 1024px) {
+        background-color: transparent;
+      }
+    }
+
+    img {
+      position: static;
+      width: auto;
+      height: auto;
+      object-fit: none;
+      pointer-events: auto;
+    }
+
+    span {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #FFFFFF;
     }
   }
 }

@@ -102,6 +102,12 @@ h1 {
   &:hover {
     background-color: rgba(41, 171, 226, 0.1);
   }
+
+  &.avatar-placeholder {
+    cursor: default;
+    border-color: transparent;
+    pointer-events: none;
+  }
 }
 
 .dropdown-menu {
