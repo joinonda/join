@@ -33,12 +33,15 @@ export class Header {
 
   navigateToHelp(): void {
     this.router.navigate(['/help']);
+    this.isDropdownOpen = false;
   }
   navigateToLegalNotice(): void {
     this.router.navigate(['/legal-notice']);
+    this.isDropdownOpen = false;
   }
   navigateToPrivacyPolicy(): void {
     this.router.navigate(['/privacy-policy']);
+    this.isDropdownOpen = false;
   }
 
   logout(): void {
