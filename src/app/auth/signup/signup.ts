@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { updateProfile } from '@angular/fire/auth';
 
 @Component({
@@ -24,6 +25,7 @@ export class SignupComponent {
 
   private router = inject(Router);
   private authService = inject(AuthService);
+  private firebaseService = inject(FirebaseService);
 
   async onSignUp() {
     if (!this.name || !this.email || !this.password || !this.confirmPassword) {
@@ -56,6 +58,18 @@ export class SignupComponent {
       if (this.name && cred.user) {
         await updateProfile(cred.user, { displayName: this.name });
       }
+      
+      const nameParts = this.name.trim().split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      
+      await this.firebaseService.addContactToDatabase({
+        firstName: firstName,
+        lastName: lastName,
+        email: this.email,
+        phone: '',
+      });
+      
       this.router.navigate(['/summary']);
     } catch (error: any) {
       this.errorMessage = this.mapSignupError(error.code);

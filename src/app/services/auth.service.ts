@@ -1,12 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import {
-  Auth,
-  User,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from '@angular/fire/auth';
+import { Auth, User, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 type AuthState = 'guest' | 'firebase' | null;
@@ -91,11 +84,15 @@ export class AuthService {
     if (!user) return 'UU';
 
     if (user.displayName) {
-      const names = user.displayName.split(' ');
-      if (names.length >= 2) {
-        return (names[0][0] + names[names.length - 1][0]).toUpperCase();
+      const nameParts = user.displayName.trim().split(/\s+/);
+      if (nameParts.length >= 2) {
+        const firstName = nameParts[0];
+        const lastName = nameParts[nameParts.length - 1];
+        return (firstName[0] + lastName[0]).toUpperCase();
       }
-      return user.displayName.substring(0, 2).toUpperCase();
+      if (nameParts.length === 1 && nameParts[0].length >= 2) {
+        return nameParts[0].substring(0, 2).toUpperCase();
+      }
     }
 
     if (user.email) {
