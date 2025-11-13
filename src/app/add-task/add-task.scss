@@ -37,6 +37,7 @@ $medium-orange: #ff8a00;
 
   @media (max-width: 750px) {
     height: 43px;
+    padding-left: 4%;
   }
 
   h2 {
@@ -331,8 +332,8 @@ $medium-orange: #ff8a00;
   align-items: center;
   padding: clamp(0px, 1.5vw, 16px);
   gap: 4px;
-  min-width: 137px;
-  height: clamp(48px, 4vw, 57px);
+  min-width: 183px;
+  min-height: 56px;
   background: #2a3647;
   border: none;
   border-radius: 10px;
@@ -371,8 +372,8 @@ $medium-orange: #ff8a00;
   align-items: center;
   padding: clamp(12px, 1.5vw, 16px);
   gap: 4px;
-  min-width: clamp(120px, 8vw, 128px);
-  height: clamp(48px, 4vw, 56px);
+  min-height: 56px;
+  min-width: 110px;
   background: #ffffff;
   border: 1px solid #2a3647;
   border-radius: 10px;
