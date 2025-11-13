@@ -65,6 +65,15 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     color: #29abe2;
   }
 
+  a {
+    color: #29abe2;
+    text-decoration: underline;
+
+    &:hover {
+      color: red;
+    }
+  }
+
   .back-btn {
     position: absolute;
     border: none;
