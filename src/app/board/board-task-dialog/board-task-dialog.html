@@ -1,19 +1,28 @@
-<div class="dialog-backdrop" (click)="closed.emit()">
-  <div class="dialog" [class.edit-mode]="editMode" (click)="$event.stopPropagation()">
+<div class="dialog-backdrop" role="presentation" (click)="closed.emit()">
+  <div
+    class="dialog"
+    [class.edit-mode]="editMode"
+    (click)="$event.stopPropagation()"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="!editMode ? 'task-dialog-title' : null"
+    tabindex="-1"
+  >
     <div class="dialog-header">
       @if (!editMode) {
-        <span class="badge" [style.background-color]="categoryColor()">{{ task().category }}</span>
+      <span class="badge" [style.background-color]="categoryColor()">
+        {{ task().category }}
+      </span>
       }
-      <button class="close" (click)="closed.emit()">
-        <img src="imgs/close-black.png" alt="" />
+      <button class="close" type="button" (click)="closed.emit()" aria-label="Close dialog">
+        <img src="imgs/close-black.png" alt="" aria-hidden="true" />
       </button>
     </div>
 
     @if (!editMode) {
-      <h2 class="title">{{ task().title }}</h2>
+    <h2 class="title" id="task-dialog-title">{{ task().title }}</h2>
 
-
-      <div class="description-dialog-scrollbar-wrapper">
+    <div class="description-dialog-scrollbar-wrapper">
       <p class="description">{{ task().description }}</p>
 
       <div class="meta">
@@ -25,7 +34,11 @@
           <span class="label">Priority:</span>
           <div class="priority-content">
             <span class="priority-text">{{ priorityText() }}</span>
-            <img [src]="priorityIcon()" class="priority-icon" alt="priority" />
+            <img
+              [src]="priorityIcon()"
+              class="priority-icon"
+              [attr.alt]="priorityText() + ' priority'"
+            />
           </div>
         </div>
       </div>
@@ -35,7 +48,12 @@
         <div class="people">
           @for (contact of assignedContacts(); track contact.name) {
           <div class="contact-item">
-            <div class="contact-avatar" [style.background-color]="contact.color">
+            <div
+              class="contact-avatar"
+              [style.background-color]="contact.color"
+              role="img"
+              [attr.aria-label]="'Assigned to ' + contact.name"
+            >
               {{ contact.initials }}
             </div>
             <span class="contact-name">{{ contact.name }}</span>
@@ -55,28 +73,30 @@
         }
       </div>
       }
-
-     
     </div>
+
     <div class="dialog-footer">
-      <button class="delete-btn" (click)="deleted.emit(task())">
-        <img src="imgs/delete-dark.png" alt="" />
-        <img src="imgs/delete-hover.png" alt="" />
+      <button
+        class="delete-btn"
+        type="button"
+        (click)="deleted.emit(task())"
+        aria-label="Delete task"
+      >
+        <img src="imgs/delete-dark.png" alt="" aria-hidden="true" />
+        <img src="imgs/delete-hover.png" alt="" aria-hidden="true" />
       </button>
       <div class="footer-divider"></div>
-      <button class="edit-btn" (click)="editTask()">
-        <img src="imgs/edit-dark.png" alt="" />
-        <img src="imgs/edit-hover.png" alt="" />
+      <button class="edit-btn" type="button" (click)="editTask()" aria-label="Edit task">
+        <img src="imgs/edit-dark.png" alt="" aria-hidden="true" />
+        <img src="imgs/edit-hover.png" alt="" aria-hidden="true" />
       </button>
     </div>
-
-
     } @else {
-      <app-board-task-dialog-edit
-        [task]="task()"
-        (saved)="onEditSaved($event)"
-        (cancelled)="onEditCancelled()"
-      />
+    <app-board-task-dialog-edit
+      [task]="task()"
+      (saved)="onEditSaved($event)"
+      (cancelled)="onEditCancelled()"
+    />
     }
   </div>
 </div>

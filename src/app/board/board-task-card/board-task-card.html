@@ -1,55 +1,95 @@
-<section class="board-task-card-section" (click)="onCardClick($event)">
+<section
+  class="board-task-card-section"
+  (click)="onCardClick($event)"
+  role="button"
+  tabindex="0"
+  (keydown.enter)="onCardClick($event)"
+  (keydown.space)="onCardClick($event)"
+>
   <div class="card-header">
     <div class="category" [style.background-color]="categoryColor()">
       <span>{{ task().category }}</span>
     </div>
     @if (isMobile()) {
-      <div class="move-to-btn-wrapper">
-        <button 
-          class="move-to-btn" 
-          (click)="onMoveButtonClick($event)" 
-          [class.active]="showMoveMenu()" 
+    <div class="move-to-btn-wrapper">
+      <button
+        class="move-to-btn"
+        (click)="onMoveButtonClick($event)"
+        [class.active]="showMoveMenu()"
+        type="button"
+        title="Move to"
+        aria-haspopup="menu"
+        [attr.aria-expanded]="showMoveMenu()"
+        aria-label="Move task to another column"
+      >
+        <img src="imgs/mobile/moveto.png" alt="" aria-hidden="true" />
+      </button>
+      @if (showMoveMenu()) {
+      <div class="move-menu" role="menu" aria-label="Move task">
+        <div class="move-menu-title">Move to</div>
+        @for (statusOption of availableStatuses(); track statusOption.value) {
+        <button
+          class="move-menu-item"
           type="button"
-          title="Move to">
-          <img src="imgs/mobile/moveto.png" alt="Move to" />
+          (click)="moveToStatus(statusOption.value, $event)"
+          role="menuitem"
+        >
+          <span class="move-menu-icon" aria-hidden="true">{{ statusOption.icon }}</span>
+          <span class="move-menu-text">{{ statusOption.label }}</span>
         </button>
-        @if (showMoveMenu()) {
-          <div class="move-menu">
-            <div class="move-menu-title">Move to</div>
-            @for (statusOption of availableStatuses(); track statusOption.value) {
-              <button class="move-menu-item" (click)="moveToStatus(statusOption.value, $event)">
-                <span class="move-menu-icon">{{ statusOption.icon }}</span>
-                <span class="move-menu-text">{{ statusOption.label }}</span>
-              </button>
-            }
-          </div>
         }
       </div>
+      }
+    </div>
     }
   </div>
   <span class="title">{{ task().title }}</span>
   <span class="description">{{ truncatedDescription() }}</span>
 
   @if (task().subtasks.length) {
-    <div class="progress-container">
-      <progress [value]="completedSubtasksCount()" [max]="task().subtasks.length"></progress>
-      <span>{{ completedSubtasksCount() }}/{{ task().subtasks.length }} Subtasks</span>
-    </div>
+  <div class="progress-container">
+    <progress
+      role="progressbar"
+      [value]="completedSubtasksCount()"
+      [max]="task().subtasks.length"
+      aria-valuemin="0"
+      [attr.aria-valuenow]="completedSubtasksCount()"
+      [attr.aria-valuemax]="task().subtasks.length"
+      [attr.aria-label]="
+        completedSubtasksCount() + ' of ' + task().subtasks.length + ' subtasks completed'
+      "
+    ></progress>
+    <span>{{ completedSubtasksCount() }}/{{ task().subtasks.length }} Subtasks</span>
+  </div>
   }
 
   <div class="card-footer">
     <div class="assigned">
       @for (contact of displayedContacts(); track $index; let i = $index) {
-        <div class="avatar" [attr.data-idx]="i" [style.background-color]="contact.color" [style.color]="'white'">
-          {{ contact.initials }}
-        </div>
-      }
-      @if (remainingContactsCount() > 0) {
-        <div class="avatar avatar-more">
-          +{{ remainingContactsCount() }}
-        </div>
+      <div
+        class="avatar"
+        [attr.data-idx]="i"
+        [style.background-color]="contact.color"
+        [style.color]="'white'"
+        role="img"
+        [attr.aria-label]="'Assigned: ' + contact.initials"
+      >
+        {{ contact.initials }}
+      </div>
+      } @if (remainingContactsCount() > 0) {
+      <div
+        class="avatar avatar-more"
+        role="img"
+        [attr.aria-label]="remainingContactsCount() + ' more assignees'"
+      >
+        +{{ remainingContactsCount() }}
+      </div>
       }
     </div>
-    <img class="priority-icon" [src]="priorityIconSrc()" alt="Priority" />
+    <img
+      class="priority-icon"
+      [src]="priorityIconSrc()"
+      [attr.alt]="task().priority + ' priority'"
+    />
   </div>
 </section>

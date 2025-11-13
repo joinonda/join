@@ -1,4 +1,7 @@
-<section class="board-wrapper">
-  <app-board-header [searchTerm]="searchTerm()" (searchTermChange)="onSearchTermChange($event)"></app-board-header>
+<section class="board-wrapper" role="region" aria-label="Task board">
+  <app-board-header
+    [searchTerm]="searchTerm()"
+    (searchTermChange)="onSearchTermChange($event)"
+  ></app-board-header>
   <app-board-tasks [searchTerm]="searchTerm()"></app-board-tasks>
 </section>
