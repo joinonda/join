@@ -1,6 +1,11 @@
-<section class="addtask-section">
+<section
+  class="addtask-section"
+  role="form"
+  aria-labelledby="addtask-heading"
+  aria-describedby="required-info"
+>
   <div class="addtask-header">
-    <h2>Add Task</h2>
+    <h2 id="addtask-heading">Add Task</h2>
   </div>
 
   <div class="addtask-content">
@@ -24,12 +29,17 @@
             formControlName="title"
             [attr.aria-invalid]="title?.touched && title?.invalid"
             aria-describedby="title-error"
+            aria-required="true"
           />
         </div>
 
         <div class="description-form form-field">
-          <label>Description</label>
-          <textarea placeholder="Enter a description" formControlName="description"></textarea>
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            placeholder="Enter a description"
+            formControlName="description"
+          ></textarea>
         </div>
 
         <div class="due-date-form form-field">
@@ -51,6 +61,7 @@
             [attr.min]="todayStr"
             [attr.aria-invalid]="dueDate?.touched && dueDate?.invalid"
             aria-describedby="dueDate-error"
+            aria-required="true"
           />
         </div>
       </div>
@@ -60,43 +71,46 @@
 
       <div class="form-right" [formGroup]="form">
         <div class="priority-form form-field">
-          <label>Priority</label>
-          <div class="priority-buttons">
+          <label id="priority-label">Priority</label>
+          <div class="priority-buttons" role="radiogroup" [attr.aria-labelledby]="'priority-label'">
             <button
               type="button"
               class="priority-button urgent"
-              [class.active-urgent]="form.value.priority === 'urgent'"
+              role="radio"
+              [attr.aria-checked]="form.value.priority === 'urgent'"
               (click)="prioritySelect('urgent')"
             >
               Urgent
-              <img src="imgs/addtask/urgent-normal.png" alt="Urgent" class="priority-icon-normal" />
-              <img src="imgs/addtask/urgent-hover.png" alt="Urgent" class="priority-icon-hover" />
+              <img src="imgs/addtask/urgent-normal.png" alt="" class="priority-icon-normal" />
+              <img src="imgs/addtask/urgent-hover.png" alt="" class="priority-icon-hover" />
             </button>
             <button
               type="button"
               class="priority-button medium"
-              [class.active-medium]="form.value.priority === 'medium'"
+              role="radio"
+              [attr.aria-checked]="form.value.priority === 'medium'"
               (click)="prioritySelect('medium')"
             >
               Medium
-              <img src="imgs/addtask/medium-normal.png" alt="Medium" class="priority-icon-normal" />
-              <img src="imgs/addtask/medium-hover.png" alt="Medium" class="priority-icon-hover" />
+              <img src="imgs/addtask/medium-normal.png" alt="" class="priority-icon-normal" />
+              <img src="imgs/addtask/medium-hover.png" alt="" class="priority-icon-hover" />
             </button>
             <button
               type="button"
               class="priority-button low"
-              [class.active-low]="form.value.priority === 'low'"
+              role="radio"
+              [attr.aria-checked]="form.value.priority === 'low'"
               (click)="prioritySelect('low')"
             >
               Low
-              <img src="imgs/addtask/low-normal.png" alt="Low" class="priority-icon-normal" />
-              <img src="imgs/addtask/low-hover.png" alt="Low" class="priority-icon-hover" />
+              <img src="imgs/addtask/low-normal.png" alt="" class="priority-icon-normal" />
+              <img src="imgs/addtask/low-hover.png" alt="" class="priority-icon-hover" />
             </button>
           </div>
         </div>
 
         <div class="assigned-to-form form-field">
-          <label>Assigned to</label>
+          <label for="assignedTo">Assigned to</label>
           <div class="dropdown-container">
             <div
               class="dropdown-input"
@@ -104,6 +118,7 @@
               [attr.data-open]="isDropdownOpen()"
             >
               <input
+                id="assignedTo"
                 type="text"
                 placeholder="Select contacts to assign"
                 [ngModel]="searchTerm()"
@@ -112,20 +127,28 @@
                 (click)="$event.stopPropagation()"
                 (focus)="isDropdownOpen.set(true)"
                 class="dropdown-search"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-haspopup="listbox"
+                [attr.aria-expanded]="isDropdownOpen()"
+                aria-controls="assignedTo-list"
               />
-              <span class="dropdown-arrow"></span>
+              <span class="dropdown-arrow" aria-hidden="true"></span>
             </div>
             @if (isDropdownOpen()) {
-            <div class="dropdown-list">
+            <div class="dropdown-list" id="assignedTo-list" role="listbox">
               @for (contact of filteredContacts(); track contact.id) {
               <div
                 class="dropdown-item"
                 [class.selected]="isContactSelected(contact.id)"
                 (click)="toggleContact(contact.id)"
+                role="option"
+                [attr.aria-selected]="isContactSelected(contact.id)"
               >
                 <div
                   class="dropdown-item-avatar"
                   [style.background-color]="getContactColor(contact)"
+                  aria-hidden="true"
                 >
                   {{ getInitials(contact) }}
                 </div>
@@ -141,8 +164,9 @@
                       ? 'imgs/checkbox-checked.png'
                       : 'imgs/checkbox-empty.png'
                   "
-                  alt="checkbox"
+                  alt=""
                   class="dropdown-checkbox"
+                  aria-hidden="true"
                 />
               </div>
               }
@@ -156,6 +180,9 @@
               class="contact-avatar"
               [style.background-color]="getContactColor(contact)"
               (click)="removeContact(contact.id)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="'Remove ' + contact.firstName + ' ' + contact.lastName"
             >
               {{ getInitials(contact) }}
             </div>
@@ -180,19 +207,21 @@
               formControlName="category"
               [attr.aria-invalid]="category?.touched && category?.invalid"
               aria-describedby="category-error"
+              aria-required="true"
             >
               <option value="">Select task category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
             </select>
-            <span class="select-arrow"></span>
+            <span class="select-arrow" aria-hidden="true"></span>
           </div>
         </div>
 
         <div class="subtasks-form form-field">
-          <label>Subtasks</label>
+          <label for="subtasks">Subtasks</label>
           <div class="subtask-input-wrapper">
             <input
+              id="subtasks"
               type="text"
               placeholder="Add new subtask"
               [(ngModel)]="newSubtaskInput"
@@ -203,14 +232,14 @@
             <div class="subtask-actions">
               <img
                 src="imgs/cancel-x-btn.png"
-                alt="Cancel"
+                alt="Cancel subtask"
                 class="subtask-icon"
                 (click)="clearSubtaskInput()"
               />
               <div class="subtask-divider"></div>
               <img
                 src="imgs/checksubtasks.png"
-                alt="Save"
+                alt="Save subtask"
                 class="subtask-icon"
                 (click)="addSubtask()"
               />
@@ -238,14 +267,14 @@
               <div class="subtask-actions">
                 <img
                   src="imgs/dialog/deleve-normal.png"
-                  alt="Delete"
+                  alt="Delete subtask"
                   class="subtask-action-icon"
                   (click)="removeSubtask(subtask.id)"
                 />
                 <div class="subtask-divider"></div>
                 <img
                   src="imgs/dialog/check-normal.png"
-                  alt="Save"
+                  alt="Save subtask"
                   class="subtask-action-icon"
                   (click)="saveSubtaskEdit(subtask.id)"
                 />
@@ -256,14 +285,14 @@
               <div class="subtask-actions">
                 <img
                   src="imgs/dialog/edit-normal.png"
-                  alt="Edit"
+                  alt="Edit subtask"
                   class="subtask-action-icon"
                   (click)="startEditingSubtask(subtask)"
                 />
                 <div class="subtask-divider"></div>
                 <img
                   src="imgs/dialog/deleve-normal.png"
-                  alt="Delete"
+                  alt="Delete subtask"
                   class="subtask-action-icon"
                   (click)="removeSubtask(subtask.id)"
                 />
@@ -280,17 +309,17 @@
 
     <div class="addtask-bottom">
       <div class="addtask-bottom-left">
-        <label><span class="required">*</span>This field is required</label>
+        <label id="required-info"><span class="required">*</span>This field is required</label>
       </div>
 
       <div class="addtask-bottom-right">
         <button type="button" class="btn-secondary" id="cancel-btn" (click)="clearForm()">
           Clear
-          <img src="imgs/cancel-x-btn.png" alt="Cancel" />
+          <img src="imgs/cancel-x-btn.png" alt="" aria-hidden="true" />
         </button>
         <button type="button" class="btn-primary" id="submit-btn" (click)="createTask()">
           Create Task
-          <img src="imgs/check-save-btn.png" alt="Save" />
+          <img src="imgs/check-save-btn.png" alt="" aria-hidden="true" />
         </button>
       </div>
     </div>
