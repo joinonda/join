@@ -1,214 +1,299 @@
-
-
 <div class="edit-dialog-content" [formGroup]="form">
   <div class="edit-dialog-scrollbar-wrapper">
-  <div class="title-form form-field">
-    <label>Title</label>
-    <input type="text" placeholder="Enter a title" formControlName="title" />
-  </div>
-
-  <div class="description-form form-field">
-    <label>Description</label>
-    <textarea placeholder="Enter a description" formControlName="description"></textarea>
-  </div>
-
-  <div class="due-date-form form-field">
-    <label>Due date</label>
-    <input type="date" placeholder="dd/mm/yyyy" class="date-input" formControlName="dueDate" />
-  </div>
-
-  <div class="priority-form form-field">
-    <label>Priority</label>
-
-    <div class="priority-buttons">
-
-      <button type="button" class="priority-button urgent"
-        [class.active-urgent]="form.value.priority==='urgent'"
-        (click)="prioritySelect('urgent')">Urgent
-        <img src="imgs/addtask/urgent-normal.png" alt="Urgent" class="priority-icon-normal" />
-        <img src="imgs/addtask/urgent-hover.png" alt="Urgent" class="priority-icon-hover" />
-      </button>
-
-      <button type="button" class="priority-button medium"
-        [class.active-medium]="form.value.priority==='medium'"
-        (click)="prioritySelect('medium')">Medium
-        <img src="imgs/addtask/medium-normal.png" alt="Medium" class="priority-icon-normal" />
-        <img src="imgs/addtask/medium-hover.png" alt="Medium" class="priority-icon-hover" />
-      </button>
-
-      <button type="button" class="priority-button low"
-        [class.active-low]="form.value.priority==='low'"
-        (click)="prioritySelect('low')">Low
-        <img src="imgs/addtask/low-normal.png" alt="Low" class="priority-icon-normal" />
-        <img src="imgs/addtask/low-hover.png" alt="Low" class="priority-icon-hover" />
-      </button>
-      
+    <div class="title-form form-field">
+      <label for="edit-title">Title</label>
+      <input id="edit-title" type="text" placeholder="Enter a title" formControlName="title" />
     </div>
-  </div>
 
-  <div class="assigned-to-form form-field">
-    <label>Assigned to</label>
-    <div class="dropdown-container">
-      <div class="dropdown-input" (click)="toggleDropdown()" [attr.data-open]="isDropdownOpen()">
-        <input 
-          type="text" 
-          placeholder="Select contacts to assign"
-          [ngModel]="searchTerm()"
-          (ngModelChange)="searchTerm.set($event)"
-          [ngModelOptions]="{standalone: true}"
-          (click)="$event.stopPropagation()"
-          (focus)="isDropdownOpen.set(true)"
-          class="dropdown-search" />
-        <span class="dropdown-arrow"></span>
+    <div class="description-form form-field">
+      <label for="edit-description">Description</label>
+      <textarea
+        id="edit-description"
+        placeholder="Enter a description"
+        formControlName="description"
+      ></textarea>
+    </div>
+
+    <div class="due-date-form form-field">
+      <label for="edit-due-date">Due date</label>
+      <input
+        id="edit-due-date"
+        type="date"
+        placeholder="dd/mm/yyyy"
+        class="date-input"
+        formControlName="dueDate"
+      />
+    </div>
+
+    <div class="priority-form form-field">
+      <label id="edit-priority-label">Priority</label>
+
+      <div class="priority-buttons" role="radiogroup" aria-labelledby="edit-priority-label">
+        <button
+          type="button"
+          class="priority-button urgent"
+          [class.active-urgent]="form.value.priority === 'urgent'"
+          (click)="prioritySelect('urgent')"
+          role="radio"
+          [attr.aria-checked]="form.value.priority === 'urgent'"
+        >
+          Urgent
+          <img
+            src="imgs/addtask/urgent-normal.png"
+            alt=""
+            class="priority-icon-normal"
+            aria-hidden="true"
+          />
+          <img
+            src="imgs/addtask/urgent-hover.png"
+            alt=""
+            class="priority-icon-hover"
+            aria-hidden="true"
+          />
+        </button>
+
+        <button
+          type="button"
+          class="priority-button medium"
+          [class.active-medium]="form.value.priority === 'medium'"
+          (click)="prioritySelect('medium')"
+          role="radio"
+          [attr.aria-checked]="form.value.priority === 'medium'"
+        >
+          Medium
+          <img
+            src="imgs/addtask/medium-normal.png"
+            alt=""
+            class="priority-icon-normal"
+            aria-hidden="true"
+          />
+          <img
+            src="imgs/addtask/medium-hover.png"
+            alt=""
+            class="priority-icon-hover"
+            aria-hidden="true"
+          />
+        </button>
+
+        <button
+          type="button"
+          class="priority-button low"
+          [class.active-low]="form.value.priority === 'low'"
+          (click)="prioritySelect('low')"
+          role="radio"
+          [attr.aria-checked]="form.value.priority === 'low'"
+        >
+          Low
+          <img
+            src="imgs/addtask/low-normal.png"
+            alt=""
+            class="priority-icon-normal"
+            aria-hidden="true"
+          />
+          <img
+            src="imgs/addtask/low-hover.png"
+            alt=""
+            class="priority-icon-hover"
+            aria-hidden="true"
+          />
+        </button>
       </div>
+    </div>
 
-@if (isDropdownOpen()) {
-    <div class="dropdown-list">
-        @for (contact of filteredContacts(); track contact.id) {
-            <div 
-            class="dropdown-item" 
+    <div class="assigned-to-form form-field">
+      <label for="edit-assigned-to">Assigned to</label>
+      <div class="dropdown-container">
+        <div class="dropdown-input" (click)="toggleDropdown()" [attr.data-open]="isDropdownOpen()">
+          <input
+            id="edit-assigned-to"
+            type="text"
+            placeholder="Select contacts to assign"
+            [ngModel]="searchTerm()"
+            (ngModelChange)="searchTerm.set($event)"
+            [ngModelOptions]="{ standalone: true }"
+            (click)="$event.stopPropagation()"
+            (focus)="isDropdownOpen.set(true)"
+            class="dropdown-search"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-haspopup="listbox"
+            [attr.aria-expanded]="isDropdownOpen()"
+            aria-controls="edit-assigned-list"
+          />
+          <span class="dropdown-arrow" aria-hidden="true"></span>
+        </div>
+
+        @if (isDropdownOpen()) {
+        <div class="dropdown-list" id="edit-assigned-list" role="listbox">
+          @for (contact of filteredContacts(); track contact.id) {
+          <div
+            class="dropdown-item"
             [class.selected]="isContactSelected(contact.id)"
-            (click)="toggleContact(contact.id)">
-            <div class="dropdown-item-avatar" [style.background-color]="getContactColor(contact)">
-            {{ getInitials(contact) }}
+            (click)="toggleContact(contact.id)"
+            role="option"
+            [attr.aria-selected]="isContactSelected(contact.id)"
+          >
+            <div
+              class="dropdown-item-avatar"
+              [style.background-color]="getContactColor(contact)"
+              aria-hidden="true"
+            >
+              {{ getInitials(contact) }}
             </div>
-              <span class="dropdown-item-name">
-                {{ contact.firstName }} {{ contact.lastName }}
-                @if (isCurrentUser(contact.id)) {
-                  <span class="you-label">(You)</span>
-                }
-              </span>
-              <img 
-                [src]="isContactSelected(contact.id) ? 'imgs/checkbox-checked.png' : 'imgs/checkbox-empty.png'" 
-                alt="checkbox"
-                class="dropdown-checkbox"
-              />
-            </div>
+            <span class="dropdown-item-name">
+              {{ contact.firstName }} {{ contact.lastName }}
+              @if (isCurrentUser(contact.id)) {
+              <span class="you-label">(You)</span>
+              }
+            </span>
+            <img
+              [src]="
+                isContactSelected(contact.id)
+                  ? 'imgs/checkbox-checked.png'
+                  : 'imgs/checkbox-empty.png'
+              "
+              alt=""
+              class="dropdown-checkbox"
+              aria-hidden="true"
+            />
+          </div>
           }
         </div>
-      }
-    </div>
-    @if (selectedContacts().length) {
+        }
+      </div>
+
+      @if (selectedContacts().length) {
       <div class="assigned-contacts">
         @for (contact of selectedContacts(); track contact.id) {
-          <div class="contact-avatar" [style.background-color]="getContactColor(contact)" (click)="removeContact(contact.id)">
-            {{ getInitials(contact) }}
-          </div>
+        <div
+          class="contact-avatar"
+          [style.background-color]="getContactColor(contact)"
+          (click)="removeContact(contact.id)"
+          role="button"
+          tabindex="0"
+          [attr.aria-label]="'Remove ' + contact.firstName + ' ' + contact.lastName"
+        >
+          {{ getInitials(contact) }}
+        </div>
         }
       </div>
-    }
-  </div>
-
-  <div class="category-form form-field">
-    <label>Category</label>
-    <div class="select-wrapper">
-      <select formControlName="category">
-        <option value="">Select task category</option>
-        <option value="Technical Task">Technical Task</option>
-        <option value="User Story">User Story</option>
-      </select>
-      <span class="select-arrow"></span>
+      }
     </div>
-  </div>
 
-  <div class="subtasks-form form-field">
-
-    <label>Subtasks</label>
-
-    <div class="subtask-input-wrapper">
-      <input 
-        type="text" 
-        placeholder="Add new subtask"
-        [(ngModel)]="newSubtaskInput"
-        (keyup.enter)="addSubtask()"
-        [ngModelOptions]="{standalone: true}"
-        class="subtask-input"/>
-
-      <div class="subtask-actions">
-        <img 
-          src="imgs/cancel-x-btn.png" 
-          alt="Cancel" 
-          class="subtask-icon"
-          (click)="clearSubtaskInput()"/>
-
-        <div class="subtask-divider"></div>
-        <img 
-          src="imgs/checksubtasks.png" 
-          alt="Save" 
-          class="subtask-icon"
-          (click)="addSubtask()"/>
+    <div class="category-form form-field">
+      <label for="edit-category">Category</label>
+      <div class="select-wrapper">
+        <select id="edit-category" formControlName="category">
+          <option value="">Select task category</option>
+          <option value="Technical Task">Technical Task</option>
+          <option value="User Story">User Story</option>
+        </select>
+        <span class="select-arrow" aria-hidden="true"></span>
       </div>
     </div>
 
-    @if (subtasks().length) {
+    <div class="subtasks-form form-field">
+      <label for="edit-subtasks">Subtasks</label>
+
+      <div class="subtask-input-wrapper">
+        <input
+          id="edit-subtasks"
+          type="text"
+          placeholder="Add new subtask"
+          [(ngModel)]="newSubtaskInput"
+          (keyup.enter)="addSubtask()"
+          [ngModelOptions]="{ standalone: true }"
+          class="subtask-input"
+        />
+
+        <div class="subtask-actions">
+          <img
+            src="imgs/cancel-x-btn.png"
+            alt="Cancel subtask"
+            class="subtask-icon"
+            (click)="clearSubtaskInput()"
+          />
+
+          <div class="subtask-divider"></div>
+          <img
+            src="imgs/checksubtasks.png"
+            alt="Save subtask"
+            class="subtask-icon"
+            (click)="addSubtask()"
+          />
+        </div>
+      </div>
+
+      @if (subtasks().length) {
       <ul class="subtasks-list">
         @for (subtask of subtasks(); track subtask.id) {
-          <li
-            (mouseenter)="setHoveredSubtask(subtask.id)"
-            (mouseleave)="setHoveredSubtask(null)"
-            [class.hovered]="hoveredSubtaskId() === subtask.id"
-            [class.editing]="editingSubtaskId() === subtask.id">
+        <li
+          (mouseenter)="setHoveredSubtask(subtask.id)"
+          (mouseleave)="setHoveredSubtask(null)"
+          [class.hovered]="hoveredSubtaskId() === subtask.id"
+          [class.editing]="editingSubtaskId() === subtask.id"
+        >
+          @if (editingSubtaskId() === subtask.id) {
+          <input
+            type="text"
+            [value]="editingSubtaskTitle()"
+            (input)="updateEditingSubtaskTitle($any($event.target).value)"
+            (keydown.enter)="saveSubtaskEdit(subtask.id)"
+            (blur)="saveSubtaskEdit(subtask.id)"
+            class="subtask-edit-input"
+            autofocus
+          />
 
-            @if (editingSubtaskId() === subtask.id) {
-              <input
-                type="text"
-                [value]="editingSubtaskTitle()"
-                (input)="updateEditingSubtaskTitle($any($event.target).value)"
-                (keydown.enter)="saveSubtaskEdit(subtask.id)"
-                (blur)="saveSubtaskEdit(subtask.id)"
-                class="subtask-edit-input"
-                autofocus/>
+          <div class="subtask-actions">
+            <img
+              src="imgs/dialog/deleve-normal.png"
+              alt="Delete subtask"
+              class="subtask-action-icon"
+              (click)="removeSubtask(subtask.id)"
+            />
 
-              <div class="subtask-actions">
-                <img
-                  src="imgs/dialog/deleve-normal.png"
-                  alt="Delete"
-                  class="subtask-action-icon"
-                  (click)="removeSubtask(subtask.id)"/>
-
-                <div class="subtask-divider"></div>
-                <img
-                  src="imgs/dialog/check-normal.png"
-                  alt="Save"
-                  class="subtask-action-icon"
-                  (click)="saveSubtaskEdit(subtask.id)"/>
-              </div>
-            } @else {
-              <span class="subtask-text">{{ subtask.title }}</span>
-              @if (hoveredSubtaskId() === subtask.id) {
-                <div class="subtask-actions">
-                  <img
-                    src="imgs/dialog/edit-normal.png"
-                    alt="Edit"
-                    class="subtask-action-icon"
-                    (click)="startEditingSubtask(subtask)"
-                  />
-                  <div class="subtask-divider"></div>
-                  <img
-                    src="imgs/dialog/deleve-normal.png"
-                    alt="Delete"
-                    class="subtask-action-icon"
-                    (click)="removeSubtask(subtask.id)"
-                  />
-                </div>
-              }
-            }
-          </li>
+            <div class="subtask-divider"></div>
+            <img
+              src="imgs/dialog/check-normal.png"
+              alt="Save subtask"
+              class="subtask-action-icon"
+              (click)="saveSubtaskEdit(subtask.id)"
+            />
+          </div>
+          } @else {
+          <span class="subtask-text">{{ subtask.title }}</span>
+          @if (hoveredSubtaskId() === subtask.id) {
+          <div class="subtask-actions">
+            <img
+              src="imgs/dialog/edit-normal.png"
+              alt="Edit subtask"
+              class="subtask-action-icon"
+              (click)="startEditingSubtask(subtask)"
+            />
+            <div class="subtask-divider"></div>
+            <img
+              src="imgs/dialog/deleve-normal.png"
+              alt="Delete subtask"
+              class="subtask-action-icon"
+              (click)="removeSubtask(subtask.id)"
+            />
+          </div>
+          } }
+        </li>
         }
       </ul>
-    }
+      }
+    </div>
   </div>
-  </div>  
-
-
 
   <div class="edit-dialog-footer">
-    <button type="button" class="btn-secondary" id="cancel-btn" (click)="cancelEdit()">Cancel
-      <img src="imgs/cancel-x-btn.png" alt="Cancel" />
+    <button type="button" class="btn-secondary" id="cancel-btn" (click)="cancelEdit()">
+      Cancel
+      <img src="imgs/cancel-x-btn.png" alt="" aria-hidden="true" />
     </button>
-    <button type="button" class="btn-primary" id="submit-btn" (click)="saveTask()">Ok
-      <img src="imgs/check-save-btn.png" alt="Save" />
+    <button type="button" class="btn-primary" id="submit-btn" (click)="saveTask()">
+      Ok
+      <img src="imgs/check-save-btn.png" alt="" aria-hidden="true" />
     </button>
   </div>
 </div>
-
