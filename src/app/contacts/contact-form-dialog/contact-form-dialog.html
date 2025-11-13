@@ -1,16 +1,27 @@
-<div class="overlay" (click)="onBackdropClick($event)">
-  <div class="dialog-container">
-    <button class="close-btn" (click)="onClose()" type="button" aria-label="Close">
-      <img class="close-btn-dark" src="imgs/close-dark.png" alt="" />
-      <img class="close-btn-white" src="imgs/close-white.png" alt="" />
+<div class="overlay" role="presentation" (click)="onBackdropClick($event)">
+  <div
+    class="dialog-container"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="contact-dialog-title"
+    [attr.aria-describedby]="subtitle ? 'contact-dialog-subtitle' : null"
+  >
+    <button class="close-btn" (click)="onClose()" type="button" aria-label="Close dialog">
+      <img class="close-btn-dark" src="imgs/close-dark.png" alt="" aria-hidden="true" />
+      <img class="close-btn-white" src="imgs/close-white.png" alt="" aria-hidden="true" />
     </button>
+
     <div class="dialog-left">
       <img src="imgs/logo-white.png" alt="Join Logo" class="logo" width="55.6" height="66.48" />
       <div class="dialog-header">
-        <h2 class="dialog-title">{{ title }}</h2>
+        <h2 class="dialog-title" id="contact-dialog-title">
+          {{ title }}
+        </h2>
       </div>
       @if (subtitle) {
-      <p class="dialog-subtitle">{{ subtitle }}</p>
+      <p class="dialog-subtitle" id="contact-dialog-subtitle">
+        {{ subtitle }}
+      </p>
       }
       <div class="title-underline"></div>
     </div>
@@ -19,17 +30,22 @@
       <div class="right-content">
         <div class="avatar-container">
           @if (mode === 'edit' && contact) {
-          <div class="avatar" [style.background-color]="contactColor">
+          <div
+            class="avatar"
+            [style.background-color]="contactColor"
+            role="img"
+            [attr.aria-label]="initials + ' contact avatar'"
+          >
             {{ initials }}
           </div>
           } @else {
           <div class="avatar avatar-placeholder">
-            <img src="imgs/add-contact-profile-placeholder.png" alt="" />
+            <img src="imgs/add-contact-profile-placeholder.png" alt="" aria-hidden="true" />
           </div>
           }
         </div>
 
-        <form class="contact-form" (ngSubmit)="onSave()">
+        <form class="contact-form" (ngSubmit)="onSave()" aria-describedby="contact-dialog-title">
           <div class="input-wrapper">
             <input
               type="text"
@@ -42,10 +58,17 @@
               [class.invalid]="nameError && (nameInput.dirty || nameInput.touched)"
               #nameInput="ngModel"
               (input)="validateName()"
+              aria-label="Name"
+              [attr.aria-invalid]="nameError && (nameInput.dirty || nameInput.touched)"
+              [attr.aria-describedby]="
+                nameError && (nameInput.dirty || nameInput.touched) ? 'name-error' : null
+              "
             />
-            <img src="imgs/input-name-person.png" alt="Name icon" class="input-icon" />
+            <img src="imgs/input-name-person.png" alt="" class="input-icon" aria-hidden="true" />
             @if (nameError && (nameInput.dirty || nameInput.touched)) {
-            <span class="error-message">{{ nameError }}</span>
+            <span class="error-message" id="name-error" role="alert" aria-live="polite">
+              {{ nameError }}
+            </span>
             }
           </div>
 
@@ -60,10 +83,17 @@
               [class.invalid]="emailError && (emailInput.dirty || emailInput.touched)"
               #emailInput="ngModel"
               (input)="validateEmail()"
+              aria-label="Email"
+              [attr.aria-invalid]="emailError && (emailInput.dirty || emailInput.touched)"
+              [attr.aria-describedby]="
+                emailError && (emailInput.dirty || emailInput.touched) ? 'email-error' : null
+              "
             />
-            <img src="imgs/input-mail-letter.png" alt="Email icon" class="input-icon" />
+            <img src="imgs/input-mail-letter.png" alt="" class="input-icon" aria-hidden="true" />
             @if (emailError && (emailInput.dirty || emailInput.touched)) {
-            <span class="error-message">{{ emailError }}</span>
+            <span class="error-message" id="email-error" role="alert" aria-live="polite">
+              {{ emailError }}
+            </span>
             }
           </div>
 
@@ -78,10 +108,17 @@
               [class.invalid]="phoneError && (phoneInput.dirty || phoneInput.touched)"
               #phoneInput="ngModel"
               (input)="validatePhone()"
+              aria-label="Phone"
+              [attr.aria-invalid]="phoneError && (phoneInput.dirty || phoneInput.touched)"
+              [attr.aria-describedby]="
+                phoneError && (phoneInput.dirty || phoneInput.touched) ? 'phone-error' : null
+              "
             />
-            <img src="imgs/input-call-phone.png" alt="Phone icon" class="input-icon" />
+            <img src="imgs/input-call-phone.png" alt="" class="input-icon" aria-hidden="true" />
             @if (phoneError && (phoneInput.dirty || phoneInput.touched)) {
-            <span class="error-message">{{ phoneError }}</span>
+            <span class="error-message" id="phone-error" role="alert" aria-live="polite">
+              {{ phoneError }}
+            </span>
             }
           </div>
 
@@ -93,7 +130,7 @@
             } @else {
             <button type="button" class="btn-secondary" id="cancel-btn" (click)="onClose()">
               Cancel
-              <img src="imgs/cancel-x-btn.png" alt="Cancel" />
+              <img src="imgs/cancel-x-btn.png" alt="" aria-hidden="true" />
             </button>
             }
             <button
@@ -101,10 +138,10 @@
               class="btn-primary"
               [disabled]="!canSubmit"
               [attr.aria-disabled]="!canSubmit"
-              title="{{ !canSubmit ? 'Please fix validation errors' : 'Create contact' }}"
+              [attr.title]="!canSubmit ? 'Please fix validation errors' : 'Create contact'"
             >
               {{ saveButtonText }}
-              <img src="imgs/check-save-btn.png" alt="Save" />
+              <img src="imgs/check-save-btn.png" alt="" aria-hidden="true" />
             </button>
           </div>
         </form>

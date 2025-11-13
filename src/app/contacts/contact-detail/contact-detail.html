@@ -1,21 +1,28 @@
 @if (contact && isVisible) {
-<div class="contact-detail">
+<div class="contact-detail" role="region" aria-labelledby="contact-detail-name">
   <div class="detail-header">
     <div class="detail-avatar-container">
-      <div class="detail-avatar" [style.background-color]="contactColor">
+      <div
+        class="detail-avatar"
+        [style.background-color]="contactColor"
+        role="img"
+        [attr.aria-label]="contact.firstName + ' ' + contact.lastName"
+      >
         {{ getInitials(contact.firstName, contact.lastName) }}
       </div>
     </div>
     <div class="detail-name-section">
-      <h1 class="detail-name">{{ contact.firstName }} {{ contact.lastName }}</h1>
+      <h1 class="detail-name" id="contact-detail-name">
+        {{ contact.firstName }} {{ contact.lastName }}
+      </h1>
       <div class="detail-actions">
-        <button class="edit-btn" (click)="onEdit()">
-          <img src="imgs/edit-dark.png" alt="" />
-          <img src="imgs/edit-hover.png" alt="" />
+        <button class="edit-btn" type="button" (click)="onEdit()" aria-label="Edit contact">
+          <img src="imgs/edit-dark.png" alt="" aria-hidden="true" />
+          <img src="imgs/edit-hover.png" alt="" aria-hidden="true" />
         </button>
-        <button class="delete-btn" (click)="onDelete()">
-          <img src="imgs/delete-dark.png" alt="" />
-          <img src="imgs/delete-hover.png" alt="" />
+        <button class="delete-btn" type="button" (click)="onDelete()" aria-label="Delete contact">
+          <img src="imgs/delete-dark.png" alt="" aria-hidden="true" />
+          <img src="imgs/delete-hover.png" alt="" aria-hidden="true" />
         </button>
       </div>
     </div>

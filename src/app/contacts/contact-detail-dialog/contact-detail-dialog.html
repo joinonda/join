@@ -1,27 +1,46 @@
-<div class="overlay" (click)="onBackdropClick($event)">
-  <div class="dialog-container">
+<div class="overlay" role="presentation" (click)="onBackdropClick($event)">
+  <div
+    class="dialog-container"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="contacts-dialog-heading"
+    tabindex="-1"
+    (click)="$event.stopPropagation()"
+  >
     <div class="dialog-content">
       <div class="page-header">
         <div class="header-content">
-          <h2>Contacts</h2>
+          <h2 id="contacts-dialog-heading">Contacts</h2>
           <p>Better with a team</p>
           <div class="header-separator"></div>
         </div>
-        <button class="back-btn" (click)="onClose()">
-          <img src="imgs/arrow-to-left.png" alt="Back" width="32" height="32" />
+        <button
+          class="back-btn"
+          type="button"
+          (click)="onClose()"
+          aria-label="Back to contacts list"
+        >
+          <img src="imgs/arrow-to-left.png" alt="" width="32" height="32" aria-hidden="true" />
         </button>
       </div>
 
       @if (contact) {
-      <div class="contact-detail">
+      <div class="contact-detail" role="region" aria-labelledby="contact-detail-name-mobile">
         <div class="detail-header">
           <div class="detail-avatar-container">
-            <div class="detail-avatar" [style.background-color]="contactColor">
+            <div
+              class="detail-avatar"
+              [style.background-color]="contactColor"
+              role="img"
+              [attr.aria-label]="contact.firstName + ' ' + contact.lastName"
+            >
               {{ getInitials(contact.firstName, contact.lastName) }}
             </div>
           </div>
           <div class="detail-name-section">
-            <h1 class="detail-name">{{ contact.firstName }} {{ contact.lastName }}</h1>
+            <h1 class="detail-name" id="contact-detail-name-mobile">
+              {{ contact.firstName }} {{ contact.lastName }}
+            </h1>
           </div>
         </div>
 
@@ -45,17 +64,34 @@
       </div>
       }
 
-      <button class="fab-button" (click)="toggleMenu()">
-        <img src="imgs/edit-mobile-dark-dots.png" alt="" />
+      <button
+        class="fab-button"
+        type="button"
+        (click)="toggleMenu()"
+        aria-label="Open contact actions"
+      >
+        <img src="imgs/edit-mobile-dark-dots.png" alt="" aria-hidden="true" />
       </button>
 
       @if (showMenu) {
-      <div class="dropdown-menu">
-        <button class="dropdown-item" (click)="onEdit()">
-          <img src="imgs/edit-dark.png" alt="" />
+      <div class="dropdown-menu" role="menu" aria-label="Contact actions">
+        <button
+          class="dropdown-item"
+          type="button"
+          (click)="onEdit()"
+          role="menuitem"
+          aria-label="Edit contact"
+        >
+          <img src="imgs/edit-dark.png" alt="" aria-hidden="true" />
         </button>
-        <button class="dropdown-item" (click)="onDelete()">
-          <img src="imgs/delete-dark.png" alt="" />
+        <button
+          class="dropdown-item"
+          type="button"
+          (click)="onDelete()"
+          role="menuitem"
+          aria-label="Delete contact"
+        >
+          <img src="imgs/delete-dark.png" alt="" aria-hidden="true" />
         </button>
       </div>
       }
