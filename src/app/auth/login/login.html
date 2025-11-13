@@ -1,6 +1,6 @@
 <div class="login-page">
   <div class="logo-container">
-    <img src="imgs/logo.png" alt="Join Logo" class="logo">
+    <img src="imgs/logo.png" alt="Join Logo" class="logo" />
   </div>
 
   <div class="login-container">
@@ -10,44 +10,92 @@
         <div class="title-underline"></div>
       </div>
 
-
-      <form class="login-fields" (ngSubmit)="onLogin()">
+      <form class="login-fields" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
         <div class="input-group">
           <div class="input-field">
             <input
-              type="email" 
-              [(ngModel)]="email" 
+              type="email"
+              [(ngModel)]="email"
               name="email"
+              #emailCtrl="ngModel"
               placeholder="Email"
               required
+              email
               class="form-input"
-            >
-            <img class="input-icon" src="imgs/loginsignup/mail.png" alt="Email icon" width="24" height="24" />
+              [attr.aria-invalid]="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
+              aria-describedby="email-error"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/mail.png"
+              alt="Email icon"
+              width="24"
+              height="24"
+            />
           </div>
+
+          <p
+            *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
+            class="error-text"
+            id="email-error"
+            role="alert"
+            aria-live="polite"
+          >
+            <span *ngIf="emailCtrl.errors?.['required']">Email is required.</span>
+            <span *ngIf="emailCtrl.errors?.['email']">Please enter a valid email address.</span>
+          </p>
         </div>
 
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="password" 
-              [(ngModel)]="password" 
+            <input
+              type="password"
+              [(ngModel)]="password"
               name="password"
+              #passwordCtrl="ngModel"
               placeholder="Password"
               required
+              minlength="6"
               class="form-input"
-            >
-            <img class="input-icon" src="imgs/loginsignup/lock.png" alt="Password icon" width="24" height="24" />
+              [attr.aria-invalid]="
+                passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)
+              "
+              aria-describedby="password-error"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/lock.png"
+              alt="Password icon"
+              width="24"
+              height="24"
+            />
           </div>
+
+          <p
+            *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)"
+            class="error-text"
+            id="password-error"
+            role="alert"
+            aria-live="polite"
+          >
+            <span *ngIf="passwordCtrl.errors?.['required']">Password is required.</span>
+            <span *ngIf="passwordCtrl.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </span>
+          </p>
         </div>
 
-
         <div class="button-group">
-          <button type="submit" class="btn-primary">
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="loginForm.invalid || isLoading"
+            [attr.aria-disabled]="loginForm.invalid || isLoading"
+          >
             Log in
           </button>
-          <button type="button" class="btn-secondary" (click)="onGuestLogin()">
-            Guest Log in
-          </button>
+
+          <button type="button" class="btn-secondary" (click)="onGuestLogin()">Guest Log in</button>
         </div>
       </form>
     </div>
