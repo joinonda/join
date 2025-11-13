@@ -32,11 +32,12 @@ $medium-orange: #ff8a00;
   margin-top: 100px;
   white-space: nowrap;
   height: 73px;
-  padding-left: 4%;
+  padding-left: 50px;
   margin-bottom: 60px;
 
   @media (max-width: 750px) {
     height: 43px;
+    padding-left: 4%;
   }
 
   h2 {
@@ -61,8 +62,8 @@ $medium-orange: #ff8a00;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  gap: clamp(15px, 3vw, 60px);
-  padding: 0 4%;
+  gap: 35px;
+  padding: 0 50px;
   max-width: 1100px;
   min-height: 0;
 
@@ -70,7 +71,7 @@ $medium-orange: #ff8a00;
     position: relative;
     top: 30px;
     justify-content: center;
-    gap: clamp(15px, 6vw, 80px);
+    gap: 30px;
     max-width: 100%;
     margin-top: 10px;
   }
@@ -331,8 +332,8 @@ $medium-orange: #ff8a00;
   align-items: center;
   padding: clamp(0px, 1.5vw, 16px);
   gap: 4px;
-  min-width: 137px;
-  height: clamp(48px, 4vw, 57px);
+  min-width: 183px;
+  min-height: 56px;
   background: #2a3647;
   border: none;
   border-radius: 10px;
@@ -371,8 +372,8 @@ $medium-orange: #ff8a00;
   align-items: center;
   padding: clamp(12px, 1.5vw, 16px);
   gap: 4px;
-  min-width: clamp(120px, 8vw, 128px);
-  height: clamp(48px, 4vw, 56px);
+  min-height: 56px;
+  min-width: 110px;
   background: #ffffff;
   border: 1px solid #2a3647;
   border-radius: 10px;
@@ -748,7 +749,7 @@ $medium-orange: #ff8a00;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  gap: clamp(16px, 2vw, 25px);
+
   margin-bottom: 30px;
 
   .addtask-bottom-left {

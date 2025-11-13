@@ -61,14 +61,38 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     }
   }
 
+  .da-span {
+    color: #29abe2;
+  }
+
+  a {
+    color: #29abe2;
+    text-decoration: underline;
+
+    &:hover {
+      color: red;
+    }
+  }
+
   .back-btn {
     position: absolute;
     border: none;
     background: transparent;
     right: 4%;
     top: 100px;
+    display: none;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 1024px) {
+      display: block;
+    }
 
     @media (max-width: 750px) {
+      display: block;
       top: 18px;
     }
   }
