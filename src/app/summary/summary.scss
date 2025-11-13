@@ -390,6 +390,7 @@ section {
     font-weight: bold;
     word-break: break-word;
     overflow-wrap: break-word;
+    white-space: nowrap;
   }
 }
 
@@ -419,7 +420,7 @@ section {
     }
 
     span {
-    
+
       order: 2;
       font-size: 20px;
     }
