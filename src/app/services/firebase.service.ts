@@ -56,7 +56,11 @@ export class FirebaseService {
 
   async deleteContactFromDatabase(id: string) {
     return runInInjectionContext(this.injector, async () => {
-      await deleteDoc(doc(this.firestore, 'contact', id));
+      if (!id) {
+        throw new Error('Contact ID is required for deletion');
+      }
+      const docRef = doc(this.firestore, 'contact', id);
+      await deleteDoc(docRef);
     });
   }
 

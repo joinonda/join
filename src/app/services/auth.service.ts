@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, runInInjectionContext, Injector } from '@angular/core';
 import { Auth, User, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,7 @@ type AuthState = 'guest' | 'firebase' | null;
 export class AuthService {
   private auth = inject(Auth);
   private router = inject(Router);
+  private injector = inject(Injector);
   private currentUser = signal<User | null>(null);
   private authState = signal<AuthState>(null);
   private readonly STORAGE_KEY = 'join_auth_state';
@@ -36,11 +37,15 @@ export class AuthService {
   }
 
   signUp(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+    return runInInjectionContext(this.injector, () => {
+      return createUserWithEmailAndPassword(this.auth, email, password);
+    });
   }
 
   signIn(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password);
+    return runInInjectionContext(this.injector, () => {
+      return signInWithEmailAndPassword(this.auth, email, password);
+    });
   }
 
   loginAsGuest() {
@@ -52,7 +57,9 @@ export class AuthService {
     const state = this.authState();
     
     if (state === 'firebase') {
-      await signOut(this.auth);
+      await runInInjectionContext(this.injector, async () => {
+        await signOut(this.auth);
+      });
     }
     
     this.authState.set(null);
