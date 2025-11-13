@@ -1,9 +1,15 @@
-<section class="privacy-section" id="legalnotice">
-  <button class="back-btn" (click)="onClose()">
-    <img src="imgs/arrow-to-left.png" alt="Back" width="32" height="32" />
+<section
+  class="privacy-section"
+  id="legalnotice"
+  role="region"
+  aria-labelledby="legalnotice-heading"
+  tabindex="-1"
+>
+  <button class="back-btn" type="button" (click)="onClose()" aria-label="Go back to previous view">
+    <img src="imgs/arrow-to-left.png" alt="" width="32" height="32" aria-hidden="true" />
   </button>
   <div class="privacy-content">
-    <h2>Legal Notice</h2>
+    <h2 id="legalnotice-heading">Legal Notice</h2>
     <div>
       <h3>Imprint</h3>
       <ul>
