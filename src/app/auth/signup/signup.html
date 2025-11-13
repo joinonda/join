@@ -5,15 +5,14 @@
 
   <div class="signup-container">
     <div class="signup-form">
-      <button class="back-arrow" (click)="goBack()" type="button">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M20 24L12 16L20 8" stroke="#29ABE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-
       <div class="signup-header">
-        <h1 class="signup-title">Sign up</h1>
-        <div class="title-underline"></div>
+        <button class="back-btn" (click)="onClose()">
+          <img src="imgs/arrow-to-left.png" alt="Back" width="32" height="32" />
+        </button>
+        <div class="header-title-section">
+          <h1 class="signup-title">Sign up</h1>
+          <div class="title-underline"></div>
+        </div>
       </div>
 
       <form class="signup-fields" (ngSubmit)="onSignUp()">
@@ -27,10 +26,7 @@
               required
               class="form-input"
             >
-            <svg class="input-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="#A8A8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="7" r="4" stroke="#A8A8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img class="input-icon" src="imgs/loginsignup/person.png" alt="Name icon" width="24" height="24" />
           </div>
         </div>
 
@@ -44,10 +40,7 @@
               required
               class="form-input"
             >
-            <svg class="input-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="#A8A8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <polyline points="22,6 12,13 2,6" stroke="#A8A8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img class="input-icon" src="imgs/loginsignup/mail.png" alt="Email icon" width="24" height="24" />
           </div>
         </div>
 
@@ -62,11 +55,7 @@
               class="form-input"
               (ngModelChange)="onPasswordChange()"
             >
-            <svg class="input-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="#A8A8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="16" r="1" fill="#A8A8A8"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#A8A8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img class="input-icon" src="imgs/loginsignup/lock.png" alt="Password icon" width="24" height="24" />
           </div>
         </div>
 
@@ -81,11 +70,7 @@
               class="form-input"
               (ngModelChange)="onPasswordChange()"
             >
-            <svg class="input-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="#A8A8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="16" r="1" fill="#A8A8A8"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#A8A8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img class="input-icon" src="imgs/loginsignup/lock.png" alt="Password icon" width="24" height="24" />
           </div>
           <span class="error-message" *ngIf="passwordMismatch">Ups! your password don't match</span>
         </div>
