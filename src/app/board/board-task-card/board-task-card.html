@@ -49,8 +49,10 @@
   @if (task().subtasks.length) {
   <div class="progress-container">
     <progress
+      role="progressbar"
       [value]="completedSubtasksCount()"
       [max]="task().subtasks.length"
+      aria-valuemin="0"
       [attr.aria-valuenow]="completedSubtasksCount()"
       [attr.aria-valuemax]="task().subtasks.length"
       [attr.aria-label]="
