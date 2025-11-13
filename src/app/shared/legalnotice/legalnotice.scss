@@ -38,7 +38,16 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     @media (max-width: 750px) {
       font-size: 47px;
       margin: -80px 0 35px 0;
+      padding-right: 60px;
     }
+  }
+
+  .join-span {
+    color: #29abe2;
+  }
+
+  .da-span {
+    color: #29abe2;
   }
 
   @media (max-width: 1024px) {
@@ -63,6 +72,18 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
 
     &:last-of-type {
       padding-bottom: 40px;
+    }
+  }
+
+  .back-btn {
+    position: absolute;
+    border: none;
+    background: transparent;
+    right: 4%;
+    top: 100px;
+
+    @media (max-width: 750px) {
+      top: 18px;
     }
   }
 }

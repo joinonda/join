@@ -36,6 +36,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     @media (max-width: 750px) {
       font-size: 47px;
       margin: -80px 0 35px 0;
+      padding-right: 60px;
     }
   }
   @media (max-width: 1024px) {
@@ -88,6 +89,18 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     p:last-of-type {
       font-size: clamp(16px, 1.5vw, 20px);
       font-weight: 400;
+    }
+  }
+
+  .back-btn {
+    position: absolute;
+    border: none;
+    background: transparent;
+    right: 4%;
+    top: 100px;
+
+    @media (max-width: 750px) {
+      top: 18px;
     }
   }
 }
