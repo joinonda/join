@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FirebaseService } from '../../services/firebase.service';
@@ -34,25 +34,10 @@ export class SignupComponent {
     this.location.back();
   }
 
-  async onSignUp() {
-    if (!this.name || !this.email || !this.password || !this.confirmPassword) {
-      this.errorMessage = 'Please fill in all fields.';
-      return;
-    }
-
-    if (!this.acceptPrivacy) {
-      this.errorMessage = 'Please accept the privacy policy.';
-      return;
-    }
-
-    if (this.password !== this.confirmPassword) {
-      this.passwordMismatch = true;
-      this.errorMessage = 'The passwords do not match.';
-      return;
-    }
-
-    if (this.password.length < 6) {
-      this.errorMessage = 'The password must be at least 6 characters long.';
+  async onSignUp(form: NgForm) {
+    if (form.invalid || this.passwordMismatch) {
+      form.control.markAllAsTouched();
+      this.errorMessage = 'Please correct the highlighted fields.';
       return;
     }
 
@@ -62,21 +47,22 @@ export class SignupComponent {
 
     try {
       const cred = await this.authService.signUp(this.email, this.password);
+
       if (this.name && cred.user) {
         await updateProfile(cred.user, { displayName: this.name });
       }
-      
+
       const nameParts = this.name.trim().split(' ');
       const firstName = nameParts[0] || '';
       const lastName = nameParts.slice(1).join(' ') || '';
-      
+
       await this.firebaseService.addContactToDatabase({
-        firstName: firstName,
-        lastName: lastName,
+        firstName,
+        lastName,
         email: this.email,
         phone: '',
       });
-      
+
       if (window.innerWidth > 1024) {
         this.router.navigate(['/summary']);
       } else {
@@ -90,9 +76,13 @@ export class SignupComponent {
   }
 
   onPasswordChange() {
-    if (this.passwordMismatch && this.password === this.confirmPassword) {
-      this.passwordMismatch = false;
-      this.errorMessage = '';
+    this.passwordMismatch =
+      !!this.password && !!this.confirmPassword && this.password !== this.confirmPassword;
+
+    if (!this.passwordMismatch) {
+      if (this.errorMessage?.toLowerCase().includes('password')) {
+        this.errorMessage = '';
+      }
     }
   }
 

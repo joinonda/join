@@ -1,6 +1,6 @@
 <div class="signup-page">
   <div class="logo-container">
-    <img src="imgs/logo.png" alt="Join Logo" class="logo">
+    <img src="imgs/logo.png" alt="Join Logo" class="logo" />
   </div>
 
   <div class="signup-container">
@@ -15,79 +15,202 @@
         </div>
       </div>
 
-      <form class="signup-fields" (ngSubmit)="onSignUp()">
+      <form class="signup-fields" #signupForm="ngForm" (ngSubmit)="onSignUp(signupForm)">
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="text" 
-              [(ngModel)]="name" 
+            <input
+              type="text"
+              [(ngModel)]="name"
               name="name"
+              #nameCtrl="ngModel"
               placeholder="Name"
               required
               class="form-input"
-            >
-            <img class="input-icon" src="imgs/loginsignup/person.png" alt="Name icon" width="24" height="24" />
+              [attr.aria-invalid]="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)"
+              aria-describedby="name-error"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/person.png"
+              alt="Name icon"
+              width="24"
+              height="24"
+            />
           </div>
+
+          <p
+            *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)"
+            class="error-message"
+            id="name-error"
+            role="alert"
+            aria-live="polite"
+          >
+            Name is required.
+          </p>
         </div>
 
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="email" 
-              [(ngModel)]="email" 
+            <input
+              type="email"
+              [(ngModel)]="email"
               name="email"
+              #emailCtrl="ngModel"
               placeholder="Email"
               required
+              email
               class="form-input"
-            >
-            <img class="input-icon" src="imgs/loginsignup/mail.png" alt="Email icon" width="24" height="24" />
+              [attr.aria-invalid]="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
+              aria-describedby="email-error"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/mail.png"
+              alt="Email icon"
+              width="24"
+              height="24"
+            />
           </div>
+
+          <p
+            *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
+            class="error-message"
+            id="email-error"
+            role="alert"
+            aria-live="polite"
+          >
+            <span *ngIf="emailCtrl.errors?.['required']">Email is required.</span>
+            <span *ngIf="emailCtrl.errors?.['email']">Please enter a valid email address.</span>
+          </p>
         </div>
 
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="password" 
-              [(ngModel)]="password" 
+            <input
+              type="password"
+              [(ngModel)]="password"
               name="password"
+              #passwordCtrl="ngModel"
               placeholder="Password"
               required
+              minlength="6"
               class="form-input"
               (ngModelChange)="onPasswordChange()"
-            >
-            <img class="input-icon" src="imgs/loginsignup/lock.png" alt="Password icon" width="24" height="24" />
+              [attr.aria-invalid]="
+                passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)
+              "
+              aria-describedby="password-error"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/lock.png"
+              alt="Password icon"
+              width="24"
+              height="24"
+            />
           </div>
+
+          <p
+            *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)"
+            class="error-message"
+            id="password-error"
+            role="alert"
+            aria-live="polite"
+          >
+            <span *ngIf="passwordCtrl.errors?.['required']">Password is required.</span>
+            <span *ngIf="passwordCtrl.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </span>
+          </p>
         </div>
 
         <div class="input-group">
           <div class="input-field" [class.error]="passwordMismatch">
-            <input 
-              type="password" 
-              [(ngModel)]="confirmPassword" 
+            <input
+              type="password"
+              [(ngModel)]="confirmPassword"
               name="confirmPassword"
+              #confirmPasswordCtrl="ngModel"
               placeholder="Confirm Password"
               required
               class="form-input"
               (ngModelChange)="onPasswordChange()"
-            >
-            <img class="input-icon" src="imgs/loginsignup/lock.png" alt="Password icon" width="24" height="24" />
+              [attr.aria-invalid]="
+                (confirmPasswordCtrl.invalid &&
+                  (confirmPasswordCtrl.dirty || confirmPasswordCtrl.touched)) ||
+                passwordMismatch
+              "
+              aria-describedby="confirm-password-error"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/lock.png"
+              alt="Password icon"
+              width="24"
+              height="24"
+            />
           </div>
-          <span class="error-message" *ngIf="passwordMismatch">Ups! your password don't match</span>
+
+          <p
+            *ngIf="
+              confirmPasswordCtrl.invalid &&
+              (confirmPasswordCtrl.dirty || confirmPasswordCtrl.touched)
+            "
+            class="error-message"
+            role="alert"
+            aria-live="polite"
+          >
+            Confirming your password is required.
+          </p>
+
+          <p
+            *ngIf="!confirmPasswordCtrl.invalid && passwordMismatch"
+            class="error-message"
+            id="confirm-password-error"
+            role="alert"
+            aria-live="polite"
+          >
+            Ups! your passwords don't match.
+          </p>
         </div>
 
         <div class="privacy-policy">
           <label class="checkbox-container">
-            <input type="checkbox" [(ngModel)]="acceptPrivacy" name="acceptPrivacy" required>
+            <input
+              type="checkbox"
+              [(ngModel)]="acceptPrivacy"
+              name="acceptPrivacy"
+              #privacyCtrl="ngModel"
+              required
+            />
             <span class="checkmark"></span>
             <span class="checkbox-label">
               I accept the <a routerLink="/privacy-policy" class="privacy-link">Privacy policy</a>
             </span>
           </label>
+
+          <p
+            *ngIf="privacyCtrl.invalid && (privacyCtrl.dirty || privacyCtrl.touched)"
+            class="error-message"
+            role="alert"
+            aria-live="polite"
+          >
+            You must accept the privacy policy.
+          </p>
         </div>
 
-        <button type="submit" class="btn-primary" [disabled]="!acceptPrivacy">
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="signupForm.invalid || passwordMismatch || isLoading"
+          [attr.aria-disabled]="signupForm.invalid || passwordMismatch || isLoading"
+        >
           Sign up
         </button>
+
+        <p *ngIf="errorMessage" class="error-message" role="alert" aria-live="polite">
+          {{ errorMessage }}
+        </p>
       </form>
     </div>
   </div>
