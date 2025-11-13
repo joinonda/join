@@ -1,6 +1,6 @@
 <div class="signup-page">
   <div class="logo-container">
-    <img src="imgs/logo.png" alt="Join Logo" class="logo">
+    <img src="imgs/logo.png" alt="Join Logo" class="logo" />
   </div>
 
   <div class="signup-container">
@@ -15,77 +15,182 @@
         </div>
       </div>
 
-      <form class="signup-fields" (ngSubmit)="onSignUp()">
+      <form class="signup-fields" #signupForm="ngForm" (ngSubmit)="onSignUp(signupForm)">
+        <div class="error-message global-error" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="text" 
-              [(ngModel)]="name" 
+            <input
+              type="text"
+              [(ngModel)]="name"
               name="name"
               placeholder="Name"
               required
+              minlength="2"
               class="form-input"
-            >
-            <img class="input-icon" src="imgs/loginsignup/person.png" alt="Name icon" width="24" height="24" />
+              #nameModel="ngModel"
+              [ngClass]="{
+                'input-error':
+                  nameModel.invalid && (nameModel.dirty || nameModel.touched || isSubmitted)
+              }"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/person.png"
+              alt="Name icon"
+              width="24"
+              height="24"
+            />
+          </div>
+          <div
+            class="field-error"
+            *ngIf="nameModel.invalid && (nameModel.dirty || nameModel.touched || isSubmitted)"
+          >
+            <span *ngIf="nameModel.errors?.['required']">Name is required.</span>
+            <span *ngIf="nameModel.errors?.['minlength']">Name must be at least 2 characters.</span>
           </div>
         </div>
 
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="email" 
-              [(ngModel)]="email" 
+            <input
+              type="email"
+              [(ngModel)]="email"
               name="email"
               placeholder="Email"
               required
+              email
               class="form-input"
-            >
-            <img class="input-icon" src="imgs/loginsignup/mail.png" alt="Email icon" width="24" height="24" />
+              #emailModel="ngModel"
+              [ngClass]="{
+                'input-error':
+                  emailModel.invalid && (emailModel.dirty || emailModel.touched || isSubmitted)
+              }"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/mail.png"
+              alt="Email icon"
+              width="24"
+              height="24"
+            />
+          </div>
+          <div
+            class="field-error"
+            *ngIf="emailModel.invalid && (emailModel.dirty || emailModel.touched || isSubmitted)"
+          >
+            <span *ngIf="emailModel.errors?.['required']">Email is required.</span>
+            <span *ngIf="emailModel.errors?.['email']">Please enter a valid email address.</span>
           </div>
         </div>
 
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="password" 
-              [(ngModel)]="password" 
+            <input
+              type="password"
+              [(ngModel)]="password"
               name="password"
               placeholder="Password"
               required
+              minlength="6"
               class="form-input"
+              #passwordModel="ngModel"
               (ngModelChange)="onPasswordChange()"
-            >
-            <img class="input-icon" src="imgs/loginsignup/lock.png" alt="Password icon" width="24" height="24" />
+              [ngClass]="{
+                'input-error':
+                  passwordModel.invalid &&
+                  (passwordModel.dirty || passwordModel.touched || isSubmitted)
+              }"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/lock.png"
+              alt="Password icon"
+              width="24"
+              height="24"
+            />
+          </div>
+          <div
+            class="field-error"
+            *ngIf="
+              passwordModel.invalid && (passwordModel.dirty || passwordModel.touched || isSubmitted)
+            "
+          >
+            <span *ngIf="passwordModel.errors?.['required']">Password is required.</span>
+            <span *ngIf="passwordModel.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </span>
           </div>
         </div>
 
         <div class="input-group">
           <div class="input-field" [class.error]="passwordMismatch">
-            <input 
-              type="password" 
-              [(ngModel)]="confirmPassword" 
+            <input
+              type="password"
+              [(ngModel)]="confirmPassword"
               name="confirmPassword"
               placeholder="Confirm Password"
               required
               class="form-input"
+              #confirmPasswordModel="ngModel"
               (ngModelChange)="onPasswordChange()"
-            >
-            <img class="input-icon" src="imgs/loginsignup/lock.png" alt="Password icon" width="24" height="24" />
+              [ngClass]="{
+                'input-error':
+                  (confirmPasswordModel.invalid &&
+                    (confirmPasswordModel.dirty || confirmPasswordModel.touched || isSubmitted)) ||
+                  passwordMismatch
+              }"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/lock.png"
+              alt="Password icon"
+              width="24"
+              height="24"
+            />
           </div>
-          <span class="error-message" *ngIf="passwordMismatch">Ups! your password don't match</span>
+          <div
+            class="field-error"
+            *ngIf="
+              confirmPasswordModel.invalid &&
+              (confirmPasswordModel.dirty || confirmPasswordModel.touched || isSubmitted)
+            "
+          >
+            <span *ngIf="confirmPasswordModel.errors?.['required']">
+              Please confirm your password.
+            </span>
+          </div>
+          <span class="error-message field-error" *ngIf="passwordMismatch">
+            Ups! your password don't match
+          </span>
         </div>
 
         <div class="privacy-policy">
           <label class="checkbox-container">
-            <input type="checkbox" [(ngModel)]="acceptPrivacy" name="acceptPrivacy" required>
+            <input
+              type="checkbox"
+              [(ngModel)]="acceptPrivacy"
+              name="acceptPrivacy"
+              required
+              #privacyModel="ngModel"
+            />
             <span class="checkmark"></span>
             <span class="checkbox-label">
               I accept the <a routerLink="/privacy-policy" class="privacy-link">Privacy policy</a>
             </span>
           </label>
+          <div class="field-error" *ngIf="privacyModel.invalid && isSubmitted">
+            <span>Please accept the privacy policy.</span>
+          </div>
         </div>
 
-        <button type="submit" class="btn-primary" [disabled]="!acceptPrivacy">
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="signupForm.invalid || !acceptPrivacy || isLoading"
+        >
           Sign up
         </button>
       </form>
