@@ -226,6 +226,10 @@
   &.error {
     border-color: #ff0000;
   }
+
+  @media (max-width: 380px) {
+    padding: 12px 6px;
+  }
 }
 
 .form-input {
@@ -238,6 +242,7 @@
   font-size: 20px;
   line-height: 120%;
   color: #000000;
+  margin-right: -79px;
 
   &::placeholder {
     color: #D1D1D1;
