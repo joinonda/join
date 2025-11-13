@@ -1,68 +1,106 @@
 <div class="login-page">
   <div class="logo-container">
-    <img src="imgs/logo.png" alt="Join Logo" class="logo">
+    <img src="imgs/logo.png" alt="Join Logo" class="logo" />
   </div>
-
   <div class="login-container">
     <div class="login-form">
       <div class="login-header">
         <h1 class="login-title">Log in</h1>
         <div class="title-underline"></div>
       </div>
+      <form class="login-fields" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+        <div class="error-message global-error" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
 
-
-      <form class="login-fields" (ngSubmit)="onLogin()">
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="email" 
-              [(ngModel)]="email" 
+            <input
+              type="email"
+              [(ngModel)]="email"
               name="email"
               placeholder="Email"
               required
+              email
               class="form-input"
-            >
-            <img class="input-icon" src="imgs/loginsignup/mail.png" alt="Email icon" width="24" height="24" />
+              #emailModel="ngModel"
+              [ngClass]="{
+                'input-error':
+                  emailModel.invalid && (emailModel.dirty || emailModel.touched || isSubmitted)
+              }"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/mail.png"
+              alt="Email icon"
+              width="24"
+              height="24"
+            />
+          </div>
+          <div
+            class="field-error"
+            *ngIf="emailModel.invalid && (emailModel.dirty || emailModel.touched || isSubmitted)"
+          >
+            <span *ngIf="emailModel.errors?.['required']">Email is required.</span>
+            <span *ngIf="emailModel.errors?.['email']">Please enter a valid email address.</span>
           </div>
         </div>
 
         <div class="input-group">
           <div class="input-field">
-            <input 
-              type="password" 
-              [(ngModel)]="password" 
+            <input
+              type="password"
+              [(ngModel)]="password"
               name="password"
               placeholder="Password"
               required
+              minlength="6"
               class="form-input"
-            >
-            <img class="input-icon" src="imgs/loginsignup/lock.png" alt="Password icon" width="24" height="24" />
+              #passwordModel="ngModel"
+              [ngClass]="{
+                'input-error':
+                  passwordModel.invalid &&
+                  (passwordModel.dirty || passwordModel.touched || isSubmitted)
+              }"
+            />
+            <img
+              class="input-icon"
+              src="imgs/loginsignup/lock.png"
+              alt="Password icon"
+              width="24"
+              height="24"
+            />
+          </div>
+          <div
+            class="field-error"
+            *ngIf="
+              passwordModel.invalid && (passwordModel.dirty || passwordModel.touched || isSubmitted)
+            "
+          >
+            <span *ngIf="passwordModel.errors?.['required']">Password is required.</span>
+            <span *ngIf="passwordModel.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </span>
           </div>
         </div>
 
-
         <div class="button-group">
-          <button type="submit" class="btn-primary">
+          <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || isLoading">
             Log in
           </button>
-          <button type="button" class="btn-secondary" (click)="onGuestLogin()">
-            Guest Log in
-          </button>
+          <button type="button" class="btn-secondary" (click)="onGuestLogin()">Guest Log in</button>
         </div>
       </form>
     </div>
-
     <div class="desktop-signup-prompt">
       <span class="signup-text">Not a Join user?</span>
       <button class="btn-signup" (click)="onSignUp()">Sign up</button>
     </div>
   </div>
-
   <div class="mobile-signup">
     <span class="signup-text">Not a Join user?</span>
     <button class="btn-signup" (click)="onSignUp()">Sign up</button>
   </div>
-
   <div class="footer-links">
     <a routerLink="/privacy-policy" class="footer-link">Privacy Policy</a>
     <a routerLink="/legal-notice" class="footer-link">Legal notice</a>
