@@ -25,9 +25,9 @@
             </div>
             <div class="letter-header-divider"></div>
           </div>
+          
           @for (contact of groupedContacts[letter]; track $index) {
-          <div
-            class="contact-item"
+          <div class="contact-item"
             [class.selected]="isSelected(contact)"
             (click)="selectContact(contact)"
             role="button"
@@ -78,8 +78,8 @@
         [contact]="selectedContact"
         [contactColor]="getContactColor(selectedContact)"
         [contactKey]="selectedContact.id"
-        (edit)="(onEdit)"
-        (delete)="(onDelete)"
+        (edit)="onEdit()"
+        (delete)="onDelete()"
       ></app-contact-detail>
     </div>
     }
@@ -92,21 +92,21 @@
     [contactColor]="getContactColor(editingContact)"
     (save)="saveEdit($event)"
     (delete)="onDelete()"
-    (close)="closeEdit()"
-  ></app-contact-form-dialog>
-  } @if (isAddOpen) {
+    (close)="closeEdit()">
+</app-contact-form-dialog>
+  } 
+  
+  @if (isAddOpen) {
   <app-contact-form-dialog
     mode="add"
     (save)="saveAdd($event)"
     (close)="closeAdd()"
   ></app-contact-form-dialog>
-  } @if (isDetailDialogOpen && detailDialogContact) {
+  } 
+  
+  @if (isDetailDialogOpen && detailDialogContact) {
   <app-contact-detail-dialog
-    [contact]="detailDialogContact"
-    [contactColor]="getContactColor(detailDialogContact)"
-    (edit)="onDetailEdit()"
-    (delete)="onDetailDelete()"
-    (close)="closeDetailDialog()"
+    [contact]="detailDialogContact"[contactColor]="getContactColor(detailDialogContact) "(edit)="onDetailEdit()"(delete)="onDetailDelete()"(close)="closeDetailDialog()"
   ></app-contact-detail-dialog>
   }
 
