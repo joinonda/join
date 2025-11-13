@@ -98,6 +98,11 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     background: transparent;
     right: 4%;
     top: 100px;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
 
     @media (max-width: 750px) {
       top: 18px;
