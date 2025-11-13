@@ -332,7 +332,7 @@ $medium-orange: #ff8a00;
   align-items: center;
   padding: clamp(0px, 1.5vw, 16px);
   gap: 4px;
-  min-width: 183px;
+  width: 183px;
   min-height: 56px;
   background: #2a3647;
   border: none;
@@ -345,6 +345,10 @@ $medium-orange: #ff8a00;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+
+  @media (max-width: 750px) {
+    width: 140px;
+  }
 
   img {
     width: clamp(20px, 1.5vw, 24px);
@@ -359,10 +363,6 @@ $medium-orange: #ff8a00;
 
   &:active {
     transform: translateY(0);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
   }
 }
 
@@ -385,6 +385,10 @@ $medium-orange: #ff8a00;
   cursor: pointer;
   transition: all 0.2s ease;
 
+  @media (max-width: 750px) {
+    width: 118px;
+  }
+
   img {
     width: clamp(20px, 1.5vw, 24px);
     height: clamp(20px, 1.5vw, 24px);
@@ -400,10 +404,6 @@ $medium-orange: #ff8a00;
 
   &:active {
     transform: translateY(0);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
   }
 }
 
