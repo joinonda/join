@@ -1,9 +1,9 @@
-<section class="help-section">
-  <button class="back-btn" (click)="onClose()">
-    <img src="imgs/arrow-to-left.png" alt="Back" width="32" height="32" />
+<section class="help-section" role="region" aria-labelledby="help-heading" tabindex="-1">
+  <button class="back-btn" type="button" (click)="onClose()" aria-label="Go back to previous view">
+    <img src="imgs/arrow-to-left.png" alt="" width="32" height="32" aria-hidden="true" />
   </button>
   <div class="help-content">
-    <h2>Help</h2>
+    <h2 id="help-heading">Help</h2>
     <p>
       Welcome to the help page for <span class="join-span">Join</span>, your guide to using our
       kanban project management tool. Here, we'll provide an overview of what
@@ -25,9 +25,9 @@
     </p>
     <h3>How to use it</h3>
     <p>Here is a step-by-step guide on how to use <span class="join-span">Join</span>:</p>
-    <div class="how-to-use-it-container">
+    <div class="how-to-use-it-container" role="list">
       <!-- 1 -->
-      <div class="how-to-use-it-single">
+      <div class="how-to-use-it-single" role="listitem">
         <div>
           <span class="how-to-use-it-span">1.</span>
         </div>
@@ -40,7 +40,7 @@
           </p>
         </div>
       </div>
-      <div class="how-to-use-it-single">
+      <div class="how-to-use-it-single" role="listitem">
         <div>
           <span class="how-to-use-it-span">2.</span>
         </div>
@@ -54,7 +54,7 @@
           </p>
         </div>
       </div>
-      <div class="how-to-use-it-single">
+      <div class="how-to-use-it-single" role="listitem">
         <div>
           <span class="how-to-use-it-span">3.</span>
         </div>
@@ -68,7 +68,7 @@
           </p>
         </div>
       </div>
-      <div class="how-to-use-it-single">
+      <div class="how-to-use-it-single" role="listitem">
         <div>
           <span class="how-to-use-it-span">4.</span>
         </div>
@@ -80,7 +80,7 @@
           </p>
         </div>
       </div>
-      <div class="how-to-use-it-single">
+      <div class="how-to-use-it-single" role="listitem">
         <div>
           <span class="how-to-use-it-span">5.</span>
         </div>
