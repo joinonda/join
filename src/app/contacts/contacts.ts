@@ -163,7 +163,11 @@ export class Contacts implements OnInit {
       }
 
       this.closeEdit();
-    } catch (err: any) {}
+      this.toast.show('Contact successfully deleted');
+    } catch (err: any) {
+      console.error('Error deleting contact:', err);
+      this.toast.show('Error deleting contact. Please try again.');
+    }
   }
 
   closeEdit(): void {
