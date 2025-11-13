@@ -1,9 +1,9 @@
-<section class="privacy-section">
-  <button class="back-btn" (click)="onClose()">
-    <img src="imgs/arrow-to-left.png" alt="Back" width="32" height="32" />
+<section class="privacy-section" role="region" aria-labelledby="privacy-heading" tabindex="-1">
+  <button class="back-btn" type="button" (click)="onClose()" aria-label="Go back to previous view">
+    <img src="imgs/arrow-to-left.png" alt="" width="32" height="32" aria-hidden="true" />
   </button>
   <div class="privacy-content">
-    <h2>Privacy Policy</h2>
+    <h2 id="privacy-heading">Privacy Policy</h2>
 
     <p><strong>Last updated:</strong> November 2025</p>
 
