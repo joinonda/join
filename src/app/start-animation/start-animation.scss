@@ -76,6 +76,10 @@
   transform-origin: center center;
 }
 
+.logo-mobile {
+  display: none;
+}
+
 @keyframes fadeOutAnimatedLogo {
   0% {
     opacity: 1;
@@ -89,19 +93,19 @@
   0% {
     transform: translate(0, 0) scale(1);
     opacity: 1;
-    width: 274px;
-    height: 334.07px;
+    width: 100.03px;
+    height: 121.97px;
   }
   20% {
     transform: translate(0, 0) scale(1);
     opacity: 1;
-    width: 274px;
-    height: 334.07px;
+    width: 100.03px;
+    height: 121.97px;
   }
   100% {
     transform: translate(calc(-50vw + 64px + 50px), calc(-50vh + 64px + 60.985px));
     opacity: 1;
-    width: 100px;
+    width: 100.03px;
     height: 121.97px;
   }
 }
@@ -115,5 +119,86 @@
   }
   100% {
     background-color: transparent;
+  }
+}
+
+@keyframes fadeOutBackgroundMobile {
+  0% {
+    background-color: #2A3647;
+  }
+  30% {
+    background-color: #2A3647;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@media (max-width: 1024px) {
+  .logo-desktop {
+    display: none;
+  }
+
+  .logo-mobile {
+    display: block;
+  }
+
+  .animation-container {
+    background-color: #2A3647;
+    animation: fadeOutBackgroundMobile 1.8s ease-in-out forwards;
+  }
+
+  .logo {
+    width: 80px;
+    height: 97.576px;
+    animation: slideToCornerTablet 1.8s ease-in-out forwards, fadeOutAnimatedLogo 0.3s ease-in-out 1.8s forwards;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    animation: slideToCornerMobile 1.8s ease-in-out forwards, fadeOutAnimatedLogo 0.3s ease-in-out 1.8s forwards;
+  }
+}
+
+@keyframes slideToCornerTablet {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    width: 80px;
+    height: 97.576px;
+  }
+  20% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    width: 80px;
+    height: 97.576px;
+  }
+  100% {
+    transform: translate(calc(-50vw + 64px + 40px), calc(-50vh + 64px + 48.788px));
+    opacity: 1;
+    width: 80px;
+    height: 97.576px;
+  }
+}
+
+@keyframes slideToCornerMobile {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    width: 80px;
+    height: 97.576px;
+  }
+  20% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    width: 80px;
+    height: 97.576px;
+  }
+  100% {
+    transform: translate(calc(-50vw + 4vw + 40px), calc(-50vh + 70px + 48.788px));
+    opacity: 1;
+    width: 80px;
+    height: 97.576px;
   }
 }
