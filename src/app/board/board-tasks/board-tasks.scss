@@ -14,7 +14,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0 2.5%;
+  padding: 0 25px;
   background-color: #f6f7f8;
   height: auto;
   min-height: auto;
@@ -141,7 +141,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
-    
+
     &::-webkit-scrollbar {
       width: 4px;
     }
@@ -179,7 +179,7 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     padding-bottom: 8px;
     padding-right: 0;
     gap: 12px;
-    
+
     &::-webkit-scrollbar {
       height: 4px;
     }
@@ -204,4 +204,4 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     flex-shrink: 0;
     margin: 0;
   }
-} 
+}
