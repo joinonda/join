@@ -1,18 +1,26 @@
-<section class="contacts-section">
+<section class="contacts-section" role="region" aria-labelledby="contacts-heading">
   <div class="contacts-container">
     <div class="add-contact-btn-container">
-      <button class="add-contact-btn" (click)="onAdd()">
+      <button class="add-contact-btn" type="button" (click)="onAdd()">
         <span>Add new Contact</span>
-        <img src="imgs/add-new-contact-person-plus.png" width="32px" height="32px" alt="" />
+        <img
+          src="imgs/add-new-contact-person-plus.png"
+          width="32"
+          height="32"
+          alt=""
+          aria-hidden="true"
+        />
       </button>
     </div>
-    <div class="contact-list">
-      <div class="contacts-scroll">
+    <div class="contact-list" role="region" aria-label="Contact list">
+      <div class="contacts-scroll" role="list">
         @for (letter of alphabet; track letter) { @if (groupedContacts[letter]?.length) {
         <div class="contact-group">
           <div class="letter-header-container">
             <div class="letter-header-letter-box">
-              <div class="letter-header-letter">{{ letter }}</div>
+              <div class="letter-header-letter" role="heading" aria-level="3">
+                {{ letter }}
+              </div>
               <div class="letter-header-right"></div>
             </div>
             <div class="letter-header-divider"></div>
@@ -22,8 +30,19 @@
             class="contact-item"
             [class.selected]="isSelected(contact)"
             (click)="selectContact(contact)"
+            role="button"
+            tabindex="0"
+            (keydown.enter)="selectContact(contact)"
+            (keydown.space)="selectContact(contact)"
           >
-            <div class="contact-avatar" [style.background-color]="getContactColor(contact)">
+            <div
+              class="contact-avatar"
+              [style.background-color]="getContactColor(contact)"
+              role="img"
+              [attr.aria-label]="
+                getInitials(contact.firstName, contact.lastName) + ' contact avatar'
+              "
+            >
               {{ getInitials(contact.firstName, contact.lastName) }}
             </div>
             <div class="contact-info">
@@ -37,25 +56,30 @@
       </div>
     </div>
 
-    <button class="mobile-add-contact-fab" (click)="onAdd()">
-      <img src="imgs/add-new-contact-person-plus.png" alt="" />
+    <button
+      class="mobile-add-contact-fab"
+      type="button"
+      (click)="onAdd()"
+      aria-label="Add new Contact"
+    >
+      <img src="imgs/add-new-contact-person-plus.png" alt="" aria-hidden="true" />
     </button>
   </div>
   <div class="contacts-header">
     <div class="header-content">
-      <h2>Contacts</h2>
+      <h2 id="contacts-heading">Contacts</h2>
       <div class="header-separator"></div>
       <p>Better with a team</p>
     </div>
 
     @if (selectedContact) {
-    <div class="detail-container">
+    <div class="detail-container" role="region" aria-label="Selected contact details">
       <app-contact-detail
         [contact]="selectedContact"
         [contactColor]="getContactColor(selectedContact)"
         [contactKey]="selectedContact.id"
-        (edit)="onEdit()"
-        (delete)="onDelete()"
+        (edit)="(onEdit)"
+        (delete)="(onDelete)"
       ></app-contact-detail>
     </div>
     }
