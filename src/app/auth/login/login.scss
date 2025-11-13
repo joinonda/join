@@ -5,6 +5,9 @@
   flex-direction: column;
   position: relative;
   font-family: 'Inter', sans-serif;
+  max-width: 1920px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .logo-container {
@@ -17,7 +20,7 @@
     position: static;
     display: flex;
     justify-content: flex-start;
-    padding: 20px 20px 0;
+    padding: 70px 4% 0;
   }
 }
 
@@ -25,15 +28,12 @@
   width: 100px;
   height: 121.97px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 80px;
     height: 97.576px;
-  }
+  } 
 
-  @media (max-width: 480px) {
-    width: 66.67px;
-    height: 81.31px;
-  }
+
 }
 
 .login-container {
@@ -44,6 +44,15 @@
   align-items: center;
   padding: 20px;
   position: relative;
+
+
+  @media (max-width: 768px) {
+    top: 0px;
+  }
+
+  @media (max-width: 480px) {
+    top: 20px;
+  }
 }
 
 .login-form {
@@ -394,6 +403,7 @@
   align-items: center;
   gap: 8px;
   padding: 40px 0;
+  z-index: 10;
 
   @media (max-width: 480px) {
     flex-direction: row;
