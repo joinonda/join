@@ -65,6 +65,7 @@ export class AuthService {
     this.authState.set(null);
     this.currentUser.set(null);
     localStorage.removeItem(this.STORAGE_KEY);
+    sessionStorage.removeItem('greetingShown');
     this.router.navigate(['/login']);
   }
 

@@ -1,0 +1,81 @@
+.greeting-screen {
+  position: fixed;
+  top: 96px;
+  left: 232px;
+  right: 0;
+  height: calc(100vh - 96px);
+  background-color: #f6f7f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+
+  @media (max-width: 1024px) {
+    top: 80px;
+    left: 0;
+    height: calc(100vh - 160px);
+  }
+}
+
+.greeting-screen.fade-out {
+  opacity: 0;
+}
+
+.greeting-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.greeting-text {
+  font-size: 64px;
+  font-weight: 700;
+  color: #2A3647;
+  margin: 0;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.greeting-content .user-name {
+  font-size: 48px;
+  font-weight: bold;
+  color: #29abe2 !important;
+  margin: 0;
+  animation: fadeIn 0.5s ease-in 0.2s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .greeting-text {
+    font-size: 48px;
+  }
+
+  .greeting-content .user-name {
+    font-size: 36px;
+    color: #29abe2;
+  }
+}
+
+@media (max-width: 768px) {
+  .greeting-text {
+    font-size: 36px;
+  }
+
+  .greeting-content .user-name {
+    font-size: 28px;
+    color: #29abe2;
+  }
+}
+

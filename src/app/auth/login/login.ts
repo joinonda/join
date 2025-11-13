@@ -32,7 +32,11 @@ export class LoginComponent {
 
     try {
       await this.authService.signIn(this.email, this.password);
-      this.router.navigate(['/summary']);
+      if (window.innerWidth > 1024) {
+        this.router.navigate(['/summary']);
+      } else {
+        this.router.navigate(['/greeting']);
+      }
     } catch (error: any) {
       this.errorMessage = this.mapAuthError(error.code);
     } finally {
@@ -42,7 +46,11 @@ export class LoginComponent {
 
   onGuestLogin() {
     this.authService.loginAsGuest();
-    this.router.navigate(['/summary']);
+    if (window.innerWidth > 1024) {
+      this.router.navigate(['/summary']);
+    } else {
+      this.router.navigate(['/greeting']);
+    }
   }
 
   onSignUp() {

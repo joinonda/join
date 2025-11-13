@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
 import { Task } from '../interfaces/task-interface';
@@ -12,9 +12,11 @@ import { Task } from '../interfaces/task-interface';
   templateUrl: './summary.html',
   styleUrl: './summary.scss',
 })
-export class Summary {
+export class Summary implements OnInit {
   private dataService = inject(DataService);
   private authService = inject(AuthService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   get todoCount(): number {
     return this.dataService.todo.length;
@@ -87,5 +89,23 @@ export class Summary {
     }
 
     return 'Guest User';
+  }
+
+  ngOnInit(): void {
+    const isDesktop = window.innerWidth > 1024;
+    
+    if (!isDesktop) {
+      const greetingShown = sessionStorage.getItem('greetingShown');
+      const fromGreeting = this.route.snapshot.queryParams['fromGreeting'];
+      
+      if (!greetingShown && !fromGreeting) {
+        this.router.navigate(['/greeting']);
+      } else if (fromGreeting) {
+        sessionStorage.setItem('greetingShown', 'true');
+        this.router.navigate(['/summary'], { replaceUrl: true });
+      }
+    } else if (this.route.snapshot.queryParams['fromGreeting']) {
+      this.router.navigate(['/summary'], { replaceUrl: true });
+    }
   }
 }

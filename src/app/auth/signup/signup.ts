@@ -77,7 +77,11 @@ export class SignupComponent {
         phone: '',
       });
       
-      this.router.navigate(['/summary']);
+      if (window.innerWidth > 1024) {
+        this.router.navigate(['/summary']);
+      } else {
+        this.router.navigate(['/greeting']);
+      }
     } catch (error: any) {
       this.errorMessage = this.mapSignupError(error.code);
     } finally {
