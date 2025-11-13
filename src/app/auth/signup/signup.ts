@@ -97,7 +97,7 @@ export class SignupComponent {
       case 'auth/invalid-email':
         return 'Invalid email address';
       case 'auth/weak-password':
-        return 'The password must be at least 6 characters long.';
+        return 'Password must be at least 6 characters.';
       default:
         return 'Registration failed';
     }
