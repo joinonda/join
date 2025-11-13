@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FirebaseService } from '../../services/firebase.service';
 import { updateProfile } from '@angular/fire/auth';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
@@ -26,6 +27,12 @@ export class SignupComponent {
   private router = inject(Router);
   private authService = inject(AuthService);
   private firebaseService = inject(FirebaseService);
+
+  private location = inject(Location);
+
+  onClose(): void {
+    this.location.back();
+  }
 
   async onSignUp() {
     if (!this.name || !this.email || !this.password || !this.confirmPassword) {

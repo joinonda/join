@@ -21,6 +21,42 @@
   }
 }
 
+.back-btn {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+
+  &:hover {
+    background: #f0f0f0;
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 380px) {
+    position: relative;
+    left: auto;
+    top: auto;
+    align-self: center;
+    margin-bottom: 16px;
+  }
+}
+
 .logo {
   width: 100px;
   height: 121.97px;
@@ -58,17 +94,16 @@
   max-width: 598px;
   position: relative;
   isolation: isolate;
+  top: 80px;
 
   @media (max-width: 768px) {
     padding: 48px 32px;
     border-radius: 20px;
     gap: 24px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 32px 24px;
+    top: 0px; 
   }
 }
+
 
 .back-arrow {
   position: absolute;
@@ -102,13 +137,23 @@
 }
 
 .signup-header {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
   width: 100%;
-  max-width: 315px;
+  max-width: 422px;
   z-index: 0;
+  margin-bottom: 16px;
+}
+
+.header-title-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
 }
 
 .signup-title {
@@ -125,11 +170,7 @@
   height: auto;
 
   @media (max-width: 768px) {
-    font-size: 48px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 36px;
+    font-size: 47px;
   }
 }
 
@@ -334,7 +375,7 @@
   }
 
   @media (max-width: 480px) {
-    width: 100%;
+    width: 50%;
     font-size: 18px;
   }
 }
@@ -347,7 +388,6 @@
   padding: 40px 0;
 
   @media (max-width: 480px) {
-    flex-direction: column;
     gap: 16px;
     padding: 20px 0;
   }
