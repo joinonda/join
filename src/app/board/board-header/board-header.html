@@ -1,46 +1,53 @@
 <div class="board-wrapper">
-  <div class="board-container">
+  <div class="board-container" role="region" aria-labelledby="board-title">
     <div class="board-header">
       <div class="header-top-row">
-        <h2 class="board-title">Board</h2>
-        <button class="add-task-button-icon"(click)="openAddTaskComponent()">
-          <span class="plus-icon-mobile">+</span>
+        <h2 id="board-title" class="board-title">Board</h2>
+        <button
+          type="button"
+          class="add-task-button-icon"
+          (click)="openAddTaskComponent()"
+          aria-label="Add task"
+        >
+          <span class="plus-icon-mobile" aria-hidden="true">+</span>
         </button>
       </div>
 
       <div class="board-actions">
-        <div class="search-container">
+        <div class="search-container" role="search">
           <input
             type="text"
             placeholder="Find Task"
             class="search-input"
             [value]="searchTerm()"
             (input)="onSearchInput($event)"
+            aria-label="Find task"
           />
-          <div class="search-separator">|</div>
+          <div class="search-separator" aria-hidden="true">|</div>
           <img
             src="imgs/search.png"
             alt="Search"
             class="search-icon"
             (click)="performSearch()"
+            role="button"
           />
         </div>
 
-        <button class="add-task-button desktop-only"(click)="openAddTaskOverlay()">
+        <button type="button" class="add-task-button desktop-only" (click)="openAddTaskOverlay()">
           <span>Add task</span>
-          <img src="imgs/boardheader/plus.png" alt="Plus" class="plus-icon" />
+          <img src="imgs/boardheader/plus.png" alt="" class="plus-icon" aria-hidden="true" />
         </button>
       </div>
     </div>
 
     @if (searchTerm() && !hasSearchResults) {
-      <div class="no-results-message">
-        <p>No results found for "{{ searchTerm() }}"</p>
-      </div>
+    <div class="no-results-message" role="status" aria-live="polite">
+      <p>No results found for "{{ searchTerm() }}"</p>
+    </div>
     }
   </div>
 </div>
 
 @if (isAddTaskDialogOpen() && !isMobile()) {
-  <app-board-add-task-dialog (closed)="onDialogClosed()"></app-board-add-task-dialog>
+<app-board-add-task-dialog (closed)="onDialogClosed()"></app-board-add-task-dialog>
 }
