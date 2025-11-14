@@ -171,7 +171,7 @@ $medium-orange: #ff8a00;
   max-width: 100%;
   min-width: 100%;
   width: 100%;
-  padding: 12px 16px 12px 16px;
+  padding: 12px 30px 12px 10px;
   border: 1px solid $input-border;
   border-radius: 8px;
   font-size: 16px;
@@ -631,7 +631,7 @@ $medium-orange: #ff8a00;
 
 .subtasks-list {
   list-style: disc;
-  padding-left: 20px;
+  padding-left: 10px;
   margin: 10px 0 0 0;
   display: block;
   width: 100%;
@@ -669,6 +669,10 @@ $medium-orange: #ff8a00;
     list-style: none;
     padding-right: 40px;
 
+    @media (max-width: 450px) {
+      padding-right: 75px;
+    }
+
     &::before {
       content: '•';
       position: absolute;
@@ -692,13 +696,16 @@ $medium-orange: #ff8a00;
 
     .subtask-text {
       flex: 1;
+      word-wrap: break-word;
+      text-wrap: wrap;
+      width: 230px;
+      margin: 0 34px 0 0;
     }
 
     .subtask-edit-input {
       flex: 1;
       padding: 0;
       border: none;
-      border-bottom: 2px solid #29abe2;
       border-radius: 0;
       font-size: 16px;
       font-family: 'Inter', sans-serif;

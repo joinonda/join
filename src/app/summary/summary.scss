@@ -372,33 +372,16 @@ section {
   }
 }
 
-@keyframes fadeInSlide {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .greeting {
   width: 100%;
-  animation: fadeInSlide 1s ease-out;
 
-  @media (max-width: 1060px) and (min-width: 1025px) {
-    display: none;
-  }
-
-  @media (max-width: 826px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 
   p {
     font-size: clamp(1.5em, 6.667vw - 3.5em, 2.5em);
     color: #2a3647;
-    animation: fadeInSlide 1.2s ease-out;
   }
 
   .name {
@@ -408,7 +391,6 @@ section {
     word-break: break-word;
     overflow-wrap: break-word;
     white-space: nowrap;
-    animation: fadeInSlide 1.4s ease-out;
   }
 }
 
