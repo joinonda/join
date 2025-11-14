@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -6,15 +6,17 @@ import { AuthService } from '../../services/auth.service';
 import { FirebaseService } from '../../services/firebase.service';
 import { updateProfile } from '@angular/fire/auth';
 import { Location } from '@angular/common';
+import { ToastComponent } from '../../shared/toast/toast';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, ToastComponent],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })
 export class SignupComponent {
+  @ViewChild(ToastComponent) toast!: ToastComponent;
   name: string = '';
   email: string = '';
   password: string = '';
@@ -48,26 +50,31 @@ export class SignupComponent {
     try {
       const cred = await this.authService.signUp(this.email, this.password);
 
+      this.toast.show('You Signed Up successfully', 1500);
+
       if (this.name && cred.user) {
-        await updateProfile(cred.user, { displayName: this.name });
+        updateProfile(cred.user, { displayName: this.name }).catch(() => {});
       }
 
       const nameParts = this.name.trim().split(' ');
       const firstName = nameParts[0] || '';
       const lastName = nameParts.slice(1).join(' ') || '';
 
-      await this.firebaseService.addContactToDatabase({
+      this.firebaseService.addContactToDatabase({
         firstName,
         lastName,
         email: this.email,
         phone: '',
-      });
+      }).catch(() => {});
 
-      if (window.innerWidth > 1024) {
-        this.router.navigate(['/summary']);
-      } else {
-        this.router.navigate(['/greeting']);
-      }
+
+      setTimeout(() => {
+        if (window.innerWidth > 1024) {
+          this.router.navigate(['/summary']);
+        } else {
+          this.router.navigate(['/greeting']);
+        }
+      }, 2500);
     } catch (error: any) {
       this.errorMessage = this.mapSignupError(error.code);
     } finally {
