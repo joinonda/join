@@ -201,7 +201,17 @@
   text-wrap: nowrap;
 
   @media (max-width: 1024px) {
-    display: none;
+    flex-direction: row;
+    margin: 48px 20px 0 0;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    text-wrap: nowrap;
+
+    @media (max-width: 380px) {
+      gap: 15px;
+      white-space: wrap;
+    }
   }
 
   a {
