@@ -39,7 +39,7 @@ $red: #ff3d3d;
   textarea {
     max-width: 100%;
     width: 100%;
-    padding: 12px 16px 12px 16px;
+    padding: 12px 10px 12px 10px;
     border: 1px solid $input-border;
     border-radius: 8px;
     font-size: 16px;
@@ -53,10 +53,8 @@ $red: #ff3d3d;
     position: relative;
   }
 
-  @media (max-width: 450px) {
-    .subtask-input {
-      padding-right: 75px;
-    }
+  .subtask-input {
+    padding-right: 75px;
   }
 
   input[type='date']::-webkit-calendar-picker-indicator {
