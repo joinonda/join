@@ -10,7 +10,7 @@ section {
 
   @media (max-width: 1024px) {
     margin-left: 0;
-    margin-top: 25px;
+    margin-top: 19px;
     height: calc(100vh - 160px);
   }
 }
@@ -390,10 +390,9 @@ section {
     font-weight: bold;
     word-break: break-word;
     overflow-wrap: break-word;
-    white-space: nowrap;
+    white-space: wrap;
   }
 }
-
 
 @media (max-width: 580px) {
   section {
@@ -420,7 +419,6 @@ section {
     }
 
     span {
-
       order: 2;
       font-size: 20px;
     }
