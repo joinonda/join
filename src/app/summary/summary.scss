@@ -104,7 +104,7 @@ section {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    background-image: url('/imgs/summary/pen-default.png');
+    background-image: url('../../../public/imgs/summary/pen-default.png');
 
     @media (max-width: 580px) {
       width: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
@@ -154,7 +154,7 @@ section {
   }
 
   &:hover .icon {
-    background-image: url('/imgs/summary/pen-hover.png');
+    background-image: url('../../../public/imgs/summary/pen-hover.png');
   }
 }
 
@@ -177,7 +177,7 @@ section {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    background-image: url('/imgs/summary/checkmark-default.png');
+    background-image: url('../../../public/imgs/summary/checkmark-default.png');
 
     @media (max-width: 580px) {
       width: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
@@ -227,7 +227,7 @@ section {
   }
 
   &:hover .icon {
-    background-image: url('/imgs/summary/checkmark-hover.png');
+    background-image: url('../../../public/imgs/summary/checkmark-hover.png');
   }
 }
 
@@ -260,7 +260,7 @@ section {
     .icon {
       width: 60px;
       height: 60px;
-      background-image: url('/imgs/summary/urgent-default.png');
+      background-image: url('../../../public/imgs/summary/urgent-default.png');
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
