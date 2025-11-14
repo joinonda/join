@@ -212,6 +212,14 @@
       gap: 15px;
       white-space: wrap;
     }
+
+    &.hide-on-mobile {
+      display: none;
+    }
+
+    &.hide-when-logged-in {
+      display: none;
+    }
   }
 
   a {
@@ -222,7 +230,15 @@
     text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
+      color: #29abe2;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    &.not-logged-in {
+      a {
+        color: #f1f1f1;
+      }
     }
   }
 }
