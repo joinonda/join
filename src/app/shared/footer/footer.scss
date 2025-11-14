@@ -55,6 +55,18 @@
   }
   a {
     cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+
+    &:active {
+      text-decoration: none;
+      outline: none;
+    }
+
+    &:visited {
+      text-decoration: none;
+    }
   }
 }
 
@@ -67,6 +79,9 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 
   @media (max-width: 1024px) {
     display: flex;
@@ -87,6 +102,16 @@
       background-color: #091931;
       border-radius: 16px;
     }
+  }
+
+  &:active {
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  &:visited {
+    text-decoration: none;
   }
 
   &.active {
@@ -164,6 +189,7 @@
 
 .mobile-label {
   display: none;
+  text-decoration: none;
 
   @media (max-width: 1024px) {
     display: block;
@@ -172,6 +198,7 @@
     font-weight: 400;
     color: #ffffff;
     text-align: center;
+    text-decoration: none;
   }
 }
 
@@ -228,9 +255,22 @@
     font-weight: 700;
     color: #a8a8a8;
     text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
       color: #29abe2;
+    }
+
+    &:active {
+      text-decoration: none;
+      outline: none;
+      color: #a8a8a8;
+    }
+
+    &:visited {
+      text-decoration: none;
+      color: #a8a8a8;
     }
   }
 
@@ -238,6 +278,17 @@
     &.not-logged-in {
       a {
         color: #f1f1f1;
+
+        &:active {
+          text-decoration: none;
+          outline: none;
+          color: #f1f1f1;
+        }
+
+        &:visited {
+          text-decoration: none;
+          color: #f1f1f1;
+        }
       }
     }
   }
