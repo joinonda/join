@@ -258,19 +258,20 @@
     outline: none;
     -webkit-tap-highlight-color: transparent;
 
+    &:visited {
+      text-decoration: none;
+      color: #a8a8a8;
+    }
+
     &:hover {
       color: #29abe2;
+      text-decoration: none;
     }
 
     &:active {
       text-decoration: none;
       outline: none;
-      color: #a8a8a8;
-    }
-
-    &:visited {
-      text-decoration: none;
-      color: #a8a8a8;
+      color: #29abe2;
     }
   }
 
@@ -279,14 +280,18 @@
       a {
         color: #f1f1f1;
 
-        &:active {
+        &:visited {
           text-decoration: none;
-          outline: none;
           color: #f1f1f1;
         }
 
-        &:visited {
+        &:hover {
+          color: #f1f1f1;
+        }
+
+        &:active {
           text-decoration: none;
+          outline: none;
           color: #f1f1f1;
         }
       }
