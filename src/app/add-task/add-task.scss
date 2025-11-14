@@ -698,8 +698,12 @@ $medium-orange: #ff8a00;
       flex: 1;
       word-wrap: break-word;
       text-wrap: wrap;
-      width: 230px;
+      width: 250px;
       margin: 0 34px 0 0;
+
+      @media (max-width: 480px) {
+        width: 230px;
+      }
     }
 
     .subtask-edit-input {

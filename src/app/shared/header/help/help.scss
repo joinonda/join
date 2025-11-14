@@ -26,19 +26,43 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
 
   .help-content {
     margin: 94px 4% 0 4%;
+    max-width: 1550px;
   }
 
-  h2 {
-    font-size: 61px;
-    font-weight: 700;
-    margin: 0 0 35px 0;
+  .help-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    @media (max-width: 750px) {
-      font-size: 47px;
-      margin: -80px 0 35px 0;
-      padding-right: 60px;
+    .back-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      margin: -50px 0 0px 0;
+
+      @media (max-width: 750px) {
+        font-size: 47px;
+        margin: -114px 0 0px 0;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    h2 {
+      font-size: 61px;
+      font-weight: 700;
+      margin: 0 0 35px 0;
+
+      @media (max-width: 750px) {
+        font-size: 47px;
+        margin: -80px 0 35px 0;
+        padding-right: 60px;
+      }
     }
   }
+
   @media (max-width: 1024px) {
     margin: 97px 0 0px 0;
   }
@@ -89,23 +113,6 @@ $overlay-bg: rgba(0, 0, 0, 0.4);
     p:last-of-type {
       font-size: clamp(16px, 1.5vw, 20px);
       font-weight: 400;
-    }
-  }
-
-  .back-btn {
-    position: absolute;
-    border: none;
-    background: transparent;
-    right: 4%;
-    top: 100px;
-    cursor: pointer;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 750px) {
-      top: 18px;
     }
   }
 }

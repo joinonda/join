@@ -1,9 +1,17 @@
 <section class="help-section" role="region" aria-labelledby="help-heading" tabindex="-1">
-  <button class="back-btn" type="button" (click)="onClose()" aria-label="Go back to previous view">
-    <img src="imgs/arrow-to-left.png" alt="" width="32" height="32" aria-hidden="true" />
-  </button>
   <div class="help-content">
-    <h2 id="help-heading">Help</h2>
+    <div class="help-header">
+      <h2 id="help-heading">Help</h2>
+      <button
+        class="back-btn"
+        type="button"
+        (click)="onClose()"
+        aria-label="Go back to previous view"
+      >
+        <img src="imgs/arrow-to-left.png" alt="" width="32" height="32" aria-hidden="true" />
+      </button>
+    </div>
+
     <p>
       Welcome to the help page for <span class="join-span">Join</span>, your guide to using our
       kanban project management tool. Here, we'll provide an overview of what
