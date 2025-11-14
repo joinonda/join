@@ -49,7 +49,8 @@
         <div class="input-group">
           <div class="input-field">
             <input
-              type="password"
+              #passwordInput
+              [type]="showPassword ? 'text' : 'password'"
               [(ngModel)]="password"
               name="password"
               #passwordCtrl="ngModel"
@@ -57,15 +58,19 @@
               required
               minlength="6"
               class="form-input"
+              (focus)="onPasswordFocus()"
+              (blur)="onPasswordBlur()"
               [attr.aria-invalid]="
                 passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)
               "
               aria-describedby="password-error"
             />
             <img
-              class="input-icon"
-              src="imgs/loginsignup/lock.png"
-              alt="Password icon"
+              class="input-icon password-toggle"
+              [src]="isPasswordFocused ? (showPassword ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
+              [alt]="isPasswordFocused ? (showPassword ? 'Hide password' : 'Show password') : 'Password icon'"
+              (mousedown)="togglePasswordVisibility($event)"
+              [style.cursor]="isPasswordFocused ? 'pointer' : 'default'"
               width="24"
               height="24"
             />

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -12,14 +12,42 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.scss',
 })
 export class LoginComponent {
+  @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
+  
   email: string = '';
   password: string = '';
   rememberMe: boolean = false;
   errorMessage: string = '';
   isLoading: boolean = false;
+  showPassword: boolean = false;
+  isPasswordFocused: boolean = false;
 
   private router = inject(Router);
   private authService = inject(AuthService);
+
+  togglePasswordVisibility(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.isPasswordFocused) {
+      this.showPassword = !this.showPassword;
+      setTimeout(() => {
+        this.passwordInput?.nativeElement.focus();
+      }, 0);
+    }
+  }
+
+  onPasswordFocus(): void {
+    this.isPasswordFocused = true;
+  }
+
+  onPasswordBlur(): void {
+    setTimeout(() => {
+      if (!this.passwordInput?.nativeElement.matches(':focus')) {
+        this.isPasswordFocused = false;
+        this.showPassword = false;
+      }
+    }, 150);
+  }
 
   async onLogin(form: NgForm) {
     if (form.invalid) {

@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -17,6 +17,8 @@ import { ToastComponent } from '../../shared/toast/toast';
 })
 export class SignupComponent {
   @ViewChild(ToastComponent) toast!: ToastComponent;
+  @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('confirmPasswordInput') confirmPasswordInput!: ElementRef<HTMLInputElement>;
   name: string = '';
   email: string = '';
   password: string = '';
@@ -25,12 +27,64 @@ export class SignupComponent {
   passwordMismatch: boolean = false;
   errorMessage: string = '';
   isLoading: boolean = false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+  isPasswordFocused: boolean = false;
+  isConfirmPasswordFocused: boolean = false;
 
   private router = inject(Router);
   private authService = inject(AuthService);
   private firebaseService = inject(FirebaseService);
 
   private location = inject(Location);
+
+  togglePasswordVisibility(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.isPasswordFocused) {
+      this.showPassword = !this.showPassword;
+      setTimeout(() => {
+        this.passwordInput?.nativeElement.focus();
+      }, 0);
+    }
+  }
+
+  toggleConfirmPasswordVisibility(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.isConfirmPasswordFocused) {
+      this.showConfirmPassword = !this.showConfirmPassword;
+      setTimeout(() => {
+        this.confirmPasswordInput?.nativeElement.focus();
+      }, 0);
+    }
+  }
+
+  onPasswordFocus(): void {
+    this.isPasswordFocused = true;
+  }
+
+  onPasswordBlur(): void {
+    setTimeout(() => {
+      if (!this.passwordInput?.nativeElement.matches(':focus')) {
+        this.isPasswordFocused = false;
+        this.showPassword = false;
+      }
+    }, 150);
+  }
+
+  onConfirmPasswordFocus(): void {
+    this.isConfirmPasswordFocused = true;
+  }
+
+  onConfirmPasswordBlur(): void {
+    setTimeout(() => {
+      if (!this.confirmPasswordInput?.nativeElement.matches(':focus')) {
+        this.isConfirmPasswordFocused = false;
+        this.showConfirmPassword = false;
+      }
+    }, 150);
+  }
 
   onClose(): void {
     this.location.back();
