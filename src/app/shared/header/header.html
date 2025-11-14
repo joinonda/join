@@ -4,9 +4,11 @@
   <h1>Kanban Project Management Tool</h1>
   
   <div class="header-actions">
+    @if(isLoggedIn()) {
     <button (click)="navigateToHelp()" title="Help" class="help-link-desktop">
       <img class="questionmark-img" src="imgs/questionmark-small.png" alt="Help Questionmark Icon" />
     </button>
+    }
 
     <div class="avatar-container" [class.hidden-mobile-legal]="shouldHideAvatarOnMobileLegal">
       @if(isLoggedIn()){
