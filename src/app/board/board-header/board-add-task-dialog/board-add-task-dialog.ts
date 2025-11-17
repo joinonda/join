@@ -8,7 +8,7 @@ import { Task } from '../../../interfaces/task-interface';
   standalone: true,
   imports: [CommonModule, Addtask],
   templateUrl: './board-add-task-dialog.html',
-  styleUrl: './board-add-task-dialog.scss'
+  styleUrls: ['./board-add-task-dialog.scss', './board-add-task-dialog-mobile.scss']
 })
 export class BoardAddTaskDialog {
   closed = output<void>();
