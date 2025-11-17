@@ -123,11 +123,7 @@ export class SignupComponent {
 
 
       setTimeout(() => {
-        if (window.innerWidth > 1024) {
-          this.router.navigate(['/summary']);
-        } else {
-          this.router.navigate(['/greeting']);
-        }
+        this.router.navigate(['/login']);
       }, 2500);
     } catch (error: any) {
       this.errorMessage = this.mapSignupError(error.code);
