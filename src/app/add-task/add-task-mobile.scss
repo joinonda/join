@@ -1,0 +1,118 @@
+$red: #ff3d3d;
+
+@media (max-width: 1024px) {
+  .addtask-section {
+    margin-left: 0;
+    margin-top: 80px;
+    height: calc(100vh - 160px);
+  }
+
+  .addtask-content {
+    position: relative;
+    top: 30px;
+    justify-content: center;
+    gap: 18px;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .addtask-bottom {
+    gap: 16px;
+    margin: 0 0 44px 0;
+  }
+}
+
+@media (max-width: 750px) {
+  .addtask-header {
+    height: 43px;
+    padding-left: 4%;
+    margin: 31px 0 0px 0;
+
+    h2 {
+      font-size: 47px;
+    }
+  }
+
+  .addtask-content {
+    padding: 0 4%;
+  }
+
+  .form-left-and-form-right {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: clip;
+    margin-right: -7px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
+
+  .form-left,
+  .form-right {
+    width: 100%;
+  }
+
+  .addtask-bottom-left {
+    display: none;
+  }
+
+  .required-mobile {
+    display: block;
+
+    span {
+      color: $red;
+    }
+  }
+
+  .btn-primary {
+    width: 140px;
+  }
+
+  .btn-secondary {
+    width: 118px;
+  }
+
+  .addtask-bottom {
+    gap: 16px;
+    margin: 0 0 44px 0;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 500px) {
+  .priority-form .priority-button {
+    font-size: 0;
+    max-width: 100px;
+    min-width: 50px;
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .addtask-bottom-right {
+    gap: 12px;
+  }
+
+  .subtasks-list li .subtask-text {
+    width: 230px;
+  }
+}
+
+@media (max-width: 450px) {
+  .subtasks-list li {
+    padding-right: 75px;
+  }
+}
+
