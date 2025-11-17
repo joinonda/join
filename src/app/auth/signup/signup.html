@@ -27,7 +27,6 @@
               placeholder="Name"
               required
               pattern="^\S+\s+[A-Za-zÀ-ÖØ-öø-ÿ].*$"
-              title="Please enter first and last name (e.g. John Doe)."
               class="form-input"
               [attr.aria-invalid]="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)"
               aria-describedby="name-error"
@@ -43,7 +42,7 @@
 
           @if (nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)) {
           <p class="error-message" id="name-error" role="alert" aria-live="polite">
-            Name is required.
+            Full name is required.
           </p>
           }
         </div>
