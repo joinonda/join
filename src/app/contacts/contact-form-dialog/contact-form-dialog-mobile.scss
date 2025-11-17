@@ -1,0 +1,187 @@
+@media (max-width: 1280px) {
+  .dialog-container {
+    width: 95%;
+    max-width: 1100px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dialog-container {
+    width: 95%;
+    height: calc(100vh - 160px);
+    animation: slideInFromBottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .right-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .avatar-container {
+    img {
+      width: 120px;
+      height: auto;
+    }
+    margin-top: 20px;
+  }
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .contact-form {
+    gap: 24px;
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 1140px) {
+  .dialog-title {
+    white-space: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .dialog-container {
+    flex-direction: column;
+    width: 95%;
+    overflow-y: auto;
+    position: relative;
+    animation: slideInFromBottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .dialog-left {
+    width: 100%;
+    align-items: center;
+    padding: 0px 2px;
+    height: 40%;
+  }
+
+  .dialog-header {
+    align-items: center;
+  }
+
+  .dialog-title {
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .dialog-subtitle {
+    text-align: center;
+  }
+
+  .dialog-right {
+    padding: 0px 3% 20px 3%;
+  }
+
+  .right-content {
+    gap: 0;
+    margin-top: 40px;
+  }
+
+  .close-btn {
+    top: 20px;
+    right: 3.5%;
+
+    .close-btn-dark {
+      display: none;
+    }
+    .close-btn-white {
+      display: block;
+    }
+  }
+
+  .avatar-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    margin: 0;
+  }
+
+  .contact-form {
+    margin-top: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button-group {
+    gap: 16px;
+  }
+
+  .btn-secondary#cancel-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .avatar-container {
+    img {
+      width: 88px;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .button-group {
+    gap: 2%;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+
+  .btn-secondary {
+    width: 100%;
+  }
+}
+
+@media (max-height: 768px) {
+  .avatar-container {
+    top: 40%;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 26px;
+    top: 25%;
+  }
+}
+
+@media (max-height: 697px) {
+  .avatar-container {
+    top: 39%;
+  }
+}
+
+@media (max-height: 680px) {
+  .avatar-container {
+    top: 36%;
+  }
+}
+
+@media (max-height: 670px) {
+  .avatar-container {
+    img {
+      width: 68px;
+      height: auto;
+    }
+  }
+}
+
+@media (max-height: 480px) {
+  .avatar {
+    width: 60px;
+    height: auto;
+  }
+}
+
