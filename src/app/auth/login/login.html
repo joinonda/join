@@ -24,7 +24,9 @@
               required
               email
               class="form-input"
-              [attr.aria-invalid]="(emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) || !!emailError()"
+              [attr.aria-invalid]="
+                (emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) || !!emailError()
+              "
               aria-describedby="email-error"
             />
             <img
@@ -37,20 +39,15 @@
           </div>
 
           @if ((emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) || emailError()) {
-            <p
-              class="error-text"
-              id="email-error"
-              role="alert"
-              aria-live="polite"
-            >
-              @if (emailError()) {
-                <span>{{ emailError() }}</span>
-              } @else if (emailCtrl.errors?.['required'] && (emailCtrl.dirty || emailCtrl.touched)) {
-                <span>Email is required.</span>
-              } @else if (emailCtrl.errors?.['email'] && (emailCtrl.dirty || emailCtrl.touched)) {
-                <span>Please enter a valid email address.</span>
-              }
-            </p>
+          <p class="error-text" id="email-error" role="alert" aria-live="polite">
+            @if (emailError()) {
+            <span>{{ emailError() }}</span>
+            } @else if (emailCtrl.errors?.['required'] && (emailCtrl.dirty || emailCtrl.touched)) {
+            <span>Email is required.</span>
+            } @else if (emailCtrl.errors?.['email'] && (emailCtrl.dirty || emailCtrl.touched)) {
+            <span>Enter a valid email.</span>
+            }
+          </p>
           }
         </div>
 
@@ -70,14 +67,27 @@
               (focus)="onPasswordFocus()"
               (blur)="onPasswordBlur()"
               [attr.aria-invalid]="
-                (passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) || !!passwordError()
+                (passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) ||
+                !!passwordError()
               "
               aria-describedby="password-error"
             />
             <img
               class="input-icon password-toggle"
-              [src]="isPasswordFocused() ? (showPassword() ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
-              [alt]="isPasswordFocused() ? (showPassword() ? 'Hide password' : 'Show password') : 'Password icon'"
+              [src]="
+                isPasswordFocused()
+                  ? showPassword()
+                    ? 'imgs/visibility-off.png'
+                    : 'imgs/visibility.png'
+                  : 'imgs/loginsignup/lock.png'
+              "
+              [alt]="
+                isPasswordFocused()
+                  ? showPassword()
+                    ? 'Hide password'
+                    : 'Show password'
+                  : 'Password icon'
+              "
               (mousedown)="togglePasswordVisibility($event)"
               [style.cursor]="isPasswordFocused() ? 'pointer' : 'default'"
               width="24"
@@ -85,25 +95,17 @@
             />
           </div>
 
-          @if ((passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) || passwordError()) {
-            <p
-              class="error-text"
-              id="password-error"
-              role="alert"
-              aria-live="polite"
-            >
-              @if (passwordCtrl.errors?.['required'] && !passwordError()) {
-                <span>Password is required.</span>
-              }
-              @if (passwordCtrl.errors?.['minlength'] && !passwordError()) {
-                <span>
-                  Password must be at least 6 characters.
-                </span>
-              }
-              @if (passwordError()) {
-                <span>{{ passwordError() }}</span>
-              }
-            </p>
+          @if ((passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) ||
+          passwordError()) {
+          <p class="error-text" id="password-error" role="alert" aria-live="polite">
+            @if (passwordCtrl.errors?.['required'] && !passwordError()) {
+            <span>Password is required.</span>
+            } @if (passwordCtrl.errors?.['minlength'] && !passwordError()) {
+            <span> At least 6 characters required. </span>
+            } @if (passwordError()) {
+            <span>{{ passwordError() }}</span>
+            }
+          </p>
           }
         </div>
 
