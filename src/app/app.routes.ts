@@ -10,16 +10,17 @@ import { Privacy } from './shared/privacy/privacy';
 import { Help } from './shared/header/help/help';
 import { StartAnimation } from './start-animation/start-animation';
 import { GreetingScreen } from './greeting-screen/greeting-screen';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: StartAnimation },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'greeting', component: GreetingScreen },
-  { path: 'summary', component: Summary },
-  { path: 'contact', component: Contacts },
-  { path: 'board', component: Board },
-  { path: 'add-task', component: Addtask },
+  { path: 'greeting', component: GreetingScreen, canActivate: [authGuard] },
+  { path: 'summary', component: Summary, canActivate: [authGuard] },
+  { path: 'contact', component: Contacts, canActivate: [authGuard] },
+  { path: 'board', component: Board, canActivate: [authGuard] },
+  { path: 'add-task', component: Addtask, canActivate: [authGuard] },
   { path: 'legal-notice', component: Legalnotice },
   { path: 'privacy-policy', component: Privacy },
   { path: 'help', component: Help },
