@@ -96,15 +96,22 @@ export class Summary implements OnInit {
   /**
    * Gets the next upcoming deadline from open tasks.
    * Filters tasks with due dates, excludes invalid and past dates, and returns the earliest future deadline.
+   * Includes deadlines from today regardless of time.
    * @returns The next deadline date, or null if no upcoming deadlines exist.
    */
   get nextDeadline(): Date | null {
-    const now = new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     const upcoming = this.openTasks
       .filter((t) => !!t.dueDate)
       .map((t) => new Date(t.dueDate))
-      .filter((d) => !isNaN(d.getTime()) && d >= now)
+      .filter((d) => {
+        if (isNaN(d.getTime())) return false;
+        const dateOnly = new Date(d);
+        dateOnly.setHours(0, 0, 0, 0);
+        return dateOnly >= today;
+      })
       .sort((a, b) => a.getTime() - b.getTime());
 
     return upcoming[0] ?? null;
