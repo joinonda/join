@@ -101,7 +101,7 @@
             @if (passwordCtrl.errors?.['required'] && !passwordError()) {
             <span>Password is required.</span>
             } @if (passwordCtrl.errors?.['minlength'] && !passwordError()) {
-            <span> At least 6 characters required. </span>
+            <span> 6 characters required. </span>
             } @if (passwordError()) {
             <span>{{ passwordError() }}</span>
             }
