@@ -1,4 +1,12 @@
-import { Component, inject, ViewChild, ElementRef, signal, Injector, runInInjectionContext } from '@angular/core';
+import {
+  Component,
+  inject,
+  ViewChild,
+  ElementRef,
+  signal,
+  Injector,
+  runInInjectionContext,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -71,7 +79,7 @@ export class SignupComponent {
     event.preventDefault();
     event.stopPropagation();
     if (this.isPasswordFocused()) {
-      this.showPassword.update(v => !v);
+      this.showPassword.update((v) => !v);
       setTimeout(() => {
         this.passwordInput?.nativeElement.focus();
       }, 0);
@@ -86,7 +94,7 @@ export class SignupComponent {
     event.preventDefault();
     event.stopPropagation();
     if (this.isConfirmPasswordFocused()) {
-      this.showConfirmPassword.update(v => !v);
+      this.showConfirmPassword.update((v) => !v);
       setTimeout(() => {
         this.confirmPasswordInput?.nativeElement.focus();
       }, 0);
@@ -127,6 +135,16 @@ export class SignupComponent {
         this.showConfirmPassword.set(false);
       }
     }, 150);
+  }
+
+  /**
+   * Validates that the name contains at least a first name,
+   * a space, and at least one character for the last name.
+   */
+  private isNameValid(): boolean {
+    const value = this.name().trim();
+    const fullNamePattern = /^\S+\s+[A-Za-zÀ-ÖØ-öø-ÿ].*$/;
+    return fullNamePattern.test(value);
   }
 
   /**
@@ -175,11 +193,23 @@ export class SignupComponent {
    * @returns True if form is valid, false otherwise.
    */
   private isFormValid(form: NgForm): boolean {
+    const nameControl = form.controls['name'];
+
+    if (!this.isNameValid()) {
+      if (nameControl) {
+        nameControl.setErrors({
+          ...(nameControl.errors || {}),
+          invalidFullName: true,
+        });
+      }
+    }
+
     if (form.invalid || this.passwordMismatch()) {
       form.control.markAllAsTouched();
       this.errorMessage.set('Please correct the highlighted fields.');
       return false;
     }
+
     return true;
   }
 
@@ -225,12 +255,14 @@ export class SignupComponent {
    */
   private async addContactToDatabase(): Promise<void> {
     const { firstName, lastName } = this.parseName();
-    this.firebaseService.addContactToDatabase({
-      firstName,
-      lastName,
-      email: this.email(),
-      phone: '',
-    }).catch(() => {});
+    this.firebaseService
+      .addContactToDatabase({
+        firstName,
+        lastName,
+        email: this.email(),
+        phone: '',
+      })
+      .catch(() => {});
   }
 
   /**
@@ -287,9 +319,7 @@ export class SignupComponent {
   private checkPasswordMismatch(): void {
     const password = this.password();
     const confirmPassword = this.confirmPassword();
-    this.passwordMismatch.set(
-      !!password && !!confirmPassword && password !== confirmPassword
-    );
+    this.passwordMismatch.set(!!password && !!confirmPassword && password !== confirmPassword);
 
     if (!this.passwordMismatch()) {
       if (this.errorMessage()?.toLowerCase().includes('password')) {
