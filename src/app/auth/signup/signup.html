@@ -26,6 +26,8 @@
               #nameCtrl="ngModel"
               placeholder="Name"
               required
+              pattern="^\S+\s+[A-Za-zÀ-ÖØ-öø-ÿ].*$"
+              title="Please enter first and last name (e.g. John Doe)."
               class="form-input"
               [attr.aria-invalid]="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)"
               aria-describedby="name-error"
@@ -40,14 +42,9 @@
           </div>
 
           @if (nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)) {
-            <p
-              class="error-message"
-              id="name-error"
-              role="alert"
-              aria-live="polite"
-            >
-              Name is required.
-            </p>
+          <p class="error-message" id="name-error" role="alert" aria-live="polite">
+            Name is required.
+          </p>
           }
         </div>
 
@@ -76,19 +73,13 @@
           </div>
 
           @if (emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) {
-            <p
-              class="error-message"
-              id="email-error"
-              role="alert"
-              aria-live="polite"
-            >
-              @if (emailCtrl.errors?.['required']) {
-                <span>Email is required.</span>
-              }
-              @if (emailCtrl.errors?.['email']) {
-                <span>Please enter a valid email address.</span>
-              }
-            </p>
+          <p class="error-message" id="email-error" role="alert" aria-live="polite">
+            @if (emailCtrl.errors?.['required']) {
+            <span>Email is required.</span>
+            } @if (emailCtrl.errors?.['email']) {
+            <span>Please enter a valid email address.</span>
+            }
+          </p>
           }
         </div>
 
@@ -114,8 +105,20 @@
             />
             <img
               class="input-icon password-toggle"
-              [src]="isPasswordFocused() ? (showPassword() ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
-              [alt]="isPasswordFocused() ? (showPassword() ? 'Hide password' : 'Show password') : 'Password icon'"
+              [src]="
+                isPasswordFocused()
+                  ? showPassword()
+                    ? 'imgs/visibility-off.png'
+                    : 'imgs/visibility.png'
+                  : 'imgs/loginsignup/lock.png'
+              "
+              [alt]="
+                isPasswordFocused()
+                  ? showPassword()
+                    ? 'Hide password'
+                    : 'Show password'
+                  : 'Password icon'
+              "
               (mousedown)="togglePasswordVisibility($event)"
               [style.cursor]="isPasswordFocused() ? 'pointer' : 'default'"
               width="24"
@@ -124,19 +127,13 @@
           </div>
 
           @if (passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) {
-            <p
-              class="error-message"
-              id="password-error"
-              role="alert"
-              aria-live="polite"
-            >
-              @if (passwordCtrl.errors?.['required']) {
-                <span>Password is required.</span>
-              }
-              @if (passwordCtrl.errors?.['minlength']) {
-                <span>Password must be at least 6 characters.</span>
-              }
-            </p>
+          <p class="error-message" id="password-error" role="alert" aria-live="polite">
+            @if (passwordCtrl.errors?.['required']) {
+            <span>Password is required.</span>
+            } @if (passwordCtrl.errors?.['minlength']) {
+            <span>Password must be at least 6 characters.</span>
+            }
+          </p>
           }
         </div>
 
@@ -163,8 +160,20 @@
             />
             <img
               class="input-icon password-toggle"
-              [src]="isConfirmPasswordFocused() ? (showConfirmPassword() ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
-              [alt]="isConfirmPasswordFocused() ? (showConfirmPassword() ? 'Hide password' : 'Show password') : 'Password icon'"
+              [src]="
+                isConfirmPasswordFocused()
+                  ? showConfirmPassword()
+                    ? 'imgs/visibility-off.png'
+                    : 'imgs/visibility.png'
+                  : 'imgs/loginsignup/lock.png'
+              "
+              [alt]="
+                isConfirmPasswordFocused()
+                  ? showConfirmPassword()
+                    ? 'Hide password'
+                    : 'Show password'
+                  : 'Password icon'
+              "
               (mousedown)="toggleConfirmPasswordVisibility($event)"
               [style.cursor]="isConfirmPasswordFocused() ? 'pointer' : 'default'"
               width="24"
@@ -172,25 +181,13 @@
             />
           </div>
 
-          @if (confirmPasswordCtrl.invalid && (confirmPasswordCtrl.dirty || confirmPasswordCtrl.touched)) {
-            <p
-              class="error-message"
-              role="alert"
-              aria-live="polite"
-            >
-              Confirm your password.
-            </p>
-          }
-
-          @if (!confirmPasswordCtrl.invalid && passwordMismatch()) {
-            <p
-              class="error-message"
-              id="confirm-password-error"
-              role="alert"
-              aria-live="polite"
-            >
-              Ups! your passwords don't match.
-            </p>
+          @if (confirmPasswordCtrl.invalid && (confirmPasswordCtrl.dirty ||
+          confirmPasswordCtrl.touched)) {
+          <p class="error-message" role="alert" aria-live="polite">Confirm your password.</p>
+          } @if (!confirmPasswordCtrl.invalid && passwordMismatch()) {
+          <p class="error-message" id="confirm-password-error" role="alert" aria-live="polite">
+            Ups! your passwords don't match.
+          </p>
           }
         </div>
 
@@ -211,13 +208,9 @@
           </label>
 
           @if (privacyCtrl.invalid && (privacyCtrl.dirty || privacyCtrl.touched)) {
-            <p
-              class="error-message"
-              role="alert"
-              aria-live="polite"
-            >
-              You must accept the privacy policy.
-            </p>
+          <p class="error-message" role="alert" aria-live="polite">
+            You must accept the privacy policy.
+          </p>
           }
         </div>
 
@@ -231,9 +224,9 @@
         </button>
 
         @if (errorMessage()) {
-          <p class="error-message" role="alert" aria-live="polite">
-            {{ errorMessage() }}
-          </p>
+        <p class="error-message" role="alert" aria-live="polite">
+          {{ errorMessage() }}
+        </p>
         }
       </form>
     </div>
