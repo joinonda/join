@@ -5,58 +5,63 @@ import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
 import { Task } from '../interfaces/task-interface';
 
+/**
+ * Summary component displaying task statistics and overview.
+ * Shows task counts by status, urgent tasks, upcoming deadlines, and user greeting.
+ * Handles greeting screen navigation logic for mobile devices.
+ */
 @Component({
   selector: 'app-summary',
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './summary.html',
-  styleUrl: './summary.scss',
+  styleUrls: ['./summary.scss', './summary-mobile.scss'],
 })
 export class Summary implements OnInit {
+  /** DataService instance for accessing task data. */
   private dataService = inject(DataService);
+  /** AuthService instance for user authentication and user data. */
   private authService = inject(AuthService);
+  /** Router instance for navigation. */
   private router = inject(Router);
+  /** ActivatedRoute instance for accessing route parameters and query params. */
   private route = inject(ActivatedRoute);
 
   /**
-   * Gets the number of tasks in the "To Do" status
-   * @returns The count of todo tasks
+   * Gets the number of tasks in the "To Do" status.
+   * @returns The count of todo tasks.
    */
   get todoCount(): number {
     return this.dataService.todo.length;
   }
 
-
   /**
-   * Gets the number of tasks in the "In Progress" status
-   * @returns The count of in-progress tasks
+   * Gets the number of tasks in the "In Progress" status.
+   * @returns The count of in-progress tasks.
    */
   get inProgressCount(): number {
     return this.dataService.inProgress.length;
   }
 
-
   /**
-   * Gets the number of tasks in the "Awaiting Feedback" status
-   * @returns The count of tasks awaiting feedback
+   * Gets the number of tasks in the "Awaiting Feedback" status.
+   * @returns The count of tasks awaiting feedback.
    */
   get awaitingFeedbackCount(): number {
     return this.dataService.awaitFeedback.length;
   }
 
-
   /**
-   * Gets the number of tasks in the "Done" status
-   * @returns The count of completed tasks
+   * Gets the number of tasks in the "Done" status.
+   * @returns The count of completed tasks.
    */
   get doneCount(): number {
     return this.dataService.done.length;
   }
 
-
   /**
-   * Gets the total number of all tasks across all statuses
-   * @returns The sum of todo, in-progress, awaiting feedback, and done tasks
+   * Gets the total number of all tasks across all statuses.
+   * @returns The sum of todo, in-progress, awaiting feedback, and done tasks.
    */
   get allTasksCount(): number {
     return (
@@ -67,11 +72,10 @@ export class Summary implements OnInit {
     );
   }
 
-
   /**
-   * Gets all open tasks (tasks that are not done)
-   * Combines todo, in-progress, and awaiting feedback tasks
-   * @returns Array of all open tasks
+   * Gets all open tasks (tasks that are not done).
+   * Combines todo, in-progress, and awaiting feedback tasks.
+   * @returns Array of all open tasks.
    */
   private get openTasks(): Task[] {
     return [
@@ -81,20 +85,18 @@ export class Summary implements OnInit {
     ];
   }
 
-
   /**
-   * Gets the number of urgent open tasks
-   * @returns The count of tasks with urgent priority that are not done
+   * Gets the number of urgent open tasks.
+   * @returns The count of tasks with urgent priority that are not done.
    */
   get urgentCount(): number {
     return this.openTasks.filter((t) => t.priority === 'urgent').length;
   }
 
-
   /**
-   * Gets the next upcoming deadline from open tasks
-   * Filters tasks with due dates, excludes invalid and past dates, and returns the earliest future deadline
-   * @returns The next deadline date, or null if no upcoming deadlines exist
+   * Gets the next upcoming deadline from open tasks.
+   * Filters tasks with due dates, excludes invalid and past dates, and returns the earliest future deadline.
+   * @returns The next deadline date, or null if no upcoming deadlines exist.
    */
   get nextDeadline(): Date | null {
     const now = new Date();
@@ -108,10 +110,9 @@ export class Summary implements OnInit {
     return upcoming[0] ?? null;
   }
 
-
   /**
-   * Gets the appropriate greeting text based on the current time of day
-   * @returns "Good morning," (before 12pm), "Good afternoon," (12pm-6pm), or "Good evening," (after 6pm)
+   * Gets the appropriate greeting text based on the current time of day.
+   * @returns "Good morning," (before 12pm), "Good afternoon," (12pm-6pm), or "Good evening," (after 6pm).
    */
   get greetingText(): string {
     const hour = new Date().getHours();
@@ -120,12 +121,11 @@ export class Summary implements OnInit {
     return 'Good evening,';
   }
 
-
   /**
-   * Gets the current user's display name
+   * Gets the current user's display name.
    * Returns "Guest User" for guest users, the user's display name if available,
-   * or the part before @ in the email address as fallback
-   * @returns The user's display name
+   * or the part before @ in the email address as fallback.
+   * @returns The user's display name.
    */
   get userName(): string {
     if (this.authService.isGuest()) {
@@ -144,13 +144,12 @@ export class Summary implements OnInit {
     return 'Guest User';
   }
 
-
   /**
-   * Angular lifecycle hook that initializes the component
+   * Angular lifecycle hook that initializes the component.
    * Handles greeting screen navigation logic for mobile devices:
-   * - On mobile: Shows greeting screen on first visit, then redirects to summary
-   * - On desktop: Skips greeting screen
-   * Uses sessionStorage to track if greeting has been shown
+   * - On mobile: Shows greeting screen on first visit, then redirects to summary.
+   * - On desktop: Skips greeting screen.
+   * Uses sessionStorage to track if greeting has been shown.
    */
   ngOnInit(): void {
     const isDesktop = window.innerWidth > 1024;
