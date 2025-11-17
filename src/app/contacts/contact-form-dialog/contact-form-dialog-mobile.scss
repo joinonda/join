@@ -121,14 +121,7 @@
   }
 }
 
-@media (max-width: 540px) {
-  .avatar-container {
-    img {
-      width: 88px;
-      height: auto;
-    }
-  }
-}
+
 
 @media (max-width: 480px) {
   .button-group {
@@ -172,7 +165,7 @@
 @media (max-height: 670px) {
   .avatar-container {
     img {
-      width: 68px;
+      width: 78px;
       height: auto;
     }
   }
