@@ -1,0 +1,31 @@
+$primary-color: #2a3647;
+$hover-color: #29abe2;
+$bg-color: #f6f7f8;
+$text-color: #000000;
+$white: #ffffff;
+$gray-divider: #d1d1d1;
+$gray-border: #d1d5db;
+$light-gray: #a8a8a8;
+$input-border: #d1d5db;
+$red: #ff3d3d;
+
+.priority-buttons {
+  @media (max-width: 428px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.priority-button {
+  @media (max-width: 428px) {
+    width: 100%;
+    flex: none;
+  }
+}
+
+.edit-dialog-footer {
+  @media (max-width: 450px) {
+    padding: 5px;
+  }
+}
+

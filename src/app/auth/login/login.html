@@ -15,14 +15,16 @@
           <div class="input-field">
             <input
               type="email"
-              [(ngModel)]="email"
+              [ngModel]="email()"
+              (ngModelChange)="onEmailInput($event)"
+              (blur)="onEmailBlur()"
               name="email"
               #emailCtrl="ngModel"
               placeholder="Email"
               required
               email
               class="form-input"
-              [attr.aria-invalid]="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
+              [attr.aria-invalid]="(emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) || !!emailError()"
               aria-describedby="email-error"
             />
             <img
@@ -34,24 +36,31 @@
             />
           </div>
 
-          <p
-            *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
-            class="error-text"
-            id="email-error"
-            role="alert"
-            aria-live="polite"
-          >
-            <span *ngIf="emailCtrl.errors?.['required']">Email is required.</span>
-            <span *ngIf="emailCtrl.errors?.['email']">Please enter a valid email address.</span>
-          </p>
+          @if ((emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) || emailError()) {
+            <p
+              class="error-text"
+              id="email-error"
+              role="alert"
+              aria-live="polite"
+            >
+              @if (emailError()) {
+                <span>{{ emailError() }}</span>
+              } @else if (emailCtrl.errors?.['required'] && (emailCtrl.dirty || emailCtrl.touched)) {
+                <span>Email is required.</span>
+              } @else if (emailCtrl.errors?.['email'] && (emailCtrl.dirty || emailCtrl.touched)) {
+                <span>Please enter a valid email address.</span>
+              }
+            </p>
+          }
         </div>
 
         <div class="input-group">
           <div class="input-field">
             <input
               #passwordInput
-              [type]="showPassword ? 'text' : 'password'"
-              [(ngModel)]="password"
+              [type]="showPassword() ? 'text' : 'password'"
+              [ngModel]="password()"
+              (ngModelChange)="onPasswordInput($event)"
               name="password"
               #passwordCtrl="ngModel"
               placeholder="Password"
@@ -61,41 +70,49 @@
               (focus)="onPasswordFocus()"
               (blur)="onPasswordBlur()"
               [attr.aria-invalid]="
-                passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)
+                (passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) || !!passwordError()
               "
               aria-describedby="password-error"
             />
             <img
               class="input-icon password-toggle"
-              [src]="isPasswordFocused ? (showPassword ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
-              [alt]="isPasswordFocused ? (showPassword ? 'Hide password' : 'Show password') : 'Password icon'"
+              [src]="isPasswordFocused() ? (showPassword() ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
+              [alt]="isPasswordFocused() ? (showPassword() ? 'Hide password' : 'Show password') : 'Password icon'"
               (mousedown)="togglePasswordVisibility($event)"
-              [style.cursor]="isPasswordFocused ? 'pointer' : 'default'"
+              [style.cursor]="isPasswordFocused() ? 'pointer' : 'default'"
               width="24"
               height="24"
             />
           </div>
 
-          <p
-            *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)"
-            class="error-text"
-            id="password-error"
-            role="alert"
-            aria-live="polite"
-          >
-            <span *ngIf="passwordCtrl.errors?.['required']">Password is required.</span>
-            <span *ngIf="passwordCtrl.errors?.['minlength']">
-              Password must be at least 6 characters.
-            </span>
-          </p>
+          @if ((passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) || passwordError()) {
+            <p
+              class="error-text"
+              id="password-error"
+              role="alert"
+              aria-live="polite"
+            >
+              @if (passwordCtrl.errors?.['required'] && !passwordError()) {
+                <span>Password is required.</span>
+              }
+              @if (passwordCtrl.errors?.['minlength'] && !passwordError()) {
+                <span>
+                  Password must be at least 6 characters.
+                </span>
+              }
+              @if (passwordError()) {
+                <span>{{ passwordError() }}</span>
+              }
+            </p>
+          }
         </div>
 
         <div class="button-group">
           <button
             type="submit"
             class="btn-primary"
-            [disabled]="loginForm.invalid || isLoading"
-            [attr.aria-disabled]="loginForm.invalid || isLoading"
+            [disabled]="loginForm.invalid || isLoading()"
+            [attr.aria-disabled]="loginForm.invalid || isLoading()"
           >
             Log in
           </button>

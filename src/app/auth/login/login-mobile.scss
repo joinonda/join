@@ -1,0 +1,180 @@
+$primary-color: #2a3647;
+$hover-color: #29abe2;
+$text-color: #000000;
+$light-gray: #a8a8a8;
+
+@mixin button-primary {
+  background: $primary-color;
+  color: #ffffff;
+
+  &:hover {
+    background: #1a252f;
+  }
+}
+
+@mixin text-base($size: 20px) {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: $size;
+  line-height: 120%;
+  color: $text-color;
+}
+
+.login-page {
+  .logo-container {
+    @media (max-width: 768px) {
+      position: static;
+      display: flex;
+      justify-content: flex-start;
+      padding: 15px 15px 0;
+    }
+  }
+
+  .logo {
+    @media (max-width: 1024px) {
+      width: 64px;
+      height: 78.03px;
+    }
+  }
+
+  .login-container {
+    @media (max-width: 768px) {
+      top: 0px;
+    }
+
+    .login-form {
+      @media (max-width: 768px) {
+        padding: 32px 24px;
+        border-radius: 20px;
+        gap: 24px;
+      }
+
+      .login-title {
+        @media (max-width: 768px) {
+          font-size: 48px;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 36px;
+        }
+      }
+
+      .title-underline {
+        @media (max-width: 480px) {
+          width: 100px;
+        }
+      }
+
+      .login-fields {
+        @media (max-width: 768px) {
+          gap: 28px;
+        }
+      }
+
+      .input-field {
+        @media (max-width: 380px) {
+          padding: 12px 6px;
+        }
+      }
+
+      .form-input {
+        @media (max-width: 480px) {
+          font-size: 16px;
+        }
+      }
+
+      .checkbox-container {
+        .checkbox-label {
+          @media (max-width: 480px) {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .button-group {
+        @media (max-width: 480px) {
+          flex-direction: column;
+          gap: 16px;
+        }
+      }
+
+      .btn-primary {
+        @media (max-width: 480px) {
+          min-width: 180px;
+          font-size: 18px;
+        }
+
+        @media (max-width: 380px) {
+          min-width: 130px;
+          padding: 12px 20px;
+        }
+      }
+
+      .btn-secondary {
+        @media (max-width: 480px) {
+          min-width: 180px;
+          font-size: 18px;
+        }
+
+        @media (max-width: 380px) {
+          min-width: 130px;
+          padding: 11px 9px;
+        }
+      }
+    }
+
+    .desktop-signup-prompt {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+
+  .signup-text {
+    @media (max-width: 480px) {
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+
+  .btn-signup {
+    @media (max-width: 480px) {
+      min-width: 104px;
+    }
+  }
+
+  .mobile-signup {
+    @media (max-width: 768px) {
+      display: flex;
+      z-index: 10;
+    }
+
+    @media (max-width: 480px) {
+      margin-bottom: 20px;
+      z-index: 10;
+
+      .btn-signup {
+        min-width: 100px;
+        padding: 11px 16px;
+      }
+    }
+  }
+
+  .footer-links {
+    @media (max-width: 480px) {
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    @media (max-width: 380px) {
+      padding: 16px 0 0 0;
+    }
+
+    .footer-link {
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
