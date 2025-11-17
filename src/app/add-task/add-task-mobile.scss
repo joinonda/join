@@ -105,13 +105,15 @@ $red: #ff3d3d;
   }
 }
 
+@media (max-width: 1140px) {
+  .subtasks-list li .subtask-text {
+    width: 175px;
+  }
+}
+
 @media (max-width: 480px) {
   .addtask-bottom-right {
     gap: 12px;
-  }
-
-  .subtasks-list li .subtask-text {
-    width: 230px;
   }
 }
 
