@@ -14,28 +14,11 @@
     top: 64px;
     left: 64px;
     z-index: 10;
-
-    @media (max-width: 750px) {
-      position: static;
-      display: flex;
-      justify-content: flex-start;
-      padding: 15px 15px 0;
-    }
   }
 
   .logo {
     width: 100px;
     height: 121.97px;
-
-    @media (max-width: 750px) {
-      width: 80px;
-      height: 97.576px;
-    }
-
-    @media (max-width: 480px) {
-      width: 64px;
-      height: 78.03px;
-    }
   }
 
   .signup-container {
@@ -45,10 +28,6 @@
     align-items: center;
     padding: 30px;
     position: relative;
-
-    @media (max-width: 380px) {
-      padding: 14px 20px;
-    }
 
     .signup-form {
       background: #ffffff;
@@ -64,21 +43,6 @@
       position: relative;
       isolation: isolate;
       top: 80px;
-
-      @media (max-width: 750px) {
-        padding: 48px 32px;
-        border-radius: 20px;
-        gap: 24px;
-        top: 0px;
-      }
-
-      @media (max-width: 380px) {
-        padding: 21px 10px;
-      }
-
-      @media (max-width: 380px) {
-        gap: 0;
-      }
 
       .back-btn {
         position: absolute;
@@ -106,14 +70,6 @@
           height: 32px;
           object-fit: contain;
         }
-
-        @media (max-width: 380px) {
-          position: relative;
-          left: auto;
-          top: auto;
-          align-self: center;
-          margin-bottom: 16px;
-        }
       }
 
       .back-arrow {
@@ -135,16 +91,6 @@
         &:hover {
           transform: translateX(-3px);
         }
-
-        @media (max-width: 750px) {
-          top: 32px;
-          left: 32px;
-        }
-
-        @media (max-width: 480px) {
-          top: 24px;
-          left: 24px;
-        }
       }
 
       .signup-header {
@@ -158,22 +104,12 @@
         z-index: 0;
         margin-bottom: 12px;
 
-        @media (max-width: 380px) {
-          gap: 0;
-          flex-direction: row;
-        }
-
         .header-title-section {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 16px;
           width: 100%;
-
-          @media (max-width: 380px) {
-            gap: 10px;
-            margin-right: 40px;
-          }
 
           .signup-title {
             font-family: 'Inter', sans-serif;
@@ -187,14 +123,6 @@
             width: 100%;
             max-width: 315px;
             height: auto;
-
-            @media (max-width: 750px) {
-              font-size: 47px;
-            }
-
-            @media (max-width: 480px) {
-              font-size: 43px;
-            }
           }
 
           .title-underline {
@@ -202,10 +130,6 @@
             height: 3px;
             background: #29abe2;
             border-radius: 2px;
-
-            @media (max-width: 480px) {
-              width: 100px;
-            }
           }
         }
       }
@@ -218,10 +142,6 @@
         width: 100%;
         max-width: 422px;
         z-index: 1;
-
-        @media (max-width: 750px) {
-          gap: 22px;
-        }
 
         > .error-message {
           font-family: 'Poppins', sans-serif;
@@ -277,10 +197,6 @@
         &.error {
           border-color: #ff0000;
         }
-
-        @media (max-width: 380px) {
-          padding: 12px 6px;
-        }
       }
 
       .form-input {
@@ -298,10 +214,6 @@
         &::placeholder {
           color: #d1d1d1;
         }
-
-        @media (max-width: 480px) {
-          font-size: 16px;
-        }
       }
 
       .input-icon {
@@ -315,10 +227,6 @@
         justify-content: center;
         width: 100%;
         margin-top: 8px;
-
-        @media (max-width: 380px) {
-          margin-top: 0;
-        }
 
         .checkbox-container {
           display: flex;
@@ -372,10 +280,6 @@
             font-size: 16px;
             line-height: 120%;
             color: #a8a8a8;
-
-            @media (max-width: 480px) {
-              font-size: 14px;
-            }
 
             .privacy-link {
               color: #29abe2;
@@ -435,17 +339,6 @@
           opacity: 0.5;
           cursor: not-allowed;
         }
-
-        @media (max-width: 480px) {
-          font-size: 18px;
-        }
-
-        @media (max-width: 380px) {
-          margin-top: 0;
-          min-width: 100px;
-          padding: 10px 12px;
-          height: auto;
-        }
       }
     }
   }
@@ -456,11 +349,6 @@
     align-items: center;
     gap: 8px;
     padding: 40px 0;
-
-    @media (max-width: 480px) {
-      gap: 16px;
-      padding: 0px 0;
-    }
 
     .footer-link {
       display: flex;
@@ -476,10 +364,6 @@
 
       &:hover {
         color: #2a3647;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 14px;
       }
     }
   }

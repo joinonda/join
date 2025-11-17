@@ -1,0 +1,153 @@
+.signup-page {
+  .logo-container {
+    @media (max-width: 750px) {
+      position: static;
+      display: flex;
+      justify-content: flex-start;
+      padding: 15px 15px 0;
+    }
+  }
+
+  .logo {
+    @media (max-width: 750px) {
+      width: 80px;
+      height: 97.576px;
+    }
+
+    @media (max-width: 480px) {
+      width: 64px;
+      height: 78.03px;
+    }
+  }
+
+  .signup-container {
+    @media (max-width: 380px) {
+      padding: 14px 20px;
+    }
+
+    .signup-form {
+      @media (max-width: 750px) {
+        padding: 48px 32px;
+        border-radius: 20px;
+        gap: 24px;
+        top: 0px;
+      }
+
+      @media (max-width: 380px) {
+        padding: 21px 10px;
+        gap: 0;
+      }
+
+      .back-btn {
+        @media (max-width: 380px) {
+          position: relative;
+          left: auto;
+          top: auto;
+          align-self: center;
+          margin-bottom: 16px;
+        }
+      }
+
+      .back-arrow {
+        @media (max-width: 750px) {
+          top: 32px;
+          left: 32px;
+        }
+
+        @media (max-width: 480px) {
+          top: 24px;
+          left: 24px;
+        }
+      }
+
+      .signup-header {
+        @media (max-width: 380px) {
+          gap: 0;
+          flex-direction: row;
+        }
+
+        .header-title-section {
+          @media (max-width: 380px) {
+            gap: 10px;
+            margin-right: 40px;
+          }
+
+          .signup-title {
+            @media (max-width: 750px) {
+              font-size: 47px;
+            }
+
+            @media (max-width: 480px) {
+              font-size: 43px;
+            }
+          }
+
+          .title-underline {
+            @media (max-width: 480px) {
+              width: 100px;
+            }
+          }
+        }
+      }
+
+      .signup-fields {
+        @media (max-width: 750px) {
+          gap: 22px;
+        }
+      }
+
+      .input-field {
+        @media (max-width: 380px) {
+          padding: 12px 6px;
+        }
+      }
+
+      .form-input {
+        @media (max-width: 480px) {
+          font-size: 16px;
+        }
+      }
+
+      .privacy-policy {
+        @media (max-width: 380px) {
+          margin-top: 0;
+        }
+
+        .checkbox-container {
+          .checkbox-label {
+            @media (max-width: 480px) {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .btn-primary {
+        @media (max-width: 480px) {
+          font-size: 18px;
+        }
+
+        @media (max-width: 380px) {
+          margin-top: 0;
+          min-width: 100px;
+          padding: 10px 12px;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  .footer-links {
+    @media (max-width: 480px) {
+      gap: 16px;
+      padding: 0px 0;
+    }
+
+    .footer-link {
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
+    }
+  }
+}
+

@@ -20,7 +20,8 @@
           <div class="input-field">
             <input
               type="text"
-              [(ngModel)]="name"
+              [ngModel]="name()"
+              (ngModelChange)="name.set($event)"
               name="name"
               #nameCtrl="ngModel"
               placeholder="Name"
@@ -38,22 +39,24 @@
             />
           </div>
 
-          <p
-            *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)"
-            class="error-message"
-            id="name-error"
-            role="alert"
-            aria-live="polite"
-          >
-            Name is required.
-          </p>
+          @if (nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)) {
+            <p
+              class="error-message"
+              id="name-error"
+              role="alert"
+              aria-live="polite"
+            >
+              Name is required.
+            </p>
+          }
         </div>
 
         <div class="input-group">
           <div class="input-field">
             <input
               type="email"
-              [(ngModel)]="email"
+              [ngModel]="email()"
+              (ngModelChange)="email.set($event)"
               name="email"
               #emailCtrl="ngModel"
               placeholder="Email"
@@ -72,24 +75,30 @@
             />
           </div>
 
-          <p
-            *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
-            class="error-message"
-            id="email-error"
-            role="alert"
-            aria-live="polite"
-          >
-            <span *ngIf="emailCtrl.errors?.['required']">Email is required.</span>
-            <span *ngIf="emailCtrl.errors?.['email']">Please enter a valid email address.</span>
-          </p>
+          @if (emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) {
+            <p
+              class="error-message"
+              id="email-error"
+              role="alert"
+              aria-live="polite"
+            >
+              @if (emailCtrl.errors?.['required']) {
+                <span>Email is required.</span>
+              }
+              @if (emailCtrl.errors?.['email']) {
+                <span>Please enter a valid email address.</span>
+              }
+            </p>
+          }
         </div>
 
         <div class="input-group">
           <div class="input-field">
             <input
               #passwordInput
-              [type]="showPassword ? 'text' : 'password'"
-              [(ngModel)]="password"
+              [type]="showPassword() ? 'text' : 'password'"
+              [ngModel]="password()"
+              (ngModelChange)="onPasswordInput($event)"
               name="password"
               #passwordCtrl="ngModel"
               placeholder="Password"
@@ -98,7 +107,6 @@
               class="form-input"
               (focus)="onPasswordFocus()"
               (blur)="onPasswordBlur()"
-              (ngModelChange)="onPasswordChange()"
               [attr.aria-invalid]="
                 passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)
               "
@@ -106,35 +114,39 @@
             />
             <img
               class="input-icon password-toggle"
-              [src]="isPasswordFocused ? (showPassword ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
-              [alt]="isPasswordFocused ? (showPassword ? 'Hide password' : 'Show password') : 'Password icon'"
+              [src]="isPasswordFocused() ? (showPassword() ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
+              [alt]="isPasswordFocused() ? (showPassword() ? 'Hide password' : 'Show password') : 'Password icon'"
               (mousedown)="togglePasswordVisibility($event)"
-              [style.cursor]="isPasswordFocused ? 'pointer' : 'default'"
+              [style.cursor]="isPasswordFocused() ? 'pointer' : 'default'"
               width="24"
               height="24"
             />
           </div>
 
-          <p
-            *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)"
-            class="error-message"
-            id="password-error"
-            role="alert"
-            aria-live="polite"
-          >
-            <span *ngIf="passwordCtrl.errors?.['required']">Password is required.</span>
-            <span *ngIf="passwordCtrl.errors?.['minlength']">
-              Password must be at least 6 characters.
-            </span>
-          </p>
+          @if (passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) {
+            <p
+              class="error-message"
+              id="password-error"
+              role="alert"
+              aria-live="polite"
+            >
+              @if (passwordCtrl.errors?.['required']) {
+                <span>Password is required.</span>
+              }
+              @if (passwordCtrl.errors?.['minlength']) {
+                <span>Password must be at least 6 characters.</span>
+              }
+            </p>
+          }
         </div>
 
         <div class="input-group">
-          <div class="input-field" [class.error]="passwordMismatch">
+          <div class="input-field" [class.error]="passwordMismatch()">
             <input
               #confirmPasswordInput
-              [type]="showConfirmPassword ? 'text' : 'password'"
-              [(ngModel)]="confirmPassword"
+              [type]="showConfirmPassword() ? 'text' : 'password'"
+              [ngModel]="confirmPassword()"
+              (ngModelChange)="onConfirmPasswordInput($event)"
               name="confirmPassword"
               #confirmPasswordCtrl="ngModel"
               placeholder="Confirm Password"
@@ -142,53 +154,52 @@
               class="form-input"
               (focus)="onConfirmPasswordFocus()"
               (blur)="onConfirmPasswordBlur()"
-              (ngModelChange)="onPasswordChange()"
               [attr.aria-invalid]="
                 (confirmPasswordCtrl.invalid &&
                   (confirmPasswordCtrl.dirty || confirmPasswordCtrl.touched)) ||
-                passwordMismatch
+                passwordMismatch()
               "
               aria-describedby="confirm-password-error"
             />
             <img
               class="input-icon password-toggle"
-              [src]="isConfirmPasswordFocused ? (showConfirmPassword ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
-              [alt]="isConfirmPasswordFocused ? (showConfirmPassword ? 'Hide password' : 'Show password') : 'Password icon'"
+              [src]="isConfirmPasswordFocused() ? (showConfirmPassword() ? 'imgs/visibility-off.png' : 'imgs/visibility.png') : 'imgs/loginsignup/lock.png'"
+              [alt]="isConfirmPasswordFocused() ? (showConfirmPassword() ? 'Hide password' : 'Show password') : 'Password icon'"
               (mousedown)="toggleConfirmPasswordVisibility($event)"
-              [style.cursor]="isConfirmPasswordFocused ? 'pointer' : 'default'"
+              [style.cursor]="isConfirmPasswordFocused() ? 'pointer' : 'default'"
               width="24"
               height="24"
             />
           </div>
 
-          <p
-            *ngIf="
-              confirmPasswordCtrl.invalid &&
-              (confirmPasswordCtrl.dirty || confirmPasswordCtrl.touched)
-            "
-            class="error-message"
-            role="alert"
-            aria-live="polite"
-          >
-            Confirm your password.
-          </p>
+          @if (confirmPasswordCtrl.invalid && (confirmPasswordCtrl.dirty || confirmPasswordCtrl.touched)) {
+            <p
+              class="error-message"
+              role="alert"
+              aria-live="polite"
+            >
+              Confirm your password.
+            </p>
+          }
 
-          <p
-            *ngIf="!confirmPasswordCtrl.invalid && passwordMismatch"
-            class="error-message"
-            id="confirm-password-error"
-            role="alert"
-            aria-live="polite"
-          >
-            Ups! your passwords don't match.
-          </p>
+          @if (!confirmPasswordCtrl.invalid && passwordMismatch()) {
+            <p
+              class="error-message"
+              id="confirm-password-error"
+              role="alert"
+              aria-live="polite"
+            >
+              Ups! your passwords don't match.
+            </p>
+          }
         </div>
 
         <div class="privacy-policy">
           <label class="checkbox-container">
             <input
               type="checkbox"
-              [(ngModel)]="acceptPrivacy"
+              [ngModel]="acceptPrivacy()"
+              (ngModelChange)="acceptPrivacy.set($event)"
               name="acceptPrivacy"
               #privacyCtrl="ngModel"
               required
@@ -199,28 +210,31 @@
             </span>
           </label>
 
-          <p
-            *ngIf="privacyCtrl.invalid && (privacyCtrl.dirty || privacyCtrl.touched)"
-            class="error-message"
-            role="alert"
-            aria-live="polite"
-          >
-            You must accept the privacy policy.
-          </p>
+          @if (privacyCtrl.invalid && (privacyCtrl.dirty || privacyCtrl.touched)) {
+            <p
+              class="error-message"
+              role="alert"
+              aria-live="polite"
+            >
+              You must accept the privacy policy.
+            </p>
+          }
         </div>
 
         <button
           type="submit"
           class="btn-primary"
-          [disabled]="signupForm.invalid || passwordMismatch || isLoading"
-          [attr.aria-disabled]="signupForm.invalid || passwordMismatch || isLoading"
+          [disabled]="signupForm.invalid || passwordMismatch() || isLoading()"
+          [attr.aria-disabled]="signupForm.invalid || passwordMismatch() || isLoading()"
         >
           Sign up
         </button>
 
-        <p *ngIf="errorMessage" class="error-message" role="alert" aria-live="polite">
-          {{ errorMessage }}
-        </p>
+        @if (errorMessage()) {
+          <p class="error-message" role="alert" aria-live="polite">
+            {{ errorMessage() }}
+          </p>
+        }
       </form>
     </div>
   </div>
