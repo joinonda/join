@@ -76,6 +76,7 @@
             <button
               type="button"
               class="priority-button urgent"
+              [class.active-urgent]="form.value.priority === 'urgent'"
               role="radio"
               [attr.aria-checked]="form.value.priority === 'urgent'"
               (click)="prioritySelect('urgent')"
@@ -87,6 +88,7 @@
             <button
               type="button"
               class="priority-button medium"
+              [class.active-medium]="form.value.priority === 'medium'"
               role="radio"
               [attr.aria-checked]="form.value.priority === 'medium'"
               (click)="prioritySelect('medium')"
@@ -98,6 +100,7 @@
             <button
               type="button"
               class="priority-button low"
+              [class.active-low]="form.value.priority === 'low'"
               role="radio"
               [attr.aria-checked]="form.value.priority === 'low'"
               (click)="prioritySelect('low')"

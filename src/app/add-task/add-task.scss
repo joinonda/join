@@ -34,8 +34,8 @@ $red: #ff3d3d;
   }
 }
 
-@mixin priority-active($bg-color) {
-  background-color: $bg-color;
+@mixin priority-active($priority-bg-color) {
+  background-color: $priority-bg-color;
   color: $white;
   border-color: transparent;
   .priority-icon-normal {
@@ -91,7 +91,7 @@ $red: #ff3d3d;
   white-space: nowrap;
   height: 73px;
   padding-left: 50px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 
   h2 {
     font-size: 61px;
@@ -331,6 +331,7 @@ $red: #ff3d3d;
   gap: 0;
   margin-top: 8px;
   flex-wrap: wrap;
+  padding-left: 5px;
 }
 
 .contact-avatar {
