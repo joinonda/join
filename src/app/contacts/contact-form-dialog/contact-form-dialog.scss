@@ -21,11 +21,6 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   animation: slideInFromRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  @media (max-width: 1280px) {
-    width: 95%;
-    max-width: 1100px;
-  }
-
   @keyframes slideInFromRight {
     from {
       transform: translateX(100%);
@@ -45,20 +40,6 @@
       opacity: 1;
     }
   }
-
-  @media (max-width: 1024px) {
-    width: 95%;
-    height: calc(100vh - 160px);
-    animation: slideInFromBottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 95%;
-    overflow-y: auto;
-    position: relative;
-    animation: slideInFromBottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
 }
 
 .dialog-left {
@@ -71,23 +52,12 @@
   width: 39%;
   background: #2a3647;
   position: relative;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    align-items: center;
-    padding: 0px 2px;
-    height: 40%;
-  }
 }
 
 .logo {
   width: 55.6px;
   height: 66.48px;
   margin-bottom: 10px;
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
 }
 
 .dialog-header {
@@ -96,10 +66,6 @@
   gap: 10px;
   width: 100%;
   max-width: 361px;
-
-  @media (max-width: 768px) {
-    align-items: center;
-  }
 }
 
 .dialog-title {
@@ -110,15 +76,6 @@
   color: #ffffff;
   margin: 0;
   white-space: nowrap;
-
-  @media (max-width: 1140px) {
-    white-space: wrap;
-  }
-
-  @media (max-width: 768px) {
-    text-align: center;
-    white-space: nowrap;
-  }
 }
 
 .title-underline {
@@ -137,10 +94,6 @@
   color: #ffffff;
   margin: 8px 0 0 0;
   white-space: nowrap;
-
-  @media (max-width: 768px) {
-    text-align: center;
-  }
 }
 
 .dialog-right {
@@ -151,10 +104,6 @@
   padding: 0px 35px 66px 5%;
   background-color: #ffffff;
   justify-content: center;
-
-  @media (max-width: 768px) {
-    padding: 0px 3% 20px 3%;
-  }
 }
 
 .right-content {
@@ -165,17 +114,6 @@
   width: 100%;
   max-width: 700px;
   padding-left: 35px;
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-  }
-
-  @media (max-width: 768px) {
-    gap: 0;
-    margin-top: 40px;
-  }
 }
 
 .close-btn {
@@ -212,18 +150,6 @@
   .close-btn-white {
     display: none;
   }
-
-  @media (max-width: 768px) {
-    top: 20px;
-    right: 3.5%;
-
-    .close-btn-dark {
-      display: none;
-    }
-    .close-btn-white {
-      display: block;
-    }
-  }
 }
 
 .avatar-container {
@@ -233,55 +159,6 @@
   img {
     width: 120px;
     height: auto;
-  }
-
-  @media (max-width: 1024px) {
-    img {
-      width: 120px;
-      height: auto;
-    }
-    margin-top: 20px;
-  }
-
-  @media (max-width: 768px) {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    margin: 0;
-  }
-
-  @media (max-width: 540px) {
-    img {
-      width: 88px;
-      height: auto;
-    }
-  }
-
-  @media (max-height: 670px) {
-    img {
-      width: 68px;
-      height: auto;
-    }
-  }
-}
-
-@media (max-height: 768px) {
-  .avatar-container {
-    top: 40%;
-  }
-}
-
-@media (max-height: 697px) {
-  .avatar-container {
-    top: 39%;
-  }
-}
-
-@media (max-height: 680px) {
-  .avatar-container {
-    top: 36%;
   }
 }
 
@@ -299,23 +176,6 @@
   color: #ffffff;
   text-align: center;
   transition: all 0.3s ease;
-
-  @media (max-width: 1024px) {
-    width: 110px;
-    height: 110px;
-  }
-
-  @media (max-height: 768px) {
-    width: 70px;
-    height: 70px;
-    font-size: 26px;
-    top: 25%;
-  }
-
-  @media (max-height: 480px) {
-    width: 60px;
-    height: auto;
-  }
 }
 
 .contact-form {
@@ -325,17 +185,6 @@
   width: 100%;
   max-width: clamp(300px, 40vw, 422px);
   margin-top: 90px;
-
-  @media (max-width: 1024px) {
-    gap: 24px;
-    margin-top: 24px;
-  }
-
-  @media (max-width: 768px) {
-    margin-top: 0;
-    justify-content: center;
-    align-items: center;
-  }
 }
 
 .input-wrapper {
@@ -418,14 +267,6 @@
   display: flex;
 
   gap: clamp(16px, 2vw, 25px);
-
-  @media (max-width: 768px) {
-    gap: 16px;
-  }
-
-  @media (max-width: 480px) {
-    gap: 2%;
-  }
 }
 
 .btn-primary {
@@ -461,10 +302,6 @@
 
   &:active {
     transform: translateY(0);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
   }
 }
 
@@ -502,14 +339,5 @@
 
   &:active {
     transform: translateY(0);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-  }
-}
-@media (max-width: 768px) {
-  .btn-secondary#cancel-btn {
-    display: none;
   }
 }
