@@ -1,8 +1,4 @@
-import {
-  ApplicationConfig,
-  provideBrowserGlobalErrorListeners,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
@@ -10,6 +6,10 @@ import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 
+/**
+ * Application configuration for Angular bootstrap.
+ * Configures providers for routing, Firebase (App, Firestore, Auth), error handling, and change detection.
+ */
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
