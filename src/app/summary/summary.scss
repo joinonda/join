@@ -1,6 +1,3 @@
-@use './summary-media';
-
-
 section {
   height: calc(100vh - 96px);
   background-color: #f6f7f8;
@@ -10,6 +7,12 @@ section {
   position: relative;
   flex-direction: column;
   max-width: none;
+
+  @media (max-width: 1024px) {
+    margin-left: 0;
+    margin-top: 19px;
+    height: calc(100vh - 160px);
+  }
 }
 
 .summary-header {
@@ -29,6 +32,12 @@ section {
     font-weight: 700;
     line-height: 120%;
     letter-spacing: 0%;
+  }
+
+  @media (max-width: 700px) {
+    h2 {
+      font-size: 47px;
+    }
   }
 
   .spacer-blue {
@@ -96,6 +105,11 @@ section {
     background-position: center;
     background-size: contain;
     background-image: url('../../../public/imgs/summary/pen-default.png');
+
+    @media (max-width: 580px) {
+      width: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
+      height: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
+    }
   }
 
   .text {
@@ -108,12 +122,20 @@ section {
     .count {
       font-size: 64px;
       font-weight: 600;
+
+      @media (max-width: 580px) {
+        font-size: clamp(1.5em, 9.231vw, 4em);
+      }
     }
 
     p {
       font-size: 20px;
       color: #2a3647;
       white-space: nowrap;
+
+      @media (max-width: 580px) {
+        font-size: clamp(1em, 1.538vw + 0.692em, 1.25em);
+      }
     }
   }
 
@@ -156,6 +178,11 @@ section {
     background-position: center;
     background-size: contain;
     background-image: url('../../../public/imgs/summary/checkmark-default.png');
+
+    @media (max-width: 580px) {
+      width: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
+      height: clamp(2.5em, 11.538vw + 0.192em, 4.375em);
+    }
   }
 
   .text {
@@ -168,12 +195,20 @@ section {
     .count {
       font-size: 64px;
       font-weight: 600;
+
+      @media (max-width: 580px) {
+        font-size: clamp(1.5em, 9.231vw, 4em);
+      }
     }
 
     p {
       font-size: 20px;
       color: #2a3647;
       white-space: nowrap;
+
+      @media (max-width: 580px) {
+        font-size: clamp(1em, 1.538vw + 0.692em, 1.25em);
+      }
     }
   }
 
@@ -241,12 +276,20 @@ section {
       .count {
         font-size: 64px;
         font-weight: 600;
+
+        @media (max-width: 580px) {
+          font-size: clamp(1.5em, 9.231vw, 4em);
+        }
       }
 
       p {
         font-size: 16px;
         color: #2a3647;
         white-space: nowrap;
+
+        @media (max-width: 580px) {
+          font-size: clamp(1em, 1.538vw + 0.692em, 1.25em);
+        }
       }
     }
   }
@@ -332,6 +375,10 @@ section {
 .greeting {
   width: 100%;
 
+  @media (max-width: 1060px) {
+    display: none;
+  }
+
   p {
     font-size: clamp(1.5em, 6.667vw - 3.5em, 2.5em);
     color: #2a3647;
@@ -344,5 +391,90 @@ section {
     word-break: break-word;
     overflow-wrap: break-word;
     white-space: wrap;
+  }
+}
+
+@media (max-width: 580px) {
+  section {
+    align-items: flex-start;
+  }
+
+  .summary-header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 90px;
+
+    .spacer-blue {
+      margin-top: 5px;
+      order: 3;
+      height: 2px;
+      max-height: 2px;
+      width: 90px;
+      background-color: #29abe2;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    span {
+      order: 2;
+      font-size: 20px;
+    }
+  }
+
+  .card-row {
+    width: clamp(18.25em, 90vw, 34em);
+    gap: clamp(0.5em, 3.077vw - 0.115em, 1em);
+  }
+
+  .card-to-do,
+  .card-done {
+    padding: clamp(0.5em, 3.385vw, 2.375em);
+    gap: clamp(0.5em, 3.077vw - 0.115em, 1em);
+
+    text {
+      gap: 0;
+    }
+  }
+
+  .card-deadline {
+    padding: clamp(0.5em, 5.385vw, 2.375em) 0;
+    gap: 8px;
+
+    .highest-priority-badge {
+      gap: 8px;
+
+      .icon {
+        width: clamp(2.25em, 9.231vw + 0.404em, 3.75em);
+        height: clamp(2.25em, 9.231vw + 0.404em, 3.75em);
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .deadline {
+    .date {
+      max-width: clamp(148px, 32.222vw + 1.194em, 206px);
+      white-space: wrap;
+    }
+  }
+
+  .card-all-tasks,
+  .card-in-progress,
+  .card-awaiting-feedback {
+    padding: 16px 8px;
+
+    .count {
+      font-size: clamp(1.5em, 9.231vw, 4em);
+    }
+
+    p {
+      font-size: clamp(1em, 1.538vw, 1.25em);
+    }
   }
 }
