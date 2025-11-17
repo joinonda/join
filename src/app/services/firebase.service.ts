@@ -1,14 +1,5 @@
 import { Injectable, inject, runInInjectionContext, Injector } from '@angular/core';
-import {
-  Firestore,
-  collection,
-  onSnapshot,
-  doc,
-  updateDoc,
-  deleteDoc,
-  docData,
-  addDoc,
-} from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot, doc, updateDoc, deleteDoc, docData, addDoc } from '@angular/fire/firestore';
 import { getDoc } from 'firebase/firestore';
 import { Observable, firstValueFrom } from 'rxjs';
 import { Contact, NewContact } from '../interfaces/contacts-interfaces';
